@@ -74,7 +74,7 @@ const suites = [
   {
     id: "naturalbench" as const,
     label: "NaturalBench Lite",
-    description: "Scores idiomatic writing and formulaic habits",
+    description: "Checks whether the writing is idiomatic or formulaic",
     ready: false,
     prompts: "benches/naturalbench/public.json",
     judge: "benches/naturalbench/judge.txt",
