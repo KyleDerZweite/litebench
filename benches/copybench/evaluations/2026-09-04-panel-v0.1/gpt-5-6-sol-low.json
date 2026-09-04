@@ -1,0 +1,800 @@
+{
+  "schema_version": 1,
+  "evaluation": {
+    "id": "2026-09-04-panel-v0.1",
+    "protocol_version": "panel-v0.1",
+    "protocol_file": "benches/judge-panel-v0.1.json",
+    "protocol_sha256": "11dd5da0515ce600f8a63c17e27fb9104df99581461ee1f08cf16972f11193e5",
+    "source_file": "benches/copybench/generations/2026-09-04-rerun-01/gpt-5-6-sol-low.json",
+    "source_sha256": "53e2b15028da09dd69319362cea929614621cd614bb5b580ab3578ef40f4b4df",
+    "human_validated": false,
+    "judges": {
+      "sol_max": {
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "max",
+        "focus": "Audit objective constraints first. Treat every plausible addition as unsupported unless the brief supplies it. Enforce all score caps."
+      },
+      "gemini_high": {
+        "model": "gemini-3.8-flash-high",
+        "reasoning_effort": "high",
+        "focus": "Audit idiom, locale, register, rhythm, audience fit, and formulaic language closely. Keep the shared rubric and caps unchanged."
+      },
+      "glm_high": {
+        "model": "z-ai/glm-5.3-flash",
+        "reasoning_effort": "high",
+        "focus": "Take an adversarial pass for generic phrasing, repetition, unsupported inference, and structural shortcuts. Keep the shared rubric and caps unchanged."
+      }
+    },
+    "created_at": "2026-09-04T19:04:38.548897+00:00"
+  },
+  "summary": {
+    "model": "gpt-5.6-sol",
+    "provider": "kylehub",
+    "model_version": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "date": "2026-09-04",
+    "evaluation_type": "ai_panel_provisional",
+    "human_evaluation": false,
+    "score": 88.77,
+    "judge_stddev": 1.52,
+    "judge_range": 3.5,
+    "judge_scores": {
+      "sol_max": 87.38,
+      "gemini_high": 90.88,
+      "glm_high": 88.06
+    },
+    "average_item_judge_stddev": 6.13,
+    "disagreement_count": 2,
+    "brief_ok_pct": 100.0,
+    "average_latency_ms": 7672,
+    "average_input_tokens": 422,
+    "average_output_tokens": 321,
+    "average_cost_usd": 0.0081065,
+    "cost_basis": "estimated",
+    "generated": 8,
+    "rated": 8,
+    "total": 8,
+    "generation_file": "benches/copybench/generations/2026-09-04-rerun-01/gpt-5-6-sol-low.json",
+    "file": "benches/copybench/evaluations/2026-09-04-panel-v0.1/gpt-5-6-sol-low.json"
+  },
+  "items": [
+    {
+      "task_id": "public-de-product-a2-01",
+      "score": 92.67,
+      "judge_stddev": 4.11,
+      "judge_range": 10.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 98.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The copy meets the length, language, structure, factual, tone, and CEFR requirements with clear, simple wording.",
+          "prompt_sha256": "58507081dfb5476a4a960305d73b4e92a39e531d437136022ae2b6fcae425877",
+          "raw_output": "{\"score\":98.0,\"brief_ok\":true,\"realized_cefr\":\"A2\",\"issues\":[],\"note\":\"The copy meets the length, language, structure, factual, tone, and CEFR requirements with clear, simple wording.\"}",
+          "response": {
+            "id": "resp_00f5e7bad275b3b9016a9b1357ed0887d2bdab35ac57a4a87e",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1011,
+            "output_tokens": 525,
+            "billable_output_tokens": 525,
+            "reasoning_tokens": 469,
+            "total_tokens": 1536,
+            "latency_ms": 11146,
+            "attempts": 1
+          },
+          "delta": 5.33
+        },
+        "gemini_high": {
+          "score": 92.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_phrasing",
+              "evidence": "So kannst du dein Essen mit zur Arbeit nehmen."
+            }
+          ],
+          "note": "The copy strictly adheres to all factual and structural constraints at an accurate A2 level, though repeated phrasing about taking food to work creates a slightly monotonous rhythm.",
+          "prompt_sha256": "4e5d5921fcaa2cdf607db8b8427d04575480aafeaad6844a36a09052f34a9989",
+          "raw_output": "{\"score\": 92.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetitive_phrasing\", \"evidence\": \"So kannst du dein Essen mit zur Arbeit nehmen.\"}], \"note\": \"The copy strictly adheres to all factual and structural constraints at an accurate A2 level, though repeated phrasing about taking food to work creates a slightly monotonous rhythm.\"}",
+          "response": {
+            "id": "resp_WBObatXgJbyg3boPn-7wiAE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 770,
+            "output_tokens": 91,
+            "billable_output_tokens": 2940,
+            "reasoning_tokens": 2849,
+            "total_tokens": 3710,
+            "latency_ms": 13789,
+            "attempts": 1
+          },
+          "delta": -0.67
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "Du kannst den Einsatz herausnehmen. Nach dem Essen darf die Lunchbox..."
+            },
+            {
+              "code": "redundant_filler",
+              "evidence": "So kannst du dein Essen mit zur Arbeit nehmen."
+            },
+            {
+              "code": "word_repetition",
+              "evidence": "dein Essen... dein Essen... dein Essen... dein Essen"
+            }
+          ],
+          "note": "Alle Fakten korrekt, Länge und A2-Stil eingehalten, aber einige Sätze wiederholen sich und könnten ohne Informationsverlust gestrafft werden.",
+          "prompt_sha256": "3cddc516c3d1fd97a5b65dd6b6d76602548a167a6a19f1a5e6f590c4ac24a904",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"Du kannst den Einsatz herausnehmen. Nach dem Essen darf die Lunchbox...\"}, {\"code\": \"redundant_filler\", \"evidence\": \"So kannst du dein Essen mit zur Arbeit nehmen.\"}, {\"code\": \"word_repetition\", \"evidence\": \"dein Essen... dein Essen... dein Essen... dein Essen\"}], \"note\": \"Alle Fakten korrekt, Länge und A2-Stil eingehalten, aber einige Sätze wiederholen sich und könnten ohne Informationsverlust gestrafft werden.\"}",
+          "response": {
+            "id": "gen-1788547932-WAuDcCwzwVXzPzo2P4WG",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 742,
+            "output_tokens": 547,
+            "billable_output_tokens": 547,
+            "reasoning_tokens": 0,
+            "total_tokens": 1289,
+            "latency_ms": 13812,
+            "attempts": 1
+          },
+          "delta": -4.67
+        }
+      }
+    },
+    {
+      "task_id": "public-en-product-a2-01",
+      "score": 92.33,
+      "judge_stddev": 4.03,
+      "judge_range": 9.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 98.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The description meets the length, content, language, structure, tone, and CEFR requirements with clear, simple copy.",
+          "prompt_sha256": "90b87bbce321418d460066663deda30f623b6b504ae44521d520ae706488526e",
+          "raw_output": "{\"score\":98.0,\"brief_ok\":true,\"realized_cefr\":\"A2\",\"issues\":[],\"note\":\"The description meets the length, content, language, structure, tone, and CEFR requirements with clear, simple copy.\"}",
+          "response": {
+            "id": "resp_0e89c075000e7558016a9b1362ea1887d2a2cb10b413145de2",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 970,
+            "output_tokens": 725,
+            "billable_output_tokens": 725,
+            "reasoning_tokens": 669,
+            "total_tokens": 1695,
+            "latency_ms": 14485,
+            "attempts": 1
+          },
+          "delta": 5.67
+        },
+        "gemini_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_wording",
+              "evidence": "work lunch"
+            }
+          ],
+          "note": "The copy follows all factual, structural, and length constraints at an A2 level, but the rhythm is weakened by heavy repetition of the word 'lunch'.",
+          "prompt_sha256": "b967592ec0332fc5ce747a6b633c2ad21345675a74a8a1a95355ef0dbc27dedb",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": \"A2\", \"issues\": [{\"code\": \"repetitive_wording\", \"evidence\": \"work lunch\"}], \"note\": \"The copy follows all factual, structural, and length constraints at an A2 level, but the rhythm is weakened by heavy repetition of the word 'lunch'.\"}",
+          "response": {
+            "id": "resp_ZhObasbMGIOQ3boP7NPjQA",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 729,
+            "output_tokens": 85,
+            "billable_output_tokens": 3622,
+            "reasoning_tokens": 3537,
+            "total_tokens": 4351,
+            "latency_ms": 14965,
+            "attempts": 1
+          },
+          "delta": -3.33
+        },
+        "glm_high": {
+          "score": 90.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "space for your work lunch ... Make your work lunch easier"
+            },
+            {
+              "code": "generic_phrasing",
+              "evidence": "Lunch Made Easy"
+            }
+          ],
+          "note": "Meets all stated facts, length, A2 tone, and structure with only minor repetition of 'lunch' and a slightly generic heading.",
+          "prompt_sha256": "dc3b664294826e9fca0211ab047c2a302f002f09e222e36f2c9b6adff655bdc0",
+          "raw_output": "{\"score\": 90.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"space for your work lunch ... Make your work lunch easier\"}, {\"code\": \"generic_phrasing\", \"evidence\": \"Lunch Made Easy\"}], \"note\": \"Meets all stated facts, length, A2 tone, and structure with only minor repetition of 'lunch' and a slightly generic heading.\"}",
+          "response": {
+            "id": "gen-1788547946-sVUHSIcKhyOTdmPVtEj4",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 687,
+            "output_tokens": 376,
+            "billable_output_tokens": 376,
+            "reasoning_tokens": 0,
+            "total_tokens": 1063,
+            "latency_ms": 10542,
+            "attempts": 1
+          },
+          "delta": -2.33
+        }
+      }
+    },
+    {
+      "task_id": "public-de-landing-b1-01",
+      "score": 77.0,
+      "judge_stddev": 13.14,
+      "judge_range": 31.0,
+      "disagreement": true,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 59.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_ease_claim",
+              "evidence": "Buche dein Auto einfach per App."
+            }
+          ],
+          "note": "The copy meets the required format, length, tone, and supplied facts, but the unsupported ease claim triggers the factual-claim cap.",
+          "prompt_sha256": "af6dcf10984aeb058ca87b8478f3626769dfbc975546b4ab1f02c7fc33be0070",
+          "raw_output": "{\"score\":59.0,\"brief_ok\":false,\"realized_cefr\":\"B1\",\"issues\":[{\"code\":\"unsupported_ease_claim\",\"evidence\":\"Buche dein Auto einfach per App.\"}],\"note\":\"The copy meets the required format, length, tone, and supplied facts, but the unsupported ease claim triggers the factual-claim cap.\"}",
+          "response": {
+            "id": "resp_099508eb63cbf31b016a9b1371604c87d289103ac341f4b55c",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1005,
+            "output_tokens": 1067,
+            "billable_output_tokens": 1067,
+            "reasoning_tokens": 988,
+            "total_tokens": 2072,
+            "latency_ms": 20569,
+            "attempts": 1
+          },
+          "delta": -18.0
+        },
+        "gemini_high": {
+          "score": 90.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "redundant_copy",
+              "evidence": "Rund um die Uhr verfügbar"
+            }
+          ],
+          "note": "The copy meets all brief constraints and factual limits, though the bullet points repeat the subheadline almost verbatim.",
+          "prompt_sha256": "3bd3dbfb45e8366816cb1d647cc75f5edf04786a5d5589a422870044071b4295",
+          "raw_output": "{\"score\": 90.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"redundant_copy\", \"evidence\": \"Rund um die Uhr verfügbar\"}], \"note\": \"The copy meets all brief constraints and factual limits, though the bullet points repeat the subheadline almost verbatim.\"}",
+          "response": {
+            "id": "resp_dRObat3sE6qnnsEPl8Pc2QI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 781,
+            "output_tokens": 76,
+            "billable_output_tokens": 1670,
+            "reasoning_tokens": 1594,
+            "total_tokens": 2451,
+            "latency_ms": 6641,
+            "attempts": 1
+          },
+          "delta": 13.0
+        },
+        "glm_high": {
+          "score": 82.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "Rund um die Uhr verfügbar"
+            },
+            {
+              "code": "repetition",
+              "evidence": "Buchung direkt per App"
+            },
+            {
+              "code": "structural_shortcut",
+              "evidence": "Keine monatliche Grundgebühr."
+            }
+          ],
+          "note": "The copy uses only permitted facts, hits the required structure, length, tone, and B1 level, but the three bullets almost verbatim restate the subheadline, so redundant phrasing must be cut before publishing.",
+          "prompt_sha256": "4b39d1706c7acf7f6ad18a364fed9e8028cce356c55c24b295228b2c9085a6ea",
+          "raw_output": "{\"score\": 82.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"Rund um die Uhr verfügbar\"}, {\"code\": \"repetition\", \"evidence\": \"Buchung direkt per App\"}, {\"code\": \"structural_shortcut\", \"evidence\": \"Keine monatliche Grundgebühr.\"}], \"note\": \"The copy uses only permitted facts, hits the required structure, length, tone, and B1 level, but the three bullets almost verbatim restate the subheadline, so redundant phrasing must be cut before publishing.\"}",
+          "response": {
+            "id": "gen-1788547957-4bf3QjUWFeCe2In5MF3L",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 740,
+            "output_tokens": 464,
+            "billable_output_tokens": 464,
+            "reasoning_tokens": 0,
+            "total_tokens": 1204,
+            "latency_ms": 11801,
+            "attempts": 1
+          },
+          "delta": 5.0
+        }
+      }
+    },
+    {
+      "task_id": "public-en-landing-b1-01",
+      "score": 95.67,
+      "judge_stddev": 2.05,
+      "judge_range": 5.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 98.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "Complete, concise hero copy that uses only the allowed facts and meets the structure, length, language, and tone requirements.",
+          "prompt_sha256": "96f0380f83908f4c66e6dc72642ea48c858bb1c3b2d3ac27e62bbb9864dda4a1",
+          "raw_output": "{\"score\":98.0,\"brief_ok\":true,\"realized_cefr\":\"B1\",\"issues\":[],\"note\":\"Complete, concise hero copy that uses only the allowed facts and meets the structure, length, language, and tone requirements.\"}",
+          "response": {
+            "id": "resp_028d1dca9bb526ec016a9b13862df887d2832d3f5809b24dfe",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 962,
+            "output_tokens": 653,
+            "billable_output_tokens": 653,
+            "reasoning_tokens": 597,
+            "total_tokens": 1615,
+            "latency_ms": 14158,
+            "attempts": 1
+          },
+          "delta": 2.33
+        },
+        "gemini_high": {
+          "score": 96.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The copy strictly respects all constraints, adheres to the allowed facts without embellishment, and delivers clear, accessible B1 British English copy.",
+          "prompt_sha256": "884e6e1692b69a54ca5753c01ea60fc90d01fe7ff390fcffeb0c0f8d3dfae126",
+          "raw_output": "{\"score\": 96.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [], \"note\": \"The copy strictly respects all constraints, adheres to the allowed facts without embellishment, and delivers clear, accessible B1 British English copy.\"}",
+          "response": {
+            "id": "resp_fBObapQxyOfszw-cxsC5Ag",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 728,
+            "output_tokens": 61,
+            "billable_output_tokens": 1431,
+            "reasoning_tokens": 1370,
+            "total_tokens": 2159,
+            "latency_ms": 5897,
+            "attempts": 1
+          },
+          "delta": 0.33
+        },
+        "glm_high": {
+          "score": 93.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "minor_repetition",
+              "evidence": "drive any time, day or night"
+            }
+          ],
+          "note": "The copy meets every brief requirement with only allowed facts and clean B1 phrasing, slightly dented by the 24/7 idea being stated twice.",
+          "prompt_sha256": "29cb614a91a4075b0afc42debf6566eb00c8fe6ed7c59963ee5e2c8b4c3d8010",
+          "raw_output": "{\"score\": 93.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"minor_repetition\", \"evidence\": \"drive any time, day or night\"}], \"note\": \"The copy meets every brief requirement with only allowed facts and clean B1 phrasing, slightly dented by the 24/7 idea being stated twice.\"}",
+          "response": {
+            "id": "gen-1788547969-KVGgQb4pOzA2SlvJ3b97",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 679,
+            "output_tokens": 378,
+            "billable_output_tokens": 378,
+            "reasoning_tokens": 0,
+            "total_tokens": 1057,
+            "latency_ms": 9019,
+            "attempts": 1
+          },
+          "delta": -2.67
+        }
+      }
+    },
+    {
+      "task_id": "public-de-social-b2-01",
+      "score": 89.33,
+      "judge_stddev": 1.89,
+      "judge_range": 4.0,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 92.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "below_target_cefr",
+              "evidence": "Wir holen sie innerhalb Berlins ab und bringen sie innerhalb von 48 Stunden zurück."
+            }
+          ],
+          "note": "All factual, length, format, and CTA requirements are met, but the consistently simple syntax reads closer to B1 than the requested B2 level.",
+          "prompt_sha256": "cc020f361dfe8149f873e1f7efa5374243b6d1e5993eeb9146d79b55973477b9",
+          "raw_output": "{\"score\":92.0,\"brief_ok\":false,\"realized_cefr\":\"B1\",\"issues\":[{\"code\":\"below_target_cefr\",\"evidence\":\"Wir holen sie innerhalb Berlins ab und bringen sie innerhalb von 48 Stunden zurück.\"}],\"note\":\"All factual, length, format, and CTA requirements are met, but the consistently simple syntax reads closer to B1 than the requested B2 level.\"}",
+          "response": {
+            "id": "resp_01162246a752b099016a9b1394329c87d297cda5b47a620cee",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 987,
+            "output_tokens": 2654,
+            "billable_output_tokens": 2654,
+            "reasoning_tokens": 2563,
+            "total_tokens": 3641,
+            "latency_ms": 110446,
+            "attempts": 1
+          },
+          "delta": 2.67
+        },
+        "gemini_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "stiff_register",
+              "evidence": "Der Festpreis beträgt 24 € pro Paar."
+            }
+          ],
+          "note": "The ad meets every brief constraint and factual limit, but the phrasing is somewhat stiff and bureaucratic for a young Instagram audience in Berlin.",
+          "prompt_sha256": "4fa53e2d086850833d5596ce9b3fb48a9a653b0b1846511a1e5bb819825ae7c8",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"stiff_register\", \"evidence\": \"Der Festpreis beträgt 24 € pro Paar.\"}], \"note\": \"The ad meets every brief constraint and factual limit, but the phrasing is somewhat stiff and bureaucratic for a young Instagram audience in Berlin.\"}",
+          "response": {
+            "id": "resp_gRObasrcNbfl7M8P3KrI-QU",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 761,
+            "output_tokens": 85,
+            "billable_output_tokens": 1701,
+            "reasoning_tokens": 1616,
+            "total_tokens": 2462,
+            "latency_ms": 6493,
+            "attempts": 1
+          },
+          "delta": -1.33
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "weak_hook",
+              "evidence": "Deine Sneaker brauchen eine Reinigung?"
+            }
+          ],
+          "note": "All facts, length, emoji, tone, and CTA constraints are met cleanly, but the opening line is flat and the ad lacks the pull of a stronger hook for the target audience.",
+          "prompt_sha256": "88a93cd639124b9b9fbf8a2ea68a8a59ddffcdc8e3de6ca233d9ee0aa50e5f9f",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"weak_hook\", \"evidence\": \"Deine Sneaker brauchen eine Reinigung?\"}], \"note\": \"All facts, length, emoji, tone, and CTA constraints are met cleanly, but the opening line is flat and the ad lacks the pull of a stronger hook for the target audience.\"}",
+          "response": {
+            "id": "gen-1788547978-FPIi27hHmi3nW80pWPsF",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 724,
+            "output_tokens": 335,
+            "billable_output_tokens": 335,
+            "reasoning_tokens": 0,
+            "total_tokens": 1059,
+            "latency_ms": 8218,
+            "attempts": 1
+          },
+          "delta": -1.33
+        }
+      }
+    },
+    {
+      "task_id": "public-en-social-b2-01",
+      "score": 91.67,
+      "judge_stddev": 4.5,
+      "judge_range": 10.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 98.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The concise, engaging ad meets the factual, length, language, format, tone, emoji and call-to-action requirements.",
+          "prompt_sha256": "87ce04169cc8b3c2b01d5230d28396904ce80574de3f005477dc693c99313715",
+          "raw_output": "{\"score\":98.00,\"brief_ok\":true,\"realized_cefr\":\"B2\",\"issues\":[],\"note\":\"The concise, engaging ad meets the factual, length, language, format, tone, emoji and call-to-action requirements.\"}",
+          "response": {
+            "id": "resp_0d68e444006d3458016a9b1404683c87d2977a2f30ed069203",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 960,
+            "output_tokens": 1608,
+            "billable_output_tokens": 1608,
+            "reasoning_tokens": 1552,
+            "total_tokens": 2568,
+            "latency_ms": 33157,
+            "attempts": 1
+          },
+          "delta": 6.33
+        },
+        "gemini_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_phrasing",
+              "evidence": "We collect and return within London"
+            }
+          ],
+          "note": "The ad strictly follows all constraints and brief facts, though adjacent sentences unnecessarily repeat collection details and booking language.",
+          "prompt_sha256": "b5f860a15b39931c67e3159ebbfb035725dcd994d758ede993c6dd923627290a",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetitive_phrasing\", \"evidence\": \"We collect and return within London\"}], \"note\": \"The ad strictly follows all constraints and brief facts, though adjacent sentences unnecessarily repeat collection details and booking language.\"}",
+          "response": {
+            "id": "resp_iBObarivGfThnsEP_PCNyQI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 729,
+            "output_tokens": 78,
+            "billable_output_tokens": 1634,
+            "reasoning_tokens": 1556,
+            "total_tokens": 2363,
+            "latency_ms": 5902,
+            "attempts": 1
+          },
+          "delta": -3.67
+        },
+        "glm_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "We collect and return within London, with your trainers back within 48 hours."
+            },
+            {
+              "code": "repeated_wording",
+              "evidence": "Get 10% off your first booking. Book your first clean today."
+            }
+          ],
+          "note": "All supplied facts, structure, emoji, CTA, and length limits are met in clean B2 British English, with only mild repetition of 'collect and return within London' and 'first' keeping it short of top marks.",
+          "prompt_sha256": "9159730ac6ef10bda12598a9c0d166739487d2422fe9b23a7413807b04f6a0b5",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"We collect and return within London, with your trainers back within 48 hours.\"}, {\"code\": \"repeated_wording\", \"evidence\": \"Get 10% off your first booking. Book your first clean today.\"}], \"note\": \"All supplied facts, structure, emoji, CTA, and length limits are met in clean B2 British English, with only mild repetition of 'collect and return within London' and 'first' keeping it short of top marks.\"}",
+          "response": {
+            "id": "gen-1788547986-b47A3J8rJPx4hyQp1NWA",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 678,
+            "output_tokens": 534,
+            "billable_output_tokens": 534,
+            "reasoning_tokens": 0,
+            "total_tokens": 1212,
+            "latency_ms": 13003,
+            "attempts": 1
+          },
+          "delta": -2.67
+        }
+      }
+    },
+    {
+      "task_id": "public-de-email-c1-01",
+      "score": 80.0,
+      "judge_stddev": 14.99,
+      "judge_range": 34.0,
+      "disagreement": true,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 59.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_project_timing",
+              "evidence": "Sie haben vor drei Wochen Ihr erstes Projekt angelegt"
+            },
+            {
+              "code": "unsupported_process_detail",
+              "evidence": "Den passenden Zugriff wählen Sie direkt bei der Einladung aus."
+            }
+          ],
+          "note": "The email meets the length, structure, language, and tone requirements, but it conflates account age with project timing and adds an unsupported workflow detail.",
+          "prompt_sha256": "0cb7a29811591b190dcb8d88239dd8735889c783ee2d68dd2fbcafd80ef2854a",
+          "raw_output": "{\"score\":59.0,\"brief_ok\":false,\"realized_cefr\":\"C1\",\"issues\":[{\"code\":\"unsupported_project_timing\",\"evidence\":\"Sie haben vor drei Wochen Ihr erstes Projekt angelegt\"},{\"code\":\"unsupported_process_detail\",\"evidence\":\"Den passenden Zugriff wählen Sie direkt bei der Einladung aus.\"}],\"note\":\"The email meets the length, structure, language, and tone requirements, but it conflates account age with project timing and adds an unsupported workflow detail.\"}",
+          "response": {
+            "id": "resp_05263781f99a7770016a9b1423df9487d2b86ca58aaa4a044c",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1159,
+            "output_tokens": 1388,
+            "billable_output_tokens": 1388,
+            "reasoning_tokens": 1283,
+            "total_tokens": 2547,
+            "latency_ms": 26464,
+            "attempts": 1
+          },
+          "delta": -21.0
+        },
+        "gemini_high": {
+          "score": 93.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "clunky_phrasing",
+              "evidence": "in Ihrer Agentur im Projekt abzubilden"
+            }
+          ],
+          "note": "The copy adheres strictly to all brief constraints and factual boundaries with an appropriate tone, needing only minor smoothing of repetitive phrasing.",
+          "prompt_sha256": "c3d8f1c05b65e9107f28529ce8cc4c297dc0fc3ff1370100a054e29d2131630f",
+          "raw_output": "{\"score\": 93.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"clunky_phrasing\", \"evidence\": \"in Ihrer Agentur im Projekt abzubilden\"}], \"note\": \"The copy adheres strictly to all brief constraints and factual boundaries with an appropriate tone, needing only minor smoothing of repetitive phrasing.\"}",
+          "response": {
+            "id": "resp_jhObavG1EfzlnsEP4vSw-AI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 948,
+            "output_tokens": 84,
+            "billable_output_tokens": 3711,
+            "reasoning_tokens": 3627,
+            "total_tokens": 4659,
+            "latency_ms": 11866,
+            "attempts": 1
+          },
+          "delta": 13.0
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "awkward_phrasing",
+              "evidence": "ein guter Ausgangspunkt, um die Zusammenarbeit in Ihrer Agentur im Projekt abzubilden"
+            },
+            {
+              "code": "redundant_close",
+              "evidence": "laden Sie die Person ein, mit der Sie daran arbeiten möchten"
+            }
+          ],
+          "note": "A faithful, factual retention email that hits length, all permitted facts, audience, and tone, held back only by a clunky opening clause and slightly repetitive closing instructions.",
+          "prompt_sha256": "a171d4c319275b0a47f40ec2907294b1e94e8abf33b9a27aac50e78812289ade",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": \"C1\", \"issues\": [{\"code\": \"awkward_phrasing\", \"evidence\": \"ein guter Ausgangspunkt, um die Zusammenarbeit in Ihrer Agentur im Projekt abzubilden\"}, {\"code\": \"redundant_close\", \"evidence\": \"laden Sie die Person ein, mit der Sie daran arbeiten möchten\"}], \"note\": \"A faithful, factual retention email that hits length, all permitted facts, audience, and tone, held back only by a clunky opening clause and slightly repetitive closing instructions.\"}",
+          "response": {
+            "id": "gen-1788547999-PTCUS9jXRuN69MJm3PcU",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 923,
+            "output_tokens": 1021,
+            "billable_output_tokens": 1021,
+            "reasoning_tokens": 0,
+            "total_tokens": 1944,
+            "latency_ms": 22889,
+            "attempts": 1
+          },
+          "delta": 8.0
+        }
+      }
+    },
+    {
+      "task_id": "public-en-email-c1-01",
+      "score": 91.5,
+      "judge_stddev": 4.3,
+      "judge_range": 10.5,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 97.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The email meets the factual, structural, length, audience, tone and CTA requirements with clear, persuasive copy.",
+          "prompt_sha256": "642545d0296c9f35dec7a4bf75d7563009bb63697d1462db04972ccbe77e87a7",
+          "raw_output": "{\"score\":97.0,\"brief_ok\":true,\"realized_cefr\":\"C1\",\"issues\":[],\"note\":\"The email meets the factual, structural, length, audience, tone and CTA requirements with clear, persuasive copy.\"}",
+          "response": {
+            "id": "resp_01fc2337855ac441016a9b143e5ce887d2ac0c02f25e30b026",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1092,
+            "output_tokens": 1606,
+            "billable_output_tokens": 1606,
+            "reasoning_tokens": 1552,
+            "total_tokens": 2698,
+            "latency_ms": 30635,
+            "attempts": 1
+          },
+          "delta": 5.5
+        },
+        "gemini_high": {
+          "score": 91.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "stilted_phrasing",
+              "evidence": "You created your account 21 days ago"
+            }
+          ],
+          "note": "The email follows all briefing constraints and length requirements accurately, needing only a small tweak to make the opening line feel less like a literal prompt echo.",
+          "prompt_sha256": "3ba5fa53b1a2974fd1473d8158826d4f4891ed5f59196b1d10cd64b86e8b29fd",
+          "raw_output": "{\"score\": 91.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"stilted_phrasing\", \"evidence\": \"You created your account 21 days ago\"}], \"note\": \"The email follows all briefing constraints and length requirements accurately, needing only a small tweak to make the opening line feel less like a literal prompt echo.\"}",
+          "response": {
+            "id": "resp_mhObavWzCIOQ3boP7NPjQA",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 863,
+            "output_tokens": 89,
+            "billable_output_tokens": 3030,
+            "reasoning_tokens": 2941,
+            "total_tokens": 3893,
+            "latency_ms": 10774,
+            "attempts": 1
+          },
+          "delta": -0.5
+        },
+        "glm_high": {
+          "score": 86.5,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "cefr_below_target",
+              "evidence": "You still have 14 days left in your trial, giving you time to see how the project works with another person involved."
+            },
+            {
+              "code": "mild_repetition",
+              "evidence": "the project is no longer yours to manage alone ... see how the project works with another person involved"
+            },
+            {
+              "code": "generic_phrasing",
+              "evidence": "you can choose the right level of access for each person"
+            }
+          ],
+          "note": "Fully on-brief with correct facts, length, structure and tone, but the register sits closer to B2 than the requested C1 and leans on a few repeated, generic formulations.",
+          "prompt_sha256": "31e4e7d992edc1d1053977caf25da67e30049e1fc075efcaeeb400019fa3e9f0",
+          "raw_output": "{\"score\": 86.50, \"brief_ok\": true, \"realized_cefr\": \"B2\", \"issues\": [{\"code\": \"cefr_below_target\", \"evidence\": \"You still have 14 days left in your trial, giving you time to see how the project works with another person involved.\"}, {\"code\": \"mild_repetition\", \"evidence\": \"the project is no longer yours to manage alone ... see how the project works with another person involved\"}, {\"code\": \"generic_phrasing\", \"evidence\": \"you can choose the right level of access for each person\"}], \"note\": \"Fully on-brief with correct facts, length, structure and tone, but the register sits closer to B2 than the requested C1 and leans on a few repeated, generic formulations.\"}",
+          "response": {
+            "id": "gen-1788548022-G1MaPNRJIYgGbLqXI4Qh",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 811,
+            "output_tokens": 1065,
+            "billable_output_tokens": 1065,
+            "reasoning_tokens": 0,
+            "total_tokens": 1876,
+            "latency_ms": 23745,
+            "attempts": 1
+          },
+          "delta": -5.0
+        }
+      }
+    }
+  ]
+}

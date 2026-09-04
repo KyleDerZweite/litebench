@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "evaluation": {
+    "id": "2026-09-04-panel-v0.1",
+    "protocol_version": "panel-v0.1",
+    "protocol_file": "benches/judge-panel-v0.1.json",
+    "protocol_sha256": "11dd5da0515ce600f8a63c17e27fb9104df99581461ee1f08cf16972f11193e5",
+    "source_file": "benches/naturalbench/generations/2026-09-04-rerun-01/gpt-5-6-terra-low.json",
+    "source_sha256": "0f2ed4e1ce46773a1c69dc99ff57e355afe55a156356e19c2405f350a383fab2",
+    "human_validated": false,
+    "judges": {
+      "sol_max": {
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "max",
+        "focus": "Audit objective constraints first. Treat every plausible addition as unsupported unless the brief supplies it. Enforce all score caps."
+      },
+      "gemini_high": {
+        "model": "gemini-3.8-flash-high",
+        "reasoning_effort": "high",
+        "focus": "Audit idiom, locale, register, rhythm, audience fit, and formulaic language closely. Keep the shared rubric and caps unchanged."
+      },
+      "glm_high": {
+        "model": "z-ai/glm-5.3-flash",
+        "reasoning_effort": "high",
+        "focus": "Take an adversarial pass for generic phrasing, repetition, unsupported inference, and structural shortcuts. Keep the shared rubric and caps unchanged."
+      }
+    },
+    "created_at": "2026-09-04T19:04:38.593132+00:00"
+  },
+  "summary": {
+    "model": "gpt-5.6-terra",
+    "provider": "kylehub",
+    "model_version": "gpt-5.6-terra",
+    "reasoning_effort": "low",
+    "date": "2026-09-04",
+    "evaluation_type": "ai_panel_provisional",
+    "human_evaluation": false,
+    "score": 89.79,
+    "judge_stddev": 0.16,
+    "judge_range": 0.38,
+    "judge_scores": {
+      "sol_max": 89.62,
+      "gemini_high": 90.0,
+      "glm_high": 89.75
+    },
+    "average_item_judge_stddev": 1.29,
+    "disagreement_count": 0,
+    "brief_ok_pct": 50.0,
+    "average_latency_ms": 3999,
+    "average_input_tokens": 394,
+    "average_output_tokens": 123,
+    "average_cost_usd": 0.002267,
+    "cost_basis": "estimated",
+    "generated": 4,
+    "rated": 4,
+    "total": 4,
+    "generation_file": "benches/naturalbench/generations/2026-09-04-rerun-01/gpt-5-6-terra-low.json",
+    "file": "benches/naturalbench/evaluations/2026-09-04-panel-v0.1/gpt-5-6-terra-low.json"
+  },
+  "items": [
+    {
+      "task_id": "natural-en-service-01",
+      "score": 86.08,
+      "judge_stddev": 1.48,
+      "judge_range": 3.25,
+      "disagreement": false,
+      "brief_ok_votes": 0,
+      "judgments": {
+        "sol_max": {
+          "score": 87.25,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "under_length",
+              "evidence": "Account exports will be unavailable this Saturday from 07:00 to 09:00 UK time."
+            },
+            {
+              "code": "unsupported_specificity",
+              "evidence": "generate or download account exports"
+            },
+            {
+              "code": "unnecessary_action_prompt",
+              "evidence": "please arrange this outside the scheduled window"
+            }
+          ],
+          "note": "The update sounds calm and mostly natural, but repetition and the awkward phrase “arrange this” prevent it from feeling fully polished.",
+          "prompt_sha256": "e4b99d6692f117a97cb60cf51fda1703f3785a938bbd8536b8f9493e8a81fc64",
+          "raw_output": "{\"score\":87.25,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"under_length\",\"evidence\":\"Account exports will be unavailable this Saturday from 07:00 to 09:00 UK time.\"},{\"code\":\"unsupported_specificity\",\"evidence\":\"generate or download account exports\"},{\"code\":\"unnecessary_action_prompt\",\"evidence\":\"please arrange this outside the scheduled window\"}],\"note\":\"The update sounds calm and mostly natural, but repetition and the awkward phrase “arrange this” prevent it from feeling fully polished.\"}",
+          "response": {
+            "id": "resp_0dab7e56ae5b20c2016a9b1505680c87d28ef7c4820cddba22",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1000,
+            "output_tokens": 3226,
+            "billable_output_tokens": 3226,
+            "reasoning_tokens": 3106,
+            "total_tokens": 4226,
+            "latency_ms": 59517,
+            "attempts": 1
+          },
+          "delta": 1.17
+        },
+        "gemini_high": {
+          "score": 84.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "redundant_phrasing",
+              "evidence": "During this period, you will not be able to generate or download account exports."
+            },
+            {
+              "code": "stilted_passive",
+              "evidence": "No action is required from you."
+            }
+          ],
+          "note": "The tone is appropriately calm and British, but it includes immediate repetition and falls well short of the required word count.",
+          "prompt_sha256": "1f29b3eee47078115a821cca33963073241478f3c1f34bf7b9b2d046f6ddf33c",
+          "raw_output": "{\n  \"score\": 84.00,\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"redundant_phrasing\",\n      \"evidence\": \"During this period, you will not be able to generate or download account exports.\"\n    },\n    {\n      \"code\": \"stilted_passive\",\n      \"evidence\": \"No action is required from you.\"\n    }\n  ],\n  \"note\": \"The tone is appropriately calm and British, but it includes immediate repetition and falls well short of the required word count.\"\n}",
+          "response": {
+            "id": "resp_CBWbauqnDtCU3boP8JrK6QI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 760,
+            "output_tokens": 144,
+            "billable_output_tokens": 1556,
+            "reasoning_tokens": 1412,
+            "total_tokens": 2316,
+            "latency_ms": 5011,
+            "attempts": 1
+          },
+          "delta": -2.08
+        },
+        "glm_high": {
+          "score": 87.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "word_count_short",
+              "evidence": "No action is required from you."
+            },
+            {
+              "code": "repetition",
+              "evidence": "generate or download account exports"
+            },
+            {
+              "code": "redundant_restatement",
+              "evidence": "During this period, you will not be able to generate or download account exports."
+            }
+          ],
+          "note": "The prose is calm, direct, and natural British English with no AI-tell phrasing, but it runs well under the 80-word minimum and repeats the export unavailability twice.",
+          "prompt_sha256": "b8585014ec189e7ea7d4d5113d598023ee558eb5e04bf62495a3f19ffed59e69",
+          "raw_output": "{\"score\": 87.00, \"brief_ok\": false, \"realized_cefr\": null, \"issues\": [{\"code\": \"word_count_short\", \"evidence\": \"No action is required from you.\"}, {\"code\": \"repetition\", \"evidence\": \"generate or download account exports\"}, {\"code\": \"redundant_restatement\", \"evidence\": \"During this period, you will not be able to generate or download account exports.\"}], \"note\": \"The prose is calm, direct, and natural British English with no AI-tell phrasing, but it runs well under the 80-word minimum and repeats the export unavailability twice.\"}",
+          "response": {
+            "id": "gen-1788548363-fkmzjA6hqrQCPcaxiaw3",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 718,
+            "output_tokens": 780,
+            "billable_output_tokens": 780,
+            "reasoning_tokens": 0,
+            "total_tokens": 1498,
+            "latency_ms": 8666,
+            "attempts": 1
+          },
+          "delta": 0.92
+        }
+      }
+    },
+    {
+      "task_id": "natural-de-service-01",
+      "score": 91.83,
+      "judge_stddev": 0.62,
+      "judge_range": 1.5,
+      "disagreement": false,
+      "brief_ok_votes": 0,
+      "judgments": {
+        "sol_max": {
+          "score": 92.5,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "below_word_limit",
+              "evidence": "Vielen Dank für Ihr Verständnis."
+            },
+            {
+              "code": "unsupported_specificity",
+              "evidence": "keine neuen Exporte erstellt oder heruntergeladen werden"
+            },
+            {
+              "code": "minor_redundancy",
+              "evidence": "bleiben weiterhin verfügbar"
+            }
+          ],
+          "note": "The German is calm, idiomatic, and direct, but the notice has only about 62 words and adds an unsupported operational detail.",
+          "prompt_sha256": "cc2814076a6e4607f5745a6f1c155736b761e92a1e04aa69828d352db5c332ce",
+          "raw_output": "{\"score\":92.50,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"below_word_limit\",\"evidence\":\"Vielen Dank für Ihr Verständnis.\"},{\"code\":\"unsupported_specificity\",\"evidence\":\"keine neuen Exporte erstellt oder heruntergeladen werden\"},{\"code\":\"minor_redundancy\",\"evidence\":\"bleiben weiterhin verfügbar\"}],\"note\":\"The German is calm, idiomatic, and direct, but the notice has only about 62 words and adds an unsupported operational detail.\"}",
+          "response": {
+            "id": "resp_0821586eb78e8028016a9b1540d16887d28ddbc65cf2bfd4ce",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1044,
+            "output_tokens": 2699,
+            "billable_output_tokens": 2699,
+            "reasoning_tokens": 2588,
+            "total_tokens": 3743,
+            "latency_ms": 50476,
+            "attempts": 1
+          },
+          "delta": 0.67
+        },
+        "gemini_high": {
+          "score": 91.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The tone is idiomatic and appropriately professional, but the text falls significantly short of the requested word count.",
+          "prompt_sha256": "69bf5f7f9bec8e35945c0fe9395548cdf842fb4866e0bd3e25ca9027ef4f297f",
+          "raw_output": "{\"score\": 91.00, \"brief_ok\": false, \"realized_cefr\": null, \"issues\": [], \"note\": \"The tone is idiomatic and appropriately professional, but the text falls significantly short of the requested word count.\"}",
+          "response": {
+            "id": "resp_DRWbaua0D5-YkdUP39-VsQI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 813,
+            "output_tokens": 56,
+            "billable_output_tokens": 2251,
+            "reasoning_tokens": 2195,
+            "total_tokens": 3064,
+            "latency_ms": 7879,
+            "attempts": 1
+          },
+          "delta": -0.83
+        },
+        "glm_high": {
+          "score": 92.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "word_count_short",
+              "evidence": "Liebe Kundinnen und Kunden, ... Vielen Dank für Ihr Verständnis."
+            },
+            {
+              "code": "stock_closing",
+              "evidence": "Vielen Dank für Ihr Verständnis."
+            }
+          ],
+          "note": "The German is calm, direct and natural with correct facts and no marketing tone, but at roughly 60 words it falls well short of the required 80 to 110 words.",
+          "prompt_sha256": "e3be6bcd83a329b1e652f16b665d962bf07103264141989fc8e03701d4a7aab5",
+          "raw_output": "{\"score\": 92.00, \"brief_ok\": false, \"realized_cefr\": null, \"issues\": [{\"code\": \"word_count_short\", \"evidence\": \"Liebe Kundinnen und Kunden, ... Vielen Dank für Ihr Verständnis.\"}, {\"code\": \"stock_closing\", \"evidence\": \"Vielen Dank für Ihr Verständnis.\"}], \"note\": \"The German is calm, direct and natural with correct facts and no marketing tone, but at roughly 60 words it falls well short of the required 80 to 110 words.\"}",
+          "response": {
+            "id": "gen-1788548371-g0ts5aKb0PxNOtYxn9yG",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 775,
+            "output_tokens": 923,
+            "billable_output_tokens": 923,
+            "reasoning_tokens": 0,
+            "total_tokens": 1698,
+            "latency_ms": 12328,
+            "attempts": 1
+          },
+          "delta": 0.17
+        }
+      }
+    },
+    {
+      "task_id": "natural-en-founder-01",
+      "score": 92.83,
+      "judge_stddev": 2.25,
+      "judge_range": 5.0,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 91.5,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_commitment",
+              "evidence": "I’ll share another update once it’s ready to roll out."
+            },
+            {
+              "code": "stock_product_phrase",
+              "evidence": "before it’s in your hands"
+            }
+          ],
+          "note": "The note sounds candid and natural overall, though the ending turns slightly polished and adds an unsupported promise of another update.",
+          "prompt_sha256": "d1d63f9b07925b9929846040e5e829b9f00d5ace817a478142612a4bc8000c6d",
+          "raw_output": "{\"score\":91.50,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"unsupported_commitment\",\"evidence\":\"I’ll share another update once it’s ready to roll out.\"},{\"code\":\"stock_product_phrase\",\"evidence\":\"before it’s in your hands\"}],\"note\":\"The note sounds candid and natural overall, though the ending turns slightly polished and adds an unsupported promise of another update.\"}",
+          "response": {
+            "id": "resp_027886824445dff3016a9b15735da887d29558c6e1a2bc6835",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1043,
+            "output_tokens": 1458,
+            "billable_output_tokens": 1458,
+            "reasoning_tokens": 1364,
+            "total_tokens": 2501,
+            "latency_ms": 28887,
+            "attempts": 1
+          },
+          "delta": -1.33
+        },
+        "gemini_high": {
+          "score": 96.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The note strikes a perfectly candid, natural founder tone with smooth pacing and adheres strictly to all brief constraints.",
+          "prompt_sha256": "acf77976e9d8afa5bcf7f74b3055f73b8f5fb41791c89e2be6b897044fe7b044",
+          "raw_output": "{\"score\": 96.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [], \"note\": \"The note strikes a perfectly candid, natural founder tone with smooth pacing and adheres strictly to all brief constraints.\"}",
+          "response": {
+            "id": "resp_FRWbaq2mCfrikdUPrp2y6Q4",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 804,
+            "output_tokens": 56,
+            "billable_output_tokens": 1120,
+            "reasoning_tokens": 1064,
+            "total_tokens": 1924,
+            "latency_ms": 4354,
+            "attempts": 1
+          },
+          "delta": 3.17
+        },
+        "glm_high": {
+          "score": 91.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "stock_phrase",
+              "evidence": "before it's in your hands"
+            },
+            {
+              "code": "generic_closer",
+              "evidence": "once it's ready to roll out"
+            }
+          ],
+          "note": "A candid, well-scaled founder note that hits all required facts with natural register, held back slightly by a couple of stock closers and mild near-duplication between the apology and rationale.",
+          "prompt_sha256": "0704a81b92f66c50f4660ef0844e09a1aca9d2c9ca52a41750a501d87fc57a98",
+          "raw_output": "{\"score\": 91.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"stock_phrase\", \"evidence\": \"before it's in your hands\"}, {\"code\": \"generic_closer\", \"evidence\": \"once it's ready to roll out\"}], \"note\": \"A candid, well-scaled founder note that hits all required facts with natural register, held back slightly by a couple of stock closers and mild near-duplication between the apology and rationale.\"}",
+          "response": {
+            "id": "gen-1788548384-MNFLkFC04HmqrBSedJBY",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 760,
+            "output_tokens": 468,
+            "billable_output_tokens": 468,
+            "reasoning_tokens": 0,
+            "total_tokens": 1228,
+            "latency_ms": 6559,
+            "attempts": 1
+          },
+          "delta": -1.83
+        }
+      }
+    },
+    {
+      "task_id": "natural-de-founder-01",
+      "score": 88.42,
+      "judge_stddev": 0.82,
+      "judge_range": 1.75,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 87.25,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "awkward_nominalization",
+              "evidence": "zum geplanten Kalenderteilen informieren"
+            },
+            {
+              "code": "unsupported_failure_effect",
+              "evidence": "geteilte Termine zur falschen Zeit angezeigt werden"
+            },
+            {
+              "code": "unsupported_function_details",
+              "evidence": "Termine wie bisher erstellen, verschieben und verwalten"
+            }
+          ],
+          "note": "The message is clear and approachable, but the stiff nominalization and mild startup phrasing keep it from sounding fully effortless.",
+          "prompt_sha256": "4c2c5d0d4b97c3e5c8483e8f163b9a679572a22d3595b99017cca42ee5fe28c0",
+          "raw_output": "{\"score\":87.25,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"awkward_nominalization\",\"evidence\":\"zum geplanten Kalenderteilen informieren\"},{\"code\":\"unsupported_failure_effect\",\"evidence\":\"geteilte Termine zur falschen Zeit angezeigt werden\"},{\"code\":\"unsupported_function_details\",\"evidence\":\"Termine wie bisher erstellen, verschieben und verwalten\"}],\"note\":\"The message is clear and approachable, but the stiff nominalization and mild startup phrasing keep it from sounding fully effortless.\"}",
+          "response": {
+            "id": "resp_07f0405f9f5415a5016a9b1590627487d29c77f0bf7ba59330",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1087,
+            "output_tokens": 2703,
+            "billable_output_tokens": 2703,
+            "reasoning_tokens": 2588,
+            "total_tokens": 3790,
+            "latency_ms": 50322,
+            "attempts": 1
+          },
+          "delta": -1.17
+        },
+        "gemini_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "collocation_flaw",
+              "evidence": "zum geplanten Kalenderteilen informieren"
+            },
+            {
+              "code": "punctuation_crutch",
+              "evidence": "angezeigt werden – und"
+            }
+          ],
+          "note": "The tone is appropriately direct and grounded, though it uses an unidiomatic preposition construction with 'informieren' and relies on an em dash.",
+          "prompt_sha256": "e806239ff1f71f2356e2c1a05457d814a90b45a9da51617e208d11e68bb14f1b",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"collocation_flaw\", \"evidence\": \"zum geplanten Kalenderteilen informieren\"}, {\"code\": \"punctuation_crutch\", \"evidence\": \"angezeigt werden – und\"}], \"note\": \"The tone is appropriately direct and grounded, though it uses an unidiomatic preposition construction with 'informieren' and relies on an em dash.\"}",
+          "response": {
+            "id": "resp_GRWbavPrKq2wkdUP__GUqA4",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 854,
+            "output_tokens": 106,
+            "billable_output_tokens": 1888,
+            "reasoning_tokens": 1782,
+            "total_tokens": 2742,
+            "latency_ms": 7419,
+            "attempts": 1
+          },
+          "delta": 0.58
+        },
+        "glm_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "punctuation_crutch",
+              "evidence": "angezeigt werden – und das möchten wir nicht ausrollen"
+            },
+            {
+              "code": "startup_jargon",
+              "evidence": "das möchten wir nicht ausrollen"
+            },
+            {
+              "code": "formulaic_closer",
+              "evidence": "Danke für eure Geduld."
+            }
+          ],
+          "note": "Alle Fakten korrekt, innerhalb der Wortgrenze und überwiegend natürlich, aber der Gedankenstrich, das Anglizismus-ähnliche 'ausrollen' und der formelhafte Dank sind kleinere Glättungszeichen.",
+          "prompt_sha256": "5391c7c532bf4f6fdbc0672e2585a61292092f6cca595168323846f310680895",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"punctuation_crutch\", \"evidence\": \"angezeigt werden – und das möchten wir nicht ausrollen\"}, {\"code\": \"startup_jargon\", \"evidence\": \"das möchten wir nicht ausrollen\"}, {\"code\": \"formulaic_closer\", \"evidence\": \"Danke für eure Geduld.\"}], \"note\": \"Alle Fakten korrekt, innerhalb der Wortgrenze und überwiegend natürlich, aber der Gedankenstrich, das Anglizismus-ähnliche 'ausrollen' und der formelhafte Dank sind kleinere Glättungszeichen.\"}",
+          "response": {
+            "id": "gen-1788548390-OQzX67p5G79e47etoCYv",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 849,
+            "output_tokens": 1037,
+            "billable_output_tokens": 1037,
+            "reasoning_tokens": 0,
+            "total_tokens": 1886,
+            "latency_ms": 10778,
+            "attempts": 1
+          },
+          "delta": 0.58
+        }
+      }
+    }
+  ]
+}

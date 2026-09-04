@@ -15,10 +15,12 @@ share the same file format and results page.
 CopyBench asks whether the output follows the brief, fits the audience and
 channel, makes a clear case, and sticks to the supplied facts.
 
-The current batch has 8 bilingual prompts. Fifteen GPT-5.6 model and effort
-configurations produced 120 outputs. A separate, blinded `gpt-5.6-sol` max call
-judged each output. These scores are provisional, and no person has reviewed
-them.
+The current panel batch has 8 bilingual prompts and 19 model configurations.
+It contains 152 outputs. GPT-5.6 Sol max, Gemini 3.8 Flash High, and
+GLM-5.3-Flash high judged every output independently. These scores are
+provisional, and no person has reviewed them.
+
+The earlier 120-output, single-judge batch remains as a legacy result set.
 
 The public prompts and v0.2 evaluator stay unchanged because the result files
 refer to them. A changed prompt or rubric must use a new version.
@@ -35,7 +37,8 @@ into proof of AI authorship. Context still matters. The first automatic results
 must name the evaluator model and prompt version, and the site must call them
 provisional until they have been checked against human ratings.
 
-The public set has 4 bilingual tasks and no scored runs.
+The public set has 4 bilingual tasks, 19 configurations, and 76 panel-scored
+outputs.
 
 ## CEFRBench Lite
 
@@ -43,13 +46,15 @@ CEFRBench asks whether the output matches the requested CEFR level. Its tasks
 cover A2, B1, B2, and C1 in German and British English. The evaluator does not
 reward persuasion or naturalness.
 
-The public set has 8 tasks and no scored runs.
+The public set has 8 tasks, 19 configurations, and 152 panel-scored outputs.
 
 ## Results page
 
 The site uses SkateBench styling and a DeepSWE-style layout. The chart keeps
 score on the vertical axis and switches the horizontal axis between cost,
 output tokens, and latency. It connects all effort levels for each model.
+Vertical error bars show the standard deviation across the three judge
+averages.
 
 The table starts with the highest-scoring effort per model. A tied score picks
 the lower effort. `All effort levels` shows every configuration.

@@ -1,0 +1,494 @@
+{
+  "schema_version": 1,
+  "evaluation": {
+    "id": "2026-09-04-panel-v0.1",
+    "protocol_version": "panel-v0.1",
+    "protocol_file": "benches/judge-panel-v0.1.json",
+    "protocol_sha256": "11dd5da0515ce600f8a63c17e27fb9104df99581461ee1f08cf16972f11193e5",
+    "source_file": "benches/naturalbench/generations/2026-09-04-rerun-01/z-ai-glm-5-3-flash-high.json",
+    "source_sha256": "ad29775b49d4974d4763845ac36c0d0d2f3a82d023057c5a13716006b216f922",
+    "human_validated": false,
+    "judges": {
+      "sol_max": {
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "max",
+        "focus": "Audit objective constraints first. Treat every plausible addition as unsupported unless the brief supplies it. Enforce all score caps."
+      },
+      "gemini_high": {
+        "model": "gemini-3.8-flash-high",
+        "reasoning_effort": "high",
+        "focus": "Audit idiom, locale, register, rhythm, audience fit, and formulaic language closely. Keep the shared rubric and caps unchanged."
+      },
+      "glm_high": {
+        "model": "z-ai/glm-5.3-flash",
+        "reasoning_effort": "high",
+        "focus": "Take an adversarial pass for generic phrasing, repetition, unsupported inference, and structural shortcuts. Keep the shared rubric and caps unchanged."
+      }
+    },
+    "created_at": "2026-09-04T19:04:38.598449+00:00"
+  },
+  "summary": {
+    "model": "z-ai/glm-5.3-flash",
+    "provider": "kylehub",
+    "model_version": "z-ai/glm-5.3-flash",
+    "reasoning_effort": "high",
+    "date": "2026-09-04",
+    "evaluation_type": "ai_panel_provisional",
+    "human_evaluation": false,
+    "score": 86.58,
+    "judge_stddev": 1.51,
+    "judge_range": 3.62,
+    "judge_scores": {
+      "sol_max": 85.0,
+      "gemini_high": 88.62,
+      "glm_high": 86.12
+    },
+    "average_item_judge_stddev": 1.97,
+    "disagreement_count": 0,
+    "brief_ok_pct": 75.0,
+    "average_latency_ms": 4258,
+    "average_input_tokens": 109,
+    "average_output_tokens": 171,
+    "average_cost_usd": 5.091e-05,
+    "cost_basis": "estimated",
+    "generated": 4,
+    "rated": 4,
+    "total": 4,
+    "generation_file": "benches/naturalbench/generations/2026-09-04-rerun-01/z-ai-glm-5-3-flash-high.json",
+    "file": "benches/naturalbench/evaluations/2026-09-04-panel-v0.1/z-ai-glm-5-3-flash-high.json"
+  },
+  "items": [
+    {
+      "task_id": "natural-en-service-01",
+      "score": 85.08,
+      "judge_stddev": 1.36,
+      "judge_range": 3.0,
+      "disagreement": false,
+      "brief_ok_votes": 1,
+      "judgments": {
+        "sol_max": {
+          "score": 84.25,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "invented_maintenance",
+              "evidence": "while we carry out scheduled maintenance"
+            },
+            {
+              "code": "unsupported_reassurance",
+              "evidence": "you can still access everything you need during this window"
+            },
+            {
+              "code": "mixed_action_message",
+              "evidence": "downloading any exports you require beforehand may be helpful"
+            }
+          ],
+          "note": "The tone is calm and mostly idiomatic, but generic reassurance and the hedged download suggestion make the update feel overworked and slightly contradictory.",
+          "prompt_sha256": "6d45f51780e19dbd1044d1ded5138499df212c74f902f67b2778d7cf54915700",
+          "raw_output": "{\"score\":84.25,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"invented_maintenance\",\"evidence\":\"while we carry out scheduled maintenance\"},{\"code\":\"unsupported_reassurance\",\"evidence\":\"you can still access everything you need during this window\"},{\"code\":\"mixed_action_message\",\"evidence\":\"downloading any exports you require beforehand may be helpful\"}],\"note\":\"The tone is calm and mostly idiomatic, but generic reassurance and the hedged download suggestion make the update feel overworked and slightly contradictory.\"}",
+          "response": {
+            "id": "resp_0cc2f823807a8b6f016a9b15360fec87d280d38b7782fb3075",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1059,
+            "output_tokens": 4017,
+            "billable_output_tokens": 4017,
+            "reasoning_tokens": 3899,
+            "total_tokens": 5076,
+            "latency_ms": 74353,
+            "attempts": 1
+          },
+          "delta": -0.83
+        },
+        "gemini_high": {
+          "score": 87.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repeated_summary",
+              "evidence": "The only limitation is that you won't be able to generate new exports for those two hours."
+            },
+            {
+              "code": "filler",
+              "evidence": "downloading any exports you require beforehand may be helpful, but this is entirely optional."
+            }
+          ],
+          "note": "The tone is suitably considerate and the British English register is natural, but the prose relies on circular padding to stretch very few facts to the required length.",
+          "prompt_sha256": "3951b1a7d40f0a3847dd3c77d8cfb58152d4a06aaaff3e514fd1ae0268b7189b",
+          "raw_output": "{\"score\": 87.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repeated_summary\", \"evidence\": \"The only limitation is that you won't be able to generate new exports for those two hours.\"}, {\"code\": \"filler\", \"evidence\": \"downloading any exports you require beforehand may be helpful, but this is entirely optional.\"}], \"note\": \"The tone is suitably considerate and the British English register is natural, but the prose relies on circular padding to stretch very few facts to the required length.\"}",
+          "response": {
+            "id": "resp_OBWbarahMa6T3boPytiCgQE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 832,
+            "output_tokens": 123,
+            "billable_output_tokens": 2834,
+            "reasoning_tokens": 2711,
+            "total_tokens": 3666,
+            "latency_ms": 9975,
+            "attempts": 1
+          },
+          "delta": 1.92
+        },
+        "glm_high": {
+          "score": 84.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "invented_fact",
+              "evidence": "while we carry out scheduled maintenance"
+            },
+            {
+              "code": "hedged_redundancy",
+              "evidence": "There's nothing you need to do in advance... but this is entirely optional"
+            },
+            {
+              "code": "padding",
+              "evidence": "will remain fully available throughout"
+            }
+          ],
+          "note": "Natural, calm British English that fits a support lead, but it invents a 'scheduled maintenance' reason not given in the brief and hedges around the no-action point with padded qualifiers.",
+          "prompt_sha256": "2707bf7e917e006beb48886468935cdc05d76d51b5ac3a2bd2e20b25c771b998",
+          "raw_output": "{\"score\": 84.00, \"brief_ok\": false, \"realized_cefr\": null, \"issues\": [{\"code\": \"invented_fact\", \"evidence\": \"while we carry out scheduled maintenance\"}, {\"code\": \"hedged_redundancy\", \"evidence\": \"There's nothing you need to do in advance... but this is entirely optional\"}, {\"code\": \"padding\", \"evidence\": \"will remain fully available throughout\"}], \"note\": \"Natural, calm British English that fits a support lead, but it invents a 'scheduled maintenance' reason not given in the brief and hedges around the no-action point with padded qualifiers.\"}",
+          "response": {
+            "id": "gen-1788548410-z3JqeluFXRrSUfWyBolc",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 782,
+            "output_tokens": 755,
+            "billable_output_tokens": 755,
+            "reasoning_tokens": 0,
+            "total_tokens": 1537,
+            "latency_ms": 11311,
+            "attempts": 1
+          },
+          "delta": -1.08
+        }
+      }
+    },
+    {
+      "task_id": "natural-de-service-01",
+      "score": 88.0,
+      "judge_stddev": 0.71,
+      "judge_range": 1.5,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 88.5,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "invented_maintenance",
+              "evidence": "zu einer geplanten Wartung"
+            },
+            {
+              "code": "unsupported_contact_detail",
+              "evidence": "Bei Fragen erreichen Sie uns wie üblich über den Support."
+            },
+            {
+              "code": "generic_boilerplate",
+              "evidence": "Vielen Dank für Ihr Verständnis."
+            }
+          ],
+          "note": "The German is calm and fluent, but generic support boilerplate and two unsupported additions keep it from feeling fully precise and tailored.",
+          "prompt_sha256": "ba4840c16af5206eeff5a752a27a9811b5bedeefc0d27549a0b4b77df822d0e5",
+          "raw_output": "{\"score\":88.50,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"invented_maintenance\",\"evidence\":\"zu einer geplanten Wartung\"},{\"code\":\"unsupported_contact_detail\",\"evidence\":\"Bei Fragen erreichen Sie uns wie üblich über den Support.\"},{\"code\":\"generic_boilerplate\",\"evidence\":\"Vielen Dank für Ihr Verständnis.\"}],\"note\":\"The German is calm and fluent, but generic support boilerplate and two unsupported additions keep it from feeling fully precise and tailored.\"}",
+          "response": {
+            "id": "resp_0186e8ba304e8e52016a9b158092b887d2a8f54eec665517ed",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1075,
+            "output_tokens": 1665,
+            "billable_output_tokens": 1665,
+            "reasoning_tokens": 1552,
+            "total_tokens": 2740,
+            "latency_ms": 31959,
+            "attempts": 1
+          },
+          "delta": 0.5
+        },
+        "gemini_high": {
+          "score": 87.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_phrasing",
+              "evidence": "wie gewohnt"
+            }
+          ],
+          "note": "The message is calm, clear, and meets all brief requirements, but it relies on repetitive filler phrases like 'wie gewohnt'.",
+          "prompt_sha256": "ae8015596e7d7f0a6357d4dbf734040a8c55da925b9323f982ee0d0c52917b9e",
+          "raw_output": "{\"score\": 87.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetitive_phrasing\", \"evidence\": \"wie gewohnt\"}], \"note\": \"The message is calm, clear, and meets all brief requirements, but it relies on repetitive filler phrases like 'wie gewohnt'.\"}",
+          "response": {
+            "id": "resp_QxWbarfAFK2wkdUP__GUqA4",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 848,
+            "output_tokens": 80,
+            "billable_output_tokens": 1999,
+            "reasoning_tokens": 1919,
+            "total_tokens": 2847,
+            "latency_ms": 8423,
+            "attempts": 1
+          },
+          "delta": -1.0
+        },
+        "glm_high": {
+          "score": 88.5,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repeated_phrasing",
+              "evidence": "können wie gewohnt eingesehen werden ... stehen die Kontoexporte wieder wie gewohnt zur Verfügung"
+            },
+            {
+              "code": "filler_closing",
+              "evidence": "Bei Fragen erreichen Sie uns wie üblich über den Support."
+            }
+          ],
+          "note": "A calm, natural and factually accurate notice within the word limit, with only minor repetition of 'wie gewohnt/wie üblich' and a slightly formulaic closing line.",
+          "prompt_sha256": "b6a060a51313e842ed64a40f1b1c9e4caf5f7354e7ff7ef76fa3ee6f7c81fbf1",
+          "raw_output": "{\"score\": 88.50, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repeated_phrasing\", \"evidence\": \"können wie gewohnt eingesehen werden ... stehen die Kontoexporte wieder wie gewohnt zur Verfügung\"}, {\"code\": \"filler_closing\", \"evidence\": \"Bei Fragen erreichen Sie uns wie üblich über den Support.\"}], \"note\": \"A calm, natural and factually accurate notice within the word limit, with only minor repetition of 'wie gewohnt/wie üblich' and a slightly formulaic closing line.\"}",
+          "response": {
+            "id": "gen-1788548422-al2NDChNb2hVEbd4gRoD",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 817,
+            "output_tokens": 632,
+            "billable_output_tokens": 632,
+            "reasoning_tokens": 0,
+            "total_tokens": 1449,
+            "latency_ms": 11891,
+            "attempts": 1
+          },
+          "delta": 0.5
+        }
+      }
+    },
+    {
+      "task_id": "natural-en-founder-01",
+      "score": 87.0,
+      "judge_stddev": 3.19,
+      "judge_range": 7.0,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 84.5,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "invented_failure_detail",
+              "evidence": "meetings were showing up at the wrong times for some people"
+            },
+            {
+              "code": "invented_product_features",
+              "evidence": "booking links, scheduling, confirmations"
+            },
+            {
+              "code": "stock_contrast",
+              "evidence": "We'd rather get this right than get it out fast."
+            }
+          ],
+          "note": "The founder-like voice is clear and natural, but repeated contrast phrasing and a stock closing make it feel slightly over-polished.",
+          "prompt_sha256": "a7359e679f3178d303c1edb6a953d3b9cfb94ca626113e026f398ddb008f2fe7",
+          "raw_output": "{\"score\":84.50,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"invented_failure_detail\",\"evidence\":\"meetings were showing up at the wrong times for some people\"},{\"code\":\"invented_product_features\",\"evidence\":\"booking links, scheduling, confirmations\"},{\"code\":\"stock_contrast\",\"evidence\":\"We'd rather get this right than get it out fast.\"}],\"note\":\"The founder-like voice is clear and natural, but repeated contrast phrasing and a stock closing make it feel slightly over-polished.\"}",
+          "response": {
+            "id": "resp_009e4a9ff43fcf3c016a9b15a0eb6487d28b972009ef56eac8",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1049,
+            "output_tokens": 2190,
+            "billable_output_tokens": 2190,
+            "reasoning_tokens": 2070,
+            "total_tokens": 3239,
+            "latency_ms": 42233,
+            "attempts": 1
+          },
+          "delta": -2.5
+        },
+        "gemini_high": {
+          "score": 91.5,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "punctuation_crutch",
+              "evidence": "today — booking links, scheduling, confirmations — works"
+            },
+            {
+              "code": "formulaic_language",
+              "evidence": "We'd rather get this right than get it out fast."
+            }
+          ],
+          "note": "The candid founder voice sounds natural and direct, though it leans slightly on em dashes and a familiar startup sign-off.",
+          "prompt_sha256": "9c224231108374d4d63a7ef1ef267730d2ab3e29a4619a04d84bc9b425054e6b",
+          "raw_output": "{\n  \"score\": 91.50,\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"punctuation_crutch\",\n      \"evidence\": \"today — booking links, scheduling, confirmations — works\"\n    },\n    {\n      \"code\": \"formulaic_language\",\n      \"evidence\": \"We'd rather get this right than get it out fast.\"\n    }\n  ],\n  \"note\": \"The candid founder voice sounds natural and direct, though it leans slightly on em dashes and a familiar startup sign-off.\"\n}",
+          "response": {
+            "id": "resp_SxWbasPNDtma3boP8of6gAE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 814,
+            "output_tokens": 144,
+            "billable_output_tokens": 2406,
+            "reasoning_tokens": 2262,
+            "total_tokens": 3220,
+            "latency_ms": 8428,
+            "attempts": 1
+          },
+          "delta": 4.5
+        },
+        "glm_high": {
+          "score": 85.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "punctuation_crutch_em_dash",
+              "evidence": "handled — meetings"
+            },
+            {
+              "code": "repeated_construction",
+              "evidence": "I'd rather be upfront than quietly push"
+            },
+            {
+              "code": "stock_closer",
+              "evidence": "We'd rather get this right than get it out fast."
+            }
+          ],
+          "note": "Candid, specific, and on-brief in the founder's voice, but the double em dashes, the repeated rather-than construction, and the aphoristic closing line read as polished crutches needing small edits.",
+          "prompt_sha256": "a15ef9819b09a6a8e58b195d6f64b7db85b77cb210cb7a416fe34604c4069bb3",
+          "raw_output": "{\"score\": 85.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"punctuation_crutch_em_dash\", \"evidence\": \"handled — meetings\"}, {\"code\": \"repeated_construction\", \"evidence\": \"I'd rather be upfront than quietly push\"}, {\"code\": \"stock_closer\", \"evidence\": \"We'd rather get this right than get it out fast.\"}], \"note\": \"Candid, specific, and on-brief in the founder's voice, but the double em dashes, the repeated rather-than construction, and the aphoristic closing line read as polished crutches needing small edits.\"}",
+          "response": {
+            "id": "gen-1788548434-e7rJNHIxttQnghx2qwae",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 773,
+            "output_tokens": 930,
+            "billable_output_tokens": 930,
+            "reasoning_tokens": 0,
+            "total_tokens": 1703,
+            "latency_ms": 10995,
+            "attempts": 1
+          },
+          "delta": -2.0
+        }
+      }
+    },
+    {
+      "task_id": "natural-de-founder-01",
+      "score": 86.25,
+      "judge_stddev": 2.61,
+      "judge_range": 6.25,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 82.75,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "invented_technical_detail",
+              "evidence": "Termine wurden in manchen Fällen falsch angezeigt"
+            },
+            {
+              "code": "unsupported_reply_claim",
+              "evidence": "wie immer direkt schreiben – ich antworte persönlich"
+            },
+            {
+              "code": "stock_contrast",
+              "evidence": "Aber lieber liefern wir etwas, das funktioniert, als etwas, das halbgar ist."
+            }
+          ],
+          "note": "The German is clear and mostly idiomatic, but formulaic launch-update language and unsupported additions make it feel more templated than candid.",
+          "prompt_sha256": "a545b2f31ceb544b7395bb20bcd9de0e3959465658bf5b25be5e9a779d92e283",
+          "raw_output": "{\"score\":82.75,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"invented_technical_detail\",\"evidence\":\"Termine wurden in manchen Fällen falsch angezeigt\"},{\"code\":\"unsupported_reply_claim\",\"evidence\":\"wie immer direkt schreiben – ich antworte persönlich\"},{\"code\":\"stock_contrast\",\"evidence\":\"Aber lieber liefern wir etwas, das funktioniert, als etwas, das halbgar ist.\"}],\"note\":\"The German is clear and mostly idiomatic, but formulaic launch-update language and unsupported additions make it feel more templated than candid.\"}",
+          "response": {
+            "id": "resp_0dd8540bea6819d2016a9b15cd250c87d286425693dcccafbd",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1120,
+            "output_tokens": 3230,
+            "billable_output_tokens": 3230,
+            "reasoning_tokens": 3104,
+            "total_tokens": 4350,
+            "latency_ms": 62278,
+            "attempts": 1
+          },
+          "delta": -3.5
+        },
+        "gemini_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "awkward_signoff",
+              "evidence": "Eure Gründerin"
+            }
+          ],
+          "note": "The tone is direct and idiomatic for an independent app founder, though signing off literally as 'Eure Gründerin' feels unnatural.",
+          "prompt_sha256": "3685615124a29becc96a9bb493ada65315c1ea4501b7e61d766ebdd8f96f5cb0",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"awkward_signoff\", \"evidence\": \"Eure Gründerin\"}], \"note\": \"The tone is direct and idiomatic for an independent app founder, though signing off literally as 'Eure Gründerin' feels unnatural.\"}",
+          "response": {
+            "id": "resp_UxWbavbXJKqckdUPvOWmiAI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 889,
+            "output_tokens": 83,
+            "billable_output_tokens": 1981,
+            "reasoning_tokens": 1898,
+            "total_tokens": 2870,
+            "latency_ms": 7403,
+            "attempts": 1
+          },
+          "delta": 2.75
+        },
+        "glm_high": {
+          "score": 87.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "em_dash_croute",
+              "evidence": "direkt schreiben – ich antworte persönlich"
+            },
+            {
+              "code": "stock_framing",
+              "evidence": "Die gute Nachricht:"
+            },
+            {
+              "code": "added_detail",
+              "evidence": "Termine wurden in manchen Fällen falsch angezeigt"
+            }
+          ],
+          "note": "A natural, appropriately open founder voice that hits all required facts within length, docked slightly for an em-dash crutch, a stock framing phrase, and a lightly invented user-facing detail beyond the brief.",
+          "prompt_sha256": "cb1a39db7715f3b05b4d24b31629c8e51861ef8e6f7abea428094a1d79293634",
+          "raw_output": "{\"score\": 87.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"em_dash_croute\", \"evidence\": \"direkt schreiben – ich antworte persönlich\"}, {\"code\": \"stock_framing\", \"evidence\": \"Die gute Nachricht:\"}, {\"code\": \"added_detail\", \"evidence\": \"Termine wurden in manchen Fällen falsch angezeigt\"}], \"note\": \"A natural, appropriately open founder voice that hits all required facts within length, docked slightly for an em-dash crutch, a stock framing phrase, and a lightly invented user-facing detail beyond the brief.\"}",
+          "response": {
+            "id": "gen-1788548445-J9dO9BGfZ4sFc34ng2n7",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 879,
+            "output_tokens": 1015,
+            "billable_output_tokens": 1015,
+            "reasoning_tokens": 0,
+            "total_tokens": 1894,
+            "latency_ms": 11842,
+            "attempts": 1
+          },
+          "delta": 0.75
+        }
+      }
+    }
+  ]
+}

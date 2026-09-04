@@ -1,0 +1,869 @@
+{
+  "schema_version": 1,
+  "evaluation": {
+    "id": "2026-09-04-panel-v0.1",
+    "protocol_version": "panel-v0.1",
+    "protocol_file": "benches/judge-panel-v0.1.json",
+    "protocol_sha256": "11dd5da0515ce600f8a63c17e27fb9104df99581461ee1f08cf16972f11193e5",
+    "source_file": "benches/cefrbench/generations/2026-09-04-rerun-01/gpt-5-6-luna-medium.json",
+    "source_sha256": "af8a96e131480bec935c33d5104a198b0b38d1f839833ec113d310840a796e4e",
+    "human_validated": false,
+    "judges": {
+      "sol_max": {
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "max",
+        "focus": "Audit objective constraints first. Treat every plausible addition as unsupported unless the brief supplies it. Enforce all score caps."
+      },
+      "gemini_high": {
+        "model": "gemini-3.8-flash-high",
+        "reasoning_effort": "high",
+        "focus": "Audit idiom, locale, register, rhythm, audience fit, and formulaic language closely. Keep the shared rubric and caps unchanged."
+      },
+      "glm_high": {
+        "model": "z-ai/glm-5.3-flash",
+        "reasoning_effort": "high",
+        "focus": "Take an adversarial pass for generic phrasing, repetition, unsupported inference, and structural shortcuts. Keep the shared rubric and caps unchanged."
+      }
+    },
+    "created_at": "2026-09-04T19:04:38.503937+00:00"
+  },
+  "summary": {
+    "model": "gpt-5.6-luna",
+    "provider": "kylehub",
+    "model_version": "gpt-5.6-luna",
+    "reasoning_effort": "medium",
+    "date": "2026-09-04",
+    "evaluation_type": "ai_panel_provisional",
+    "human_evaluation": false,
+    "score": 91.38,
+    "judge_stddev": 3.66,
+    "judge_range": 8.94,
+    "judge_scores": {
+      "sol_max": 95.69,
+      "gemini_high": 91.69,
+      "glm_high": 86.75
+    },
+    "average_item_judge_stddev": 3.96,
+    "disagreement_count": 0,
+    "brief_ok_pct": 62.5,
+    "average_latency_ms": 10908,
+    "average_input_tokens": 379,
+    "average_output_tokens": 480,
+    "average_cost_usd": 0.00065162,
+    "cost_basis": "estimated",
+    "generated": 8,
+    "rated": 8,
+    "total": 8,
+    "generation_file": "benches/cefrbench/generations/2026-09-04-rerun-01/gpt-5-6-luna-medium.json",
+    "file": "benches/cefrbench/evaluations/2026-09-04-panel-v0.1/gpt-5-6-luna-medium.json"
+  },
+  "items": [
+    {
+      "task_id": "cefr-en-a2-01",
+      "score": 93.17,
+      "judge_stddev": 5.27,
+      "judge_range": 12.5,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 98.5,
+          "brief_ok": true,
+          "realized_cefr": "A2",
+          "issues": [],
+          "note": "The notice meets the factual, length, register, and language requirements with consistently clear A2 wording and syntax.",
+          "prompt_sha256": "e2429372cd3711bbff8e2acb66c130161af0823af563cb4fa3aa88cbacd44374",
+          "raw_output": "{\"score\":98.50,\"brief_ok\":true,\"realized_cefr\":\"A2\",\"issues\":[],\"note\":\"The notice meets the factual, length, register, and language requirements with consistently clear A2 wording and syntax.\"}",
+          "response": {
+            "id": "resp_003aa6f1e02488d3016a9b11a0d33487d28391daedb2223c8a",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 903,
+            "output_tokens": 1564,
+            "billable_output_tokens": 1564,
+            "reasoning_tokens": 1510,
+            "total_tokens": 2467,
+            "latency_ms": 29833,
+            "attempts": 1
+          },
+          "delta": 5.33
+        },
+        "gemini_high": {
+          "score": 95.0,
+          "brief_ok": true,
+          "realized_cefr": "A2",
+          "issues": [],
+          "note": "The notice meets the word count and brief requirements cleanly while maintaining syntax and vocabulary appropriate for CEFR A2.",
+          "prompt_sha256": "26dcb58e486c02212c7dd859fb7019acd23003968617f7ebf30eb9222425232e",
+          "raw_output": "{\"score\": 95.00, \"brief_ok\": true, \"realized_cefr\": \"A2\", \"issues\": [], \"note\": \"The notice meets the word count and brief requirements cleanly while maintaining syntax and vocabulary appropriate for CEFR A2.\"}",
+          "response": {
+            "id": "resp_oBGbavi2I--Y3boP3piCgAE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 665,
+            "output_tokens": 59,
+            "billable_output_tokens": 2016,
+            "reasoning_tokens": 1957,
+            "total_tokens": 2681,
+            "latency_ms": 8161,
+            "attempts": 1
+          },
+          "delta": 1.83
+        },
+        "glm_high": {
+          "score": 86.0,
+          "brief_ok": true,
+          "realized_cefr": "A2",
+          "issues": [
+            {
+              "code": "redundant_filler",
+              "evidence": "Please note the Friday closing time and the Saturday opening time before you visit the library."
+            },
+            {
+              "code": "repetition",
+              "evidence": "Visitors can use the return box to return books during this time."
+            }
+          ],
+          "note": "Simple, accurate A2 notice within the word count with all required facts, but the final sentence is empty filler and the return box is stated twice.",
+          "prompt_sha256": "9765e5ad2c03c94e866b75fc7a72bc61be66673f175667b261e87686e97787cd",
+          "raw_output": "{\"score\": 86.00, \"brief_ok\": true, \"realized_cefr\": \"A2\", \"issues\": [{\"code\": \"redundant_filler\", \"evidence\": \"Please note the Friday closing time and the Saturday opening time before you visit the library.\"}, {\"code\": \"repetition\", \"evidence\": \"Visitors can use the return box to return books during this time.\"}], \"note\": \"Simple, accurate A2 notice within the word count with all required facts, but the final sentence is empty filler and the return box is stated twice.\"}",
+          "response": {
+            "id": "gen-1788547488-gVEGrHS1h8AJ4jt1mILa",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 621,
+            "output_tokens": 539,
+            "billable_output_tokens": 539,
+            "reasoning_tokens": 0,
+            "total_tokens": 1160,
+            "latency_ms": 5990,
+            "attempts": 1
+          },
+          "delta": -7.17
+        }
+      }
+    },
+    {
+      "task_id": "cefr-de-a2-01",
+      "score": 94.0,
+      "judge_stddev": 3.56,
+      "judge_range": 8.0,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 97.0,
+          "brief_ok": false,
+          "realized_cefr": "A2",
+          "issues": [
+            {
+              "code": "invented_return_items",
+              "evidence": "Bücher und andere Medien können Sie auch außerhalb der Öffnungszeiten zurückgeben."
+            }
+          ],
+          "note": "The language is a strong A2 fit and the length is correct, but the accepted return items are not supplied by the brief.",
+          "prompt_sha256": "c3727eeaab10e9bb3fe5550390bf23031b2185742d331a80f5b119b4d3c4579b",
+          "raw_output": "{\"score\":97.00,\"brief_ok\":false,\"realized_cefr\":\"A2\",\"issues\":[{\"code\":\"invented_return_items\",\"evidence\":\"Bücher und andere Medien können Sie auch außerhalb der Öffnungszeiten zurückgeben.\"}],\"note\":\"The language is a strong A2 fit and the length is correct, but the accepted return items are not supplied by the brief.\"}",
+          "response": {
+            "id": "resp_0c00cb656cc06c42016a9b11bebe9887d2b401ebd780a82ca0",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 938,
+            "output_tokens": 1119,
+            "billable_output_tokens": 1119,
+            "reasoning_tokens": 1034,
+            "total_tokens": 2057,
+            "latency_ms": 22181,
+            "attempts": 1
+          },
+          "delta": 3.0
+        },
+        "gemini_high": {
+          "score": 96.0,
+          "brief_ok": true,
+          "realized_cefr": "A2",
+          "issues": [],
+          "note": "The notice matches the A2 target level with simple, accessible syntax, natural public signage register, and precise adherence to all constraints.",
+          "prompt_sha256": "5ea17650f4b44662c0092cf33a55bd9e8869bb5bdb94ba1587c72eab9ed46864",
+          "raw_output": "{\"score\": 96.00, \"brief_ok\": true, \"realized_cefr\": \"A2\", \"issues\": [], \"note\": \"The notice matches the A2 target level with simple, accessible syntax, natural public signage register, and precise adherence to all constraints.\"}",
+          "response": {
+            "id": "resp_qBGbaoWSF8OS3boPsJHFkAE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 702,
+            "output_tokens": 63,
+            "billable_output_tokens": 1719,
+            "reasoning_tokens": 1656,
+            "total_tokens": 2421,
+            "latency_ms": 6031,
+            "attempts": 1
+          },
+          "delta": 2.0
+        },
+        "glm_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": "A2",
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "Die Rückgabebox bleibt geöffnet. Bitte nutzen Sie die Rückgabebox"
+            },
+            {
+              "code": "mild_inference",
+              "evidence": "am Freitagabend und in der Nacht"
+            },
+            {
+              "code": "slightly_advanced_phrase",
+              "evidence": "außerhalb der Öffnungszeiten"
+            }
+          ],
+          "note": "All required facts are present within the word limit in mostly simple A2-appropriate language, with only minor repetition and slightly advanced phrasing.",
+          "prompt_sha256": "a95a0b1c6a0ea7f3fa849ff7596545e4f03dda4a7750a21711cb70d34a3788e3",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": \"A2\", \"issues\": [{\"code\": \"repetition\", \"evidence\": \"Die Rückgabebox bleibt geöffnet. Bitte nutzen Sie die Rückgabebox\"}, {\"code\": \"mild_inference\", \"evidence\": \"am Freitagabend und in der Nacht\"}, {\"code\": \"slightly_advanced_phrase\", \"evidence\": \"außerhalb der Öffnungszeiten\"}], \"note\": \"All required facts are present within the word limit in mostly simple A2-appropriate language, with only minor repetition and slightly advanced phrasing.\"}",
+          "response": {
+            "id": "gen-1788547494-M2w0E4wb2a770yJHGii1",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 669,
+            "output_tokens": 572,
+            "billable_output_tokens": 572,
+            "reasoning_tokens": 0,
+            "total_tokens": 1241,
+            "latency_ms": 8088,
+            "attempts": 1
+          },
+          "delta": -5.0
+        }
+      }
+    },
+    {
+      "task_id": "cefr-en-b1-01",
+      "score": 91.0,
+      "judge_stddev": 4.24,
+      "judge_range": 9.0,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 97.0,
+          "brief_ok": false,
+          "realized_cefr": "B1",
+          "issues": [
+            {
+              "code": "unsupported_fact",
+              "evidence": "would like to grow plants"
+            }
+          ],
+          "note": "The clear vocabulary, moderate sentence lengths, relative clause and conditional fit B1 very well, but the plot’s purpose is not supplied in the brief.",
+          "prompt_sha256": "08065d3a726bfa6d847a810a7176183243a32896618b3361b61f1104535f1650",
+          "raw_output": "{\"score\":97.0,\"brief_ok\":false,\"realized_cefr\":\"B1\",\"issues\":[{\"code\":\"unsupported_fact\",\"evidence\":\"would like to grow plants\"}],\"note\":\"The clear vocabulary, moderate sentence lengths, relative clause and conditional fit B1 very well, but the plot’s purpose is not supplied in the brief.\"}",
+          "response": {
+            "id": "resp_01986d135b949841016a9b11d4a64c87d2913317ad19c1b5e1",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 936,
+            "output_tokens": 1388,
+            "billable_output_tokens": 1388,
+            "reasoning_tokens": 1311,
+            "total_tokens": 2324,
+            "latency_ms": 26828,
+            "attempts": 1
+          },
+          "delta": 6.0
+        },
+        "gemini_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": "B1",
+          "issues": [
+            {
+              "code": "formulaic_repetition",
+              "evidence": "This means that"
+            }
+          ],
+          "note": "The text accurately targets CEFR B1 in syntax and vocabulary, but suffers from repetitive phrasing and padding to meet the length requirement.",
+          "prompt_sha256": "76072f79b37104ebf22ebf2bc1a886c639c3b8523094e4ad4e46fdafcb8a514b",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": \"B1\", \"issues\": [{\"code\": \"formulaic_repetition\", \"evidence\": \"This means that\"}], \"note\": \"The text accurately targets CEFR B1 in syntax and vocabulary, but suffers from repetitive phrasing and padding to meet the length requirement.\"}",
+          "response": {
+            "id": "resp_uBGbav7KBI29kdUPjvKZcQ",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 695,
+            "output_tokens": 81,
+            "billable_output_tokens": 2386,
+            "reasoning_tokens": 2305,
+            "total_tokens": 3081,
+            "latency_ms": 10463,
+            "attempts": 2
+          },
+          "delta": -3.0
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": "B1",
+          "issues": [
+            {
+              "code": "repetitive_construction",
+              "evidence": "This means that residents pay £25 ... This means that every applicant"
+            },
+            {
+              "code": "redundant_restatement",
+              "evidence": "Applicants should complete the online application before the closing date"
+            },
+            {
+              "code": "unsupported_inference",
+              "evidence": "every applicant has an equal chance of being chosen"
+            }
+          ],
+          "note": "The text fits B1 well and stays within the word count and brief, but the repeated 'This means that' construction and restated closing date pad the explanation without adding content.",
+          "prompt_sha256": "8b8afe7594f07df737805baa3119cd9f1ce8d5222969c71fbe68781995ae8a1d",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": \"B1\", \"issues\": [{\"code\": \"repetitive_construction\", \"evidence\": \"This means that residents pay £25 ... This means that every applicant\"}, {\"code\": \"redundant_restatement\", \"evidence\": \"Applicants should complete the online application before the closing date\"}, {\"code\": \"unsupported_inference\", \"evidence\": \"every applicant has an equal chance of being chosen\"}], \"note\": \"The text fits B1 well and stays within the word count and brief, but the repeated 'This means that' construction and restated closing date pad the explanation without adding content.\"}",
+          "response": {
+            "id": "gen-1788547502-dMsdsREkGyRm38nxZUjD",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 654,
+            "output_tokens": 458,
+            "billable_output_tokens": 458,
+            "reasoning_tokens": 0,
+            "total_tokens": 1112,
+            "latency_ms": 7063,
+            "attempts": 1
+          },
+          "delta": -3.0
+        }
+      }
+    },
+    {
+      "task_id": "cefr-de-b1-01",
+      "score": 92.0,
+      "judge_stddev": 3.74,
+      "judge_range": 9.0,
+      "disagreement": false,
+      "brief_ok_votes": 1,
+      "judgments": {
+        "sol_max": {
+          "score": 97.0,
+          "brief_ok": false,
+          "realized_cefr": "B1",
+          "issues": [
+            {
+              "code": "invented_equal_chances",
+              "evidence": "So haben alle die gleichen Chancen auf ein Beet."
+            },
+            {
+              "code": "invented_plot_uses",
+              "evidence": "Wer ausgewählt wird, kann dort eigenes Gemüse, Kräuter oder Blumen anbauen."
+            },
+            {
+              "code": "invented_info_source",
+              "evidence": "Weitere Informationen zur Online-Bewerbung finden Interessierte im entsprechenden Angebot."
+            }
+          ],
+          "note": "The 82-word text closely matches B1 in vocabulary, syntax, cohesion, and register, but it adds unsupported information.",
+          "prompt_sha256": "b7422dbe47aa47486536bb4acb6163a45b5959675a47cd87070c532bacae1dad",
+          "raw_output": "{\"score\":97.00,\"brief_ok\":false,\"realized_cefr\":\"B1\",\"issues\":[{\"code\":\"invented_equal_chances\",\"evidence\":\"So haben alle die gleichen Chancen auf ein Beet.\"},{\"code\":\"invented_plot_uses\",\"evidence\":\"Wer ausgewählt wird, kann dort eigenes Gemüse, Kräuter oder Blumen anbauen.\"},{\"code\":\"invented_info_source\",\"evidence\":\"Weitere Informationen zur Online-Bewerbung finden Interessierte im entsprechenden Angebot.\"}],\"note\":\"The 82-word text closely matches B1 in vocabulary, syntax, cohesion, and register, but it adds unsupported information.\"}",
+          "response": {
+            "id": "resp_0f1aa33df2e80c4f016a9b11ef602887d28d4ef2e0f17dfd4f",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 974,
+            "output_tokens": 1686,
+            "billable_output_tokens": 1686,
+            "reasoning_tokens": 1552,
+            "total_tokens": 2660,
+            "latency_ms": 32287,
+            "attempts": 1
+          },
+          "delta": 5.0
+        },
+        "gemini_high": {
+          "score": 91.0,
+          "brief_ok": false,
+          "realized_cefr": "B1",
+          "issues": [
+            {
+              "code": "invented_facts",
+              "evidence": "eigenes Gemüse, Kräuter oder Blumen anbauen"
+            },
+            {
+              "code": "unnatural_phrasing",
+              "evidence": "im entsprechenden Angebot"
+            }
+          ],
+          "note": "The text accurately reflects CEFR B1 in grammar and vocabulary, but it invents unprompted details contrary to the brief.",
+          "prompt_sha256": "109f067853b6f0d3fcd412a4cb30bc2ecb13e7c717a605fdf07a11049bc75be2",
+          "raw_output": "{\"score\": 91.00, \"brief_ok\": false, \"realized_cefr\": \"B1\", \"issues\": [{\"code\": \"invented_facts\", \"evidence\": \"eigenes Gemüse, Kräuter oder Blumen anbauen\"}, {\"code\": \"unnatural_phrasing\", \"evidence\": \"im entsprechenden Angebot\"}], \"note\": \"The text accurately reflects CEFR B1 in grammar and vocabulary, but it invents unprompted details contrary to the brief.\"}",
+          "response": {
+            "id": "resp_whGbatShCs-D3boP_sLsgQc",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 733,
+            "output_tokens": 106,
+            "billable_output_tokens": 2706,
+            "reasoning_tokens": 2600,
+            "total_tokens": 3439,
+            "latency_ms": 10365,
+            "attempts": 1
+          },
+          "delta": -1.0
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": "B1",
+          "issues": [
+            {
+              "code": "redundancy",
+              "evidence": "Die Bewerbung muss rechtzeitig eingereicht werden, damit sie berücksichtigt werden kann."
+            },
+            {
+              "code": "vague_reference",
+              "evidence": "im entsprechenden Angebot"
+            },
+            {
+              "code": "lexical_repetition",
+              "evidence": "Bewerbung ... Bewerbungen ... Bewerberinnen und Bewerber ... Online-Bewerbung"
+            }
+          ],
+          "note": "An accurate, correctly lengthed B1 text with simple syntax and appropriate vocabulary, slightly weakened by a redundant filler sentence, repeated Bewerbung-derivatives, and a vague closing phrase.",
+          "prompt_sha256": "1bc96695692c12fa74ec92f9695768ecdd968c28ddb9a70150faf67adb347423",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": \"B1\", \"issues\": [{\"code\": \"redundancy\", \"evidence\": \"Die Bewerbung muss rechtzeitig eingereicht werden, damit sie berücksichtigt werden kann.\"}, {\"code\": \"vague_reference\", \"evidence\": \"im entsprechenden Angebot\"}, {\"code\": \"lexical_repetition\", \"evidence\": \"Bewerbung ... Bewerbungen ... Bewerberinnen und Bewerber ... Online-Bewerbung\"}], \"note\": \"An accurate, correctly lengthed B1 text with simple syntax and appropriate vocabulary, slightly weakened by a redundant filler sentence, repeated Bewerbung-derivatives, and a vague closing phrase.\"}",
+          "response": {
+            "id": "gen-1788547509-Gp9QRfabpy6nqseTuPGZ",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 724,
+            "output_tokens": 954,
+            "billable_output_tokens": 954,
+            "reasoning_tokens": 0,
+            "total_tokens": 1678,
+            "latency_ms": 10698,
+            "attempts": 1
+          },
+          "delta": -4.0
+        }
+      }
+    },
+    {
+      "task_id": "cefr-en-b2-01",
+      "score": 89.5,
+      "judge_stddev": 6.28,
+      "judge_range": 15.0,
+      "disagreement": false,
+      "brief_ok_votes": 0,
+      "judgments": {
+        "sol_max": {
+          "score": 96.0,
+          "brief_ok": false,
+          "realized_cefr": "B2",
+          "issues": [
+            {
+              "code": "unsupported_condition",
+              "evidence": "subject to the team’s arrangements and work requirements"
+            },
+            {
+              "code": "invented_rationale",
+              "evidence": "This approach is intended to provide a clear balance between remote and office-based working."
+            },
+            {
+              "code": "invented_guidance",
+              "evidence": "Further guidance on how teams should select and communicate their shared office days will be provided through the usual internal channels."
+            }
+          ],
+          "note": "The vocabulary, syntax and formal register consistently match B2, but the response adds unsupported conditions, rationale and future guidance.",
+          "prompt_sha256": "787bbbcf136f96640a62f4411c989a1bc4cfac6555a1b855aaae4e7d5173b3ed",
+          "raw_output": "{\"score\":96.00,\"brief_ok\":false,\"realized_cefr\":\"B2\",\"issues\":[{\"code\":\"unsupported_condition\",\"evidence\":\"subject to the team’s arrangements and work requirements\"},{\"code\":\"invented_rationale\",\"evidence\":\"This approach is intended to provide a clear balance between remote and office-based working.\"},{\"code\":\"invented_guidance\",\"evidence\":\"Further guidance on how teams should select and communicate their shared office days will be provided through the usual internal channels.\"}],\"note\":\"The vocabulary, syntax and formal register consistently match B2, but the response adds unsupported conditions, rationale and future guidance.\"}",
+          "response": {
+            "id": "resp_0dbc79e803efdf57016a9b120fcbfc87d2959c55156c12bc18",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 993,
+            "output_tokens": 1687,
+            "billable_output_tokens": 1687,
+            "reasoning_tokens": 1552,
+            "total_tokens": 2680,
+            "latency_ms": 31818,
+            "attempts": 1
+          },
+          "delta": 6.5
+        },
+        "gemini_high": {
+          "score": 91.5,
+          "brief_ok": false,
+          "realized_cefr": "B2",
+          "issues": [
+            {
+              "code": "invented_fact",
+              "evidence": "This approach is intended to provide a clear balance between remote and office-based working."
+            },
+            {
+              "code": "invented_fact",
+              "evidence": "Further guidance on how teams should select and communicate their shared office days will be provided through the usual internal channels."
+            },
+            {
+              "code": "formulaic_repetition",
+              "evidence": "Staff should discuss proposed exceptions with their team lead and follow any arrangements agreed within the team."
+            }
+          ],
+          "note": "The candidate accurately captures the target B2 level and British workplace register, but it suffers from formulaic repetition and adds unprompted procedural facts.",
+          "prompt_sha256": "8a6685ffb031b436380872fa3cef440fb77d35a30ef10f62891492b4ebf77b57",
+          "raw_output": "{\"score\": 91.50, \"brief_ok\": false, \"realized_cefr\": \"B2\", \"issues\": [{\"code\": \"invented_fact\", \"evidence\": \"This approach is intended to provide a clear balance between remote and office-based working.\"}, {\"code\": \"invented_fact\", \"evidence\": \"Further guidance on how teams should select and communicate their shared office days will be provided through the usual internal channels.\"}, {\"code\": \"formulaic_repetition\", \"evidence\": \"Staff should discuss proposed exceptions with their team lead and follow any arrangements agreed within the team.\"}], \"note\": \"The candidate accurately captures the target B2 level and British workplace register, but it suffers from formulaic repetition and adds unprompted procedural facts.\"}",
+          "response": {
+            "id": "resp_zBGbauP2H8Wb3boPnfC_gQE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 750,
+            "output_tokens": 163,
+            "billable_output_tokens": 3687,
+            "reasoning_tokens": 3524,
+            "total_tokens": 4437,
+            "latency_ms": 11970,
+            "attempts": 1
+          },
+          "delta": 2.0
+        },
+        "glm_high": {
+          "score": 81.0,
+          "brief_ok": false,
+          "realized_cefr": "B2",
+          "issues": [
+            {
+              "code": "invented_fact",
+              "evidence": "Further guidance on how teams should select and communicate their shared office days will be provided through the usual internal channels."
+            },
+            {
+              "code": "redundancy",
+              "evidence": "Staff should discuss proposed exceptions with their team lead and follow any arrangements agreed within the team."
+            },
+            {
+              "code": "unsupported_inference",
+              "evidence": "subject to the team's arrangements and work requirements"
+            }
+          ],
+          "note": "The text is at a solid B2 level within the word limit, but it invents an unspecified guidance announcement, repeats the exception instructions, and adds unsupported conditions.",
+          "prompt_sha256": "4e887f5b79a89900a16943f54ae049786ca0f088dd88bafc3b1061fed6ed2f2d",
+          "raw_output": "{\"score\": 81.00, \"brief_ok\": false, \"realized_cefr\": \"B2\", \"issues\": [{\"code\": \"invented_fact\", \"evidence\": \"Further guidance on how teams should select and communicate their shared office days will be provided through the usual internal channels.\"}, {\"code\": \"redundancy\", \"evidence\": \"Staff should discuss proposed exceptions with their team lead and follow any arrangements agreed within the team.\"}, {\"code\": \"unsupported_inference\", \"evidence\": \"subject to the team's arrangements and work requirements\"}], \"note\": \"The text is at a solid B2 level within the word limit, but it invents an unspecified guidance announcement, repeats the exception instructions, and adds unsupported conditions.\"}",
+          "response": {
+            "id": "gen-1788547520-xI6mg9ckTqolDBKAPOc8",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 711,
+            "output_tokens": 625,
+            "billable_output_tokens": 625,
+            "reasoning_tokens": 0,
+            "total_tokens": 1336,
+            "latency_ms": 8428,
+            "attempts": 1
+          },
+          "delta": -8.5
+        }
+      }
+    },
+    {
+      "task_id": "cefr-de-b2-01",
+      "score": 82.33,
+      "judge_stddev": 4.78,
+      "judge_range": 11.0,
+      "disagreement": false,
+      "brief_ok_votes": 1,
+      "judgments": {
+        "sol_max": {
+          "score": 89.0,
+          "brief_ok": false,
+          "realized_cefr": "B2",
+          "issues": [
+            {
+              "code": "invented_notification_step",
+              "evidence": "Die jeweiligen Bürotage werden innerhalb des Teams vereinbart und bekannt gegeben."
+            },
+            {
+              "code": "invented_information_source",
+              "evidence": "Informationen zu den jeweils festgelegten Bürotagen erhalten Sie im Team oder bei der Teamleitung."
+            }
+          ],
+          "note": "Formal administrative vocabulary and cohesive references support B2, but the consistently simple and repetitive syntax places it near the lower end of that level.",
+          "prompt_sha256": "b7dcd68a0447146a9b0efd0c87d678726b002de8c22e1d50fb64009e912f4cdd",
+          "raw_output": "{\"score\":89.0,\"brief_ok\":false,\"realized_cefr\":\"B2\",\"issues\":[{\"code\":\"invented_notification_step\",\"evidence\":\"Die jeweiligen Bürotage werden innerhalb des Teams vereinbart und bekannt gegeben.\"},{\"code\":\"invented_information_source\",\"evidence\":\"Informationen zu den jeweils festgelegten Bürotagen erhalten Sie im Team oder bei der Teamleitung.\"}],\"note\":\"Formal administrative vocabulary and cohesive references support B2, but the consistently simple and repetitive syntax places it near the lower end of that level.\"}",
+          "response": {
+            "id": "resp_04ced68d400c3189016a9b122f87a487d2bc35eddbf27dd5c8",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1024,
+            "output_tokens": 6086,
+            "billable_output_tokens": 6086,
+            "reasoning_tokens": 5968,
+            "total_tokens": 7110,
+            "latency_ms": 111062,
+            "attempts": 1
+          },
+          "delta": 6.67
+        },
+        "gemini_high": {
+          "score": 80.0,
+          "brief_ok": true,
+          "realized_cefr": "B2",
+          "issues": [
+            {
+              "code": "tautological_padding",
+              "evidence": "Die Überprüfung findet nach Ablauf dieses Zeitraums statt."
+            },
+            {
+              "code": "redundant_date",
+              "evidence": "Die Regelung beginnt am 1. November"
+            }
+          ],
+          "note": "The text hits the B2 target well in vocabulary and register, but it relies on clumsy tautological padding and repeated statements to meet the word count.",
+          "prompt_sha256": "0a38aa1c62d00c9763cc4f940dfb67c45fc8dc37c0d9f82c77e392224da9e38a",
+          "raw_output": "{\"score\": 80.00, \"brief_ok\": true, \"realized_cefr\": \"B2\", \"issues\": [{\"code\": \"tautological_padding\", \"evidence\": \"Die Überprüfung findet nach Ablauf dieses Zeitraums statt.\"}, {\"code\": \"redundant_date\", \"evidence\": \"Die Regelung beginnt am 1. November\"}], \"note\": \"The text hits the B2 target well in vocabulary and register, but it relies on clumsy tautological padding and repeated statements to meet the word count.\"}",
+          "response": {
+            "id": "resp_2BGbavvUHZmZ3boPxrXygQE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 782,
+            "output_tokens": 116,
+            "billable_output_tokens": 3470,
+            "reasoning_tokens": 3354,
+            "total_tokens": 4252,
+            "latency_ms": 12253,
+            "attempts": 1
+          },
+          "delta": -2.33
+        },
+        "glm_high": {
+          "score": 78.0,
+          "brief_ok": false,
+          "realized_cefr": "B2",
+          "issues": [
+            {
+              "code": "under_length",
+              "evidence": "Die Regelung beginnt am 1. November und wird nach sechs Monaten überprüft."
+            },
+            {
+              "code": "repetition",
+              "evidence": "Die Überprüfung findet nach Ablauf dieses Zeitraums statt."
+            },
+            {
+              "code": "unsupported_content",
+              "evidence": "Informationen zu den jeweils festgelegten Bürotagen erhalten Sie im Team oder bei der Teamleitung."
+            }
+          ],
+          "note": "The language fits B2 with all required facts, but the text is roughly 20 words under the minimum, repeats content, and adds mild filler.",
+          "prompt_sha256": "3bbae4ffad3472ad96756012432dbe2951f443666f24a68a3317cf932a093d74",
+          "raw_output": "{\"score\": 78.00, \"brief_ok\": false, \"realized_cefr\": \"B2\", \"issues\": [{\"code\": \"under_length\", \"evidence\": \"Die Regelung beginnt am 1. November und wird nach sechs Monaten überprüft.\"}, {\"code\": \"repetition\", \"evidence\": \"Die Überprüfung findet nach Ablauf dieses Zeitraums statt.\"}, {\"code\": \"unsupported_content\", \"evidence\": \"Informationen zu den jeweils festgelegten Bürotagen erhalten Sie im Team oder bei der Teamleitung.\"}], \"note\": \"The language fits B2 with all required facts, but the text is roughly 20 words under the minimum, repeats content, and adds mild filler.\"}",
+          "response": {
+            "id": "gen-1788547528-Fkt0ZxZCPgTA1oQbbMKD",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 763,
+            "output_tokens": 932,
+            "billable_output_tokens": 932,
+            "reasoning_tokens": 0,
+            "total_tokens": 1695,
+            "latency_ms": 11658,
+            "attempts": 1
+          },
+          "delta": -4.33
+        }
+      }
+    },
+    {
+      "task_id": "cefr-en-c1-01",
+      "score": 94.0,
+      "judge_stddev": 1.63,
+      "judge_range": 4.0,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 94.0,
+          "brief_ok": false,
+          "realized_cefr": "C1",
+          "issues": [
+            {
+              "code": "unsupported_peak_claim",
+              "evidence": "during the busiest leisure period"
+            },
+            {
+              "code": "unsupported_dependency_detail",
+              "evidence": "particularly those who depend on private vehicles"
+            }
+          ],
+          "note": "The controlled formal register, varied subordination and cohesive trade-off framing closely match C1, but the text adds unsupported details.",
+          "prompt_sha256": "adbb082139bcb8da4646a1270bcd50a69b3a2ea9dcd82089393717f549a3a0c4",
+          "raw_output": "{\"score\":94.00,\"brief_ok\":false,\"realized_cefr\":\"C1\",\"issues\":[{\"code\":\"unsupported_peak_claim\",\"evidence\":\"during the busiest leisure period\"},{\"code\":\"unsupported_dependency_detail\",\"evidence\":\"particularly those who depend on private vehicles\"}],\"note\":\"The controlled formal register, varied subordination and cohesive trade-off framing closely match C1, but the text adds unsupported details.\"}",
+          "response": {
+            "id": "resp_0dd2437f3266ba30016a9b129e927887d2a83333f5e1bf1b96",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1048,
+            "output_tokens": 5257,
+            "billable_output_tokens": 5257,
+            "reasoning_tokens": 5167,
+            "total_tokens": 6305,
+            "latency_ms": 96692,
+            "attempts": 1
+          },
+          "delta": 0.0
+        },
+        "gemini_high": {
+          "score": 96.0,
+          "brief_ok": true,
+          "realized_cefr": "C1",
+          "issues": [],
+          "note": "The summary precisely adheres to the brief constraints, maintaining British English conventions, balanced framing, and well-calibrated C1 register and syntax throughout.",
+          "prompt_sha256": "75ffc7a2d81eee6d946de8f3adb119184caa0254d92e1a2413fba284e79139c7",
+          "raw_output": "{\"score\": 96.00, \"brief_ok\": true, \"realized_cefr\": \"C1\", \"issues\": [], \"note\": \"The summary precisely adheres to the brief constraints, maintaining British English conventions, balanced framing, and well-calibrated C1 register and syntax throughout.\"}",
+          "response": {
+            "id": "resp_5BGbavfxLa2unsEPzp_Z2QI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 803,
+            "output_tokens": 66,
+            "billable_output_tokens": 2865,
+            "reasoning_tokens": 2799,
+            "total_tokens": 3668,
+            "latency_ms": 11182,
+            "attempts": 1
+          },
+          "delta": 2.0
+        },
+        "glm_high": {
+          "score": 92.0,
+          "brief_ok": true,
+          "realized_cefr": "C1",
+          "issues": [
+            {
+              "code": "unsupported_inference",
+              "evidence": "during the busiest leisure period"
+            },
+            {
+              "code": "speculative_padding",
+              "evidence": "although their effectiveness would depend on how well they meet the needs of residents and businesses"
+            }
+          ],
+          "note": "A balanced, hedged C1 summary within the word limit covering all required points in British English, with only minor hedged speculation beyond the brief.",
+          "prompt_sha256": "727f94fa324c3954563523eea8764089366659ce48c83b1965a86b216b4d648a",
+          "raw_output": "{\"score\": 92.00, \"brief_ok\": true, \"realized_cefr\": \"C1\", \"issues\": [{\"code\": \"unsupported_inference\", \"evidence\": \"during the busiest leisure period\"}, {\"code\": \"speculative_padding\", \"evidence\": \"although their effectiveness would depend on how well they meet the needs of residents and businesses\"}], \"note\": \"A balanced, hedged C1 summary within the word limit covering all required points in British English, with only minor hedged speculation beyond the brief.\"}",
+          "response": {
+            "id": "gen-1788547540-0R3pvuomy9196iSymWsP",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 763,
+            "output_tokens": 533,
+            "billable_output_tokens": 533,
+            "reasoning_tokens": 0,
+            "total_tokens": 1296,
+            "latency_ms": 6382,
+            "attempts": 1
+          },
+          "delta": -2.0
+        }
+      }
+    },
+    {
+      "task_id": "cefr-de-c1-01",
+      "score": 95.0,
+      "judge_stddev": 2.16,
+      "judge_range": 5.0,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 97.0,
+          "brief_ok": false,
+          "realized_cefr": "C1",
+          "issues": [
+            {
+              "code": "unsupported_effect_claim",
+              "evidence": "Dadurch könnte sich die Nutzung des innerstädtischen Bereichs am Wochenende verändern"
+            },
+            {
+              "code": "unsupported_access_detail",
+              "evidence": "darauf angewiesen sein, mit dem privaten Auto bis in die Innenstadt zu fahren"
+            },
+            {
+              "code": "unsupported_delivery_detail",
+              "evidence": "da unklar ist, wie diese unter den veränderten Bedingungen erfolgen sollen"
+            }
+          ],
+          "note": "The formal register, abstract lexis, varied complex syntax, and strong cohesion closely match C1, although unsupported elaborations make the brief noncompliant.",
+          "prompt_sha256": "6af1bcbe254d1c2ba8c55b9b0cb93032b2bdd19ce0393015b240e3877e0e3290",
+          "raw_output": "{\"score\":97.0,\"brief_ok\":false,\"realized_cefr\":\"C1\",\"issues\":[{\"code\":\"unsupported_effect_claim\",\"evidence\":\"Dadurch könnte sich die Nutzung des innerstädtischen Bereichs am Wochenende verändern\"},{\"code\":\"unsupported_access_detail\",\"evidence\":\"darauf angewiesen sein, mit dem privaten Auto bis in die Innenstadt zu fahren\"},{\"code\":\"unsupported_delivery_detail\",\"evidence\":\"da unklar ist, wie diese unter den veränderten Bedingungen erfolgen sollen\"}],\"note\":\"The formal register, abstract lexis, varied complex syntax, and strong cohesion closely match C1, although unsupported elaborations make the brief noncompliant.\"}",
+          "response": {
+            "id": "resp_0ea33b188433c5d0016a9b12ff392087d2ac3b9e79ad5564ac",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1133,
+            "output_tokens": 4722,
+            "billable_output_tokens": 4722,
+            "reasoning_tokens": 4581,
+            "total_tokens": 5855,
+            "latency_ms": 86256,
+            "attempts": 1
+          },
+          "delta": 2.0
+        },
+        "gemini_high": {
+          "score": 96.0,
+          "brief_ok": true,
+          "realized_cefr": "C1",
+          "issues": [],
+          "note": "The text adheres precisely to the word count, captures all required points neutrally, and demonstrates a natural, nuanced C1 register.",
+          "prompt_sha256": "70a0eee74059197f9e7fe10b40bfe3bf540338d81e2352e21a5c357fa5801a8d",
+          "raw_output": "{\"score\": 96.00, \"brief_ok\": true, \"realized_cefr\": \"C1\", \"issues\": [], \"note\": \"The text adheres precisely to the word count, captures all required points neutrally, and demonstrates a natural, nuanced C1 register.\"}",
+          "response": {
+            "id": "resp_7xGbaqyDN_68kdUPwNbowAY",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 905,
+            "output_tokens": 63,
+            "billable_output_tokens": 1267,
+            "reasoning_tokens": 1204,
+            "total_tokens": 2172,
+            "latency_ms": 4825,
+            "attempts": 1
+          },
+          "delta": 1.0
+        },
+        "glm_high": {
+          "score": 92.0,
+          "brief_ok": true,
+          "realized_cefr": "C1",
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "Zugang ... Zugang ... Ausschlusses ... Ausschluss"
+            },
+            {
+              "code": "excessive_hedging",
+              "evidence": "könnte ... möglicherweise ... bleibt offen"
+            },
+            {
+              "code": "minor_inference",
+              "evidence": "ohne dass die Konsultation bereits eine bestimmte Wirkung festlegt"
+            }
+          ],
+          "note": "A balanced, factually faithful 176-word summary with solid C1-level syntax, connectives, and subjunctive, slightly weighted down by repeated key nouns, dense hedging, and one meta-commentary clause beyond the brief.",
+          "prompt_sha256": "7a568e5a2ec0922323d078d227970f52f340858ed12b9888f2d980cb45cb9d82",
+          "raw_output": "{\"score\": 92.00, \"brief_ok\": true, \"realized_cefr\": \"C1\", \"issues\": [{\"code\": \"repetition\", \"evidence\": \"Zugang ... Zugang ... Ausschlusses ... Ausschluss\"}, {\"code\": \"excessive_hedging\", \"evidence\": \"könnte ... möglicherweise ... bleibt offen\"}, {\"code\": \"minor_inference\", \"evidence\": \"ohne dass die Konsultation bereits eine bestimmte Wirkung festlegt\"}], \"note\": \"A balanced, factually faithful 176-word summary with solid C1-level syntax, connectives, and subjunctive, slightly weighted down by repeated key nouns, dense hedging, and one meta-commentary clause beyond the brief.\"}",
+          "response": {
+            "id": "gen-1788547546-ywOPrT3yrHPI8vS21Gfn",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 904,
+            "output_tokens": 924,
+            "billable_output_tokens": 924,
+            "reasoning_tokens": 0,
+            "total_tokens": 1828,
+            "latency_ms": 11577,
+            "attempts": 1
+          },
+          "delta": -3.0
+        }
+      }
+    }
+  ]
+}

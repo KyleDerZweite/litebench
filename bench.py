@@ -2,6 +2,7 @@
 """Validate and aggregate LiteBench result files."""
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -15,6 +16,12 @@ PUBLIC_TASKS = ROOT / "benches" / "copybench" / "public.json"
 RESULTS_DIR = ROOT / "benches" / "copybench" / "results"
 LEADERBOARD = ROOT / "visualizer" / "data" / "leaderboard.json"
 PRICING = ROOT / "pricing.json"
+PANEL_EVALUATION = "2026-09-04-panel-v0.1"
+PANEL_SUITES = {
+    "copybench": ("CopyBench Lite", "CopyBench score"),
+    "naturalbench": ("NaturalBench Lite", "Naturalness score"),
+    "cefrbench": ("CEFRBench Lite", "CEFR fit score"),
+}
 SCALE_FIELDS = ("copy_quality", "naturalness", "cefr_fit")
 BOOL_FIELDS = ("facts_ok", "would_use")
 
@@ -295,7 +302,7 @@ def command_check(args):
     return 0 if valid else 1
 
 
-def command_build(args):
+def command_legacy_build(args):
     result_dir = Path(args.results)
     task_data, tasks = load_tasks(PUBLIC_TASKS)
     expected_name = task_set_name(task_data)
@@ -330,6 +337,152 @@ def command_build(args):
     }
     write_json(args.out, payload)
     print(f"{args.out}: wrote {len(rows)} run(s)")
+    return 0
+
+
+def panel_validation_errors(data):
+    errors = []
+    if not isinstance(data, dict) or data.get("schema_version") != 1:
+        return ["schema_version must be 1"]
+    evaluation = data.get("evaluation")
+    summary = data.get("summary")
+    items = data.get("items")
+    if not isinstance(evaluation, dict):
+        errors.append("evaluation must be an object")
+        return errors
+    if not isinstance(summary, dict) or not str(summary.get("model", "")).strip():
+        errors.append("summary.model must be a non-empty string")
+    if not isinstance(items, list) or not items:
+        errors.append("items must be a non-empty list")
+        return errors
+    judges = evaluation.get("judges")
+    judge_ids = set(judges) if isinstance(judges, dict) else set()
+    if len(judge_ids) != 3:
+        errors.append("evaluation.judges must contain three judges")
+    seen = set()
+    for index, item in enumerate(items, 1):
+        label = f"items[{index}]"
+        task_id = item.get("task_id") if isinstance(item, dict) else None
+        if not isinstance(task_id, str) or not task_id or task_id in seen:
+            errors.append(f"{label}.task_id must be unique and non-empty")
+        else:
+            seen.add(task_id)
+        score = item.get("score") if isinstance(item, dict) else None
+        judgments = item.get("judgments") if isinstance(item, dict) else None
+        if isinstance(score, bool) or not isinstance(score, (int, float)) or not 0 <= score <= 100:
+            errors.append(f"{label}.score must be numeric from 0 to 100")
+        if not isinstance(judgments, dict) or set(judgments) != judge_ids:
+            errors.append(f"{label}.judgments must match the panel")
+            continue
+        scores = [judgment.get("score") for judgment in judgments.values() if isinstance(judgment, dict)]
+        if len(scores) != 3 or any(
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not 0 <= value <= 100
+            for value in scores
+        ):
+            errors.append(f"{label} has invalid judge scores")
+        elif round(fmean(scores), 2) != score:
+            errors.append(f"{label}.score does not match the judge mean")
+    return errors
+
+
+def panel_paths(evaluation_id):
+    return sorted(ROOT.glob(f"benches/*/evaluations/{evaluation_id}/*.json"))
+
+
+def command_panel_check(args):
+    paths = [Path(path) for path in args.paths] or panel_paths(args.evaluation)
+    if not paths:
+        print("No panel evaluation files found.")
+        return 1
+    valid = True
+    for path in paths:
+        data = read_json(path)
+        errors = panel_validation_errors(data)
+        evaluation = data.get("evaluation", {}) if isinstance(data, dict) else {}
+        for field in ("protocol_file", "source_file"):
+            relative = evaluation.get(field)
+            if not isinstance(relative, str):
+                errors.append(f"evaluation.{field} must be a string")
+                continue
+            target = (ROOT / relative).resolve()
+            if not target.is_relative_to(ROOT) or not target.exists():
+                errors.append(f"evaluation.{field} is missing or outside the repository")
+                continue
+            expected = evaluation.get(field.replace("_file", "_sha256"))
+            actual = hashlib.sha256(target.read_bytes()).hexdigest()
+            if expected != actual:
+                errors.append(f"evaluation.{field} hash does not match")
+        if errors:
+            valid = False
+            for error in errors:
+                print(f"{path}: {error}", file=sys.stderr)
+        else:
+            print(f"{path}: OK - {len(data['items'])} outputs, three judges")
+    return 0 if valid else 1
+
+
+def command_build(args):
+    paths = panel_paths(args.evaluation)
+    if not paths:
+        raise ValueError(f"No panel evaluations found for {args.evaluation}")
+    rows = {suite: [] for suite in PANEL_SUITES}
+    panel = None
+    valid = True
+    for path in paths:
+        data = read_json(path)
+        errors = panel_validation_errors(data)
+        if errors:
+            valid = False
+            for error in errors:
+                print(f"{path}: {error}", file=sys.stderr)
+            continue
+        evaluation = data["evaluation"]
+        if panel is None:
+            panel = evaluation
+        elif evaluation["protocol_sha256"] != panel["protocol_sha256"]:
+            valid = False
+            print(f"{path}: evaluator protocol does not match the other runs", file=sys.stderr)
+            continue
+        suite = Path(evaluation["source_file"]).parts[1]
+        if suite not in rows:
+            valid = False
+            print(f"{path}: unknown suite {suite}", file=sys.stderr)
+            continue
+        summary = dict(data["summary"])
+        summary["file"] = path.relative_to(ROOT).as_posix()
+        rows[suite].append(summary)
+    if not valid:
+        return 1
+    payload = {
+        "benchmark": "LiteBench",
+        "score_scale": 100,
+        "evaluation": {
+            "id": args.evaluation,
+            "type": "ai_panel_provisional",
+            "protocol_version": panel["protocol_version"],
+            "human_validated": False,
+            "judges": panel["judges"],
+        },
+        "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "pricing": read_json(PRICING),
+        "suites": {},
+    }
+    for suite, suite_rows in rows.items():
+        name, score_label = PANEL_SUITES[suite]
+        _, tasks = load_tasks(ROOT / "benches" / suite / "public.json")
+        payload["suites"][suite] = {
+            "name": name,
+            "score_label": score_label,
+            "task_count": len(tasks),
+            "runs": sorted(
+                suite_rows,
+                key=lambda row: (-row["score"], row["model"], row["reasoning_effort"]),
+            ),
+        }
+    write_json(args.out, payload)
+    print(f"{args.out}: wrote {sum(len(value) for value in rows.values())} panel run(s)")
     return 0
 
 
@@ -383,6 +536,29 @@ def command_self_test(_args):
     assert summary["average_output_tokens"] == 300
     assert summary["average_cost_usd"] == 0.00039
     assert summary["cost_basis"] == "estimated"
+    panel_sample = {
+        "schema_version": 1,
+        "evaluation": {"judges": {"one": {}, "two": {}, "three": {}}},
+        "summary": {"model": "sample"},
+        "items": [
+            {
+                "task_id": "sample-task",
+                "score": 80.0,
+                "judgments": {
+                    "one": {"score": 70.0},
+                    "two": {"score": 80.0},
+                    "three": {"score": 90.0},
+                },
+            }
+        ],
+    }
+    assert not panel_validation_errors(panel_sample)
+    panel_sample["items"][0]["score"] = 81.0
+    assert panel_validation_errors(panel_sample)
+    panel_sample["items"][0]["score"] = 80.0
+    panel_sample["items"][0]["judgments"]["one"]["score"] = 101.0
+    panel_sample["items"][0]["judgments"]["three"]["score"] = 59.0
+    assert panel_validation_errors(panel_sample)
     print("self-test: OK")
     return 0
 
@@ -407,10 +583,20 @@ def parser():
     check.add_argument("paths", nargs="*")
     check.set_defaults(func=command_check)
 
-    build = commands.add_parser("build", help="rebuild static leaderboard data")
-    build.add_argument("--results", default=RESULTS_DIR, type=Path)
+    panel_check = commands.add_parser("panel-check", help="validate panel evaluation files")
+    panel_check.add_argument("paths", nargs="*")
+    panel_check.add_argument("--evaluation", default=PANEL_EVALUATION)
+    panel_check.set_defaults(func=command_panel_check)
+
+    build = commands.add_parser("build", help="rebuild static panel leaderboard data")
+    build.add_argument("--evaluation", default=PANEL_EVALUATION)
     build.add_argument("--out", default=LEADERBOARD, type=Path)
     build.set_defaults(func=command_build)
+
+    legacy_build = commands.add_parser("legacy-build", help="rebuild the earlier CopyBench leaderboard")
+    legacy_build.add_argument("--results", default=RESULTS_DIR, type=Path)
+    legacy_build.add_argument("--out", default=LEADERBOARD, type=Path)
+    legacy_build.set_defaults(func=command_legacy_build)
 
     self_test = commands.add_parser("self-test", help="run the smallest useful check")
     self_test.set_defaults(func=command_self_test)

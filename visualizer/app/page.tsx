@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import {
   CartesianGrid,
+  ErrorBar,
   ResponsiveContainer,
   Scatter,
   ScatterChart,
@@ -20,7 +21,13 @@ type MatrixAxis = "cost" | "tokens" | "latency";
 interface Run {
   model: string;
   reasoning_effort: string;
-  copy_quality: number | null;
+  score: number;
+  judge_stddev: number;
+  judge_range: number;
+  judge_scores: Record<string, number>;
+  average_item_judge_stddev: number;
+  disagreement_count: number;
+  brief_ok_pct: number;
   average_latency_ms: number | null;
   average_input_tokens: number | null;
   average_output_tokens: number | null;
@@ -32,6 +39,7 @@ interface Run {
   total: number;
   evaluation_type: string;
   human_evaluation: boolean;
+  generation_file: string;
   file: string;
 }
 
@@ -44,17 +52,26 @@ interface Pricing {
 
 interface Leaderboard {
   benchmark: string;
-  suite: string;
-  task_set: string;
   score_scale: number;
   generated_at: string;
   pricing: Pricing;
-  runs: Run[];
+  evaluation: {
+    id: string;
+    type: string;
+    protocol_version: string;
+    human_validated: boolean;
+    judges: Record<string, { model: string; reasoning_effort: string; focus: string }>;
+  };
+  suites: Record<SuiteId, {
+    name: string;
+    score_label: string;
+    task_count: number;
+    runs: Run[];
+  }>;
 }
 
-const data = leaderboardData as Leaderboard;
+const data = leaderboardData as unknown as Leaderboard;
 const repository = "https://github.com/KyleDerZweite/litebench";
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const effortOrder: Record<string, number> = { low: 0, medium: 1, high: 2, xhigh: 3, max: 4 };
 const modelColors: Record<string, string> = {
   "gpt-5.6-luna": "#3fa66b",
@@ -68,31 +85,29 @@ const suites = [
   {
     id: "copybench" as const,
     label: "CopyBench Lite",
-    description: "Scores how well the writing follows a copy brief",
-    ready: true,
-    prompts: "benches/copybench/public.json",
-    judge: "benches/copybench/judge-ai-provisional-v0.2.txt",
   },
   {
     id: "naturalbench" as const,
     label: "NaturalBench Lite",
-    description: "Checks whether the writing is idiomatic or formulaic",
-    ready: false,
-    prompts: "benches/naturalbench/public.json",
-    judge: "benches/naturalbench/judge.txt",
   },
   {
     id: "cefrbench" as const,
     label: "CEFRBench Lite",
-    description: "Checks whether the writing matches the requested CEFR level",
-    ready: false,
-    prompts: "benches/cefrbench/public.json",
-    judge: "benches/cefrbench/judge.txt",
   },
 ];
 
+const judgeLabels: Record<string, string> = {
+  sol_max: "Sol max",
+  gemini_high: "Gemini high",
+  glm_high: "GLM high",
+};
+
 function formatNumber(value: number, decimals = 1) {
   return Number.isInteger(value) ? value.toFixed(0) : value.toFixed(decimals);
+}
+
+function formatScore(value: number) {
+  return value.toFixed(2);
 }
 
 function compactTokens(value: number | null) {
@@ -117,8 +132,8 @@ function bestByModel(runs: Run[]) {
   const best = new Map<string, Run>();
   for (const run of runs) {
     const current = best.get(run.model);
-    const score = run.copy_quality ?? -Infinity;
-    const currentScore = current?.copy_quality ?? -Infinity;
+    const score = run.score;
+    const currentScore = current?.score ?? -Infinity;
     if (
       !current ||
       score > currentScore ||
@@ -130,8 +145,8 @@ function bestByModel(runs: Run[]) {
   return [...best.values()];
 }
 
-function ModelLogo({ className = "h-4 w-4" }: { className?: string }) {
-  return <img alt="" aria-hidden="true" className={`${className} opacity-80`} src={`${basePath}/assets/logos/openai.svg`} />;
+function ModelMark({ model }: { model: string }) {
+  return <i aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: modelColors[model] || "#888" }} />;
 }
 
 function LiteMark() {
@@ -188,7 +203,7 @@ function ModelFilter({ models, selected, onChange }: {
               }}
               type="checkbox"
             />
-            <ModelLogo />
+            <ModelMark model={model} />
             <span>{model}</span>
           </label>
         ))}
@@ -203,7 +218,11 @@ function MatrixTooltip({ active, payload }: any) {
   return (
     <div className="chart-tooltip">
       <strong>{point?.label}</strong>
-      <div>Score: {formatNumber(point?.score)} / 100</div>
+      <div>Score: {formatScore(point?.score)} ± {formatScore(point?.judgeStddev)}</div>
+      {Object.entries(point?.judgeScores || {}).map(([judge, score]) => (
+        <div key={judge}>{judgeLabels[judge] || judge}: {formatScore(score as number)}</div>
+      ))}
+      <div>Brief OK: {formatScore(point?.briefOkPct)}%</div>
       <div>{point?.axisLabel}: {point?.xDisplay}</div>
       <div>Estimated cost: {formatCost(point?.cost)}</div>
       <div>Output: {compactTokens(point?.outputTokens)} tok</div>
@@ -218,7 +237,7 @@ function MatrixPoint({ cx, cy, fill, maxX, mobile, payload }: any) {
   const nearLeft = maxX > 0 && payload.x >= maxX * 0.82;
   const textAnchor = nearRight ? "end" : nearLeft ? "start" : "middle";
   const labelX = cx + (nearRight ? -8 : nearLeft ? 8 : 0);
-  const labelY = cy - 13;
+  const labelY = cy + (payload.model === "z-ai/glm-5.3-flash" ? 18 : -13);
   return (
     <g>
       <circle cx={cx} cy={cy} fill={fill} r={3.5} />
@@ -232,7 +251,7 @@ function MatrixPoint({ cx, cy, fill, maxX, mobile, payload }: any) {
   );
 }
 
-function PerformanceChart({ runs, mobile, axis, onAxisChange, models, selectedModels, onModelsChange }: {
+function PerformanceChart({ runs, mobile, axis, onAxisChange, models, selectedModels, onModelsChange, scoreLabel, taskCount }: {
   runs: Run[];
   mobile: boolean;
   axis: MatrixAxis;
@@ -240,6 +259,8 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange, models, selectedMo
   models: string[];
   selectedModels: Set<string>;
   onModelsChange: (models: Set<string>) => void;
+  scoreLabel: string;
+  taskCount: number;
 }) {
   const axisDefinition = {
     cost: { label: "Avg cost per task", value: (run: Run) => run.average_cost_usd, format: (value: number) => value === 0 ? "$0" : mobile ? `$${value.toFixed(3)}` : formatCost(value) },
@@ -251,9 +272,12 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange, models, selectedMo
       .filter((run) => run.model === model)
       .map((run) => {
         const x = axisDefinition.value(run);
-        return x === null || run.copy_quality === null ? null : {
+        return x === null ? null : {
           x,
-          score: run.copy_quality,
+          score: run.score,
+          judgeStddev: run.judge_stddev,
+          judgeScores: run.judge_scores,
+          briefOkPct: run.brief_ok_pct,
           label: runLabel(run),
           axisLabel: axisDefinition.label,
           xDisplay: axisDefinition.format(x),
@@ -293,14 +317,14 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange, models, selectedMo
           ))}
         </div>
         <div className="flex items-center gap-3">
-          <span className="hidden font-mono text-[9px] uppercase text-neutral-600 sm:inline">8 tasks · updated {formatDate(data.generated_at)}</span>
+          <span className="hidden font-mono text-[9px] uppercase text-neutral-600 sm:inline">{taskCount} tasks · updated {formatDate(data.generated_at)}</span>
           <ModelFilter models={models} onChange={onModelsChange} selected={selectedModels} />
         </div>
       </div>
       <section className="border border-neutral-800 bg-[#151515] p-4 sm:p-6">
         <div className="mb-1 flex items-baseline justify-between gap-4">
-          <h3 className="text-sm font-semibold text-neutral-200">CopyBench score</h3>
-          <span className="font-mono text-[9px] italic text-neutral-600">most efficient ↗</span>
+          <h3 className="text-sm font-semibold text-neutral-200">{scoreLabel}</h3>
+          <span className="font-mono text-[9px] italic text-neutral-600">± judge SD · most efficient ↗</span>
         </div>
         <div className="h-[390px] w-full sm:h-[540px]">
           <ResponsiveContainer height="100%" width="100%">
@@ -335,7 +359,9 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange, models, selectedMo
                   line={{ stroke: group.color, strokeWidth: 1.5 }}
                   name={group.model}
                   shape={<MatrixPoint maxX={maxX} mobile={mobile} />}
-                />
+                >
+                  <ErrorBar dataKey="judgeStddev" direction="y" stroke={group.color} strokeWidth={1} width={5} />
+                </Scatter>
               ))}
             </ScatterChart>
           </ResponsiveContainer>
@@ -355,7 +381,7 @@ function LeaderboardTable({ runs, scope, onScopeChange }: {
 }) {
   const rows = (scope === "best" ? bestByModel(runs) : runs)
     .slice()
-    .sort((a, b) => (b.copy_quality ?? -Infinity) - (a.copy_quality ?? -Infinity));
+    .sort((a, b) => b.score - a.score);
 
   return (
     <section className="mt-8">
@@ -364,15 +390,17 @@ function LeaderboardTable({ runs, scope, onScopeChange }: {
         <span className="font-mono text-[9px] uppercase text-neutral-600">{rows.length} configurations</span>
       </div>
       <div className="overflow-x-auto border border-white/5 bg-neutral-900/30">
-        <table className="w-full min-w-[780px] border-collapse font-mono text-[11px]">
+        <table className="w-full min-w-[980px] border-collapse font-mono text-[11px]">
           <thead className="text-[9px] uppercase text-neutral-600">
             <tr>
               <th className="px-4 py-3 text-left font-medium">Model</th>
               <th className="px-3 py-3 text-right font-medium">Score</th>
+              <th className="px-3 py-3 text-right font-medium">Judge SD</th>
+              <th className="px-3 py-3 text-right font-medium">Brief OK</th>
               <th className="px-3 py-3 text-right font-medium">Avg cost</th>
               <th className="px-3 py-3 text-right font-medium">Out tok</th>
               <th className="px-3 py-3 text-right font-medium">Latency</th>
-              <th className="px-4 py-3 text-right font-medium">Raw</th>
+              <th className="px-4 py-3 text-right font-medium">Files</th>
             </tr>
           </thead>
           <tbody>
@@ -380,19 +408,26 @@ function LeaderboardTable({ runs, scope, onScopeChange }: {
               <tr className="border-t border-white/5 text-neutral-400 hover:bg-white/[.025]" key={`${run.model}-${run.reasoning_effort}`}>
                 <td className="px-4 py-3">
                   <span className="flex items-center gap-2 text-neutral-200">
-                    <ModelLogo />
+                    <ModelMark model={run.model} />
                     <span>{run.model}</span>
                     <span className="text-neutral-600">[{run.reasoning_effort}]</span>
                   </span>
                   <span className="mt-2 block h-1.5 overflow-hidden bg-neutral-900">
-                    <span className="block h-full" style={{ background: modelColors[run.model] || "#888", width: `${run.copy_quality ?? 0}%` }} />
+                    <span className="block h-full" style={{ background: modelColors[run.model] || "#888", width: `${run.score}%` }} />
                   </span>
                 </td>
-                <td className="px-3 py-3 text-right font-bold text-neutral-100">{run.copy_quality === null ? "N/A" : `${formatNumber(run.copy_quality)} / 100`}</td>
+                <td className="px-3 py-3 text-right font-bold text-neutral-100" title={Object.entries(run.judge_scores).map(([judge, score]) => `${judgeLabels[judge] || judge}: ${formatScore(score)}`).join("\n")}>{formatScore(run.score)} / 100</td>
+                <td className="px-3 py-3 text-right">±{formatScore(run.judge_stddev)}</td>
+                <td className="px-3 py-3 text-right">{formatScore(run.brief_ok_pct)}%</td>
                 <td className="px-3 py-3 text-right" title={`${run.cost_basis} generation cost`}>{formatCost(run.average_cost_usd)}</td>
                 <td className="px-3 py-3 text-right">{compactTokens(run.average_output_tokens)}</td>
                 <td className="px-3 py-3 text-right">{run.average_latency_ms === null ? "N/A" : `${formatNumber(run.average_latency_ms / 1000, 2)}s`}</td>
-                <td className="px-4 py-3 text-right"><a className="uppercase text-neutral-600 hover:text-orange-500" href={`${repository}/blob/main/${run.file}`} rel="noreferrer" target="_blank">View</a></td>
+                <td className="px-4 py-3 text-right">
+                  <span className="flex justify-end gap-3">
+                    <a className="uppercase text-neutral-600 hover:text-orange-500" href={`${repository}/blob/main/${run.generation_file}`} rel="noreferrer" target="_blank">Output</a>
+                    <a className="uppercase text-neutral-600 hover:text-orange-500" href={`${repository}/blob/main/${run.file}`} rel="noreferrer" target="_blank">Judges</a>
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -405,32 +440,18 @@ function LeaderboardTable({ runs, scope, onScopeChange }: {
   );
 }
 
-function PendingSuite({ suite }: { suite: (typeof suites)[number] }) {
-  return (
-    <section className="glass-card grid min-h-[430px] place-items-center p-8 text-center">
-      <div className="max-w-2xl">
-        <h2 className="stencil-text text-3xl">{suite.label}</h2>
-        <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-neutral-500">{suite.description}. CopyBench scores do not count here.</p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3 font-mono text-[10px] uppercase">
-          <a className="border border-neutral-800 px-4 py-3 text-neutral-300 hover:border-neutral-600" href={`${repository}/blob/main/${suite.prompts}`} rel="noreferrer" target="_blank">View prompts</a>
-          <a className="border border-neutral-800 px-4 py-3 text-neutral-300 hover:border-neutral-600" href={`${repository}/blob/main/${suite.judge}`} rel="noreferrer" target="_blank">View evaluator</a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 export default function LiteBenchVisualizer() {
   const mobile = useIsMobile();
-  const models = useMemo(() => [...new Set(data.runs.map((run) => run.model))].sort(), []);
+  const models = useMemo(() => [...new Set(Object.values(data.suites).flatMap((suite) => suite.runs.map((run) => run.model)))].sort(), []);
   const [selectedModels, setSelectedModels] = useState(() => new Set(models));
   const [suiteId, setSuiteId] = useState<SuiteId>("copybench");
   const [scope, setScope] = useState<Scope>("best");
   const [axis, setAxis] = useState<MatrixAxis>("cost");
   const suite = suites.find((item) => item.id === suiteId) || suites[0];
-  const filtered = data.runs.filter((run) => selectedModels.has(run.model));
-  const suiteModelCount = suite.ready ? models.length : 0;
-  const suiteRunCount = suite.ready ? data.runs.length : 0;
+  const suiteData = data.suites[suiteId];
+  const filtered = suiteData.runs.filter((run) => selectedModels.has(run.model));
+  const suiteModelCount = new Set(suiteData.runs.map((run) => run.model)).size;
+  const suiteRunCount = suiteData.runs.length;
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-[#050505] text-neutral-100 selection:bg-orange-500/30">
@@ -451,7 +472,7 @@ export default function LiteBenchVisualizer() {
           </div>
           <div className="flex flex-col items-end gap-2 font-mono text-[10px] uppercase text-neutral-500">
             <div className="flex gap-4"><span>Models: {suiteModelCount}</span><span>Runs: {suiteRunCount}</span></div>
-            {suite.ready && <span>Provisional AI scores · no human review</span>}
+            <span>Three-judge AI scores · no human review</span>
           </div>
         </div>
       </header>
@@ -466,30 +487,26 @@ export default function LiteBenchVisualizer() {
               onClick={() => setSuiteId(item.id)}
               type="button"
             >
-              {item.label}{!item.ready && <span className="ml-2 text-neutral-700">0 runs</span>}
+              {item.label}
             </button>
           ))}
         </nav>
 
-        {!suite.ready ? <PendingSuite suite={suite} /> : (
-          <>
-            <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-              <h2 className="text-xl font-semibold text-neutral-100">Leaderboard</h2>
-              <span className="font-mono text-[9px] uppercase text-neutral-600">Score out of 100 · lower cost, tokens, and latency are better</span>
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+          <h2 className="text-xl font-semibold text-neutral-100">Leaderboard</h2>
+          <span className="font-mono text-[9px] uppercase text-neutral-600">Score out of 100 · bars show judge SD · lower cost, tokens, and latency are better</span>
+        </div>
+        {selectedModels.size === 0 ? (
+          <section className="glass-card grid min-h-[350px] place-items-center p-6 text-center font-mono text-xs uppercase text-neutral-600">
+            <div>
+              <p>Select at least one model</p>
+              <button className="mt-4 border border-neutral-800 px-4 py-2 text-neutral-300 hover:border-neutral-600" onClick={() => setSelectedModels(new Set(models))} type="button">Select all</button>
             </div>
-            {selectedModels.size === 0 ? (
-              <section className="glass-card grid min-h-[350px] place-items-center p-6 text-center font-mono text-xs uppercase text-neutral-600">
-                <div>
-                  <p>Select at least one model</p>
-                  <button className="mt-4 border border-neutral-800 px-4 py-2 text-neutral-300 hover:border-neutral-600" onClick={() => setSelectedModels(new Set(models))} type="button">Select all</button>
-                </div>
-              </section>
-            ) : (
-              <>
-                <PerformanceChart axis={axis} mobile={mobile} models={models} onAxisChange={setAxis} onModelsChange={setSelectedModels} runs={filtered} selectedModels={selectedModels} />
-                <LeaderboardTable onScopeChange={setScope} runs={filtered} scope={scope} />
-              </>
-            )}
+          </section>
+        ) : (
+          <>
+            <PerformanceChart axis={axis} mobile={mobile} models={models} onAxisChange={setAxis} onModelsChange={setSelectedModels} runs={filtered} scoreLabel={suiteData.score_label} selectedModels={selectedModels} taskCount={suiteData.task_count} />
+            <LeaderboardTable onScopeChange={setScope} runs={filtered} scope={scope} />
           </>
         )}
       </main>

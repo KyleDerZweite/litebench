@@ -1,0 +1,494 @@
+{
+  "schema_version": 1,
+  "evaluation": {
+    "id": "2026-09-04-panel-v0.1",
+    "protocol_version": "panel-v0.1",
+    "protocol_file": "benches/judge-panel-v0.1.json",
+    "protocol_sha256": "11dd5da0515ce600f8a63c17e27fb9104df99581461ee1f08cf16972f11193e5",
+    "source_file": "benches/naturalbench/generations/2026-09-04-rerun-01/gpt-5-6-luna-high.json",
+    "source_sha256": "40b9eba2dbdda4b4b815e050976a4d981d6ac9e91f792e8a4cc3a6ce2e580121",
+    "human_validated": false,
+    "judges": {
+      "sol_max": {
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "max",
+        "focus": "Audit objective constraints first. Treat every plausible addition as unsupported unless the brief supplies it. Enforce all score caps."
+      },
+      "gemini_high": {
+        "model": "gemini-3.8-flash-high",
+        "reasoning_effort": "high",
+        "focus": "Audit idiom, locale, register, rhythm, audience fit, and formulaic language closely. Keep the shared rubric and caps unchanged."
+      },
+      "glm_high": {
+        "model": "z-ai/glm-5.3-flash",
+        "reasoning_effort": "high",
+        "focus": "Take an adversarial pass for generic phrasing, repetition, unsupported inference, and structural shortcuts. Keep the shared rubric and caps unchanged."
+      }
+    },
+    "created_at": "2026-09-04T19:04:38.577238+00:00"
+  },
+  "summary": {
+    "model": "gpt-5.6-luna",
+    "provider": "kylehub",
+    "model_version": "gpt-5.6-luna",
+    "reasoning_effort": "high",
+    "date": "2026-09-04",
+    "evaluation_type": "ai_panel_provisional",
+    "human_evaluation": false,
+    "score": 87.38,
+    "judge_stddev": 0.94,
+    "judge_range": 2.26,
+    "judge_scores": {
+      "sol_max": 87.62,
+      "gemini_high": 86.12,
+      "glm_high": 88.38
+    },
+    "average_item_judge_stddev": 2.27,
+    "disagreement_count": 0,
+    "brief_ok_pct": 100.0,
+    "average_latency_ms": 13183,
+    "average_input_tokens": 394,
+    "average_output_tokens": 631,
+    "average_cost_usd": 0.000836,
+    "cost_basis": "estimated",
+    "generated": 4,
+    "rated": 4,
+    "total": 4,
+    "generation_file": "benches/naturalbench/generations/2026-09-04-rerun-01/gpt-5-6-luna-high.json",
+    "file": "benches/naturalbench/evaluations/2026-09-04-panel-v0.1/gpt-5-6-luna-high.json"
+  },
+  "items": [
+    {
+      "task_id": "natural-en-service-01",
+      "score": 83.5,
+      "judge_stddev": 6.01,
+      "judge_range": 13.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 87.5,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "redundant_restating",
+              "evidence": "During this period, you will not be able to access account exports"
+            },
+            {
+              "code": "repeated_reassurance",
+              "evidence": "There is nothing you need to change in your account"
+            },
+            {
+              "code": "repetitive_closing",
+              "evidence": "you can plan accordingly"
+            }
+          ],
+          "note": "The update is calm and natural, but repeated explanations and reassurance make it less crisp than polished support copy.",
+          "prompt_sha256": "68ad206c52ecabf91955974929694aad7f4e8e1ba250312370befb36e84ec760",
+          "raw_output": "{\"score\":87.50,\"brief_ok\":true,\"realized_cefr\":null,\"issues\":[{\"code\":\"redundant_restating\",\"evidence\":\"During this period, you will not be able to access account exports\"},{\"code\":\"repeated_reassurance\",\"evidence\":\"There is nothing you need to change in your account\"},{\"code\":\"repetitive_closing\",\"evidence\":\"you can plan accordingly\"}],\"note\":\"The update is calm and natural, but repeated explanations and reassurance make it less crisp than polished support copy.\"}",
+          "response": {
+            "id": "resp_0fa38cb7b7f7663b016a9b14e30c3887d281e66858ff560721",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1047,
+            "output_tokens": 1668,
+            "billable_output_tokens": 1668,
+            "reasoning_tokens": 1552,
+            "total_tokens": 2715,
+            "latency_ms": 31702,
+            "attempts": 2
+          },
+          "delta": 4.0
+        },
+        "gemini_high": {
+          "score": 75.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "tautology",
+              "evidence": "During this period, you will not be able to access account exports"
+            },
+            {
+              "code": "repetitive_content",
+              "evidence": "There is nothing you need to change in your account"
+            }
+          ],
+          "note": "While the register is polite and calm, the copy relies heavily on padded repetition, reiterating the outage details and lack of required action in consecutive sentences.",
+          "prompt_sha256": "94161712f60bb405954694144e7f7d9caed0a3d6360f4b8ef75bf8d65f37350d",
+          "raw_output": "{\"score\": 75.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"tautology\", \"evidence\": \"During this period, you will not be able to access account exports\"}, {\"code\": \"repetitive_content\", \"evidence\": \"There is nothing you need to change in your account\"}], \"note\": \"While the register is polite and calm, the copy relies heavily on padded repetition, reiterating the outage details and lack of required action in consecutive sentences.\"}",
+          "response": {
+            "id": "resp_ZxSbaszOMt-W3boPq5vPkAE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 811,
+            "output_tokens": 115,
+            "billable_output_tokens": 1883,
+            "reasoning_tokens": 1768,
+            "total_tokens": 2694,
+            "latency_ms": 6962,
+            "attempts": 1
+          },
+          "delta": -8.5
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "you will not be able to access account exports, but saved reports will remain available"
+            },
+            {
+              "code": "redundant_closing",
+              "evidence": "you can plan accordingly"
+            },
+            {
+              "code": "stiff_phrasing",
+              "evidence": "No customer action is required."
+            }
+          ],
+          "note": "Calm, correct and on-brief, but the middle restates the opening sentence nearly verbatim and the final two sentences both rehash the planning point.",
+          "prompt_sha256": "5fd429aee6fd273e6bff0eae6c57243a14a96a79b1707565296b13b4054c2c1e",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"you will not be able to access account exports, but saved reports will remain available\"}, {\"code\": \"redundant_closing\", \"evidence\": \"you can plan accordingly\"}, {\"code\": \"stiff_phrasing\", \"evidence\": \"No customer action is required.\"}], \"note\": \"Calm, correct and on-brief, but the middle restates the opening sentence nearly verbatim and the final two sentences both rehash the planning point.\"}",
+          "response": {
+            "id": "gen-1788548201-PRy6uh6Bta7UdXUyGBiL",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 765,
+            "output_tokens": 395,
+            "billable_output_tokens": 395,
+            "reasoning_tokens": 0,
+            "total_tokens": 1160,
+            "latency_ms": 9429,
+            "attempts": 1
+          },
+          "delta": 4.5
+        }
+      }
+    },
+    {
+      "task_id": "natural-de-service-01",
+      "score": 88.58,
+      "judge_stddev": 0.31,
+      "judge_range": 0.75,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 88.25,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_capability",
+              "evidence": "geöffnet und heruntergeladen werden"
+            },
+            {
+              "code": "unsupported_timing_claim",
+              "evidence": "Wir informieren Sie frühzeitig"
+            },
+            {
+              "code": "unsupported_support_offer",
+              "evidence": "Bei Fragen hilft Ihnen unser Support gerne weiter."
+            }
+          ],
+          "note": "The German is calm and natural overall, but mild repetition, boilerplate phrasing, and unsupported additions prevent publication as written.",
+          "prompt_sha256": "fa52a27f3cf02345b63868deea5e520dd798aa6bb4a4ca9e2a86c7b2bfc23a5c",
+          "raw_output": "{\"score\":88.25,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"unsupported_capability\",\"evidence\":\"geöffnet und heruntergeladen werden\"},{\"code\":\"unsupported_timing_claim\",\"evidence\":\"Wir informieren Sie frühzeitig\"},{\"code\":\"unsupported_support_offer\",\"evidence\":\"Bei Fragen hilft Ihnen unser Support gerne weiter.\"}],\"note\":\"The German is calm and natural overall, but mild repetition, boilerplate phrasing, and unsupported additions prevent publication as written.\"}",
+          "response": {
+            "id": "resp_070030c373bc6879016a9b15028a4087d28b38d3f26abbee9a",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1070,
+            "output_tokens": 1142,
+            "billable_output_tokens": 1142,
+            "reasoning_tokens": 1034,
+            "total_tokens": 2212,
+            "latency_ms": 21989,
+            "attempts": 1
+          },
+          "delta": -0.33
+        },
+        "gemini_high": {
+          "score": 88.5,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_phrasing",
+              "evidence": "nicht verfügbar. Bereits gespeicherte Berichte bleiben verfügbar"
+            }
+          ],
+          "note": "The tone is appropriately calm and service-oriented, but the phrasing leans heavily on repetitive variations of 'verfügbar'.",
+          "prompt_sha256": "17645be893c45d5abee603b5e99420f19f8aacb482d553706414cba74a4c67ee",
+          "raw_output": "{\n  \"score\": 88.50,\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"repetitive_phrasing\",\n      \"evidence\": \"nicht verfügbar. Bereits gespeicherte Berichte bleiben verfügbar\"\n    }\n  ],\n  \"note\": \"The tone is appropriately calm and service-oriented, but the phrasing leans heavily on repetitive variations of 'verfügbar'.\"\n}",
+          "response": {
+            "id": "resp_bhSbau2hLb_jnsEPks296AY",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 838,
+            "output_tokens": 111,
+            "billable_output_tokens": 1781,
+            "reasoning_tokens": 1670,
+            "total_tokens": 2619,
+            "latency_ms": 6402,
+            "attempts": 1
+          },
+          "delta": -0.08
+        },
+        "glm_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "Bereits gespeicherte Berichte bleiben verfügbar ... steht der Kontoexport wieder zur Verfügung"
+            },
+            {
+              "code": "number_switch",
+              "evidence": "sind Kontoexporte ... nicht verfügbar ... steht der Kontoexport wieder zur Verfügung"
+            },
+            {
+              "code": "stock_closing",
+              "evidence": "Bei Fragen hilft Ihnen unser Support gerne weiter."
+            }
+          ],
+          "note": "A calm, factually correct customer notice in natural German, kept from a higher score by mild repetition of availability wording, an inconsistent singular/plural, and a boilerplate closing line.",
+          "prompt_sha256": "f9dee740020398e31c68486fe1f1a6b9aee8cfd620ccd16769fb47116e9dad26",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"Bereits gespeicherte Berichte bleiben verfügbar ... steht der Kontoexport wieder zur Verfügung\"}, {\"code\": \"number_switch\", \"evidence\": \"sind Kontoexporte ... nicht verfügbar ... steht der Kontoexport wieder zur Verfügung\"}, {\"code\": \"stock_closing\", \"evidence\": \"Bei Fragen hilft Ihnen unser Support gerne weiter.\"}], \"note\": \"A calm, factually correct customer notice in natural German, kept from a higher score by mild repetition of availability wording, an inconsistent singular/plural, and a boilerplate closing line.\"}",
+          "response": {
+            "id": "gen-1788548211-0OTWRS1mXRBe6mrWCI7Q",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 800,
+            "output_tokens": 579,
+            "billable_output_tokens": 579,
+            "reasoning_tokens": 0,
+            "total_tokens": 1379,
+            "latency_ms": 10908,
+            "attempts": 1
+          },
+          "delta": 0.42
+        }
+      }
+    },
+    {
+      "task_id": "natural-en-founder-01",
+      "score": 88.67,
+      "judge_stddev": 2.39,
+      "judge_range": 5.5,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 86.5,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_technical_detail",
+              "evidence": "especially when events crossed between regions"
+            },
+            {
+              "code": "invented_existing_capability",
+              "evidence": "creating, sharing, and managing schedules as usual"
+            },
+            {
+              "code": "templated_update_voice",
+              "evidence": "I wanted to give you a clear update"
+            }
+          ],
+          "note": "The note is fluent and credible overall, but an awkward invented scenario and several stock update phrases make it feel more polished than candid.",
+          "prompt_sha256": "358715528fde5e3c448ad4485a8b402e4eff50d013679870dba36cfc3764752c",
+          "raw_output": "{\"score\":86.5,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"unsupported_technical_detail\",\"evidence\":\"especially when events crossed between regions\"},{\"code\":\"invented_existing_capability\",\"evidence\":\"creating, sharing, and managing schedules as usual\"},{\"code\":\"templated_update_voice\",\"evidence\":\"I wanted to give you a clear update\"}],\"note\":\"The note is fluent and credible overall, but an awkward invented scenario and several stock update phrases make it feel more polished than candid.\"}",
+          "response": {
+            "id": "resp_06e3a8f72759e4bc016a9b15189eb487d2bbfd7c2fde318066",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1061,
+            "output_tokens": 2185,
+            "billable_output_tokens": 2185,
+            "reasoning_tokens": 2070,
+            "total_tokens": 3246,
+            "latency_ms": 40786,
+            "attempts": 1
+          },
+          "delta": -2.17
+        },
+        "gemini_high": {
+          "score": 92.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "forced_triple",
+              "evidence": "creating, sharing, and managing"
+            }
+          ],
+          "note": "The note strikes an authentic, candid founder tone with good rhythm, marred only by a slightly stock three-verb list.",
+          "prompt_sha256": "d5c08f63a9cde15480f31b1a98551b60b6d099785c1668ae94181bfdc30ce827",
+          "raw_output": "{\"score\": 92.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"forced_triple\", \"evidence\": \"creating, sharing, and managing\"}], \"note\": \"The note strikes an authentic, candid founder tone with good rhythm, marred only by a slightly stock three-verb list.\"}",
+          "response": {
+            "id": "resp_dRSbaviyDJno7M8Pnb6RsAI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 821,
+            "output_tokens": 78,
+            "billable_output_tokens": 2887,
+            "reasoning_tokens": 2809,
+            "total_tokens": 3708,
+            "latency_ms": 10183,
+            "attempts": 1
+          },
+          "delta": 3.33
+        },
+        "glm_high": {
+          "score": 87.5,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_detail",
+              "evidence": "especially when events crossed between regions"
+            },
+            {
+              "code": "forced_triple",
+              "evidence": "creating, sharing, and managing schedules"
+            },
+            {
+              "code": "stock_phrasing",
+              "evidence": "I’ll share another update when we have a firmer timeline"
+            }
+          ],
+          "note": "A candid, on-brief note within length, but it adds an invented failure detail and leans on stock closure phrasing and a padded triple.",
+          "prompt_sha256": "68bfc53914624dd30ce12d84462b03447fdb719f61419f051a129b2c02c52865",
+          "raw_output": "{\"score\": 87.50, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"unsupported_detail\", \"evidence\": \"especially when events crossed between regions\"}, {\"code\": \"forced_triple\", \"evidence\": \"creating, sharing, and managing schedules\"}, {\"code\": \"stock_phrasing\", \"evidence\": \"I’ll share another update when we have a firmer timeline\"}], \"note\": \"A candid, on-brief note within length, but it adds an invented failure detail and leans on stock closure phrasing and a padded triple.\"}",
+          "response": {
+            "id": "gen-1788548222-gaWlse2vivR5bG7XkSQp",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 778,
+            "output_tokens": 704,
+            "billable_output_tokens": 704,
+            "reasoning_tokens": 0,
+            "total_tokens": 1482,
+            "latency_ms": 10453,
+            "attempts": 1
+          },
+          "delta": -1.17
+        }
+      }
+    },
+    {
+      "task_id": "natural-de-founder-01",
+      "score": 88.75,
+      "judge_stddev": 0.35,
+      "judge_range": 0.75,
+      "disagreement": false,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 88.25,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_user_effect",
+              "evidence": "Dadurch könnten geteilte Termine bei manchen Personen zur falschen Zeit erscheinen."
+            },
+            {
+              "code": "unsupported_no_action_claim",
+              "evidence": "Ihr müsst nichts tun"
+            },
+            {
+              "code": "redundant_reassurance",
+              "evidence": "läuft unverändert normal weiter. Ihr müsst nichts tun und könnt die App wie gewohnt nutzen."
+            }
+          ],
+          "note": "The message is direct and largely natural, but unsupported elaborations and repetitive reassurance keep it from feeling fully clean and precise.",
+          "prompt_sha256": "b636f98de68a255995efe3d974212d54d151264b5b9465e0460ebc76c0db845b",
+          "raw_output": "{\"score\":88.25,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"unsupported_user_effect\",\"evidence\":\"Dadurch könnten geteilte Termine bei manchen Personen zur falschen Zeit erscheinen.\"},{\"code\":\"unsupported_no_action_claim\",\"evidence\":\"Ihr müsst nichts tun\"},{\"code\":\"redundant_reassurance\",\"evidence\":\"läuft unverändert normal weiter. Ihr müsst nichts tun und könnt die App wie gewohnt nutzen.\"}],\"note\":\"The message is direct and largely natural, but unsupported elaborations and repetitive reassurance keep it from feeling fully clean and precise.\"}",
+          "response": {
+            "id": "resp_0581f92cf44ea819016a9b1541553487d2a36d4ed3a6051978",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1114,
+            "output_tokens": 2200,
+            "billable_output_tokens": 2200,
+            "reasoning_tokens": 2070,
+            "total_tokens": 3314,
+            "latency_ms": 41249,
+            "attempts": 1
+          },
+          "delta": -0.5
+        },
+        "gemini_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "clunky_syntax",
+              "evidence": "Mir ist lieber, diese Verschiebung"
+            },
+            {
+              "code": "pleonasm",
+              "evidence": "unverändert normal weiter"
+            }
+          ],
+          "note": "The tone is appropriately direct and unpretentious, but minor phrasing flaws like the missing dummy pronoun and a slight pleonasm require small edits.",
+          "prompt_sha256": "38711d018c4abca4ff5d76d134bf27b829345dbc29138101eaba1819b40cda51",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"clunky_syntax\", \"evidence\": \"Mir ist lieber, diese Verschiebung\"}, {\"code\": \"pleonasm\", \"evidence\": \"unverändert normal weiter\"}], \"note\": \"The tone is appropriately direct and unpretentious, but minor phrasing flaws like the missing dummy pronoun and a slight pleonasm require small edits.\"}",
+          "response": {
+            "id": "resp_fxSbate_Fcr9nsEPgb2a2QI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 877,
+            "output_tokens": 104,
+            "billable_output_tokens": 2425,
+            "reasoning_tokens": 2321,
+            "total_tokens": 3302,
+            "latency_ms": 7488,
+            "attempts": 1
+          },
+          "delta": 0.25
+        },
+        "glm_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "placeholder_signature",
+              "evidence": "— [Name], Gründerin"
+            },
+            {
+              "code": "hedged_inference",
+              "evidence": "Dadurch könnten geteilte Termine bei manchen Personen zur falschen Zeit erscheinen."
+            }
+          ],
+          "note": "The message hits all required facts, stays within word count, and reads naturally and directly, but loses points for an unfilled name placeholder and a mildly inferred consequence of the timezone problem.",
+          "prompt_sha256": "4943b759c54a1ec77def8044ed7f286aa495ba857e3805d8eb082442a9d4245f",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"placeholder_signature\", \"evidence\": \"— [Name], Gründerin\"}, {\"code\": \"hedged_inference\", \"evidence\": \"Dadurch könnten geteilte Termine bei manchen Personen zur falschen Zeit erscheinen.\"}], \"note\": \"The message hits all required facts, stays within word count, and reads naturally and directly, but loses points for an unfilled name placeholder and a mildly inferred consequence of the timezone problem.\"}",
+          "response": {
+            "id": "gen-1788548232-vCW0r2NdSrDrmFepgU34",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 868,
+            "output_tokens": 1109,
+            "billable_output_tokens": 1109,
+            "reasoning_tokens": 0,
+            "total_tokens": 1977,
+            "latency_ms": 30275,
+            "attempts": 1
+          },
+          "delta": 0.25
+        }
+      }
+    }
+  ]
+}

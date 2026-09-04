@@ -1,0 +1,848 @@
+{
+  "schema_version": 1,
+  "evaluation": {
+    "id": "2026-09-04-panel-v0.1",
+    "protocol_version": "panel-v0.1",
+    "protocol_file": "benches/judge-panel-v0.1.json",
+    "protocol_sha256": "11dd5da0515ce600f8a63c17e27fb9104df99581461ee1f08cf16972f11193e5",
+    "source_file": "benches/copybench/generations/2026-09-04-rerun-01/gpt-5-6-luna-xhigh.json",
+    "source_sha256": "67f4409f5bb9131f60e7333346d2d536dca8ff731afed31743d7fa1e1be0ae64",
+    "human_validated": false,
+    "judges": {
+      "sol_max": {
+        "model": "gpt-5.6-sol",
+        "reasoning_effort": "max",
+        "focus": "Audit objective constraints first. Treat every plausible addition as unsupported unless the brief supplies it. Enforce all score caps."
+      },
+      "gemini_high": {
+        "model": "gemini-3.8-flash-high",
+        "reasoning_effort": "high",
+        "focus": "Audit idiom, locale, register, rhythm, audience fit, and formulaic language closely. Keep the shared rubric and caps unchanged."
+      },
+      "glm_high": {
+        "model": "z-ai/glm-5.3-flash",
+        "reasoning_effort": "high",
+        "focus": "Take an adversarial pass for generic phrasing, repetition, unsupported inference, and structural shortcuts. Keep the shared rubric and caps unchanged."
+      }
+    },
+    "created_at": "2026-09-04T19:04:38.544197+00:00"
+  },
+  "summary": {
+    "model": "gpt-5.6-luna",
+    "provider": "kylehub",
+    "model_version": "gpt-5.6-luna",
+    "reasoning_effort": "xhigh",
+    "date": "2026-09-04",
+    "evaluation_type": "ai_panel_provisional",
+    "human_evaluation": false,
+    "score": 84.46,
+    "judge_stddev": 3.38,
+    "judge_range": 7.94,
+    "judge_scores": {
+      "sol_max": 79.81,
+      "gemini_high": 85.81,
+      "glm_high": 87.75
+    },
+    "average_item_judge_stddev": 8.95,
+    "disagreement_count": 4,
+    "brief_ok_pct": 100.0,
+    "average_latency_ms": 18246,
+    "average_input_tokens": 422,
+    "average_output_tokens": 939,
+    "average_cost_usd": 0.00121155,
+    "cost_basis": "estimated",
+    "generated": 8,
+    "rated": 8,
+    "total": 8,
+    "generation_file": "benches/copybench/generations/2026-09-04-rerun-01/gpt-5-6-luna-xhigh.json",
+    "file": "benches/copybench/evaluations/2026-09-04-panel-v0.1/gpt-5-6-luna-xhigh.json"
+  },
+  "items": [
+    {
+      "task_id": "public-de-product-a2-01",
+      "score": 83.0,
+      "judge_stddev": 4.55,
+      "judge_range": 11.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_wording",
+              "evidence": "Sie hat einen herausnehmbaren Einsatz. Der Einsatz lässt sich herausnehmen."
+            },
+            {
+              "code": "repetitive_wording",
+              "evidence": "Die Lunchbox darf in die Spülmaschine. So können Sie die Box nach dem Essen in die Spülmaschine geben."
+            }
+          ],
+          "note": "The copy meets all objective constraints, but conspicuous repetition makes it less polished and persuasive.",
+          "prompt_sha256": "15ab575414e7e98a2728961311a531c1bffb5c4bfad86e9fbb7b66a940668548",
+          "raw_output": "{\"score\":89.00,\"brief_ok\":true,\"realized_cefr\":\"A2\",\"issues\":[{\"code\":\"repetitive_wording\",\"evidence\":\"Sie hat einen herausnehmbaren Einsatz. Der Einsatz lässt sich herausnehmen.\"},{\"code\":\"repetitive_wording\",\"evidence\":\"Die Lunchbox darf in die Spülmaschine. So können Sie die Box nach dem Essen in die Spülmaschine geben.\"}],\"note\":\"The copy meets all objective constraints, but conspicuous repetition makes it less polished and persuasive.\"}",
+          "response": {
+            "id": "resp_03662c73707d0a3a016a9b132651b487d2b566a4a3d6a1cf11",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1020,
+            "output_tokens": 1149,
+            "billable_output_tokens": 1149,
+            "reasoning_tokens": 1034,
+            "total_tokens": 2169,
+            "latency_ms": 22349,
+            "attempts": 1
+          },
+          "delta": 6.0
+        },
+        "gemini_high": {
+          "score": 78.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "redundant_phrasing",
+              "evidence": "Der Einsatz lässt sich herausnehmen."
+            },
+            {
+              "code": "repetitive_content",
+              "evidence": "So können Sie die Box nach dem Essen in die Spülmaschine geben."
+            }
+          ],
+          "note": "The copy meets all constraints and factual limits, but it uses clumsy tautological padding to satisfy the word count.",
+          "prompt_sha256": "7ffd0bf61fc3539e726d4041874465e78baa6a0bec9ba6ccd8a36b74846fdb13",
+          "raw_output": "{\"score\": 78.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"redundant_phrasing\", \"evidence\": \"Der Einsatz lässt sich herausnehmen.\"}, {\"code\": \"repetitive_content\", \"evidence\": \"So können Sie die Box nach dem Essen in die Spülmaschine geben.\"}], \"note\": \"The copy meets all constraints and factual limits, but it uses clumsy tautological padding to satisfy the word count.\"}",
+          "response": {
+            "id": "resp_KBObar-7EYaU3boPx9b5mAE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 779,
+            "output_tokens": 107,
+            "billable_output_tokens": 1848,
+            "reasoning_tokens": 1741,
+            "total_tokens": 2627,
+            "latency_ms": 7547,
+            "attempts": 1
+          },
+          "delta": -5.0
+        },
+        "glm_high": {
+          "score": 82.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "redundant_sentences",
+              "evidence": "Sie hat einen herausnehmbaren Einsatz. Der Einsatz lässt sich herausnehmen."
+            },
+            {
+              "code": "redundant_sentences",
+              "evidence": "Die Lunchbox darf in die Spülmaschine. So können Sie die Box nach dem Essen in die Spülmaschine geben."
+            },
+            {
+              "code": "generic_opening",
+              "evidence": "Diese isolierte Lunchbox ist für Ihr Mittagessen bei der Arbeit geeignet."
+            }
+          ],
+          "note": "All supplied facts are used correctly at A2 level with the required structure and length, but two pairs of near-duplicate sentences and a flat opening need trimming before publication.",
+          "prompt_sha256": "b2ee4459b45427a9d0e14000b2f92e8bdfcb2781ab718418e5f9c642c39c1e37",
+          "raw_output": "{\"score\": 82.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"redundant_sentences\", \"evidence\": \"Sie hat einen herausnehmbaren Einsatz. Der Einsatz lässt sich herausnehmen.\"}, {\"code\": \"redundant_sentences\", \"evidence\": \"Die Lunchbox darf in die Spülmaschine. So können Sie die Box nach dem Essen in die Spülmaschine geben.\"}, {\"code\": \"generic_opening\", \"evidence\": \"Diese isolierte Lunchbox ist für Ihr Mittagessen bei der Arbeit geeignet.\"}], \"note\": \"All supplied facts are used correctly at A2 level with the required structure and length, but two pairs of near-duplicate sentences and a flat opening need trimming before publication.\"}",
+          "response": {
+            "id": "gen-1788547907-kf5MZeT6VimDV2QDGEeq",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 752,
+            "output_tokens": 531,
+            "billable_output_tokens": 531,
+            "reasoning_tokens": 0,
+            "total_tokens": 1283,
+            "latency_ms": 12458,
+            "attempts": 1
+          },
+          "delta": -1.0
+        }
+      }
+    },
+    {
+      "task_id": "public-en-product-a2-01",
+      "score": 76.17,
+      "judge_stddev": 10.04,
+      "judge_range": 22.0,
+      "disagreement": true,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 82.5,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_copy",
+              "evidence": "It keeps food cool for up to 6 hours and holds 1.2 litres."
+            },
+            {
+              "code": "tautological_wording",
+              "evidence": "a removable insert, which you can take out"
+            }
+          ],
+          "note": "The copy meets all objective constraints and uses suitable A2 language, but repeated facts and tautological phrasing make it less polished.",
+          "prompt_sha256": "d61ec43a7f43989e0e1abc832224bcb8978627aa21c90f7c8b847519b4d036c5",
+          "raw_output": "{\"score\":82.50,\"brief_ok\":true,\"realized_cefr\":\"A2\",\"issues\":[{\"code\":\"repetitive_copy\",\"evidence\":\"It keeps food cool for up to 6 hours and holds 1.2 litres.\"},{\"code\":\"tautological_wording\",\"evidence\":\"a removable insert, which you can take out\"}],\"note\":\"The copy meets all objective constraints and uses suitable A2 language, but repeated facts and tautological phrasing make it less polished.\"}",
+          "response": {
+            "id": "resp_083bad5f4cf6471f016a9b133d3bdc87d280dc6af4b39301aa",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 979,
+            "output_tokens": 1143,
+            "billable_output_tokens": 1143,
+            "reasoning_tokens": 1034,
+            "total_tokens": 2122,
+            "latency_ms": 25152,
+            "attempts": 1
+          },
+          "delta": 6.33
+        },
+        "gemini_high": {
+          "score": 62.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "redundant_repetition",
+              "evidence": "It keeps food cool for up to 6 hours and holds 1.2 litres."
+            },
+            {
+              "code": "tautological_phrasing",
+              "evidence": "removable insert, which you can take out"
+            }
+          ],
+          "note": "Although the copy meets the word count and strict fact constraints, it resorts to clumsy tautology and repeats two specifications verbatim to hit the length target.",
+          "prompt_sha256": "a7a694d5a0cb84fc16c59437ccb3316dcec25f86fe4d5229312ef3f18f856b7a",
+          "raw_output": "{\"score\": 62.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"redundant_repetition\", \"evidence\": \"It keeps food cool for up to 6 hours and holds 1.2 litres.\"}, {\"code\": \"tautological_phrasing\", \"evidence\": \"removable insert, which you can take out\"}], \"note\": \"Although the copy meets the word count and strict fact constraints, it resorts to clumsy tautology and repeats two specifications verbatim to hit the length target.\"}",
+          "response": {
+            "id": "resp_LxObat3uJ72V3boP37D2-QY",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 738,
+            "output_tokens": 122,
+            "billable_output_tokens": 2463,
+            "reasoning_tokens": 2341,
+            "total_tokens": 3201,
+            "latency_ms": 8531,
+            "attempts": 1
+          },
+          "delta": -14.17
+        },
+        "glm_high": {
+          "score": 84.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "It keeps food cool for up to 6 hours and holds 1.2 litres."
+            },
+            {
+              "code": "redundant_definition",
+              "evidence": "It has a removable insert, which you can take out."
+            }
+          ],
+          "note": "The copy uses only the supplied facts, fits the word count, tone, and CEFR A2 level with a heading and call to action, but the duplicated cooling-capacity sentence and tautological insert line require deletion before publishing.",
+          "prompt_sha256": "ff2f8d3e8d7f974b383adc1fe282af34914189002d065bdfaf07a44ef85c9ca4",
+          "raw_output": "{\"score\": 84.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"It keeps food cool for up to 6 hours and holds 1.2 litres.\"}, {\"code\": \"redundant_definition\", \"evidence\": \"It has a removable insert, which you can take out.\"}], \"note\": \"The copy uses only the supplied facts, fits the word count, tone, and CEFR A2 level with a heading and call to action, but the duplicated cooling-capacity sentence and tautological insert line require deletion before publishing.\"}",
+          "response": {
+            "id": "gen-1788547920-Q2qybEtZZ8EEvreczKuq",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 696,
+            "output_tokens": 457,
+            "billable_output_tokens": 457,
+            "reasoning_tokens": 0,
+            "total_tokens": 1153,
+            "latency_ms": 10662,
+            "attempts": 1
+          },
+          "delta": 7.83
+        }
+      }
+    },
+    {
+      "task_id": "public-de-landing-b1-01",
+      "score": 82.0,
+      "judge_stddev": 16.27,
+      "judge_range": 35.0,
+      "disagreement": true,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 59.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_ease_claim",
+              "evidence": "einfach per App"
+            },
+            {
+              "code": "unsupported_app_action",
+              "evidence": "Jetzt per App losfahren"
+            }
+          ],
+          "note": "The copy meets the format, length, tone, and language requirements, but two unsupported product claims trigger the score cap.",
+          "prompt_sha256": "8c481d9e6e8be0f39ae60c1204aaf6eb754614a62220d0ea4a8eafbe922a258b",
+          "raw_output": "{\"score\":59.0,\"brief_ok\":false,\"realized_cefr\":\"B1\",\"issues\":[{\"code\":\"unsupported_ease_claim\",\"evidence\":\"einfach per App\"},{\"code\":\"unsupported_app_action\",\"evidence\":\"Jetzt per App losfahren\"}],\"note\":\"The copy meets the format, length, tone, and language requirements, but two unsupported product claims trigger the score cap.\"}",
+          "response": {
+            "id": "resp_0b6999fddf46fe57016a9b1356034887d2995531eea5d16b14",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 985,
+            "output_tokens": 1096,
+            "billable_output_tokens": 1096,
+            "reasoning_tokens": 1009,
+            "total_tokens": 2081,
+            "latency_ms": 21068,
+            "attempts": 1
+          },
+          "delta": -23.0
+        },
+        "gemini_high": {
+          "score": 94.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_phrasing",
+              "evidence": "per App"
+            }
+          ],
+          "note": "The copy strictly respects all constraints and tone requirements, though repeating 'per App' across the subheadline, bullet points, and CTA creates slight redundancy.",
+          "prompt_sha256": "ad7d193e1ac0dde9575321cc6022fd061c029ba922f2f79e21c45c0e64bc9ae6",
+          "raw_output": "{\"score\": 94.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetitive_phrasing\", \"evidence\": \"per App\"}], \"note\": \"The copy strictly respects all constraints and tone requirements, though repeating 'per App' across the subheadline, bullet points, and CTA creates slight redundancy.\"}",
+          "response": {
+            "id": "resp_OBObatr2C_fqkdUP8rOEyAI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 758,
+            "output_tokens": 83,
+            "billable_output_tokens": 1801,
+            "reasoning_tokens": 1718,
+            "total_tokens": 2559,
+            "latency_ms": 5553,
+            "attempts": 1
+          },
+          "delta": 12.0
+        },
+        "glm_high": {
+          "score": 93.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "per App – ohne monatliche Grundgebühr ... Buchung per App ... Jetzt per App losfahren"
+            },
+            {
+              "code": "thin_benefits",
+              "evidence": "Buchung per App"
+            }
+          ],
+          "note": "On-brief, fact-safe, and friendly at B1 level, but 'per App' appears three times and the second benefit merely repeats the subheadline.",
+          "prompt_sha256": "13a4a435676fdd07e16c25a97e5f62d623c1c3bd8033989e12e92530845b5149",
+          "raw_output": "{\"score\": 93.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"per App – ohne monatliche Grundgebühr ... Buchung per App ... Jetzt per App losfahren\"}, {\"code\": \"thin_benefits\", \"evidence\": \"Buchung per App\"}], \"note\": \"On-brief, fact-safe, and friendly at B1 level, but 'per App' appears three times and the second benefit merely repeats the subheadline.\"}",
+          "response": {
+            "id": "gen-1788547930-CnP5xPK8Utm0kOoXyZHk",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 716,
+            "output_tokens": 318,
+            "billable_output_tokens": 318,
+            "reasoning_tokens": 0,
+            "total_tokens": 1034,
+            "latency_ms": 7793,
+            "attempts": 1
+          },
+          "delta": 11.0
+        }
+      }
+    },
+    {
+      "task_id": "public-en-landing-b1-01",
+      "score": 91.0,
+      "judge_stddev": 4.97,
+      "judge_range": 11.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 98.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The concise hero includes every required element and allowed fact in clear, friendly B1 British English.",
+          "prompt_sha256": "c915371602dc9a4cbb4148b80857ae77e6a76effc58998713d67161c786cbe7d",
+          "raw_output": "{\"score\":98.00,\"brief_ok\":true,\"realized_cefr\":\"B1\",\"issues\":[],\"note\":\"The concise hero includes every required element and allowed fact in clear, friendly B1 British English.\"}",
+          "response": {
+            "id": "resp_0de62a9f2ec52038016a9b136c5e4887d28f81167be8d2b85b",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 955,
+            "output_tokens": 1566,
+            "billable_output_tokens": 1566,
+            "reasoning_tokens": 1515,
+            "total_tokens": 2521,
+            "latency_ms": 30988,
+            "attempts": 1
+          },
+          "delta": 7.0
+        },
+        "gemini_high": {
+          "score": 87.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "redundant_copy",
+              "evidence": "Book in the app"
+            }
+          ],
+          "note": "The copy meets all constraints and brief requirements, but duplicates booking via the app in both the subheading and the bullet list.",
+          "prompt_sha256": "5af8bc2e435a7c040e498283a8b3a548d3e3beb9e9046fb901e50c98752df1e4",
+          "raw_output": "{\"score\": 87.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"redundant_copy\", \"evidence\": \"Book in the app\"}], \"note\": \"The copy meets all constraints and brief requirements, but duplicates booking via the app in both the subheading and the bullet list.\"}",
+          "response": {
+            "id": "resp_SBObasfdDrH-nsEPzY-muAc",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 721,
+            "output_tokens": 77,
+            "billable_output_tokens": 2166,
+            "reasoning_tokens": 2089,
+            "total_tokens": 2887,
+            "latency_ms": 8920,
+            "attempts": 2
+          },
+          "delta": -4.0
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "Book through the app ... Book in the app"
+            },
+            {
+              "code": "flat_headline",
+              "evidence": "A car club for Manchester"
+            },
+            {
+              "code": "thin_persuasion",
+              "evidence": "Need a car sometimes?"
+            }
+          ],
+          "note": "All required elements, allowed facts, length, and B1 tone are met with no added facts, but the subheading and second bullet repeat the app point and the headline is flat, leaving minor edit work.",
+          "prompt_sha256": "336a3649cde565226996a4e0f25749988a68dad532cb4488675ddd352075d6ec",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"Book through the app ... Book in the app\"}, {\"code\": \"flat_headline\", \"evidence\": \"A car club for Manchester\"}, {\"code\": \"thin_persuasion\", \"evidence\": \"Need a car sometimes?\"}], \"note\": \"All required elements, allowed facts, length, and B1 tone are met with no added facts, but the subheading and second bullet repeat the app point and the headline is flat, leaving minor edit work.\"}",
+          "response": {
+            "id": "gen-1788547938-jfShTRXHLI8FAlWO2L2g",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 672,
+            "output_tokens": 394,
+            "billable_output_tokens": 394,
+            "reasoning_tokens": 0,
+            "total_tokens": 1066,
+            "latency_ms": 8722,
+            "attempts": 1
+          },
+          "delta": -3.0
+        }
+      }
+    },
+    {
+      "task_id": "public-de-social-b2-01",
+      "score": 90.33,
+      "judge_stddev": 2.62,
+      "judge_range": 6.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 94.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "awkward_price_wording",
+              "evidence": "Dein Paar kostet zum Festpreis 24 €"
+            }
+          ],
+          "note": "All required facts and constraints are met, with only a slightly awkward price sentence needing a tiny edit.",
+          "prompt_sha256": "d64f69d11b3a083c63b36413222785fd09b8f9da87037b110c8eb3d9e3ee82af",
+          "raw_output": "{\"score\":94.0,\"brief_ok\":true,\"realized_cefr\":\"B2\",\"issues\":[{\"code\":\"awkward_price_wording\",\"evidence\":\"Dein Paar kostet zum Festpreis 24 €\"}],\"note\":\"All required facts and constraints are met, with only a slightly awkward price sentence needing a tiny edit.\"}",
+          "response": {
+            "id": "resp_0ddf69f16d25c095016a9b1389fc0c87d28138c43d60ca621c",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1000,
+            "output_tokens": 2003,
+            "billable_output_tokens": 2003,
+            "reasoning_tokens": 1928,
+            "total_tokens": 3003,
+            "latency_ms": 37540,
+            "attempts": 1
+          },
+          "delta": 3.67
+        },
+        "gemini_high": {
+          "score": 89.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "awkward_phrasing",
+              "evidence": "Dein Paar kostet zum Festpreis 24 €"
+            }
+          ],
+          "note": "The copy meets all constraints and guidelines, though the phrasing regarding the price per pair sounds slightly awkward.",
+          "prompt_sha256": "1a782ec488b1c736ff68c1535b66e8b276fd3cfe329059f8f9b1a6b4e8ea4bf6",
+          "raw_output": "{\"score\": 89.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"awkward_phrasing\", \"evidence\": \"Dein Paar kostet zum Festpreis 24 €\"}], \"note\": \"The copy meets all constraints and guidelines, though the phrasing regarding the price per pair sounds slightly awkward.\"}",
+          "response": {
+            "id": "resp_UBObap_SIbef3boPo9jd2AE",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 777,
+            "output_tokens": 82,
+            "billable_output_tokens": 1277,
+            "reasoning_tokens": 1195,
+            "total_tokens": 2054,
+            "latency_ms": 4921,
+            "attempts": 1
+          },
+          "delta": -1.33
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "markdown_formatting",
+              "evidence": "**Deine Sneaker verdienen einen frischen Start. 👟**"
+            },
+            {
+              "code": "generic_cta",
+              "evidence": "Jetzt buchen und deine Sneaker reinigen lassen!"
+            }
+          ],
+          "note": "All supplied facts are used correctly with no invented services, correct emoji and length limits, and a clear CTA, but the Markdown bolding is not Instagram-native and the hook and CTA lean generic.",
+          "prompt_sha256": "d21a0aed75772e326faa15b8263292b12f4ab07d8afa6924c805fe89d41f5a17",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"markdown_formatting\", \"evidence\": \"**Deine Sneaker verdienen einen frischen Start. 👟**\"}, {\"code\": \"generic_cta\", \"evidence\": \"Jetzt buchen und deine Sneaker reinigen lassen!\"}], \"note\": \"All supplied facts are used correctly with no invented services, correct emoji and length limits, and a clear CTA, but the Markdown bolding is not Instagram-native and the hook and CTA lean generic.\"}",
+          "response": {
+            "id": "gen-1788547947-fNbXQdr83mdZPQrMbVqH",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 735,
+            "output_tokens": 334,
+            "billable_output_tokens": 334,
+            "reasoning_tokens": 0,
+            "total_tokens": 1069,
+            "latency_ms": 7950,
+            "attempts": 1
+          },
+          "delta": -2.33
+        }
+      }
+    },
+    {
+      "task_id": "public-en-social-b2-01",
+      "score": 93.33,
+      "judge_stddev": 3.3,
+      "judge_range": 7.0,
+      "disagreement": false,
+      "brief_ok_votes": 3,
+      "judgments": {
+        "sol_max": {
+          "score": 98.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [],
+          "note": "The ad meets every stated constraint and is concise, clear, persuasive, and well suited to Instagram.",
+          "prompt_sha256": "e55571003496e1f342400c2b84ac39afa5968e34054a7be797c3d2df00aeaad6",
+          "raw_output": "{\"score\":98.0,\"brief_ok\":true,\"realized_cefr\":\"B2\",\"issues\":[],\"note\":\"The ad meets every stated constraint and is concise, clear, persuasive, and well suited to Instagram.\"}",
+          "response": {
+            "id": "resp_08695751dca01aa7016a9b13af8cec87d2ad6783e3adaee351",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 954,
+            "output_tokens": 1475,
+            "billable_output_tokens": 1475,
+            "reasoning_tokens": 1423,
+            "total_tokens": 2429,
+            "latency_ms": 28306,
+            "attempts": 1
+          },
+          "delta": 4.67
+        },
+        "gemini_high": {
+          "score": 91.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_phrasing",
+              "evidence": "Our London trainer-cleaning service collects and returns your trainers within London."
+            }
+          ],
+          "note": "The copy strictly observes every constraint and avoids hype, though repeating 'London' in the second sentence is slightly clumsy.",
+          "prompt_sha256": "71e5786c3d324cd3096f33b00d9e3340d40054db56edded66e8f03760adcba3f",
+          "raw_output": "{\"score\": 91.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetitive_phrasing\", \"evidence\": \"Our London trainer-cleaning service collects and returns your trainers within London.\"}], \"note\": \"The copy strictly observes every constraint and avoids hype, though repeating 'London' in the second sentence is slightly clumsy.\"}",
+          "response": {
+            "id": "resp_VRObaoCxHr_jnsEPks296AY",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 721,
+            "output_tokens": 87,
+            "billable_output_tokens": 1226,
+            "reasoning_tokens": 1139,
+            "total_tokens": 1947,
+            "latency_ms": 4641,
+            "attempts": 1
+          },
+          "delta": -2.33
+        },
+        "glm_high": {
+          "score": 91.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "generic_hook",
+              "evidence": "Fresh trainers, without the hassle."
+            },
+            {
+              "code": "repetition",
+              "evidence": "collects and returns your trainers within London"
+            }
+          ],
+          "note": "A compliant, clean ad that uses only allowed facts at a correct length and tone, held back slightly by a somewhat generic hook and a repeated 'within London' phrase.",
+          "prompt_sha256": "f1f72d082963df6a834427817c0ca3baaa2947f42558b3a7d43fcf3556977748",
+          "raw_output": "```json\n{\"score\": 91.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"generic_hook\", \"evidence\": \"Fresh trainers, without the hassle.\"}, {\"code\": \"repetition\", \"evidence\": \"collects and returns your trainers within London\"}], \"note\": \"A compliant, clean ad that uses only allowed facts at a correct length and tone, held back slightly by a somewhat generic hook and a repeated 'within London' phrase.\"}\n```",
+          "response": {
+            "id": "gen-1788547955-k5ojDBogLS7mKSDuRbyx",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 672,
+            "output_tokens": 267,
+            "billable_output_tokens": 267,
+            "reasoning_tokens": 0,
+            "total_tokens": 939,
+            "latency_ms": 6406,
+            "attempts": 1
+          },
+          "delta": -2.33
+        }
+      }
+    },
+    {
+      "task_id": "public-de-email-c1-01",
+      "score": 80.33,
+      "judge_stddev": 15.28,
+      "judge_range": 35.0,
+      "disagreement": true,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 59.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_process_claim",
+              "evidence": "Geben Sie einfach die E-Mail-Adresse eines Teammitglieds ein"
+            }
+          ],
+          "note": "The email otherwise meets the length, structure, audience, tone, and C1 requirements, but the invented input workflow and ease claim trigger the unsupported-claim cap.",
+          "prompt_sha256": "c161c27ed5662e8c5c51e45d7adb221f616d52ecf6ddb77b7a1ef7ffa8edb952",
+          "raw_output": "{\"score\":59.0,\"brief_ok\":false,\"realized_cefr\":\"C1\",\"issues\":[{\"code\":\"unsupported_process_claim\",\"evidence\":\"Geben Sie einfach die E-Mail-Adresse eines Teammitglieds ein\"}],\"note\":\"The email otherwise meets the length, structure, audience, tone, and C1 requirements, but the invented input workflow and ease claim trigger the unsupported-claim cap.\"}",
+          "response": {
+            "id": "resp_0216d2917a193631016a9b13cc285887d285d02ea4e2a3168d",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1168,
+            "output_tokens": 2159,
+            "billable_output_tokens": 2159,
+            "reasoning_tokens": 2070,
+            "total_tokens": 3327,
+            "latency_ms": 41027,
+            "attempts": 1
+          },
+          "delta": -21.33
+        },
+        "gemini_high": {
+          "score": 94.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "pleonasm",
+              "evidence": "angelegten Projekt"
+            }
+          ],
+          "note": "The copy precisely follows all brief constraints with an appropriately respectful, non-pushy tone, requiring only minor tightening of slightly redundant phrasing.",
+          "prompt_sha256": "4fcccb2236c6096ffc4ca71a2dce79ff1d2e727de6cc4a32f191d83022abaaf2",
+          "raw_output": "{\"score\": 94.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"pleonasm\", \"evidence\": \"angelegten Projekt\"}], \"note\": \"The copy precisely follows all brief constraints with an appropriately respectful, non-pushy tone, requiring only minor tightening of slightly redundant phrasing.\"}",
+          "response": {
+            "id": "resp_WhObasmJB-3s7M8P4L_HuQI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 956,
+            "output_tokens": 78,
+            "billable_output_tokens": 4138,
+            "reasoning_tokens": 4060,
+            "total_tokens": 5094,
+            "latency_ms": 12520,
+            "attempts": 1
+          },
+          "delta": 13.67
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetition",
+              "evidence": "Sie entscheiden selbst, wen Sie einladen und welche Rolle passt"
+            },
+            {
+              "code": "redundant_parenthetical",
+              "evidence": "in dem Umfang, der für Ihre Agentur sinnvoll ist"
+            },
+            {
+              "code": "softened_cta",
+              "evidence": "können Sie die Einladung selbstverständlich auch später senden"
+            }
+          ],
+          "note": "The email hits the required facts, length, structure, and non-pushy C1 tone with no invented claims, but mild repetition, one wordy clause, and a closing line that slightly dilutes the invitation call to action leave small edits to make.",
+          "prompt_sha256": "0846fa255ee697388c9e27fd4cc79d8a2ec501aeeee5f9f6a0d9068f75500c2e",
+          "raw_output": "{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetition\", \"evidence\": \"Sie entscheiden selbst, wen Sie einladen und welche Rolle passt\"}, {\"code\": \"redundant_parenthetical\", \"evidence\": \"in dem Umfang, der für Ihre Agentur sinnvoll ist\"}, {\"code\": \"softened_cta\", \"evidence\": \"können Sie die Einladung selbstverständlich auch später senden\"}], \"note\": \"The email hits the required facts, length, structure, and non-pushy C1 tone with no invented claims, but mild repetition, one wordy clause, and a closing line that slightly dilutes the invitation call to action leave small edits to make.\"}",
+          "response": {
+            "id": "gen-1788547961-rTlmZO92xjxDctXhNy7O",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 927,
+            "output_tokens": 1213,
+            "billable_output_tokens": 1213,
+            "reasoning_tokens": 0,
+            "total_tokens": 2140,
+            "latency_ms": 23246,
+            "attempts": 1
+          },
+          "delta": 7.67
+        }
+      }
+    },
+    {
+      "task_id": "public-en-email-c1-01",
+      "score": 79.5,
+      "judge_stddev": 14.57,
+      "judge_range": 32.5,
+      "disagreement": true,
+      "brief_ok_votes": 2,
+      "judgments": {
+        "sol_max": {
+          "score": 59.0,
+          "brief_ok": false,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "unsupported_project_timing",
+              "evidence": "You set up your first project 21 days ago"
+            }
+          ],
+          "note": "The email otherwise meets the format, length, tone and CTA requirements, but the invented project-setup timing triggers the factual-claim cap.",
+          "prompt_sha256": "dc897be2d2f3335d29d76d418d55b4a1371c64defb91fa730690a2450fdb93f9",
+          "raw_output": "{\"score\":59.0,\"brief_ok\":false,\"realized_cefr\":null,\"issues\":[{\"code\":\"unsupported_project_timing\",\"evidence\":\"You set up your first project 21 days ago\"}],\"note\":\"The email otherwise meets the format, length, tone and CTA requirements, but the invented project-setup timing triggers the factual-claim cap.\"}",
+          "response": {
+            "id": "resp_06f2a1a6b4813802016a9b13f4dde887d2899a1b8e03965440",
+            "model": "gpt-5.6-sol",
+            "status": "completed",
+            "input_tokens": 1111,
+            "output_tokens": 1532,
+            "billable_output_tokens": 1532,
+            "reasoning_tokens": 1451,
+            "total_tokens": 2643,
+            "latency_ms": 29152,
+            "attempts": 1
+          },
+          "delta": -20.5
+        },
+        "gemini_high": {
+          "score": 91.5,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "repetitive_phrasing",
+              "evidence": "The invitation is sent by email"
+            }
+          ],
+          "note": "The copy meets all constraints and hits the requested non-pushy British register, but repeating 'by email' across consecutive sentences requires a quick polish.",
+          "prompt_sha256": "330d97b13ca03fda400e27c4fee4c015903d4eb60eb9cd25fbc94d6bcdba0c97",
+          "raw_output": "{\"score\": 91.50, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"repetitive_phrasing\", \"evidence\": \"The invitation is sent by email\"}], \"note\": \"The copy meets all constraints and hits the requested non-pushy British register, but repeating 'by email' across consecutive sentences requires a quick polish.\"}",
+          "response": {
+            "id": "resp_ZhObat_EJ7fl7M8PkZnH6QI",
+            "model": "gemini-3.8-flash-high",
+            "status": "completed",
+            "input_tokens": 881,
+            "output_tokens": 87,
+            "billable_output_tokens": 2145,
+            "reasoning_tokens": 2058,
+            "total_tokens": 3026,
+            "latency_ms": 7861,
+            "attempts": 1
+          },
+          "delta": 12.0
+        },
+        "glm_high": {
+          "score": 88.0,
+          "brief_ok": true,
+          "realized_cefr": null,
+          "issues": [
+            {
+              "code": "redundant_email_mention",
+              "evidence": "The invitation is sent by email, so you can start with the person who needs access most."
+            },
+            {
+              "code": "non_sequitur",
+              "evidence": "so you can start with the person who needs access most"
+            },
+            {
+              "code": "mild_repetition",
+              "evidence": "You do not need to invite everyone at once. Begin with one person"
+            }
+          ],
+          "note": "On-brief length, facts, structure, and tone, but the email-detail line repeats the invitation point and its causal link to choosing a recipient is illogical, requiring small edits.",
+          "prompt_sha256": "c3c40ba668f416b0030e16760ce78d9632002753c094abf96e950d307803009f",
+          "raw_output": "```json\n{\"score\": 88.00, \"brief_ok\": true, \"realized_cefr\": null, \"issues\": [{\"code\": \"redundant_email_mention\", \"evidence\": \"The invitation is sent by email, so you can start with the person who needs access most.\"}, {\"code\": \"non_sequitur\", \"evidence\": \"so you can start with the person who needs access most\"}, {\"code\": \"mild_repetition\", \"evidence\": \"You do not need to invite everyone at once. Begin with one person\"}], \"note\": \"On-brief length, facts, structure, and tone, but the email-detail line repeats the invitation point and its causal link to choosing a recipient is illogical, requiring small edits.\"}\n```",
+          "response": {
+            "id": "gen-1788547985-d8hDLBFVntUNPx6lLMvs",
+            "model": "z-ai/glm-5.3-flash",
+            "status": "completed",
+            "input_tokens": 830,
+            "output_tokens": 893,
+            "billable_output_tokens": 893,
+            "reasoning_tokens": 0,
+            "total_tokens": 1723,
+            "latency_ms": 19509,
+            "attempts": 1
+          },
+          "delta": 8.5
+        }
+      }
+    }
+  ]
+}

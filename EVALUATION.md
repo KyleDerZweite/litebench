@@ -1,6 +1,7 @@
-# Proposed automatic evaluation
+# Automatic evaluation
 
-Status: draft. The `2026-09-04-rerun-01` outputs have not been scored.
+Status: provisional panel v0.1. The `2026-09-04-rerun-01` batch has been scored.
+No person has reviewed or calibrated these scores.
 
 ## Panel
 
@@ -14,20 +15,20 @@ anchors, plus one short audit focus.
 | GLM-5.3-Flash high | Stock phrasing, repetition, generic claims, and overlooked defects |
 
 The focus note tells a judge where to look twice. It does not change the score
-scale or give one judge a different rubric. A mixed panel should catch more
-failure types than three Sol calls, but GLM should earn an equal vote in a
-small calibration run first, especially for German.
+scale or give one judge a different rubric. The initial panel gives each judge
+an equal vote. Later human calibration may show that a judge needs a different
+role, especially for German.
 
 ## Strict score anchors
 
-Each judge returns one integer score from 0 to 100.
+Each judge returns one score from 0.00 to 100.00.
 
-- 95 to 100: publishable as written; 100 should be rare
-- 85 to 94: publishable after tiny edits
-- 70 to 84: usable, with clear edits needed
-- 50 to 69: substantial revision needed
-- 25 to 49: major failure
-- 0 to 24: unusable, off-task, or not the requested deliverable
+- 95.00 to 100.00: publishable as written; 100.00 should be rare
+- 85.00 to 94.99: publishable after tiny edits
+- 70.00 to 84.99: usable, with clear edits needed
+- 50.00 to 69.99: substantial revision needed
+- 25.00 to 49.99: major failure
+- 0.00 to 24.99: unusable, off-task, or not the requested deliverable
 
 CopyBench applies hard caps. An invented or changed factual claim caps the
 score at 59. A material miss on required length, structure, channel, or tone
@@ -55,7 +56,7 @@ seeing the other votes.
 
 For one output with judge scores `s1`, `s2`, and `s3`:
 
-- score: arithmetic mean, rounded to one decimal
+- score: arithmetic mean, rounded to two decimals
 - judge delta: each score minus that mean
 - deviation: population standard deviation across the three scores
 - disagreement flag: score range of 20 points or more
@@ -66,13 +67,14 @@ population standard deviation across those judge averages. This measures judge
 disagreement. The later distribution view should use per-task mean scores and
 must not reuse the judge error bar.
 
-## Cheap calibration before the full run
+## First baseline
 
-The full batch needs 960 judge calls. Start with 24 outputs chosen before any
-scores are seen. Cover all suites, both languages, and a spread of model and
-effort settings. Compare the three judges with a small set of personal ratings.
+The first panel run contains 1,140 successful judgments across 380 outputs.
+Using the saved models.dev rates, the recorded successful responses cost an
+estimated $21.41. Retries add a small amount that the saved response records do
+not capture.
 
-Freeze the prompts and thresholds only after that check. If GLM is erratic or
-weak in one language, keep its flags as a disagreement signal and calculate
-the score from Sol and Gemini. Do not tune thresholds after viewing the full
-leaderboard.
+Treat this as guidance. A later protocol should compare a fixed sample against
+personal ratings across every suite and both languages. If a judge proves
+erratic, a new version may change its role. Keep v0.1 unchanged so the original
+result remains reproducible.

@@ -9,32 +9,32 @@ Live results: <https://kylederzweite.github.io/litebench/>
 
 | Suite | Question | Status |
 |---|---|---|
-| **CopyBench Lite** | Does the writing follow the copy brief? | 120 provisional scored outputs, 152 new unscored outputs |
-| **NaturalBench Lite** | Does the writing sound idiomatic and free of stock AI habits? | 76 unscored outputs |
-| **CEFRBench Lite** | Does the writing match the requested CEFR level? | 152 unscored outputs |
+| **CopyBench Lite** | Does the writing follow the copy brief? | 19 configurations, 152 panel-scored outputs |
+| **NaturalBench Lite** | Does the writing sound idiomatic and free of stock AI habits? | 19 configurations, 76 panel-scored outputs |
+| **CEFRBench Lite** | Does the writing match the requested CEFR level? | 19 configurations, 152 panel-scored outputs |
 
 CopyBench scores do not count toward the other suites.
 
-The 120 CopyBench outputs were each judged in a separate, blinded
-`gpt-5.6-sol` max call. No person has reviewed those scores. The site labels
-them as provisional AI scores.
+The current leaderboard uses the `2026-09-04-rerun-01` batch. Each of its 380
+outputs received three independent, blinded AI judgments from GPT-5.6 Sol max,
+Gemini 3.8 Flash High, and GLM-5.3-Flash high. No person has reviewed the
+scores. Treat them as initial guidance, not ground truth.
 
-The `2026-09-04-rerun-01` batch adds 380 unscored outputs from GPT-5.6 Luna,
-Terra, and Sol at five effort levels, Gemini 3.8 Flash High, and GLM-5.3-Flash
-at low, high, and max. These files stay outside the leaderboard until the
-evaluator protocol is fixed. See
-[`EVALUATION.md`](EVALUATION.md) for the current proposal.
+The earlier 120 single-judge CopyBench results remain in the repository but do
+not feed the current leaderboard. See [`EVALUATION.md`](EVALUATION.md) for the
+panel method and limitations.
 
 ## Dashboard
 
 The site uses [SkateBench](https://github.com/T3-Content/skatebench/tree/main/visualizer)
 styling with the [DeepSWE](https://deepswe.datacurve.ai/) layout. One chart
 plots score against average cost, output tokens, or latency. Lines connect the
-reasoning levels for each model. The table below shows either the best level per
-model or every level.
+reasoning levels for each model. Vertical bars show one population standard
+deviation across the three judge averages. Hovering a point shows all three.
+The table below shows either the best level per model or every level.
 
-All scores are out of 100. When scores tie, `Best` picks the lower reasoning
-level.
+All scores run from 0.00 to 100.00. When scores tie, `Best` picks the lower
+reasoning level.
 
 There is no Pass@1 yet. CopyBench has a graded rubric, not a binary pass rule.
 Choosing a threshold after seeing the results would bias it.
@@ -44,24 +44,25 @@ token counts with the model rates saved in [`pricing.json`](pricing.json) from
 [models.dev](https://models.dev/api.json). The estimate excludes cache
 discounts, proxy fees, and judge calls.
 
-## NaturalBench scoring
+## Panel scoring
 
-The NaturalBench evaluator reports a score plus machine-readable `slop_flags`.
-Each flag has a stable code, a count, and short quotes from the output. The
-codes cover stock phrasing, inflated wording, vague claims, rigid structure,
-punctuation habits, formatting habits, filler, and chatbot residue.
+The shared panel protocol lives in
+[`benches/judge-panel-v0.1.json`](benches/judge-panel-v0.1.json). Each suite has
+its own rubric. Each judge adds a small audit focus without changing the score
+scale. Every evaluation file keeps the three scores, their differences from
+the mean, cited issues, response metadata, and raw judge JSON.
 
-This schema is ready for automatic judging one output at a time. It has not
-been calibrated against human ratings, so future results must keep the
-evaluator model and prompt version.
+This first panel is not calibrated against human ratings. Future protocols must
+use a new version and keep these results intact.
 
 ## Files
 
 ```text
 benches/
-  copybench/       prompts, evaluator, scored results, raw generations
-  naturalbench/    prompts, slop-aware evaluator, raw generations
-  cefrbench/       prompts, evaluator, raw generations
+  copybench/       prompts, raw generations, panel evaluations, legacy results
+  naturalbench/    prompts, raw generations, panel evaluations
+  cefrbench/       prompts, raw generations, panel evaluations
+  judge-panel-v0.1.json
 visualizer/        static Next.js site
 bench.py           result checks and aggregation
 pricing.json       models.dev rates used for cost estimates
@@ -85,10 +86,10 @@ For each task:
 4. Record the generation metadata.
 5. Add the evaluator metadata, or leave the scores `null`.
 
-Check the files and rebuild the data:
+Check the files and rebuild the panel data:
 
 ```bash
-python3 bench.py check
+python3 bench.py panel-check
 python3 bench.py build
 ```
 
@@ -100,15 +101,16 @@ bun install
 bun run dev
 ```
 
-## Add a CopyBench result
+## Add a result
 
-Fork the repository and add one complete JSON run under
-`benches/copybench/results/`. Run the two check commands above, then include the
-raw run and rebuilt `visualizer/data/leaderboard.json` in the pull request.
+Fork the repository and add the raw generation under the matching suite. Store
+its three-judge evaluation under that suite's `evaluations/` directory. Run the
+two check commands above, then include the rebuilt
+`visualizer/data/leaderboard.json` in the pull request.
 
-Do not edit model output. Record the model, settings, evaluator, and evaluation
-type. `bench.py` supports CopyBench Lite today. The other suites will get result
-support with their first runs.
+Keep model output unchanged. Record the model, effort, evaluator versions,
+prompt hashes, token counts, and latency. Use a new evaluation ID if the panel
+or rubric changes.
 
 ## Hidden prompts
 
