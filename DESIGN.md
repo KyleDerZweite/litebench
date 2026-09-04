@@ -76,17 +76,17 @@ do not average people with different needs without showing who they were.
 
 ## Result presentation
 
-The static UI takes its information hierarchy from
-[SkateBench](https://skatebench.t3.gg/),
-[SnitchBench](https://snitchbench.t3.gg/), and
-[DeepSWE](https://deepswe.datacurve.ai/): benchmark scope first, metric controls,
-a visual ranking, then the dense result matrix. It does not copy their branding.
+The static UI follows the single-panel information architecture of
+[SkateBench](https://skatebench.t3.gg/) and
+[SnitchBench](https://snitchbench.t3.gg/): compact brand/status header, one tab
+bar, one model filter, and one chart area whose content changes in place. It
+does not reuse their logos or benchmark content.
 
-Each score dimension is a separate selectable CSS bar chart. The table beneath
-keeps every dimension visible and follows the selected metric's sort order.
-This gets the useful comparison pattern without a chart library, framework, or
-build step. A scatter plot is deferred because V0 does not yet collect a second
-continuous measure such as cost or latency.
+Each score dimension gets a selectable CSS bar chart; `Matrix` swaps the same
+panel to the full score table. This preserves the interaction and visual density
+without adding their Next.js, Tailwind, Radix UI, and Recharts stack. A scatter
+plot remains inappropriate until V0 collects another continuous measure such as
+cost or latency.
 
 ## Public and hidden tracks
 

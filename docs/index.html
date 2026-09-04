@@ -4,231 +4,268 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A small bilingual AI copywriting benchmark.">
-  <title>CopyBench Lite</title>
+  <title>CopyBench</title>
   <style>
     :root {
       color-scheme: dark;
-      --bg: #070908;
-      --panel: #0c100e;
-      --panel-2: #111613;
-      --ink: #f4f6f2;
-      --muted: #7f8a83;
-      --line: #202823;
-      --line-strong: #354139;
-      --accent: #b7ff3c;
-      --metric: #b7ff3c;
+      --bg: #050505;
+      --panel: #090909;
+      --panel-2: #0d0d0d;
+      --line: #202020;
+      --line-strong: #303030;
+      --ink: #fafafa;
+      --muted: #777;
+      --accent: #a3ff12;
       --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { min-width: 320px; background: var(--bg); }
     body {
+      min-height: 100vh;
       margin: 0;
-      min-width: 320px;
+      color: var(--ink);
       background:
         linear-gradient(rgb(255 255 255 / .025) 1px, transparent 1px),
         linear-gradient(90deg, rgb(255 255 255 / .025) 1px, transparent 1px),
-        radial-gradient(circle at 18% 0%, rgb(183 255 60 / .07), transparent 29rem),
+        radial-gradient(circle at 11% 0%, rgb(163 255 18 / .045), transparent 29rem),
         var(--bg);
-      background-size: 42px 42px, 42px 42px, auto, auto;
-      color: var(--ink);
-      font: 15px/1.55 var(--sans);
+      background-size: 48px 48px, 48px 48px, auto, auto;
+      font: 15px/1.45 var(--sans);
     }
     button, input { font: inherit; }
     button { color: inherit; }
     a { color: inherit; text-decoration: none; }
     a:hover { color: var(--accent); }
-    .shell { width: min(1220px, calc(100% - 2rem)); margin: auto; }
-    .mono {
-      color: var(--muted);
-      font: 700 .68rem/1.4 var(--mono);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .topbar {
+    [hidden] { display: none !important; }
+    .shell { width: min(1380px, calc(100% - 2rem)); margin: auto; padding-bottom: 2rem; }
+    .header {
       display: flex;
+      min-height: 138px;
       align-items: center;
-      justify-content: space-between;
-      min-height: 76px;
-      border-bottom: 1px solid var(--line);
-    }
-    .brand { display: inline-flex; align-items: center; gap: .75rem; font-weight: 900; letter-spacing: -.04em; }
-    .brand-mark {
-      display: grid;
-      width: 36px;
-      height: 36px;
-      place-items: center;
-      border: 1px solid var(--line-strong);
-      color: var(--accent);
-      font: 900 1.65rem/1 Georgia, serif;
-      transform: rotate(-3deg);
-    }
-    .brand span:last-child { color: var(--accent); }
-    nav { display: flex; gap: 1.5rem; color: var(--muted); font: 700 .72rem var(--mono); text-transform: uppercase; }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 4rem;
-      align-items: end;
-      padding: clamp(4rem, 9vw, 8rem) 0 4rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .hero h1 {
-      max-width: 850px;
-      margin: .5rem 0 1.25rem;
-      font-size: clamp(3.7rem, 10vw, 8.5rem);
-      font-weight: 950;
-      line-height: .82;
-      letter-spacing: -.085em;
-    }
-    .hero h1 span { color: var(--accent); }
-    .hero-copy { max-width: 690px; margin: 0; color: #a7b0aa; font-size: clamp(1rem, 2vw, 1.25rem); }
-    .hero-copy strong { color: var(--ink); }
-    .stats { display: grid; grid-template-columns: auto auto; gap: .45rem 2.5rem; margin: 0 0 .3rem; }
-    .stats div { display: contents; }
-    .stats dt { color: var(--muted); font: .7rem var(--mono); text-transform: uppercase; }
-    .stats dd { margin: 0; text-align: right; font: 700 .8rem var(--mono); }
-    section { padding-top: 4rem; }
-    .section-head {
-      display: flex;
-      align-items: end;
       justify-content: space-between;
       gap: 2rem;
-      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--line);
     }
-    h2 { margin: 0; font-size: clamp(1.55rem, 4vw, 2.25rem); letter-spacing: -.045em; }
-    .section-head p { max-width: 650px; margin: .35rem 0 0; color: var(--muted); }
-    .status { display: flex; align-items: center; gap: .5rem; white-space: nowrap; }
-    .status::before {
+    .identity { display: flex; align-items: center; gap: 1rem; }
+    .mark {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border: 2px solid var(--ink);
+      color: var(--accent);
+      font: 900 2rem/1 Georgia, serif;
+      transform: rotate(-4deg);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.45rem);
+      font-weight: 950;
+      line-height: .9;
+      letter-spacing: -.07em;
+    }
+    h1 span { color: var(--accent); }
+    .dateline, .system, .micro {
+      color: var(--muted);
+      font: 700 .65rem/1.5 var(--mono);
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .dateline { margin: .55rem 0 0; }
+    .dateline::before {
       content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      margin-right: .55rem;
       background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
+      box-shadow: 0 0 9px rgb(163 255 18 / .6);
     }
-    .controls {
+    .system { display: grid; grid-template-columns: auto auto; gap: .25rem 1rem; text-align: right; }
+    .system b { color: #aaa; font-weight: 700; }
+    .toolbar {
+      position: relative;
       display: flex;
+      min-height: 86px;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: .8rem;
+      gap: 1.5rem;
     }
-    .review-notice {
-      margin-bottom: .8rem;
-      padding: .85rem 1rem;
-      border: 1px solid #594a24;
-      background: rgb(255 189 68 / .07);
-      color: #d8cda9;
-      font-size: .84rem;
+    .tabs { display: flex; flex-wrap: wrap; gap: 1.6rem; }
+    .tab {
+      position: relative;
+      padding: .55rem 0;
+      border: 0;
+      background: transparent;
+      color: #909090;
+      cursor: pointer;
+      font: 850 .76rem var(--sans);
+      letter-spacing: .025em;
+      text-transform: uppercase;
     }
-    .review-notice strong { color: #ffbd44; }
-    .metric-switch { display: flex; flex-wrap: wrap; gap: .45rem; }
-    .metric-switch button, .search {
-      min-height: 38px;
+    .tab:hover { color: #d8d8d8; }
+    .tab[aria-selected="true"] { color: var(--accent); }
+    .tab[aria-selected="true"]::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: .2rem;
+      left: 0;
+      height: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 7px rgb(163 255 18 / .45);
+    }
+    .filter-wrap { position: relative; }
+    .filter-toggle {
+      min-height: 42px;
+      padding: 0 1rem;
       border: 1px solid var(--line);
-      border-radius: 0;
-      background: rgb(12 16 14 / .86);
-      font: 700 .68rem var(--mono);
+      background: #0b0b0b;
+      cursor: pointer;
+      font: 700 .64rem var(--mono);
       letter-spacing: .06em;
       text-transform: uppercase;
     }
-    .metric-switch button { padding: .65rem .9rem; cursor: pointer; }
-    .metric-switch button:hover { border-color: var(--line-strong); }
-    .metric-switch button[aria-pressed="true"] {
-      border-color: var(--metric);
-      color: var(--metric);
-      box-shadow: inset 0 -2px 0 var(--metric);
+    .filter-toggle:hover, .filter-toggle[aria-expanded="true"] { border-color: #444; background: #101010; }
+    .filter-menu {
+      position: absolute;
+      z-index: 10;
+      top: calc(100% + .5rem);
+      right: 0;
+      width: min(310px, calc(100vw - 2rem));
+      border: 1px solid var(--line-strong);
+      background: #0b0b0b;
+      box-shadow: 0 18px 55px rgb(0 0 0 / .65);
     }
-    .search { width: min(240px, 100%); padding: .65rem .8rem; color: var(--ink); outline: none; text-transform: none; }
-    .search:focus { border-color: var(--metric); }
-    .search::placeholder { color: #59625d; }
-    .panel {
-      border: 1px solid var(--line);
-      background: linear-gradient(135deg, rgb(255 255 255 / .018), transparent 45%), rgb(9 12 10 / .88);
-    }
-    .panel-head {
+    .filter-title {
       display: flex;
+      justify-content: space-between;
+      padding: .85rem 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .filter-options { max-height: 270px; overflow: auto; padding: .45rem; }
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      padding: .55rem;
+      color: #bbb;
+      cursor: pointer;
+      font-size: .8rem;
+    }
+    .filter-option:hover { background: #131313; }
+    .filter-option input { accent-color: var(--accent); }
+    .filter-actions { display: flex; border-top: 1px solid var(--line); }
+    .filter-actions button {
+      flex: 1;
+      padding: .65rem;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: 700 .6rem var(--mono);
+      text-transform: uppercase;
+    }
+    .filter-actions button:last-child { border-right: 0; }
+    .filter-actions button:hover { color: var(--ink); background: #121212; }
+    .panel {
+      min-height: 555px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgb(255 255 255 / .012), transparent 45%), rgb(7 7 7 / .94);
+    }
+    .panel-head { padding: 2.1rem 2.25rem 1.5rem; }
+    h2 {
+      margin: 0;
+      font-size: clamp(1.35rem, 3vw, 1.8rem);
+      font-weight: 900;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+    }
+    .panel-head p { margin: .35rem 0 0; }
+    .notice {
+      margin: 0 2.25rem;
+      padding: .7rem .85rem;
+      border-left: 2px solid #f59e0b;
+      background: rgb(245 158 11 / .055);
+      color: #a68e68;
+      font: 650 .65rem var(--mono);
+      letter-spacing: .035em;
+      text-transform: uppercase;
+    }
+    .notice b { color: #f5b841; }
+    .ranking { margin: 0; padding: 1.25rem 2.25rem 2rem; list-style: none; }
+    .rank-row {
+      --row-color: #555;
+      display: grid;
+      grid-template-columns: 2.5rem minmax(190px, 300px) minmax(180px, 1fr) 6rem;
+      min-height: 58px;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 1px solid #121212;
+    }
+    .rank-row:last-child { border-bottom: 0; }
+    .rank { color: var(--row-color); font: 700 .66rem var(--mono); }
+    .model {
+      min-width: 0;
+      overflow: hidden;
+      font-weight: 720;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .model small {
+      display: block;
+      overflow: hidden;
+      margin-top: .12rem;
+      color: #5f5f5f;
+      font: .61rem var(--mono);
+      text-overflow: ellipsis;
+    }
+    .track { height: 5px; overflow: hidden; background: #171717; }
+    .fill {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: var(--row-color);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--row-color) 32%, transparent);
+      transition: width .25s ease;
+    }
+    .rank-row.pending .track {
+      background: repeating-linear-gradient(90deg, #191919 0 8px, #0f0f0f 8px 16px);
+    }
+    .rank-value { color: #d8d8d8; text-align: right; font: 800 .72rem var(--mono); }
+    .rank-row.pending .rank-value { color: #686868; font-size: .61rem; }
+    .empty { display: grid; min-height: 370px; place-items: center; padding: 2rem; color: #5d5d5d; text-align: center; }
+    .matrix-wrap { overflow-x: auto; padding: 1.25rem 2.25rem 2.25rem; }
+    table { width: 100%; min-width: 850px; border-collapse: collapse; }
+    th, td { padding: .9rem .75rem; border-bottom: 1px solid #171717; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th {
+      color: #606060;
+      font: 700 .61rem var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    tbody tr:hover { background: rgb(255 255 255 / .018); }
+    .matrix-model strong { display: block; }
+    .matrix-model small { display: block; color: #5f5f5f; font: .6rem var(--mono); }
+    .matrix-score { color: #d0d0d0; font: 750 .69rem var(--mono); }
+    .matrix-score.pending { color: #555; }
+    .raw-link { color: #888; font: 700 .6rem var(--mono); text-transform: uppercase; }
+    .raw-link:hover { color: var(--accent); }
+    footer {
+      display: flex;
+      min-height: 66px;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
-      padding: 1.3rem 1.5rem;
-      border-bottom: 1px solid var(--line);
-    }
-    .panel-head strong { font-size: 1.05rem; letter-spacing: -.02em; text-transform: uppercase; }
-    .ranking { display: grid; gap: 0; margin: 0; padding: 1rem 1.5rem 1.5rem; list-style: none; }
-    .rank-row {
-      display: grid;
-      grid-template-columns: 2.5rem minmax(170px, 270px) minmax(180px, 1fr) 5rem;
-      gap: 1rem;
-      align-items: center;
-      min-height: 58px;
-      border-bottom: 1px solid #151b17;
-    }
-    .rank-row:last-child { border-bottom: 0; }
-    .rank { color: #4f5a53; font: .7rem var(--mono); }
-    .rank-row:nth-child(-n+3) .rank { color: var(--metric); }
-    .model { min-width: 0; font-weight: 750; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .model small { display: block; color: var(--muted); font: .65rem var(--mono); overflow: hidden; text-overflow: ellipsis; }
-    .track {
-      position: relative;
-      height: 5px;
-      overflow: hidden;
-      background: #1a211d;
-    }
-    .fill {
-      display: block;
-      height: 100%;
-      background: var(--metric);
-      box-shadow: 0 0 13px color-mix(in srgb, var(--metric) 35%, transparent);
-      transition: width .28s ease;
-    }
-    .rank-row:nth-child(n+4) .fill { opacity: .55; }
-    .rank-value { text-align: right; font: 800 .85rem var(--mono); }
-    .empty { padding: 3.5rem 1.5rem; color: var(--muted); text-align: center; }
-    .matrix { margin-top: 3.5rem; }
-    .table-wrap { overflow-x: auto; border: 1px solid var(--line); background: rgb(9 12 10 / .88); }
-    table { width: 100%; min-width: 900px; border-collapse: collapse; }
-    th, td { padding: .85rem 1rem; border-bottom: 1px solid var(--line); text-align: right; }
-    th:first-child, td:first-child { text-align: left; }
-    th {
-      color: var(--muted);
-      font: 700 .65rem var(--mono);
+      color: #505050;
+      font: 650 .59rem var(--mono);
       letter-spacing: .07em;
       text-transform: uppercase;
     }
-    th.active { color: var(--metric); }
-    tbody tr:last-child td { border-bottom: 0; }
-    tbody tr:hover { background: rgb(255 255 255 / .018); }
-    .model-cell strong { display: block; }
-    .model-cell small { color: var(--muted); font: .65rem var(--mono); }
-    .score { min-width: 90px; }
-    .score-output { display: flex; justify-content: flex-end; margin-bottom: .35rem; font: 750 .74rem var(--mono); }
-    .mini-track { height: 3px; background: #1b221e; }
-    .mini-track span { display: block; height: 100%; background: #66716a; }
-    td.active .mini-track span { background: var(--metric); }
-    td.active .score-output { color: var(--metric); }
-    .method-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--line);
-      background: rgb(9 12 10 / .88);
-    }
-    .method-grid article { min-height: 150px; padding: 1.25rem; border-right: 1px solid var(--line); }
-    .method-grid article:last-child { border-right: 0; }
-    .method-grid b { display: block; margin: .55rem 0 .35rem; }
-    .method-grid p { margin: 0; color: var(--muted); font-size: .85rem; }
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 4rem;
-      padding: 1.5rem 0 2.5rem;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font: .65rem var(--mono);
-      text-transform: uppercase;
-    }
+    footer a { color: #777; }
     .sr-only {
       position: absolute;
       width: 1px;
@@ -240,327 +277,349 @@
       white-space: nowrap;
       border: 0;
     }
-    [hidden] { display: none !important; }
-    @media (max-width: 800px) {
-      .hero { grid-template-columns: 1fr; gap: 2rem; }
-      .stats { justify-self: start; }
-      .section-head, .controls { align-items: stretch; flex-direction: column; }
-      .search { width: 100%; }
-      .rank-row { grid-template-columns: 2rem 1fr auto; gap: .7rem; padding: .55rem 0; }
+    @media (max-width: 860px) {
+      .header { align-items: flex-start; flex-direction: column; justify-content: center; }
+      .system { text-align: left; }
+      .toolbar { align-items: flex-start; flex-direction: column; padding: 1.25rem 0; }
+      .tabs { gap: .7rem 1.25rem; }
+      .filter-toggle { width: 100%; }
+      .filter-wrap { width: 100%; }
+      .filter-menu { right: auto; left: 0; }
+      .rank-row { grid-template-columns: 2rem 1fr auto; gap: .65rem; padding: .5rem 0; }
       .rank-row .track { grid-column: 2 / 4; }
-      .method-grid { grid-template-columns: 1fr 1fr; }
-      .method-grid article:nth-child(2) { border-right: 0; }
-      .method-grid article:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
     }
     @media (max-width: 520px) {
-      nav { display: none; }
-      .hero { padding-top: 3.5rem; }
-      .hero h1 { font-size: 3.7rem; }
-      .metric-switch { display: grid; grid-template-columns: 1fr 1fr; }
-      .metric-switch button:last-child { grid-column: 1 / -1; }
-      .panel-head { align-items: flex-start; flex-direction: column; }
-      .ranking { padding-inline: 1rem; }
-      .method-grid { grid-template-columns: 1fr; }
-      .method-grid article { border-right: 0; border-bottom: 1px solid var(--line); }
-      .method-grid article:last-child { border-bottom: 0; }
-      footer { flex-direction: column; }
+      .shell { width: min(100% - 1rem, 1380px); }
+      .mark { width: 40px; height: 40px; }
+      .system { grid-template-columns: 1fr auto; width: 100%; }
+      .panel-head { padding: 1.5rem 1.2rem 1rem; }
+      .notice { margin: 0 1.2rem; }
+      .ranking, .matrix-wrap { padding-right: 1.2rem; padding-left: 1.2rem; }
+      footer { align-items: flex-start; flex-direction: column; justify-content: center; }
     }
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
       .fill { transition: none; }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="CopyBench home">
-        <span class="brand-mark" aria-hidden="true">“</span>
-        <span>COPY<span>BENCH</span></span>
-      </a>
-      <nav aria-label="Page sections">
-        <a href="#leaderboard">Results</a>
-        <a href="#scorecard">Scorecard</a>
-        <a href="#method">Method</a>
-        <a href="https://github.com/KyleDerZweite/copybench-lite" target="_blank" rel="noreferrer">GitHub</a>
-      </nav>
+  <main class="shell">
+    <header class="header">
+      <div class="identity">
+        <div class="mark" aria-hidden="true">“</div>
+        <div>
+          <h1>COPY<span>BENCH</span></h1>
+          <p class="dateline">AI copywriting / benchmark v0.1</p>
+        </div>
+      </div>
+      <div class="system" aria-label="Benchmark status">
+        <span>system</span><b>public</b>
+        <span>models</span><b id="model-count">—</b>
+        <span>total runs</span><b id="run-count">—</b>
+      </div>
     </header>
 
-    <main>
-      <section class="hero" aria-labelledby="page-title">
-        <div>
-          <div class="mono">Data / Public V0.1</div>
-          <h1 id="page-title">COPY<span>BENCH</span></h1>
-          <p class="hero-copy">A small, inspectable smoke test for finding an AI model whose German and English copy you would <strong>actually use</strong>.</p>
-        </div>
-        <dl class="stats" aria-label="Benchmark scope">
-          <div><dt>tasks</dt><dd>8</dd></div>
-          <div><dt>languages</dt><dd>2</dd></div>
-          <div><dt>CEFR levels</dt><dd>4</dd></div>
-          <div><dt>public runs</dt><dd id="run-count">—</dd></div>
-        </dl>
-      </section>
+    <div class="toolbar">
+      <div class="tabs" role="tablist" aria-label="Result views">
+        <button class="tab" type="button" role="tab" data-view="copy_quality" aria-selected="true">Copy quality</button>
+        <button class="tab" type="button" role="tab" data-view="naturalness" aria-selected="false">Naturalness</button>
+        <button class="tab" type="button" role="tab" data-view="cefr_fit" aria-selected="false">CEFR fit</button>
+        <button class="tab" type="button" role="tab" data-view="facts_ok_pct" aria-selected="false">Facts OK</button>
+        <button class="tab" type="button" role="tab" data-view="would_use_pct" aria-selected="false">Would use</button>
+        <button class="tab" type="button" role="tab" data-view="matrix" aria-selected="false">Matrix</button>
+      </div>
 
-      <section id="leaderboard" aria-labelledby="results-title">
-        <div class="section-head">
-          <div>
-            <h2 id="results-title">Results by metric</h2>
-            <p id="metric-description">Useful, persuasive, clear, and faithful to the brief.</p>
+      <div class="filter-wrap" id="filter-wrap">
+        <button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-menu">Filter models [—/—]</button>
+        <div class="filter-menu" id="filter-menu" hidden>
+          <div class="filter-title">
+            <span class="micro">Models</span>
+            <span class="micro" id="filter-count"></span>
           </div>
-          <div class="status mono" id="dataset-meta">Loading public data</div>
-        </div>
-
-        <div class="controls">
-          <div class="metric-switch" aria-label="Choose ranking metric">
-            <button type="button" data-metric="copy_quality" aria-pressed="true">Copy quality</button>
-            <button type="button" data-metric="naturalness" aria-pressed="false">Naturalness</button>
-            <button type="button" data-metric="cefr_fit" aria-pressed="false">CEFR fit</button>
-            <button type="button" data-metric="facts_ok_pct" aria-pressed="false">Facts OK</button>
-            <button type="button" data-metric="would_use_pct" aria-pressed="false">Would use</button>
-          </div>
-          <label>
-            <span class="sr-only">Filter model runs</span>
-            <input class="search" id="search" type="search" placeholder="Filter models…" autocomplete="off">
-          </label>
-        </div>
-
-        <div class="review-notice" id="review-notice" role="status" hidden>
-          <strong>Human review pending.</strong>
-          <span id="review-notice-text"></span>
-        </div>
-
-        <div class="panel">
-          <div class="panel-head">
-            <strong id="metric-title">Copy quality distribution</strong>
-            <span class="mono" id="metric-scale">Higher is better · max 5</span>
-          </div>
-          <ol class="ranking" id="ranking"></ol>
-          <div class="empty" id="ranking-empty" hidden>No completed public runs yet. The first honest result starts the chart.</div>
-        </div>
-      </section>
-
-      <section class="matrix" id="scorecard" aria-labelledby="scorecard-title">
-        <div class="section-head">
-          <div>
-            <h2 id="scorecard-title">Scorecard</h2>
-            <p>No magic total: each dimension stays visible so one strength cannot hide a critical weakness.</p>
+          <div class="filter-options" id="filter-options"></div>
+          <div class="filter-actions">
+            <button type="button" id="select-all">Select all</button>
+            <button type="button" id="select-none">Clear</button>
           </div>
         </div>
-        <div class="table-wrap">
+      </div>
+    </div>
+
+    <section class="panel" role="tabpanel" aria-live="polite">
+      <header class="panel-head">
+        <h2 id="view-title">Copy quality distribution</h2>
+        <p class="micro" id="view-subtitle">Human rating across 8 public briefs · higher is better</p>
+      </header>
+      <div class="notice" id="notice" hidden>
+        <b>Human review pending.</b>
+        <span id="notice-text"></span>
+      </div>
+      <div id="chart-view">
+        <ol class="ranking" id="ranking"></ol>
+        <div class="empty" id="chart-empty" hidden>No model runs match this filter.</div>
+      </div>
+      <div id="matrix-view" hidden>
+        <div class="matrix-wrap">
           <table>
             <thead>
               <tr>
                 <th>Model / run</th>
-                <th data-column="copy_quality">Copy</th>
-                <th data-column="naturalness">Natural</th>
-                <th data-column="cefr_fit">CEFR</th>
-                <th data-column="facts_ok_pct">Facts OK</th>
-                <th data-column="would_use_pct">Would use</th>
+                <th>Copy</th>
+                <th>Natural</th>
+                <th>CEFR</th>
+                <th>Facts OK</th>
+                <th>Would use</th>
                 <th>Coverage</th>
-                <th>Date</th>
+                <th>Raw</th>
               </tr>
             </thead>
-            <tbody id="runs"></tbody>
+            <tbody id="matrix-body"></tbody>
           </table>
-          <div class="empty" id="table-empty" hidden>No result rows match this view.</div>
+          <div class="empty" id="matrix-empty" hidden>No model runs match this filter.</div>
         </div>
-      </section>
-
-      <section id="method" aria-labelledby="method-title">
-        <div class="section-head">
-          <div>
-            <h2 id="method-title">Read the numbers correctly</h2>
-            <p>Transparent raw runs beat decorative precision.</p>
-          </div>
-        </div>
-        <div class="method-grid">
-          <article><span class="mono">01 / Scope</span><b>Small by design</b><p>Eight disclosed tasks give a directional comparison, not statistical certainty.</p></article>
-          <article><span class="mono">02 / Rating</span><b>Human judgement</b><p>Scores reflect a named evaluator's needs and are self-reported unless verified.</p></article>
-          <article><span class="mono">03 / Evidence</span><b>Raw before rank</b><p>Inspect outputs and metadata before treating small differences as meaningful.</p></article>
-          <article><span class="mono">04 / Holdout</span><b>Hidden means canary</b><p>Four private tasks check obvious overfitting; they are too few to crown a winner.</p></article>
-        </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
     <footer>
-      <span>Static HTML · no analytics · no dependencies</span>
-      <span>DE + EN · A2–C1 · Writing only</span>
+      <span>Raw output ≠ human evaluation · unrated runs never rank</span>
+      <span><a href="https://github.com/KyleDerZweite/copybench-lite" target="_blank" rel="noreferrer">GitHub / source ↗</a></span>
     </footer>
-  </div>
+  </main>
 
   <script>
-    const metrics = {
+    const repository = "https://github.com/KyleDerZweite/copybench-lite";
+    const views = {
       copy_quality: {
-        label: "Copy quality",
-        description: "Useful, persuasive, clear, and faithful to the brief.",
+        title: "Copy quality distribution",
+        subtitle: "Human rating across 8 public briefs · higher is better",
         max: 5,
-        color: "#b7ff3c"
+        suffix: " / 5"
       },
       naturalness: {
-        label: "Naturalness",
-        description: "Specific, idiomatic, and non-formulaic to a human reader.",
+        title: "Naturalness distribution",
+        subtitle: "Perceived specificity, idiom and non-formulaic voice · higher is better",
         max: 5,
-        color: "#52d9ff"
+        suffix: " / 5"
       },
       cefr_fit: {
-        label: "CEFR fit",
-        description: "Matches the requested language level instead of merely sounding advanced.",
+        title: "CEFR fit distribution",
+        subtitle: "Match to the requested A2–C1 language level · higher is better",
         max: 5,
-        color: "#c694ff"
+        suffix: " / 5"
       },
       facts_ok_pct: {
-        label: "Facts OK",
-        description: "Share of rated outputs without an unsupported factual claim.",
+        title: "Factual discipline",
+        subtitle: "Outputs without unsupported claims · higher is better",
         max: 100,
-        color: "#ffbd44"
+        suffix: "%"
       },
       would_use_pct: {
-        label: "Would use",
-        description: "Share of outputs the evaluator would use after at most ten minutes of editing.",
+        title: "Would-use rate",
+        subtitle: "Usable after at most ten minutes of editing · higher is better",
         max: 100,
-        color: "#ff6f91"
+        suffix: "%"
+      },
+      matrix: {
+        title: "Result matrix",
+        subtitle: "All evaluation dimensions · raw runs remain visible but unranked"
       }
     };
-
-    const repository = "https://github.com/KyleDerZweite/copybench-lite";
-    const state = { data: null, metric: "copy_quality", query: "" };
+    const state = { data: null, view: "copy_quality", selected: new Set() };
+    const tabs = [...document.querySelectorAll(".tab")];
     const ranking = document.querySelector("#ranking");
-    const rankingEmpty = document.querySelector("#ranking-empty");
-    const tableBody = document.querySelector("#runs");
-    const tableEmpty = document.querySelector("#table-empty");
-    const buttons = [...document.querySelectorAll("[data-metric]")];
+    const matrixBody = document.querySelector("#matrix-body");
+    const filterToggle = document.querySelector("#filter-toggle");
+    const filterMenu = document.querySelector("#filter-menu");
+    const filterOptions = document.querySelector("#filter-options");
+    const podium = ["#22c55e", "#38bdf8", "#f97316"];
 
-    function element(tag, className, text) {
+    function node(tag, className, text) {
       const item = document.createElement(tag);
       if (className) item.className = className;
       if (text !== undefined) item.textContent = text;
       return item;
     }
 
-    function shownValue(value, metric) {
-      if (value === null || value === undefined || !Number.isFinite(Number(value))) return "Pending";
-      return metric.max === 100 ? Math.round(value) + "%" : Number(value).toFixed(1) + " / 5";
+    function available(value) {
+      return value !== null && value !== undefined && Number.isFinite(Number(value));
     }
 
-    function hasScore(run, key) {
-      return run[key] !== null && run[key] !== undefined && Number.isFinite(Number(run[key]));
+    function display(value, view) {
+      if (!available(value)) return "PENDING";
+      return view.max === 100 ? Math.round(value) + view.suffix : Number(value).toFixed(1) + view.suffix;
     }
 
-    function visibleRuns() {
-      if (!state.data) return [];
-      const query = state.query.toLowerCase();
-      return state.data.runs
-        .filter(function (run) {
-          return [run.model, run.provider, run.model_version, run.evaluator]
-            .join(" ")
-            .toLowerCase()
-            .includes(query);
-        })
-        .sort(function (a, b) {
-          const left = hasScore(a, state.metric) ? Number(a[state.metric]) : -Infinity;
-          const right = hasScore(b, state.metric) ? Number(b[state.metric]) : -Infinity;
-          return right - left;
+    function modelNames() {
+      return [...new Set(state.data.runs.map(function (run) { return run.model; }))].sort();
+    }
+
+    function filteredRuns() {
+      return state.data.runs.filter(function (run) { return state.selected.has(run.model); });
+    }
+
+    function updateFilterLabel() {
+      const names = modelNames();
+      filterToggle.textContent = "Filter models [" + state.selected.size + "/" + names.length + "]";
+      document.querySelector("#filter-count").textContent = state.selected.size + "/" + names.length;
+    }
+
+    function buildFilter() {
+      filterOptions.replaceChildren();
+      modelNames().forEach(function (name) {
+        const label = node("label", "filter-option");
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.checked = state.selected.has(name);
+        input.addEventListener("change", function () {
+          if (input.checked) state.selected.add(name);
+          else state.selected.delete(name);
+          updateFilterLabel();
+          render();
         });
+        label.append(input, document.createTextNode(name));
+        filterOptions.appendChild(label);
+      });
+      updateFilterLabel();
     }
 
-    function addScoreCell(row, value, key) {
-      const metric = metrics[key];
-      const available = value !== null && value !== undefined && Number.isFinite(Number(value));
-      const cell = element("td", "score" + (key === state.metric ? " active" : "") + (available ? "" : " pending"));
-      const output = element("span", "score-output", shownValue(value, metric));
-      const track = element("div", "mini-track");
-      const fill = element("span");
-      fill.style.width = available ? Math.max(0, Math.min(100, 100 * Number(value) / metric.max)) + "%" : "0";
-      track.appendChild(fill);
-      cell.append(output, track);
+    function renderNotice(runs) {
+      const pending = runs.filter(function (run) { return !run.rated; }).length;
+      document.querySelector("#notice").hidden = pending === 0;
+      document.querySelector("#notice-text").textContent = " " + pending +
+        (pending === 1 ? " run has" : " runs have") +
+        " raw AI outputs without human ratings and cannot enter the charts.";
+    }
+
+    function renderChart(runs) {
+      const view = views[state.view];
+      const ordered = runs.slice().sort(function (a, b) {
+        const left = available(a[state.view]) ? Number(a[state.view]) : -Infinity;
+        const right = available(b[state.view]) ? Number(b[state.view]) : -Infinity;
+        return right - left;
+      });
+      ranking.replaceChildren();
+      document.querySelector("#chart-empty").hidden = ordered.length > 0;
+      ordered.forEach(function (run, index) {
+        const value = run[state.view];
+        const scored = available(value);
+        const row = node("li", "rank-row" + (scored ? "" : " pending"));
+        const color = scored ? (podium[index] || "#555") : "#3a3a3a";
+        row.style.setProperty("--row-color", color);
+        row.appendChild(node("span", "rank", String(index + 1).padStart(2, "0")));
+
+        const model = node("span", "model", run.model);
+        model.appendChild(node("small", "", [run.provider, run.model_version].filter(Boolean).join(" · ")));
+        row.appendChild(model);
+
+        const track = node("span", "track");
+        const fill = node("span", "fill");
+        fill.style.width = scored ? Math.max(0, Math.min(100, 100 * Number(value) / view.max)) + "%" : "0";
+        track.appendChild(fill);
+        row.appendChild(track);
+        row.appendChild(node("span", "rank-value", display(value, view)));
+        ranking.appendChild(row);
+      });
+    }
+
+    function scoreCell(row, value, viewKey) {
+      const cell = node("td", "matrix-score" + (available(value) ? "" : " pending"), display(value, views[viewKey]));
       row.appendChild(cell);
     }
 
-    function render() {
-      const metric = metrics[state.metric];
-      const allRuns = visibleRuns();
-      const runs = allRuns.filter(function (run) { return hasScore(run, state.metric); });
-      document.documentElement.style.setProperty("--metric", metric.color);
-      document.querySelector("#metric-title").textContent = metric.label + " distribution";
-      document.querySelector("#metric-description").textContent = metric.description;
-      document.querySelector("#metric-scale").textContent = "Higher is better · max " + metric.max;
-      buttons.forEach(function (button) {
-        button.setAttribute("aria-pressed", String(button.dataset.metric === state.metric));
-      });
-      document.querySelectorAll("[data-column]").forEach(function (header) {
-        header.classList.toggle("active", header.dataset.column === state.metric);
-      });
+    function renderMatrix(runs) {
+      matrixBody.replaceChildren();
+      document.querySelector("#matrix-empty").hidden = runs.length > 0;
+      runs.forEach(function (run) {
+        const row = document.createElement("tr");
+        const model = node("td", "matrix-model");
+        model.appendChild(node("strong", "", run.model));
+        const status = run.rated
+          ? run.rated + "/" + run.total + " human-rated"
+          : run.generated + " raw outputs · awaiting human review";
+        model.appendChild(node("small", "", [run.provider, run.model_version, status].filter(Boolean).join(" · ")));
+        row.appendChild(model);
+        scoreCell(row, run.copy_quality, "copy_quality");
+        scoreCell(row, run.naturalness, "naturalness");
+        scoreCell(row, run.cefr_fit, "cefr_fit");
+        scoreCell(row, run.facts_ok_pct, "facts_ok_pct");
+        scoreCell(row, run.would_use_pct, "would_use_pct");
+        row.appendChild(node("td", "matrix-score", run.rated + "/" + run.total));
 
-      ranking.replaceChildren();
-      tableBody.replaceChildren();
-      rankingEmpty.hidden = runs.length > 0;
-      tableEmpty.hidden = allRuns.length > 0;
-      rankingEmpty.textContent = state.data && state.data.runs.some(function (run) { return run.status === "unrated"; })
-        ? "Raw model outputs are available, but rankings start only after human review."
-        : "No completed public runs yet. The first honest result starts the chart.";
-
-      runs.forEach(function (run, index) {
-        const value = Number(run[state.metric]);
-        const row = element("li", "rank-row");
-        row.setAttribute("aria-label", (index + 1) + ". " + run.model + ", " + shownValue(value, metric));
-        row.appendChild(element("span", "rank", String(index + 1).padStart(2, "0")));
-
-        const label = element("span", "model", run.model);
-        const details = [run.provider, run.model_version].filter(Boolean).join(" · ") || "provider not stated";
-        label.appendChild(element("small", "", details));
-        row.appendChild(label);
-
-        const track = element("span", "track");
-        const fill = element("span", "fill");
-        fill.style.width = Math.max(0, Math.min(100, 100 * value / metric.max)) + "%";
-        track.appendChild(fill);
-        row.appendChild(track);
-        row.appendChild(element("span", "rank-value", shownValue(value, metric)));
-        ranking.appendChild(row);
-
-      });
-
-      allRuns.forEach(function (run) {
-        const tableRow = document.createElement("tr");
-        const modelCell = element("td", "model-cell");
-        const name = element("a", "", run.model);
+        const raw = document.createElement("td");
         if (run.file) {
-          name.href = repository + "/blob/main/results/" + encodeURIComponent(run.file);
-          name.target = "_blank";
-          name.rel = "noreferrer";
+          const link = node("a", "raw-link", "View ↗");
+          link.href = repository + "/blob/main/results/" + encodeURIComponent(run.file);
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          raw.appendChild(link);
+        } else {
+          raw.textContent = "—";
         }
-        const heading = element("strong");
-        heading.appendChild(name);
-        modelCell.appendChild(heading);
-        const metadata = [
-          run.provider,
-          run.model_version,
-          run.evaluator ? "rated by " + run.evaluator : "",
-          run.rated ? "" : run.generated + " raw outputs · awaiting human review"
-        ].filter(Boolean).join(" · ") || "metadata not stated";
-        modelCell.appendChild(element("small", "", metadata));
-        tableRow.appendChild(modelCell);
-        addScoreCell(tableRow, run.copy_quality, "copy_quality");
-        addScoreCell(tableRow, run.naturalness, "naturalness");
-        addScoreCell(tableRow, run.cefr_fit, "cefr_fit");
-        addScoreCell(tableRow, run.facts_ok_pct, "facts_ok_pct");
-        addScoreCell(tableRow, run.would_use_pct, "would_use_pct");
-        tableRow.appendChild(element("td", "", run.rated + "/" + run.total + " rated"));
-        tableRow.appendChild(element("td", "", run.date || "—"));
-        tableBody.appendChild(tableRow);
+        row.appendChild(raw);
+        matrixBody.appendChild(row);
       });
     }
 
-    buttons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        state.metric = button.dataset.metric;
+    function render() {
+      if (!state.data) return;
+      const view = views[state.view];
+      const runs = filteredRuns();
+      document.querySelector("#view-title").textContent = view.title;
+      document.querySelector("#view-subtitle").textContent = view.subtitle;
+      tabs.forEach(function (tab) {
+        tab.setAttribute("aria-selected", String(tab.dataset.view === state.view));
+        tab.tabIndex = tab.dataset.view === state.view ? 0 : -1;
+      });
+      renderNotice(runs);
+      const matrix = state.view === "matrix";
+      document.querySelector("#chart-view").hidden = matrix;
+      document.querySelector("#matrix-view").hidden = !matrix;
+      if (matrix) renderMatrix(runs);
+      else renderChart(runs);
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        state.view = tab.dataset.view;
         render();
       });
     });
 
-    document.querySelector("#search").addEventListener("input", function (event) {
-      state.query = event.target.value.trim();
+    document.querySelector(".tabs").addEventListener("keydown", function (event) {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      const current = tabs.findIndex(function (tab) { return tab.dataset.view === state.view; });
+      const step = event.key === "ArrowRight" ? 1 : -1;
+      const next = tabs[(current + step + tabs.length) % tabs.length];
+      next.click();
+      next.focus();
+    });
+
+    filterToggle.addEventListener("click", function () {
+      const open = filterMenu.hidden;
+      filterMenu.hidden = !open;
+      filterToggle.setAttribute("aria-expanded", String(open));
+    });
+    document.querySelector("#select-all").addEventListener("click", function () {
+      state.selected = new Set(modelNames());
+      buildFilter();
       render();
+    });
+    document.querySelector("#select-none").addEventListener("click", function () {
+      state.selected.clear();
+      buildFilter();
+      render();
+    });
+    document.addEventListener("click", function (event) {
+      if (document.querySelector("#filter-wrap").contains(event.target)) return;
+      filterMenu.hidden = true;
+      filterToggle.setAttribute("aria-expanded", "false");
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape") return;
+      filterMenu.hidden = true;
+      filterToggle.setAttribute("aria-expanded", "false");
+      filterToggle.focus();
     });
 
     fetch("leaderboard.json")
@@ -571,22 +630,16 @@
       .then(function (data) {
         if (!Array.isArray(data.runs)) throw new Error("runs must be an array");
         state.data = data;
+        state.selected = new Set(data.runs.map(function (run) { return run.model; }));
+        document.querySelector("#model-count").textContent = new Set(data.runs.map(function (run) { return run.model; })).size;
         document.querySelector("#run-count").textContent = data.runs.length;
-        const pending = data.runs.filter(function (run) { return !run.rated; }).length;
-        document.querySelector("#review-notice").hidden = pending === 0;
-        document.querySelector("#review-notice-text").textContent = " " + pending +
-          (pending === 1 ? " run contains" : " runs contain") +
-          " raw AI output without human ratings and is excluded from metric rankings.";
-        const updated = data.generated_at
-          ? new Date(data.generated_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })
-          : "not built";
-        document.querySelector("#dataset-meta").textContent = data.task_set + " · updated " + updated;
+        buildFilter();
         render();
       })
       .catch(function (error) {
-        document.querySelector("#dataset-meta").textContent = "Data error · " + error.message;
-        rankingEmpty.hidden = false;
-        tableEmpty.hidden = false;
+        document.querySelector("#view-title").textContent = "Data unavailable";
+        document.querySelector("#view-subtitle").textContent = error.message;
+        document.querySelector("#chart-empty").hidden = false;
       });
   </script>
 </body>
