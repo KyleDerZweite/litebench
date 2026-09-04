@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "copybench",
+    "task_set": "public-0.1",
+    "task_file": "benches/copybench/public.json",
+    "task_file_sha256": "7fb90cc89091c77eca6b6678df56b4c6814d04fa665a8ef176c4958e6375f797",
+    "provider": "kylehub",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "max",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:45:44.251029+00:00"
+  },
+  "items": [
+    {
+      "task_id": "public-de-product-a2-01",
+      "output": "### Mittagessen kühl zur Arbeit\n\nNehmen Sie Ihr Mittagessen in dieser isolierten Lunchbox mit zur Arbeit. Die Box hält Ihr Essen bis zu 6 Stunden kühl. Sie fasst 1,2 Liter. Der Einsatz kann herausgenommen werden. Nach dem Essen darf die Lunchbox in die Spülmaschine. So können Sie Ihr Essen für den Arbeitstag mitnehmen. Probieren Sie die Lunchbox aus und nehmen Sie Ihr Mittagessen mit!",
+      "generation": {
+        "response_id": "resp_03b08d97793c7532016a9ad99913dc87d2ae1cbe3cba900994",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 427,
+        "cached_input_tokens": 0,
+        "output_tokens": 616,
+        "billable_output_tokens": 616,
+        "reasoning_tokens": 516,
+        "total_tokens": 1043,
+        "latency_ms": 14071,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-product-a2-01",
+      "output": "### Work Lunch Made Simple\n\nTake your lunch to work in this insulated lunch box. It keeps food cool for up to 6 hours. The box holds 1.2 litres. It also has a removable insert. When lunch is over, you can put it in the dishwasher because it is dishwasher safe. It is a good choice for taking food to work. Try it for your next work lunch!",
+      "generation": {
+        "response_id": "resp_0abfa55f8083c59b016a9ad9a6c51087d2a90b52baae4b370f",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 401,
+        "cached_input_tokens": 0,
+        "output_tokens": 965,
+        "billable_output_tokens": 965,
+        "reasoning_tokens": 878,
+        "total_tokens": 1366,
+        "latency_ms": 18842,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-landing-b1-01",
+      "output": "# Ein Auto, wenn du es brauchst\n\nDu brauchst in Leipzig nur manchmal ein Auto? Buche es per App, wenn du fahren möchtest.\n\n- Rund um die Uhr verfügbar  \n- Keine monatliche Grundgebühr  \n- Ab 0,31 € pro Minute  \n\n**Jetzt per App buchen**",
+      "generation": {
+        "response_id": "resp_019ff1cc677734bd016a9ad9b9b90487d2a7d2e17c7de34217",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 421,
+        "cached_input_tokens": 0,
+        "output_tokens": 858,
+        "billable_output_tokens": 858,
+        "reasoning_tokens": 792,
+        "total_tokens": 1279,
+        "latency_ms": 16952,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-landing-b1-01",
+      "output": "# A car when you need one in Manchester\n\nNeed a car sometimes? Book through the app and get going.\n\n- Cars available 24/7  \n- No monthly fee  \n- From £0.28 per minute  \n\n**Book through the app**",
+      "generation": {
+        "response_id": "resp_00c6d6816ff113f1016a9ad9cab01087d2886cf8a2f766be69",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 412,
+        "cached_input_tokens": 0,
+        "output_tokens": 367,
+        "billable_output_tokens": 367,
+        "reasoning_tokens": 310,
+        "total_tokens": 779,
+        "latency_ms": 9667,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-social-b2-01",
+      "output": "**Schmutzige Sneaker? Wir holen sie ab. 👟**\n\nUnser Sneaker-Reinigungsservice bietet Abholung und Rückgabe innerhalb Berlins. Du zahlst einen Festpreis von 24 € pro Paar und erhältst deine Sneaker innerhalb von 48 Stunden zurück. Auf deine erste Buchung bekommst du 10 % Rabatt.\n\nBuche jetzt deine erste Reinigung. ✨",
+      "generation": {
+        "response_id": "resp_07fd6d59b94285f1016a9ad9d4530887d2ad85757e93d99b2a",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 431,
+        "cached_input_tokens": 0,
+        "output_tokens": 547,
+        "billable_output_tokens": 547,
+        "reasoning_tokens": 463,
+        "total_tokens": 978,
+        "latency_ms": 11457,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-social-b2-01",
+      "output": "London life is tough on your trainers 👟\n\nWe collect and return your trainers within London, all within 48 hours. Pay a fixed price of £22 per pair and get 10% off your first booking.\n\nBook your trainer clean today.",
+      "generation": {
+        "response_id": "resp_0cec017e8dcd7088016a9ad9dfb21887d2a22a2253da7118aa",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 407,
+        "cached_input_tokens": 0,
+        "output_tokens": 412,
+        "billable_output_tokens": 412,
+        "reasoning_tokens": 356,
+        "total_tokens": 819,
+        "latency_ms": 11306,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-email-c1-01",
+      "output": "**Betreff:** Ihr Projekt ist bereit für den nächsten Schritt\n\nVor 21 Tagen haben Sie Ihr Konto eingerichtet und bereits ein erstes Projekt angelegt. Damit ist die Grundlage geschaffen – nun können Sie eine Person aus Ihrem Team einbeziehen und das Projekt gemeinsam weiterführen. Die Einladung erfolgt direkt per E-Mail. Dabei legen Sie fest, ob das Teammitglied das Projekt nur ansehen oder auch bearbeiten darf. So behalten Sie die Kontrolle darüber, wer welche Rolle übernimmt. Ihre Testphase läuft noch 14 Tage. Das ist ein guter Zeitpunkt, den nächsten konkreten Schritt im Produkt zu machen: Öffnen Sie Ihr Projekt, laden Sie zunächst eine Kollegin oder einen Kollegen ein und wählen Sie die passende Rolle. Sie müssen nicht gleich das gesamte Team hinzufügen; eine erste Einladung genügt, um die Zusammenarbeit im Projekt praktisch zu erproben. Wenn Sie später weitere Personen einbeziehen möchten, können Sie dies in Ihrem eigenen Tempo tun.\n\n**CTA:** Erste Person einladen",
+      "generation": {
+        "response_id": "resp_0893d31ddb910b67016a9ad9eb17e887d2a69cde6211bbf921",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 448,
+        "cached_input_tokens": 0,
+        "output_tokens": 1061,
+        "billable_output_tokens": 1061,
+        "reasoning_tokens": 863,
+        "total_tokens": 1509,
+        "latency_ms": 20587,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-email-c1-01",
+      "output": "**Subject:** Bring your first colleague into the project\n\nYou have already taken the first step by setting up a project. Now is a good time to invite the person who needs to see it or help move it forward.\n\nInvitations are sent by email, and you can choose the level of access that suits each colleague: select ‘View’ if they only need visibility, or ‘Edit’ if they will be contributing to the project.\n\nWith 14 days remaining in your trial, inviting one colleague now gives you time to see how the project works with another person involved. Start with the teammate closest to the work—you can decide which role is appropriate when you send the invitation.\n\nReturn to your project, enter their email address, choose ‘View’ or ‘Edit’, and send your first invitation.\n\n**CTA:** Invite a colleague",
+      "generation": {
+        "response_id": "resp_0b89b14e3f1265c3016a9ad9ffa87c87d2949999e3ab929201",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 431,
+        "cached_input_tokens": 0,
+        "output_tokens": 1040,
+        "billable_output_tokens": 1040,
+        "reasoning_tokens": 869,
+        "total_tokens": 1471,
+        "latency_ms": 20255,
+        "attempts": 1
+      }
+    }
+  ]
+}

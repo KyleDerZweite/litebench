@@ -9,15 +9,20 @@ Live results: <https://kylederzweite.github.io/litebench/>
 
 | Suite | Question | Status |
 |---|---|---|
-| **CopyBench Lite** | Does the writing follow the copy brief? | 15 configurations, 120 outputs |
-| **NaturalBench Lite** | Does the writing sound idiomatic and free of stock AI habits? | Prompts and evaluator ready, no runs |
-| **CEFRBench Lite** | Does the writing match the requested CEFR level? | Prompts and evaluator ready, no runs |
+| **CopyBench Lite** | Does the writing follow the copy brief? | 120 provisional scored outputs, 128 new unscored outputs |
+| **NaturalBench Lite** | Does the writing sound idiomatic and free of stock AI habits? | 64 unscored outputs |
+| **CEFRBench Lite** | Does the writing match the requested CEFR level? | 128 unscored outputs |
 
 CopyBench scores do not count toward the other suites.
 
 The 120 CopyBench outputs were each judged in a separate, blinded
 `gpt-5.6-sol` max call. No person has reviewed those scores. The site labels
 them as provisional AI scores.
+
+The `2026-09-04-rerun-01` batch adds 320 unscored outputs from GPT-5.6 Luna,
+Terra, and Sol at five effort levels, plus Gemini 3.8 Flash High. These files
+stay outside the leaderboard until the evaluator protocol is fixed. See
+[`EVALUATION.md`](EVALUATION.md) for the current proposal.
 
 ## Dashboard
 
@@ -34,7 +39,7 @@ There is no Pass@1 yet. CopyBench has a graded rubric, not a binary pass rule.
 Choosing a threshold after seeing the results would bias it.
 
 Cost is estimated for candidate generation only. `bench.py` combines recorded
-token counts with the OpenAI rates saved in [`pricing.json`](pricing.json) from
+token counts with the model rates saved in [`pricing.json`](pricing.json) from
 [models.dev](https://models.dev/api.json). The estimate excludes cache
 discounts, proxy fees, and judge calls.
 
@@ -53,12 +58,13 @@ evaluator model and prompt version.
 
 ```text
 benches/
-  copybench/       prompts, evaluator, hidden-set hash, results
-  naturalbench/    prompts and slop-aware evaluator
-  cefrbench/       prompts and evaluator
+  copybench/       prompts, evaluator, scored results, raw generations
+  naturalbench/    prompts, slop-aware evaluator, raw generations
+  cefrbench/       prompts, evaluator, raw generations
 visualizer/        static Next.js site
 bench.py           result checks and aggregation
 pricing.json       models.dev rates used for cost estimates
+EVALUATION.md       proposed three-judge protocol
 ```
 
 ## Run CopyBench Lite

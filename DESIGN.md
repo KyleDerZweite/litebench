@@ -66,7 +66,7 @@ Token counts and latency come from each generation response. Latency includes
 network and proxy time, so it is only useful for these runs.
 
 CPAMP does not report prices. LiteBench estimates generation cost from the
-recorded input and output tokens and the OpenAI rates in `pricing.json`. The
+recorded token counts and the model rates in `pricing.json`. The
 file records the models.dev source and capture date. The estimate does not
 include cache discounts, proxy fees, or judge calls. A provider-reported
 `cost_usd` value wins when a result contains one.

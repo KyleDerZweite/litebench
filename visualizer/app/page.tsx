@@ -389,7 +389,7 @@ function LeaderboardTable({ runs, scope, onScopeChange, models, selectedModels, 
         </table>
       </div>
       <p className="mt-3 font-mono text-[9px] leading-4 text-neutral-700">
-        Cost is estimated from recorded input and output tokens using OpenAI rates from <a className="hover:text-orange-500" href={data.pricing.source} rel="noreferrer" target="_blank">models.dev</a>, captured {data.pricing.retrieved_at}. It excludes cache discounts, proxy fees, and judge calls.
+        Cost is estimated from recorded token counts using model rates from <a className="hover:text-orange-500" href={data.pricing.source} rel="noreferrer" target="_blank">models.dev</a>, captured {data.pricing.retrieved_at}. It excludes cache discounts, proxy fees, and judge calls.
       </p>
     </section>
   );

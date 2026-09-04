@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "naturalbench",
+    "task_set": "naturalbench-public-0.1",
+    "task_file": "benches/naturalbench/public.json",
+    "task_file_sha256": "7b069666c7181bc432c57a811d704d364360bf4fc5121338bd0f07af75d2e77f",
+    "provider": "kylehub",
+    "model": "gemini-3.8-flash-high",
+    "reasoning_effort": "high",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:48:21.870744+00:00"
+  },
+  "items": [
+    {
+      "task_id": "natural-en-service-01",
+      "output": "Subject: Service update: Account exports this Saturday\n\nHello,\n\nI am getting in touch to let you know that account exports will be unavailable this Saturday from 07:00 to 09:00 UK time. \n\nPlease be assured that your saved reports remain available to access throughout this period. No customer action is required on your part, as account exports will be available again from 09:00 UK time.\n\nShould you have any queries regarding this update, please do get in touch with our support team, who are on hand to help.\n\nKind regards,\n\nHead of Support",
+      "generation": {
+        "response_id": "resp_NtqaaoiuHMr9nsEPgb2a2QI",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 92,
+        "cached_input_tokens": 0,
+        "output_tokens": 125,
+        "billable_output_tokens": 10534,
+        "reasoning_tokens": 10409,
+        "total_tokens": 10626,
+        "latency_ms": 35459,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-de-service-01",
+      "output": "**Betreff: Information zur Verfügbarkeit der Kontoexporte am Samstag**\n\nGuten Tag,\n\nich möchte Sie kurz darüber informieren, dass Kontoexporte an diesem Samstag von 07:00 bis 09:00 Uhr nicht verfügbar sind.\n\nIhre gespeicherten Berichte bleiben weiterhin verfügbar. Sie können somit auch während dieser zwei Stunden jederzeit darauf zugreifen. \n\nSie müssen nichts tun. Ab 09:00 Uhr stehen Ihnen die Kontoexporte wieder wie gewohnt zur Verfügung.\n\nIch gebe Ihnen diesen Hinweis vorab, damit Sie Ihren Tag bei Bedarf ruhig darauf einstellen können.\n\nVielen Dank für Ihre Aufmerksamkeit und Ihr Verständnis.\n\nMit freundlichen Grüßen  \nIhre Support-Leitung",
+      "generation": {
+        "response_id": "resp_WtqaaoziA8eV3boPttWjmQE",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 113,
+        "cached_input_tokens": 0,
+        "output_tokens": 154,
+        "billable_output_tokens": 5116,
+        "reasoning_tokens": 4962,
+        "total_tokens": 5229,
+        "latency_ms": 18059,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-en-founder-01",
+      "output": "Hey everyone, quick update on calendar sharing. We planned to roll this out this month, but during our final round of testing, we noticed the timezone handling wasn't totally reliable. When someone shares their availability, the last thing anyone wants is a booking showing up an hour off. We need to be confident it works every single time before putting it in your hands.\n\nBecause of that, we're pushing the release back to next month so we can get it right. \n\nTo be clear, your existing scheduling still works normally. None of your current setup is affected by this delay. \n\nThanks for bearing with us while we get this sorted. I’ll share more soon.",
+      "generation": {
+        "response_id": "resp_bNqaatSCFK2wkdUP__GUqA4",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 80,
+        "cached_input_tokens": 0,
+        "output_tokens": 140,
+        "billable_output_tokens": 3750,
+        "reasoning_tokens": 3610,
+        "total_tokens": 3830,
+        "latency_ms": 14907,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-de-founder-01",
+      "output": "Hallo zusammen,\n\nein kurzes Update von mir: Eigentlich wollten wir das Teilen von Kalendern noch in diesem Monat für euch veröffentlichen. Wir haben uns aber dazu entschieden, den Start auf nächsten Monat zu verschieben.\n\nDer Grund ist einfach: In unseren Tests haben die Zeitzonen nicht zuverlässig funktioniert. Gerade bei Terminen darf es hier keine Fehler geben, sonst stiftet das nur Verwirrung. Wir möchten das neue Feature erst dann freigeben, wenn alles sitzt und ihr euch blind darauf verlassen könnt. Deshalb nehmen wir uns die Zeit, das sauber in Ordnung zu bringen.\n\nWichtig für euren Alltag: Die bestehende Terminplanung in der App funktioniert weiterhin völlig normal und wie gewohnt.\n\nDanke für eure Geduld. Ich gebe Bescheid, sobald wir so weit sind.",
+      "generation": {
+        "response_id": "resp_etqaaqHkN8vm7M8P2dKnsAI",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 117,
+        "cached_input_tokens": 0,
+        "output_tokens": 163,
+        "billable_output_tokens": 4704,
+        "reasoning_tokens": 4541,
+        "total_tokens": 4821,
+        "latency_ms": 16402,
+        "attempts": 1
+      }
+    }
+  ]
+}

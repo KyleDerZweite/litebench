@@ -1,6 +1,6 @@
 {
   "source": "https://models.dev/api.json",
-  "provider": "openai",
+  "provider": "mixed",
   "retrieved_at": "2026-09-04",
   "unit": "USD per 1M tokens",
   "models": {
@@ -8,19 +8,37 @@
       "input": 0.2,
       "output": 1.2,
       "cache_read": 0.02,
+      "source_provider": "openai",
       "last_updated": "2026-07-09"
     },
     "gpt-5.6-terra": {
       "input": 2.0,
       "output": 12.0,
       "cache_read": 0.2,
+      "source_provider": "openai",
       "last_updated": "2026-07-09"
     },
     "gpt-5.6-sol": {
       "input": 4.0,
       "output": 20.0,
       "cache_read": 0.4,
+      "source_provider": "openai",
       "last_updated": "2026-07-09"
+    },
+    "gemini-3.8-flash-high": {
+      "input": 0.75,
+      "output": 3.75,
+      "reasoning": 3.75,
+      "cache_read": 0.075,
+      "source_provider": "google",
+      "last_updated": "2026-09-02"
+    },
+    "z-ai/glm-5.3-flash": {
+      "input": 0.075,
+      "output": 0.25,
+      "cache_read": 0.015,
+      "source_provider": "zai",
+      "last_updated": "2026-08-26"
     }
   }
 }

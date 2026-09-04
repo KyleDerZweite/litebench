@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "naturalbench",
+    "task_set": "naturalbench-public-0.1",
+    "task_file": "benches/naturalbench/public.json",
+    "task_file_sha256": "7b069666c7181bc432c57a811d704d364360bf4fc5121338bd0f07af75d2e77f",
+    "provider": "kylehub",
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "high",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:46:40.995091+00:00"
+  },
+  "items": [
+    {
+      "task_id": "natural-en-service-01",
+      "output": "**Subject: Scheduled export maintenance this Saturday**\n\nAccount exports will be unavailable this Saturday from 07:00 to 09:00 UK time. During this window, you will not be able to create or download account exports.\n\nSaved reports will remain available as usual.\n\nNo action is required from you. If you need an export for planned work, you may wish to complete it before 07:00 or after 09:00 UK time.",
+      "generation": {
+        "response_id": "resp_0ab182525ff2e8d9016a9ad9d183a887d28e0ec826bbfbd4b2",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 386,
+        "cached_input_tokens": 0,
+        "output_tokens": 93,
+        "billable_output_tokens": 93,
+        "reasoning_tokens": 0,
+        "total_tokens": 479,
+        "latency_ms": 2962,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-de-service-01",
+      "output": "**Betreff: Geplante Einschränkung bei Kontoexporten**\n\nAm kommenden Samstag stehen Kontoexporte von 07:00 bis 09:00 Uhr vorübergehend nicht zur Verfügung. In diesem Zeitraum können keine neuen Exporte erstellt oder heruntergeladen werden.\n\nIhre gespeicherten Berichte bleiben weiterhin verfügbar und können wie gewohnt abgerufen werden.\n\nFür Sie besteht kein Handlungsbedarf. Nach 09:00 Uhr können Kontoexporte wieder genutzt werden.\n\nVielen Dank für Ihr Verständnis.",
+      "generation": {
+        "response_id": "resp_08982903b57609df016a9ad9d47c1487d2a6c1c752e3894814",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 404,
+        "cached_input_tokens": 0,
+        "output_tokens": 103,
+        "billable_output_tokens": 103,
+        "reasoning_tokens": 0,
+        "total_tokens": 507,
+        "latency_ms": 3930,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-en-founder-01",
+      "output": "Hi everyone,\n\nA quick update from me: we’d planned to release calendar sharing this month. During testing, we found cases where timezone handling wasn’t reliable enough for something people will use to coordinate real plans. I don’t want to ship it with that uncertainty and ask you to work around it later.\n\nWe’re moving the calendar-sharing release to next month so we can fix and retest it properly. Your existing scheduling—creating links, booking times, and managing appointments—continues to work normally.\n\nI know some of you were waiting for this feature, and I’m sorry for the delay. Thanks for sticking with a small team that would rather be a little late than make your calendar less dependable.\n\n—[Name], Founder",
+      "generation": {
+        "response_id": "resp_05578836842c1491016a9ad9d854ac87d2a636f42e2eb2a66a",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 377,
+        "cached_input_tokens": 0,
+        "output_tokens": 625,
+        "billable_output_tokens": 625,
+        "reasoning_tokens": 473,
+        "total_tokens": 1002,
+        "latency_ms": 12477,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-de-founder-01",
+      "output": "Hallo zusammen,\n\nich möchte euch kurz zum Teilen von Kalendern informieren. Diese Funktion war für diesen Monat geplant. In unseren Tests haben wir aber festgestellt, dass Zeitzonen noch nicht zuverlässig behandelt werden. Dadurch könnten gemeinsame Termine falsch angezeigt werden – und das möchte ich nicht veröffentlichen.\n\nDeshalb verschieben wir den Start auf nächsten Monat. Die bestehende Terminplanung funktioniert weiterhin normal. Ihr könnt Termine wie bisher erstellen, bearbeiten und teilen.\n\nEs ärgert mich, dass wir den Plan nicht halten können. Lieber sage ich das klar, als eine Funktion auszuliefern, der ihr nicht vertrauen könnt. Danke für eure Geduld und eure Rückmeldungen.",
+      "generation": {
+        "response_id": "resp_003e6659d06f6b6a016a9ad9e4e7f487d2b6978153a1a0c74e",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 409,
+        "cached_input_tokens": 0,
+        "output_tokens": 444,
+        "billable_output_tokens": 444,
+        "reasoning_tokens": 305,
+        "total_tokens": 853,
+        "latency_ms": 9882,
+        "attempts": 1
+      }
+    }
+  ]
+}

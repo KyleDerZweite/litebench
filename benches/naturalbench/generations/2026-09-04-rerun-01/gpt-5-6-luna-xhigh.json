@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "naturalbench",
+    "task_set": "naturalbench-public-0.1",
+    "task_file": "benches/naturalbench/public.json",
+    "task_file_sha256": "7b069666c7181bc432c57a811d704d364360bf4fc5121338bd0f07af75d2e77f",
+    "provider": "kylehub",
+    "model": "gpt-5.6-luna",
+    "reasoning_effort": "xhigh",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:48:10.218785+00:00"
+  },
+  "items": [
+    {
+      "task_id": "natural-en-service-01",
+      "output": "**Subject: Planned interruption to account exports Saturday**\n\nHello,\n\nWe’re writing to let you know that account exports will be unavailable this Saturday from 07:00 to 09:00 UK time. Saved reports will remain available during this period, and no action is required from you. You can continue to view the reports you have already saved. We wanted to share this timing in advance so you can plan around it if needed. Exports will be available again after 09:00. If you need information during this time, please use your saved reports.\n\nThank you for your understanding.\n\nKind regards,  \nSupport",
+      "generation": {
+        "response_id": "resp_0ceff84eb1589e01016a9ada2b2e7c87d2a36d71155d942ab4",
+        "response_model": "gpt-5.6-luna",
+        "response_status": "completed",
+        "input_tokens": 386,
+        "cached_input_tokens": 0,
+        "output_tokens": 1446,
+        "billable_output_tokens": 1446,
+        "reasoning_tokens": 1317,
+        "total_tokens": 1832,
+        "latency_ms": 27807,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-de-service-01",
+      "output": "**Betreff: Kontoexporte am Samstag vorübergehend nicht verfügbar**\n\nGuten Tag,\n\nam kommenden Samstag stehen Kontoexporte von 07:00 bis 09:00 Uhr vorübergehend nicht zur Verfügung. In diesem Zeitraum können keine neuen Exporte erstellt oder heruntergeladen werden. Bereits gespeicherte Berichte bleiben wie gewohnt verfügbar und können weiterhin aufgerufen werden. Für Sie besteht kein Handlungsbedarf; Sie müssen nichts vorbereiten oder ändern.\n\nWenn Sie einen Export benötigen, planen Sie ihn bitte außerhalb dieses Zeitraums ein. Nach 09:00 Uhr können Sie Kontoexporte wieder wie gewohnt nutzen.\n\nVielen Dank für Ihr Verständnis.\n\nFreundliche Grüße  \nIhr Support-Team",
+      "generation": {
+        "response_id": "resp_0a7865e7b31d2d06016a9ada466fc887d2abc6e5cd9482df46",
+        "response_model": "gpt-5.6-luna",
+        "response_status": "completed",
+        "input_tokens": 404,
+        "cached_input_tokens": 0,
+        "output_tokens": 801,
+        "billable_output_tokens": 801,
+        "reasoning_tokens": 657,
+        "total_tokens": 1205,
+        "latency_ms": 15794,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-en-founder-01",
+      "output": "Hi everyone,\n\nI wanted to give you a straightforward update on calendar sharing. We had planned to release it this month, but testing uncovered unreliable timezone handling in some shared events. That’s not something we’re comfortable shipping, especially for a feature meant to make scheduling easier.\n\nWe’re moving the release to next month so we can fix the issue and test it properly. I know that’s later than we said, and I’m sorry for the change. In the meantime, the scheduling features you already use are working normally, and this delay doesn’t affect them.\n\nI’ll share another update when we’re closer to release. Thanks for your patience, and for catching the rough edges with us.\n\n— [Founder’s name]",
+      "generation": {
+        "response_id": "resp_055611e90e79d24d016a9ada56708087d290ac5145470ee164",
+        "response_model": "gpt-5.6-luna",
+        "response_status": "completed",
+        "input_tokens": 377,
+        "cached_input_tokens": 0,
+        "output_tokens": 666,
+        "billable_output_tokens": 666,
+        "reasoning_tokens": 516,
+        "total_tokens": 1043,
+        "latency_ms": 13815,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-de-founder-01",
+      "output": "Hallo zusammen,\n\nich bin die Gründerin unserer kleinen Terminplanungs-App und möchte euch kurz über das Teilen von Kalendern informieren. Die Funktion war für diesen Monat geplant. In unseren Tests hat sich jedoch gezeigt, dass Termine in bestimmten Zeitzonen nicht zuverlässig dargestellt werden. So möchten wir die Funktion nicht veröffentlichen, weil dadurch Missverständnisse und falsch eingetragene Zeiten entstehen könnten.\n\nDeshalb verschieben wir den Start auf nächsten Monat. Ein genaues Datum nennen wir noch nicht; wir geben Bescheid, sobald wir sicher sind, dass die Funktion verlässlich arbeitet.\n\nWichtig: Die bestehende Terminplanung läuft normal weiter. Eure bisherigen Termine und Abläufe sind davon nicht betroffen.\n\nDanke für eure Geduld und euer Verständnis. Wir melden uns mit einem weiteren Update, sobald es etwas Belastbares zu sagen gibt.\n\nViele Grüße  \n[Name]",
+      "generation": {
+        "response_id": "resp_03af9630547cf527016a9ada64292887d2b5d36456f9748347",
+        "response_model": "gpt-5.6-luna",
+        "response_status": "completed",
+        "input_tokens": 409,
+        "cached_input_tokens": 0,
+        "output_tokens": 783,
+        "billable_output_tokens": 783,
+        "reasoning_tokens": 605,
+        "total_tokens": 1192,
+        "latency_ms": 15612,
+        "attempts": 1
+      }
+    }
+  ]
+}

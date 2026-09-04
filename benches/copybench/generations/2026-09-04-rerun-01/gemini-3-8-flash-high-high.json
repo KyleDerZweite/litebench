@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "copybench",
+    "task_set": "public-0.1",
+    "task_file": "benches/copybench/public.json",
+    "task_file_sha256": "7fb90cc89091c77eca6b6678df56b4c6814d04fa665a8ef176c4958e6375f797",
+    "provider": "kylehub",
+    "model": "gemini-3.8-flash-high",
+    "reasoning_effort": "high",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:45:44.256826+00:00"
+  },
+  "items": [
+    {
+      "task_id": "public-de-product-a2-01",
+      "output": "**Die isolierte Lunchbox für die Arbeit**\n\nNehmen Sie Ihr Mittagessen mit zur Arbeit? Dann ist diese isolierte Lunchbox genau richtig für Sie. Die Box fasst 1,2 Liter. Sie hat einen herausnehmbaren Einsatz. Die Box hält Essen bis zu 6 Stunden kühl. Außerdem darf die Lunchbox in die Spülmaschine. Nehmen Sie Ihr Essen einfach mit zur Arbeit. Bestellen Sie Ihre isolierte Lunchbox noch heute für die Arbeit!",
+      "generation": {
+        "response_id": "resp_mdmaatvbL72V3boP37D2-QY",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 128,
+        "cached_input_tokens": 0,
+        "output_tokens": 98,
+        "billable_output_tokens": 10232,
+        "reasoning_tokens": 10134,
+        "total_tokens": 10360,
+        "latency_ms": 36167,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-product-a2-01",
+      "output": "### Your Work Lunch Box\n\nDo you take your lunch to work? This insulated lunch box is great for your work lunch. It holds 1.2 litres of food. It keeps food cool for up to 6 hours. Inside, it has a removable insert. The lunch box is also dishwasher safe. Bring your lunch to work every day. Order your lunch box today and enjoy your food!",
+      "generation": {
+        "response_id": "resp_vdmaasfXFrfl7M8PkZnH6QI",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 102,
+        "cached_input_tokens": 0,
+        "output_tokens": 80,
+        "billable_output_tokens": 7961,
+        "reasoning_tokens": 7881,
+        "total_tokens": 8063,
+        "latency_ms": 28074,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-landing-b1-01",
+      "output": "**Headline:**  \nCarsharing in Leipzig: Dein Auto, wenn du es brauchst\n\n**Subheadline:**  \nDu brauchst nur manchmal ein Auto? Fahre flexibel durch Leipzig, genau dann, wenn du es möchtest.\n\n**Vorteile:**  \n• Autos sind rund um die Uhr verfügbar  \n• Bequeme Buchung per App  \n• Keine monatliche Grundgebühr, ab 0,31 € pro Minute  \n\n**Call-to-Action:**  \nJetzt per App buchen",
+      "generation": {
+        "response_id": "resp_2dmaao_mD7b3nsEP-JXbgQM",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 129,
+        "cached_input_tokens": 0,
+        "output_tokens": 112,
+        "billable_output_tokens": 4327,
+        "reasoning_tokens": 4215,
+        "total_tokens": 4456,
+        "latency_ms": 15708,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-landing-b1-01",
+      "output": "**Headline:**  \nNeed a car in Manchester sometimes?\n\n**Subheading:**  \nJoin our Manchester car club and drive only when you need to.\n\n**Benefits:**  \n• **Available 24/7:** Cars are ready at any time of day or night.  \n• **Book through an app:** Reserve your car directly in the app.  \n• **No monthly fee:** Prices start at £0.28 per minute.  \n\n**Call to Action:**  \nDownload the app",
+      "generation": {
+        "response_id": "resp_6dmaaqCAEcjn7M8PnMbAuQI",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 114,
+        "cached_input_tokens": 0,
+        "output_tokens": 106,
+        "billable_output_tokens": 4989,
+        "reasoning_tokens": 4883,
+        "total_tokens": 5103,
+        "latency_ms": 19961,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-social-b2-01",
+      "output": "Schmutzige Sneaker, aber keine Zeit für die Reinigung? 👟\n\nWir übernehmen das für dich: Unser Service umfasst die bequeme Abholung und Rückgabe innerhalb Berlins. Bereits innerhalb von 48 Stunden erhältst du deine Sneaker sauber zurück. \n\nDas Angebot gilt zum fairen Festpreis von 24 € pro Paar. Sichere dir jetzt zusätzlich 10 % Rabatt auf deine erste Buchung. \n\nKlicke auf den Link und buche jetzt deinen Abholtermin! 👉",
+      "generation": {
+        "response_id": "resp__Nmaav7iMOaS3boP-d_rgQE",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 143,
+        "cached_input_tokens": 0,
+        "output_tokens": 108,
+        "billable_output_tokens": 2330,
+        "reasoning_tokens": 2222,
+        "total_tokens": 2473,
+        "latency_ms": 9573,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-social-b2-01",
+      "output": "Are your favourite trainers looking dirty? 👟\n\nWe offer a trainer-cleaning service with collection and return within London. It costs a fixed price of £22 per pair, and we return them within 48 hours. \n\nYou also receive 10% off your first booking.\n\nBook your collection today.",
+      "generation": {
+        "response_id": "resp_BtqaavS2Jq2Z3boP9MudkAc",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 112,
+        "cached_input_tokens": 0,
+        "output_tokens": 66,
+        "billable_output_tokens": 2388,
+        "reasoning_tokens": 2322,
+        "total_tokens": 2500,
+        "latency_ms": 10275,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-email-c1-01",
+      "output": "**Betreffzeile:**  \nIhr Projekt: Teammitglieder einladen und Zugriffsrechte vergeben\n\n***\n\n**Fließtext:**\n\nGuten Tag [Name],\n\nvor 21 Tagen haben Sie Ihr Konto erstellt und Ihr erstes Projekt eingerichtet. Bislang verwalten Sie dieses Vorhaben noch allein, ohne weitere Personen aus Ihrem Team hinzugezogen zu haben.\n\nEin Projektmanagement-Werkzeug entfaltet seinen praktischen Nutzen vor allem in der gemeinsamen Arbeit. Sie können Mitwirkende jederzeit unkompliziert per E-Mail in Ihr bestehendes Projekt einladen. Für die Steuerung der Zugriffsrechte stehen Ihnen dabei zwei klare Rollen zur Verfügung: Wählen Sie „Ansehen“ für reine Lesezugriffe oder „Bearbeiten“ für Personen, die im Projekt aktiv mitwirken sollen.\n\nIhre Testphase läuft noch genau 14 Tage. Dieser verbleibende Zeitraum bietet ausreichend Gelegenheit, das Zusammenspiel unter den realen Bedingungen Ihres Agenturalltags zu prüfen. \n\nKehren Sie in Ihr Projekt zurück, versenden Sie die ersten Einladungen per E-Mail und testen Sie die Zusammenarbeit direkt in der Praxis.\n\n***\n\n**CTA:**  \n[Teammitglied per E-Mail einladen]",
+      "generation": {
+        "response_id": "resp_EdqaaqjZGuWS3boP8Mu10QI",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 162,
+        "cached_input_tokens": 0,
+        "output_tokens": 258,
+        "billable_output_tokens": 6833,
+        "reasoning_tokens": 6575,
+        "total_tokens": 6995,
+        "latency_ms": 24027,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-email-c1-01",
+      "output": "**Subject:** 14 days left: bring your team into your project\n\nThree weeks ago, you took the time to set up your first project. Running an agency requires careful coordination, yet you are still navigating the workspace on your own. \n\nWith 14 days remaining in your trial, this is the ideal moment to assess how the platform supports genuine collaboration. Bringing colleagues into your existing project is straightforward: invitations are sent directly by email, allowing your team to join you. \n\nTo ensure you retain appropriate oversight, you can allocate distinct permissions. Simply assign either ‘View’ or ‘Edit’ roles, depending on whether a colleague needs to review progress or update the project.\n\nExperiencing the platform alongside your team will provide a thorough appraisal of its suitability for your agency before your access expires. Return to your project and send your first invitation.\n\n**CTA:** [Invite a Team Member]",
+      "generation": {
+        "response_id": "resp_KNqaap36K4yT3boPmuKjgQE",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 137,
+        "cached_input_tokens": 0,
+        "output_tokens": 183,
+        "billable_output_tokens": 3490,
+        "reasoning_tokens": 3307,
+        "total_tokens": 3627,
+        "latency_ms": 13819,
+        "attempts": 1
+      }
+    }
+  ]
+}

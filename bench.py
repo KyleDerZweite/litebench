@@ -174,7 +174,13 @@ def aggregate(data):
         pricing = read_json(PRICING)
         rates = pricing.get("models", {}).get(run["model"])
         token_pairs = [
-            (entry.get("input_tokens"), entry.get("output_tokens"))
+            (
+                entry.get("input_tokens"),
+                entry.get("total_tokens") - entry.get("input_tokens")
+                if type(entry.get("total_tokens")) in (int, float)
+                and type(entry.get("input_tokens")) in (int, float)
+                else entry.get("output_tokens"),
+            )
             for entry in generations
             if isinstance(entry, dict)
         ]

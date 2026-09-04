@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "copybench",
+    "task_set": "public-0.1",
+    "task_file": "benches/copybench/public.json",
+    "task_file_sha256": "7fb90cc89091c77eca6b6678df56b4c6814d04fa665a8ef176c4958e6375f797",
+    "provider": "kylehub",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "medium",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:45:44.247016+00:00"
+  },
+  "items": [
+    {
+      "task_id": "public-de-product-a2-01",
+      "output": "### Kühle Pause bei der Arbeit\n\nNehmen Sie Ihr Mittagessen in dieser isolierten Lunchbox mit zur Arbeit. Die Box hält Ihr Essen bis zu 6 Stunden kühl. Sie fasst 1,2 Liter. Der Einsatz kann einfach herausgenommen werden. Nach der Mittagspause dürfen Sie die Box in die Spülmaschine stellen. So können Sie Ihr Essen jeden Arbeitstag mitnehmen. Probieren Sie die Lunchbox aus und genießen Sie Ihre Mittagspause!",
+      "generation": {
+        "response_id": "resp_0d3dfef27c9404be016a9ad998d19887d29618930aeaf465fe",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 427,
+        "cached_input_tokens": 0,
+        "output_tokens": 540,
+        "billable_output_tokens": 540,
+        "reasoning_tokens": 437,
+        "total_tokens": 967,
+        "latency_ms": 11265,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-product-a2-01",
+      "output": "### Easy Lunch Box\n\nTake your lunch to work in this insulated lunch box. It keeps your food cool for up to 6 hours. It holds 1.2 litres, so there is space for your meal. The insert is removable, which makes it easy to use. The lunch box is also dishwasher safe. Enjoy a cool lunch at work. Try it for your next work lunch!",
+      "generation": {
+        "response_id": "resp_0f741fe8ba2431bb016a9ad9a4175c87d2bdb80385a34d65ab",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 401,
+        "cached_input_tokens": 0,
+        "output_tokens": 317,
+        "billable_output_tokens": 317,
+        "reasoning_tokens": 232,
+        "total_tokens": 718,
+        "latency_ms": 7238,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-landing-b1-01",
+      "output": "# Dein Auto in Leipzig – wenn du es brauchst\n\nDu brauchst nur manchmal ein Auto? Buche dein Carsharing-Auto einfach per App.\n\n- Rund um die Uhr verfügbar  \n- Keine monatliche Grundgebühr  \n- Ab 0,31 € pro Minute  \n\n**Jetzt per App buchen**",
+      "generation": {
+        "response_id": "resp_080ed0d417c08e46016a9ad9ab3dc887d2818c859c866b7000",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 421,
+        "cached_input_tokens": 0,
+        "output_tokens": 149,
+        "billable_output_tokens": 149,
+        "reasoning_tokens": 83,
+        "total_tokens": 570,
+        "latency_ms": 4990,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-landing-b1-01",
+      "output": "# A car when you need one\n\nNeed a car sometimes in Manchester? Book through the app and drive from £0.28 per minute.\n\n- Cars available 24/7  \n- Book through the app  \n- No monthly fee  \n\n**Book a car**",
+      "generation": {
+        "response_id": "resp_0f5b234d6d7dd778016a9ad9b0cf4087d286ec8d26353ec930",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 412,
+        "cached_input_tokens": 0,
+        "output_tokens": 351,
+        "billable_output_tokens": 351,
+        "reasoning_tokens": 292,
+        "total_tokens": 763,
+        "latency_ms": 9656,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-social-b2-01",
+      "output": "Deine Sneaker brauchen eine Pause vom Berliner Alltag? 👟\n\nWir holen sie innerhalb Berlins ab und bringen sie sauber zurück – innerhalb von 48 Stunden. Du zahlst einen Festpreis von 24 € pro Paar. Bei deiner ersten Buchung erhältst du 10 % Rabatt.\n\nBuche jetzt deine Sneaker-Reinigung und sichere dir den Rabatt. ✨",
+      "generation": {
+        "response_id": "resp_084ba2c33e5d2bc8016a9ad9b9e5d087d290c6fcb955b20292",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 431,
+        "cached_input_tokens": 0,
+        "output_tokens": 117,
+        "billable_output_tokens": 117,
+        "reasoning_tokens": 36,
+        "total_tokens": 548,
+        "latency_ms": 4496,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-social-b2-01",
+      "output": "Your trainers deserve a clean start 👟\n\nOur trainer-cleaning service collects and returns your pair anywhere in London, all for a fixed price of £22 per pair. Your trainers will be returned within 48 hours.\n\nNew customers get 10% off their first booking.\n\nBook your first clean today.",
+      "generation": {
+        "response_id": "resp_0fafc2282b3e4815016a9ad9be768887d2952cbab7db71cbd9",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 407,
+        "cached_input_tokens": 0,
+        "output_tokens": 185,
+        "billable_output_tokens": 185,
+        "reasoning_tokens": 118,
+        "total_tokens": 592,
+        "latency_ms": 4888,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-email-c1-01",
+      "output": "**Betreff:** Ihr Projekt steht – laden Sie jetzt Ihr Team ein\n\nVor drei Wochen haben Sie Ihr Konto erstellt und bereits ein erstes Projekt angelegt. Der nächste sinnvolle Schritt ist, die passenden Personen aus Ihrer Agentur einzubeziehen.\n\nEine Einladung erfolgt per E-Mail. Dabei legen Sie für jedes Teammitglied fest, welche Rolle zur Aufgabe passt: „Ansehen“ für Personen, die den Projektstand verfolgen sollen, oder „Bearbeiten“ für alle, die aktiv im Projekt mitarbeiten. So können Sie den Zugang gezielt vergeben und Ihr angelegtes Projekt gemeinsam weiterführen.\n\nIhre Testphase läuft noch 14 Tage. Nutzen Sie diese Zeit, um die Zusammenarbeit mit mindestens einem Teammitglied im Produkt auszuprobieren. Melden Sie sich dazu an, öffnen Sie Ihr Projekt und senden Sie Ihre erste Einladung. Sie müssen nicht sofort das gesamte Team hinzufügen – eine Person genügt, um den nächsten Schritt zu machen.\n\n**CTA:** Erstes Teammitglied einladen",
+      "generation": {
+        "response_id": "resp_043dd7e3c4e9f6ec016a9ad9c356f087d284e0cf55a9456349",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 448,
+        "cached_input_tokens": 0,
+        "output_tokens": 893,
+        "billable_output_tokens": 893,
+        "reasoning_tokens": 692,
+        "total_tokens": 1341,
+        "latency_ms": 18346,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-email-c1-01",
+      "output": "**Subject:** Bring a teammate into your first project\n\nHi [First name],\n\nYou have already taken the first step by setting up a project in Northstar. Now, bring one colleague into it so the project is not yours to manage alone.\n\nInvitations are sent by email, and you can choose the level of access that suits each person. Select **‘View’** when someone only needs visibility, or **‘Edit’** when they should be able to make changes.\n\nWith 14 days left in your trial, this is a good time to see how the project works with another person involved. Start with the colleague you update most often—perhaps an account manager, designer or contractor.\n\nReturn to your project, enter their email address and choose the appropriate role. One invitation is enough to take the next step and assess whether Northstar fits the way your agency works.\n\n**CTA: Invite your first team member**",
+      "generation": {
+        "response_id": "resp_0ecaf6804a65eb89016a9ad9d5aa8087d2b0749d4f03308e8c",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 431,
+        "cached_input_tokens": 0,
+        "output_tokens": 469,
+        "billable_output_tokens": 469,
+        "reasoning_tokens": 279,
+        "total_tokens": 900,
+        "latency_ms": 9828,
+        "attempts": 1
+      }
+    }
+  ]
+}

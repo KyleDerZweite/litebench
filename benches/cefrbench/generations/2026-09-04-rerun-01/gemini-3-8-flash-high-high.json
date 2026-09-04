@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "cefrbench",
+    "task_set": "cefrbench-public-0.1",
+    "task_file": "benches/cefrbench/public.json",
+    "task_file_sha256": "5a51cde0f9b7e1eff6aab162b820a6ed83348e1a800d8d942340ea1649d9423e",
+    "provider": "kylehub",
+    "model": "gemini-3.8-flash-high",
+    "reasoning_effort": "high",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:49:46.701060+00:00"
+  },
+  "items": [
+    {
+      "task_id": "cefr-en-a2-01",
+      "output": "**Notice to Library Visitors**\n\nPlease read this notice carefully. The library closes at 17:00 on Friday. The library opens at 10:00 on Saturday. Between Friday at 17:00 and Saturday at 10:00, the library is closed to visitors. But the return box stays open. You can always use the return box when the library is closed. \n\nThank you to all our library visitors.",
+      "generation": {
+        "response_id": "resp_i9qaapjVFrKW3boPn-jk2AI",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 63,
+        "cached_input_tokens": 0,
+        "output_tokens": 94,
+        "billable_output_tokens": 11210,
+        "reasoning_tokens": 11116,
+        "total_tokens": 11273,
+        "latency_ms": 39707,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-a2-01",
+      "output": "**Hinweis für Besucher**\n\nLiebe Besucherinnen und Besucher der Bibliothek,\n\nbitte lesen Sie diesen kurzen Hinweis zu den Öffnungszeiten:\n\nAm Freitag schließt die Bibliothek um 17:00 Uhr. Am Samstag öffnet die Bibliothek wieder um 10:00 Uhr. \n\nDie Rückgabebox der Bibliothek bleibt für Sie geöffnet. Sie können die Rückgabebox auch nutzen, wenn die Bibliothek geschlossen ist.\n\nVielen Dank für Ihr Verständnis!\n\nMit freundlichen Grüßen,  \nIhre Bibliothek",
+      "generation": {
+        "response_id": "resp_s9qaauyZNZee3boP58HKgQE",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 77,
+        "cached_input_tokens": 0,
+        "output_tokens": 110,
+        "billable_output_tokens": 4498,
+        "reasoning_tokens": 4388,
+        "total_tokens": 4575,
+        "latency_ms": 16595,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-b1-01",
+      "output": "Residents can apply for a community garden plot online. Applications can be made online until 30 April. For the year, a plot costs £25. \n\nPlease note what happens if there are more applications than plots. In that case, names are selected at random. This means that names will be chosen at random if the number of applications is larger than the number of plots. \n\nRemember, residents can apply online until 30 April. A plot costs £25 for the year, and names are selected at random if there are more applications than plots.",
+      "generation": {
+        "response_id": "resp_w9qaat2eDLef3boPo9jd2AE",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 67,
+        "cached_input_tokens": 0,
+        "output_tokens": 116,
+        "billable_output_tokens": 7273,
+        "reasoning_tokens": 7157,
+        "total_tokens": 7340,
+        "latency_ms": 24101,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-b1-01",
+      "output": "Liebe Einwohnerinnen und Einwohner,\n\nhier ist eine wichtige Information für Sie: Alle Einwohner können sich jetzt für ein Beet im Gemeinschaftsgarten bewerben. Die Bewerbung ist bis zum 30. April online möglich. \n\nEin Beet kostet 25 Euro pro Jahr. \n\nWas passiert, wenn es am Ende mehr Bewerbungen als Beete gibt? Das ist einfach geregelt: Wenn es mehr Bewerbungen als Beete gibt, werden die Namen zufällig ausgewählt. \n\nWenn Sie ein Beet im Gemeinschaftsgarten haben möchten, bewerben Sie sich bitte rechtzeitig bis zum 30. April online!",
+      "generation": {
+        "response_id": "resp_29qaarX8Iv7onsEProrMyQI",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 82,
+        "cached_input_tokens": 0,
+        "output_tokens": 126,
+        "billable_output_tokens": 10402,
+        "reasoning_tokens": 10276,
+        "total_tokens": 10484,
+        "latency_ms": 31685,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-b2-01",
+      "output": "This internal explanation sets out the working arrangements that apply under the policy. The policy starts on 1 November and will be reviewed after six months. \n\nUnder these terms, staff may work remotely for up to three days each week. Regarding office attendance, teams choose two shared office days. It is therefore the responsibility of each team to agree on two specific days to be in the office together. \n\nShould any staff member require an exception to this schedule, exceptions require agreement from the team lead. No exceptions can be put in place without agreement from the team lead. \n\nThese arrangements will officially begin when the policy starts on 1 November, and the policy will be reviewed after six months.",
+      "generation": {
+        "response_id": "resp_-tqaaq-ePK6T3boPytiCgQE",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 79,
+        "cached_input_tokens": 0,
+        "output_tokens": 140,
+        "billable_output_tokens": 11076,
+        "reasoning_tokens": 10936,
+        "total_tokens": 11155,
+        "latency_ms": 37792,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-b2-01",
+      "output": "**Interne Mitteilung zur Regelung des mobilen Arbeitens**\n\nHiermit erfolgt die offizielle Mitteilung über die Regelung zum mobilen Arbeiten. Diese Regelung beginnt am 1. November.\n\nBeschäftigte dürfen ab dem 1. November bis zu drei Tage pro Woche mobil arbeiten. Gleichzeitig legt jedes Team zwei gemeinsame Bürotage fest. An diesen beiden Tagen arbeiten die Personen des jeweiligen Teams zusammen im Büro.\n\nAusnahmen von dieser Regelung müssen mit der Teamleitung vereinbart werden. Beschäftigte, die eine Abweichung benötigen, müssen diese daher im Vorfeld mit ihrer zuständigen Teamleitung absprechen.\n\nDie gesamte Regelung wird nach sechs Monaten überprüft. Nach Ablauf dieser sechs Monate erfolgt eine entsprechende Überprüfung der Vorgaben.\n\nDie Teams legen ihre zwei gemeinsamen Tage fest. Bei Ausnahmen ist die Vereinbarung mit der Teamleitung erforderlich.",
+      "generation": {
+        "response_id": "resp_INuaaru7M62Z3boP9MudkAc",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 93,
+        "cached_input_tokens": 0,
+        "output_tokens": 179,
+        "billable_output_tokens": 9636,
+        "reasoning_tokens": 9457,
+        "total_tokens": 9729,
+        "latency_ms": 32434,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-c1-01",
+      "output": "A council consultation is currently considering a proposal to remove private cars from the town centre on weekends, prompting a multifaceted discussion regarding urban accessibility.\n\nSupporters anticipate clear benefits from the scheme, arguing that excluding private cars will result in quieter streets whilst affording significantly more space for pedestrians. In contrast, opponents express serious concerns regarding the practical implications of such restrictions. Their worries focus on maintaining accessibility for older residents, alongside potential complications for deliveries.\n\nTo address these issues, the proposal incorporates two peripheral car parks accompanied by a free shuttle service into the town centre.\n\nConsequently, the consultation presents a distinct trade-off between competing priorities. On the one hand, restricting traffic aims to establish a quieter, more pedestrian-focused environment. On the other hand, it creates potential access challenges for older residents and deliveries, which the proposed car parks and shuttle service attempt to alleviate. Ultimately, the scheme requires balancing the advantages of enhanced pedestrian space against the necessity of preserving essential vehicular access.",
+      "generation": {
+        "response_id": "resp_QduaavSaPMXxnsEPuNu34AI",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 84,
+        "cached_input_tokens": 0,
+        "output_tokens": 193,
+        "billable_output_tokens": 12605,
+        "reasoning_tokens": 12412,
+        "total_tokens": 12689,
+        "latency_ms": 41051,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-c1-01",
+      "output": "Gegenstand einer aktuellen kommunalen Konsultation ist die Überlegung, private Autos an Wochenenden aus der Innenstadt auszuschließen. Diese Initiative ruft geteilte Reaktionen hervor und macht einen ausgeprägten Zielkonflikt deutlich.\n\nBefürworter des Vorhabens heben die positiven Auswirkungen hervor: Sie stellen ruhigere Straßen in Aussicht und betonen, dass durch den Ausschluss privater Autos deutlich mehr Raum für Fußgänger geschaffen werde.\n\nDemgegenüber bringen die Gegner erhebliche Einwände vor, die primär die Erreichbarkeit betreffen. Sie äußern die Sorge, dass der Zugang für ältere Menschen beeinträchtigt werden könnte. Zudem befürchten sie spürbare Erschwernisse für anstehende Lieferungen, deren reibungsloser Ablauf gefährdet sei.\n\nUm diesen widerstreitenden Interessen zu begegnen, sieht der zur Debatte stehende Vorschlag zwei Parkplätze am Stadtrand sowie einen kostenlosen Shuttle vor. Dieser Dienst soll die Verbindung in das Zentrum gewährleisten und den Zugang erleichtern.\n\nZusammenfassend veranschaulicht das Vorhaben den planerischen Konflikt zwischen dem Wunsch nach Verkehrsberuhigung und Freiraum für Fußgänger einerseits sowie den Bedenken hinsichtlich der Zugänglichkeit für ältere Menschen und Lieferungen andererseits.",
+      "generation": {
+        "response_id": "resp_atuaapuMGrb3nsEP-JXbgQM",
+        "response_model": "gemini-3.8-flash-high",
+        "response_status": "completed",
+        "input_tokens": 118,
+        "cached_input_tokens": 0,
+        "output_tokens": 281,
+        "billable_output_tokens": 12485,
+        "reasoning_tokens": 12204,
+        "total_tokens": 12603,
+        "latency_ms": 39215,
+        "attempts": 1
+      }
+    }
+  ]
+}

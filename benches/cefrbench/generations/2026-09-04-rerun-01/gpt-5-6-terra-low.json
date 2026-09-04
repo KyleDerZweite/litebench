@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "cefrbench",
+    "task_set": "cefrbench-public-0.1",
+    "task_file": "benches/cefrbench/public.json",
+    "task_file_sha256": "5a51cde0f9b7e1eff6aab162b820a6ed83348e1a800d8d942340ea1649d9423e",
+    "provider": "kylehub",
+    "model": "gpt-5.6-terra",
+    "reasoning_effort": "low",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:46:32.738975+00:00"
+  },
+  "items": [
+    {
+      "task_id": "cefr-en-a2-01",
+      "output": "**Library Notice**\n\nThe library closes at 17:00 on Friday. It opens again at 10:00 on Saturday. Please remember that the return box stays open while the library is closed. You can return your books and other library items in the return box at any time.",
+      "generation": {
+        "response_id": "resp_0d3942cccf971ad7016a9ad9c94b5887d283b88ed8e28a2033",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 358,
+        "cached_input_tokens": 0,
+        "output_tokens": 61,
+        "billable_output_tokens": 61,
+        "reasoning_tokens": 0,
+        "total_tokens": 419,
+        "latency_ms": 2581,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-a2-01",
+      "output": "Liebe Besucherinnen und Besucher, bitte beachten Sie: Die Bibliothek schließt am Freitag um 17:00 Uhr. Am Samstag öffnet sie wieder um 10:00 Uhr. Wenn Sie nach 17:00 Uhr Bücher oder andere Medien zurückgeben möchten, können Sie die Rückgabebox benutzen. Die Rückgabebox bleibt geöffnet. Bitte planen Sie Ihren Besuch und Ihre Rückgabe rechtzeitig. Vielen Dank für Ihr Verständnis.",
+      "generation": {
+        "response_id": "resp_0d3f8b225adb5141016a9ad9cbd2f087d2b42f3186852dc930",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 373,
+        "cached_input_tokens": 0,
+        "output_tokens": 335,
+        "billable_output_tokens": 335,
+        "reasoning_tokens": 243,
+        "total_tokens": 708,
+        "latency_ms": 7341,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-b1-01",
+      "output": "Residents can apply online for a community garden plot until 30 April. Each plot costs £25 for the year. If the number of applications is higher than the number of available plots, the names of applicants will be chosen at random. This means that applying does not guarantee that you will receive a plot. Residents who want a plot should complete their online application before the deadline.",
+      "generation": {
+        "response_id": "resp_0198953e33919162016a9ad9d334f887d295884504e2b7ca88",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 363,
+        "cached_input_tokens": 0,
+        "output_tokens": 100,
+        "billable_output_tokens": 100,
+        "reasoning_tokens": 19,
+        "total_tokens": 463,
+        "latency_ms": 3225,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-b1-01",
+      "output": "Einwohnerinnen und Einwohner können sich bis zum 30. April online für ein Beet im Gemeinschaftsgarten bewerben. Die Bewerbung muss rechtzeitig über das Internet eingereicht werden. Ein Beet kostet 25 Euro pro Jahr. Nach Ablauf der Frist wird geprüft, wie viele Bewerbungen eingegangen sind. Gibt es mehr Bewerbungen als verfügbare Beete, werden die Namen der Bewerberinnen und Bewerber zufällig ausgewählt. So hat jede Person die gleiche Chance auf ein Beet. Wer ausgewählt wird, kann das Beet für ein Jahr nutzen. Die Auswahl erfolgt erst nach dem 30. April.",
+      "generation": {
+        "response_id": "resp_0be63bd851c6818e016a9ad9d69c7c87d291a89d97000b9679",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 378,
+        "cached_input_tokens": 0,
+        "output_tokens": 489,
+        "billable_output_tokens": 489,
+        "reasoning_tokens": 358,
+        "total_tokens": 867,
+        "latency_ms": 13172,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-b2-01",
+      "output": "From 1 November, staff may work remotely for up to three days each week. Each team will choose two shared office days when all team members are expected to work from the office. These days should be agreed within the team to support planning, communication and collaboration.\n\nIf a staff member needs to work remotely for more than three days in a week, this must be discussed with and agreed by their team lead. Any exception will depend on the individual situation and the needs of the team.\n\nThis arrangement will begin on 1 November. It will be reviewed after six months to consider how it is working in practice.",
+      "generation": {
+        "response_id": "resp_0dd0213d26c8fdab016a9ad9e3bbfc87d2ae609459f59083bb",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 376,
+        "cached_input_tokens": 0,
+        "output_tokens": 175,
+        "billable_output_tokens": 175,
+        "reasoning_tokens": 47,
+        "total_tokens": 551,
+        "latency_ms": 4622,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-b2-01",
+      "output": "**Interne Information zur mobilen Arbeit**\n\nAb dem 1. November gilt eine neue Regelung zur mobilen Arbeit. Beschäftigte dürfen künftig bis zu drei Tage pro Woche mobil arbeiten. Jedes Team bestimmt zwei gemeinsame Tage, an denen alle Teammitglieder im Büro arbeiten. Diese Bürotage werden innerhalb des jeweiligen Teams festgelegt und gelten als gemeinsame Präsenztage.\n\nWenn Beschäftigte von den vereinbarten gemeinsamen Bürotagen abweichen müssen, ist dies vorher mit der Teamleitung abzustimmen. Auch weitere Ausnahmen von der Regelung müssen mit der Teamleitung vereinbart werden.\n\nDie Regelung tritt am 1. November in Kraft. Nach sechs Monaten wird geprüft, wie die Regelung umgesetzt wurde. Danach wird über das weitere Vorgehen informiert.",
+      "generation": {
+        "response_id": "resp_07f44f249c840f00016a9ad9e827f887d28fb439b52ae07646",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 390,
+        "cached_input_tokens": 0,
+        "output_tokens": 675,
+        "billable_output_tokens": 675,
+        "reasoning_tokens": 516,
+        "total_tokens": 1065,
+        "latency_ms": 13383,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-c1-01",
+      "output": "The council is consulting on a proposal to restrict private cars in the town centre at weekends. Supporters argue that the change could create quieter, more attractive streets and provide additional room for pedestrians. In their view, reducing vehicle traffic may make the central area feel more accessible and pleasant for people walking through it.\n\nHowever, opponents raise concerns about the practical effects of the restriction. In particular, they question whether older residents would still be able to reach shops and services conveniently. There are also worries that deliveries to businesses in the town centre could become more difficult to manage.\n\nTo address these issues, the proposal includes two car parks on the edge of the town, linked to the centre by a free shuttle service. This arrangement could reduce the number of cars in central streets while maintaining an alternative means of access. Nevertheless, the consultation must consider whether the proposed facilities would meet the needs of all users and businesses.",
+      "generation": {
+        "response_id": "resp_007148574d718cd7016a9ad9f5b11087d29b88ed5f6c30993c",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 382,
+        "cached_input_tokens": 0,
+        "output_tokens": 204,
+        "billable_output_tokens": 204,
+        "reasoning_tokens": 19,
+        "total_tokens": 586,
+        "latency_ms": 5622,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-c1-01",
+      "output": "Eine kommunale Konsultation befasst sich mit dem Vorschlag, private Autos an Wochenenden aus der Innenstadt auszuschließen. Befürworter sehen darin die Chance, den Verkehrslärm zu verringern und die Straßen ruhiger zu gestalten. Zudem könnte der frei werdende Raum stärker Fußgängern zugutekommen, wodurch sich die Nutzung des Stadtzentrums verändern würde. Dem stehen jedoch Bedenken gegenüber, insbesondere hinsichtlich der Erreichbarkeit. Kritiker weisen darauf hin, dass ältere Menschen möglicherweise Schwierigkeiten hätten, ohne private Fahrzeuge in die Innenstadt zu gelangen. Auch für Lieferungen könnte die geplante Beschränkung praktische Probleme verursachen, falls Zufahrten nicht mehr wie bisher möglich wären. Als Ausgleich wurden zwei Parkplätze am Stadtrand sowie ein kostenloser Shuttle-Service vorgeschlagen. Diese Maßnahmen sollen den Zugang zur Innenstadt trotz der Einschränkungen ermöglichen. Die Konsultation verdeutlicht damit einen Zielkonflikt zwischen einer verkehrsärmeren, fußgängerfreundlicheren Innenstadt und den Anforderungen an Mobilität sowie Versorgung.",
+      "generation": {
+        "response_id": "resp_0d729333afb279e8016a9ad9fb3edc87d286a228c2e348646a",
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 411,
+        "cached_input_tokens": 0,
+        "output_tokens": 250,
+        "billable_output_tokens": 250,
+        "reasoning_tokens": 32,
+        "total_tokens": 661,
+        "latency_ms": 7507,
+        "attempts": 1
+      }
+    }
+  ]
+}

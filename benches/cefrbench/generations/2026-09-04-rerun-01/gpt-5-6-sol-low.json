@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "cefrbench",
+    "task_set": "cefrbench-public-0.1",
+    "task_file": "benches/cefrbench/public.json",
+    "task_file_sha256": "5a51cde0f9b7e1eff6aab162b820a6ed83348e1a800d8d942340ea1649d9423e",
+    "provider": "kylehub",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "low",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T14:47:25.661952+00:00"
+  },
+  "items": [
+    {
+      "task_id": "cefr-en-a2-01",
+      "output": "**Library Notice**\n\nOn Friday, the library closes at 17:00. On Saturday, the library opens at 10:00. Please remember these opening and closing times when you plan your library visit. The return box stays open while the library is closed. You can use the return box to return your library items. Thank you for reading this important notice.",
+      "generation": {
+        "response_id": "resp_0ff746240b403607016a9ad9fe1b4487d2bba6bad8e594fbec",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 358,
+        "cached_input_tokens": 0,
+        "output_tokens": 923,
+        "billable_output_tokens": 923,
+        "reasoning_tokens": 844,
+        "total_tokens": 1281,
+        "latency_ms": 18246,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-a2-01",
+      "output": "**Hinweis für Besucherinnen und Besucher**\n\nBitte beachten Sie: Die Bibliothek schließt am Freitag um 17:00 Uhr. Am Samstag öffnet die Bibliothek um 10:00 Uhr. Die Rückgabebox bleibt auch in der Zeit zwischen der Schließung am Freitag und der Öffnung am Samstag geöffnet. Bitte planen Sie Ihren Besuch und Ihre Rückgabe nach diesen Zeiten.\n\nVielen Dank für Ihr Verständnis.",
+      "generation": {
+        "response_id": "resp_09bbdf00560d3c9f016a9ada106f5087d2a160f6702bef460b",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 373,
+        "cached_input_tokens": 0,
+        "output_tokens": 606,
+        "billable_output_tokens": 606,
+        "reasoning_tokens": 516,
+        "total_tokens": 979,
+        "latency_ms": 13279,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-b1-01",
+      "output": "Residents who would like a community garden plot can apply online. Applications are open until 30 April. Each plot costs £25 for the year. If the number of applications is higher than the number of plots available, the plots will not be given out in the order that people apply. Instead, applicants’ names will be selected at random. This means that everyone who applies before the deadline has a chance of getting a plot. Residents should apply online by 30 April if they are interested.",
+      "generation": {
+        "response_id": "resp_0db53f7392f47106016a9ada1dbae487d29b9feaf88ee3c5e0",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 363,
+        "cached_input_tokens": 0,
+        "output_tokens": 370,
+        "billable_output_tokens": 370,
+        "reasoning_tokens": 266,
+        "total_tokens": 733,
+        "latency_ms": 8236,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-b1-01",
+      "output": "Einwohner können sich bis zum 30. April online für ein Beet im Gemeinschaftsgarten bewerben. Die Bewerbung muss also spätestens an diesem Tag online eingereicht werden. Ein Beet kostet 25 Euro pro Jahr. Wenn mehr Bewerbungen eingehen, als Beete vorhanden sind, entscheidet der Zufall. Die Namen der Bewerber werden dann zufällig ausgewählt. So hat jede Person bei der Auswahl die gleiche Chance. Wer Interesse an einem Beet hat, sollte die Online-Bewerbung rechtzeitig abschicken und beachten, dass die jährlichen Kosten 25 Euro betragen.",
+      "generation": {
+        "response_id": "resp_04ab96d9de18165b016a9ada25f72c87d28e51538c3cc2877b",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 378,
+        "cached_input_tokens": 0,
+        "output_tokens": 464,
+        "billable_output_tokens": 464,
+        "reasoning_tokens": 342,
+        "total_tokens": 842,
+        "latency_ms": 9727,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-b2-01",
+      "output": "From 1 November, staff may work remotely for up to three days each week. Each team will choose two shared office days when all team members are expected to attend the workplace. This arrangement is intended to ensure that teams have regular time together while allowing remote working during the rest of the week.\n\nStaff should plan their working week around the two office days agreed by their team. If someone needs an exception to the usual arrangement, they must discuss it with their team lead and receive agreement in advance. Exceptions will therefore be considered at team level rather than applied automatically.\n\nThe policy will operate for six months from its start date. After this period, it will be reviewed. Further information will be provided following the review.",
+      "generation": {
+        "response_id": "resp_06ef602215e4a88c016a9ada2feeb887d2bf1aef9016eee04f",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 376,
+        "cached_input_tokens": 0,
+        "output_tokens": 193,
+        "billable_output_tokens": 193,
+        "reasoning_tokens": 45,
+        "total_tokens": 569,
+        "latency_ms": 6300,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-b2-01",
+      "output": "**Interne Information zum mobilen Arbeiten**\n\nAb dem 1. November gilt eine neue Regelung zum mobilen Arbeiten. Beschäftigte dürfen an bis zu drei Tagen pro Woche mobil arbeiten. Die übrigen Arbeitstage finden im Büro statt.\n\nJedes Team legt zwei gemeinsame Bürotage fest. An diesen Tagen arbeiten alle Mitglieder des Teams zusammen im Büro. So gibt es innerhalb jedes Teams feste Tage mit gemeinsamer Anwesenheit. Welche beiden Wochentage dafür vorgesehen sind, entscheidet das jeweilige Team.\n\nAusnahmen von dieser Regelung müssen mit der zuständigen Teamleitung vereinbart werden. Dies betrifft sowohl die Anzahl der mobilen Arbeitstage als auch die festgelegten gemeinsamen Bürotage.\n\nDie Regelung gilt zunächst für einen Zeitraum von sechs Monaten. Nach Ablauf dieser sechs Monate wird sie überprüft. Bis zu dieser Überprüfung bleiben die genannten Vorgaben gültig.",
+      "generation": {
+        "response_id": "resp_0e6439ee8436faf4016a9ada35e85087d29455450986d35085",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 390,
+        "cached_input_tokens": 0,
+        "output_tokens": 438,
+        "billable_output_tokens": 438,
+        "reasoning_tokens": 260,
+        "total_tokens": 828,
+        "latency_ms": 9156,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-c1-01",
+      "output": "The council is consulting on a proposal to remove private cars from the town centre at weekends. Supporters argue that restricting traffic would create quieter streets and provide more room for pedestrians, making the central area less dominated by vehicles. From this perspective, the change would prioritise people on foot and alter how public space is used during the weekend.\n\nHowever, opponents are concerned that the restriction could make the centre harder to reach. In particular, they question how older residents would manage access and how deliveries would be carried out if private cars were excluded.\n\nTo address these concerns, the proposal includes two car parks on the edge of the centre, together with a free shuttle service. These measures are intended to offer an alternative way of completing the journey. The consultation therefore weighs the potential benefits of calmer, more pedestrian-friendly streets against possible difficulties involving mobility and practical access. Its central issue is whether the proposed parking and shuttle arrangements would balance those competing needs.",
+      "generation": {
+        "response_id": "resp_0a4aa62513a4a5ac016a9ada3f1e8c87d2b45c99ff21162ca4",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 382,
+        "cached_input_tokens": 0,
+        "output_tokens": 610,
+        "billable_output_tokens": 610,
+        "reasoning_tokens": 418,
+        "total_tokens": 992,
+        "latency_ms": 12225,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-c1-01",
+      "output": "Im Rahmen einer kommunalen Konsultation wird geprüft, ob private Autos am Wochenende aus der Innenstadt ausgeschlossen werden sollen. Die Befürworter verbinden mit dieser Maßnahme vor allem die Aussicht auf ruhigere Straßen und eine stärkere Nutzung des öffentlichen Raums durch Fußgänger. Aus ihrer Sicht könnte der Verzicht auf privaten Autoverkehr an diesen Tagen dazu beitragen, den Fußgängern mehr Platz einzuräumen.\n\nKritiker verweisen hingegen auf mögliche Schwierigkeiten beim Zugang zur Innenstadt. Besonders ältere Menschen könnten betroffen sein, wenn sie nicht mit dem eigenen Auto ins Zentrum gelangen können. Darüber hinaus bestehen Bedenken hinsichtlich der Lieferungen, die trotz des Ausschlusses weiterhin ermöglicht werden müssten.\n\nAls Ausgleich sind zwei Parkplätze am Stadtrand sowie ein kostenloser Shuttle vorgesehen. Damit soll eine Alternative zur direkten Einfahrt mit dem Privatwagen geschaffen werden. Der zentrale Zielkonflikt besteht somit zwischen einer ruhigeren, fußgängerfreundlicheren Innenstadt und der Sicherung eines praktikablen Zugangs für ältere Menschen sowie für Lieferungen. Die Konsultation muss daher abwägen, ob die vorgeschlagenen Ersatzangebote ausreichen, um die erwarteten Vorteile mit den geäußerten Zugangsbedenken in Einklang zu bringen.",
+      "generation": {
+        "response_id": "resp_040d02d8a5f81d08016a9ada4b867487d2a7b885ea43a977f3",
+        "response_model": "gpt-5.6-sol",
+        "response_status": "completed",
+        "input_tokens": 411,
+        "cached_input_tokens": 0,
+        "output_tokens": 757,
+        "billable_output_tokens": 757,
+        "reasoning_tokens": 500,
+        "total_tokens": 1168,
+        "latency_ms": 15362,
+        "attempts": 1
+      }
+    }
+  ]
+}
