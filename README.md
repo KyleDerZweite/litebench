@@ -29,9 +29,12 @@ panel method and limitations.
 The site uses [SkateBench](https://github.com/T3-Content/skatebench/tree/main/visualizer)
 styling with the [DeepSWE](https://deepswe.datacurve.ai/) layout. One chart
 plots score against average cost, output tokens, or latency. Lines connect the
-reasoning levels for each model. Vertical bars show one population standard
-deviation across the three judge averages. Hovering a point shows all three.
-The table below shows either the best level per model or every level.
+reasoning levels for each model. The table and run details show the population
+standard deviation across the three judge averages alongside the aggregate
+score. Hovering a point mutes the other models and shows all three judge scores.
+`Configs` filters individual reasoning levels. The table shows either the best
+level per model or every level, and `View` opens the prompt, output, and judge
+notes for each task.
 
 All scores run from 0.00 to 100.00. When scores tie, `Best` picks the lower
 reasoning level.
@@ -41,8 +44,8 @@ Choosing a threshold after seeing the results would bias it.
 
 Cost is estimated for candidate generation only. `bench.py` combines recorded
 token counts with the model rates saved in [`pricing.json`](pricing.json) from
-[models.dev](https://models.dev/api.json). The estimate excludes cache
-discounts, proxy fees, and judge calls.
+[models.dev](https://models.dev/api.json), captured 2026-09-04. The estimate
+excludes cache discounts, proxy fees, and judge calls.
 
 ## Panel scoring
 

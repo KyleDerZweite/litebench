@@ -22,6 +22,8 @@ PANEL_SUITES = {
     "naturalbench": ("NaturalBench Lite", "Naturalness score"),
     "cefrbench": ("CEFRBench Lite", "CEFR fit score"),
 }
+DETAIL_GENERATION_FIELDS = ("input_tokens", "output_tokens", "total_tokens", "latency_ms")
+DETAIL_JUDGMENT_FIELDS = ("score", "brief_ok", "realized_cefr", "issues", "note")
 SCALE_FIELDS = ("copy_quality", "naturalness", "cefr_fit")
 BOOL_FIELDS = ("facts_ok", "would_use")
 
@@ -391,6 +393,89 @@ def panel_paths(evaluation_id):
     return sorted(ROOT.glob(f"benches/*/evaluations/{evaluation_id}/*.json"))
 
 
+def run_detail_items(path, data, tasks):
+    """Join one panel evaluation to its generation records for the static site."""
+    expected_ids = {task["id"] for task in tasks}
+    evaluation_items = data.get("items", [])
+    evaluation_by_id = {item["task_id"]: item for item in evaluation_items}
+    if set(evaluation_by_id) != expected_ids:
+        missing = sorted(expected_ids - set(evaluation_by_id))
+        extra = sorted(set(evaluation_by_id) - expected_ids)
+        details = []
+        if missing:
+            details.append(f"missing {', '.join(missing)}")
+        if extra:
+            details.append(f"unknown {', '.join(extra)}")
+        raise ValueError(f"{path}: evaluation task ids do not match task set ({'; '.join(details)})")
+
+    source_file = data.get("evaluation", {}).get("source_file")
+    if not isinstance(source_file, str) or not source_file:
+        raise ValueError(f"{path}: evaluation.source_file is required")
+    source_path = (ROOT / source_file).resolve()
+    if not source_path.is_relative_to(ROOT) or not source_path.exists():
+        raise ValueError(f"{path}: evaluation.source_file is missing or outside the repository")
+    generation_data = read_json(source_path)
+    generation_items = generation_data.get("items") if isinstance(generation_data, dict) else None
+    if not isinstance(generation_items, list):
+        raise ValueError(f"{source_path}: expected an items list")
+    generation_by_id = {}
+    for item in generation_items:
+        task_id = item.get("task_id") if isinstance(item, dict) else None
+        if not isinstance(task_id, str) or not task_id:
+            raise ValueError(f"{source_path}: every generation item needs a task_id")
+        if task_id in generation_by_id:
+            raise ValueError(f"{source_path}: duplicate task id {task_id}")
+        generation_by_id[task_id] = item
+    if set(generation_by_id) != expected_ids:
+        missing = sorted(expected_ids - set(generation_by_id))
+        extra = sorted(set(generation_by_id) - expected_ids)
+        details = []
+        if missing:
+            details.append(f"missing {', '.join(missing)}")
+        if extra:
+            details.append(f"unknown {', '.join(extra)}")
+        raise ValueError(f"{source_path}: generation task ids do not match task set ({'; '.join(details)})")
+
+    joined = []
+    for task in tasks:
+        task_id = task["id"]
+        generated = generation_by_id[task_id]
+        output = generated.get("output")
+        if not isinstance(output, str):
+            raise ValueError(f"{source_path}: {task_id}.output must be a string")
+        generation = generated.get("generation")
+        if not isinstance(generation, dict):
+            generation = {}
+        generation_detail = {field: generation.get(field) for field in DETAIL_GENERATION_FIELDS}
+        evaluation_item = evaluation_by_id[task_id]
+        judgments = {}
+        for judge_id, judgment in evaluation_item["judgments"].items():
+            if not isinstance(judgment, dict):
+                raise ValueError(f"{path}: {task_id}.{judge_id} must be an object")
+            issues = judgment.get("issues", [])
+            if not isinstance(issues, list):
+                raise ValueError(f"{path}: {task_id}.{judge_id}.issues must be a list")
+            parsed_issues = []
+            for issue in issues:
+                if not isinstance(issue, dict):
+                    raise ValueError(f"{path}: {task_id}.{judge_id}.issues must contain objects")
+                parsed_issues.append({"code": issue.get("code", ""), "evidence": issue.get("evidence", "")})
+            judgments[judge_id] = {
+                field: (parsed_issues if field == "issues" else judgment.get(field))
+                for field in DETAIL_JUDGMENT_FIELDS
+            }
+        joined.append({
+            "task_id": task_id,
+            "output": output,
+            "generation": generation_detail,
+            "score": evaluation_item["score"],
+            "judge_stddev": evaluation_item["judge_stddev"],
+            "brief_ok_votes": evaluation_item["brief_ok_votes"],
+            "judgments": judgments,
+        })
+    return joined
+
+
 def command_panel_check(args):
     paths = [Path(path) for path in args.paths] or panel_paths(args.evaluation)
     if not paths:
@@ -428,6 +513,10 @@ def command_build(args):
     if not paths:
         raise ValueError(f"No panel evaluations found for {args.evaluation}")
     rows = {suite: [] for suite in PANEL_SUITES}
+    suite_tasks = {
+        suite: load_tasks(ROOT / "benches" / suite / "public.json")[1]
+        for suite in PANEL_SUITES
+    }
     panel = None
     valid = True
     for path in paths:
@@ -445,13 +534,16 @@ def command_build(args):
             valid = False
             print(f"{path}: evaluator protocol does not match the other runs", file=sys.stderr)
             continue
-        suite = Path(evaluation["source_file"]).parts[1]
+        source_file = evaluation.get("source_file")
+        source_parts = Path(source_file).parts if isinstance(source_file, str) else ()
+        suite = source_parts[1] if len(source_parts) > 1 and source_parts[0] == "benches" else ""
         if suite not in rows:
             valid = False
             print(f"{path}: unknown suite {suite}", file=sys.stderr)
             continue
         summary = dict(data["summary"])
         summary["file"] = path.relative_to(ROOT).as_posix()
+        summary["items"] = run_detail_items(path, data, suite_tasks[suite])
         rows[suite].append(summary)
     if not valid:
         return 1
@@ -471,11 +563,14 @@ def command_build(args):
     }
     for suite, suite_rows in rows.items():
         name, score_label = PANEL_SUITES[suite]
-        _, tasks = load_tasks(ROOT / "benches" / suite / "public.json")
         payload["suites"][suite] = {
             "name": name,
             "score_label": score_label,
-            "task_count": len(tasks),
+            "task_count": len(suite_tasks[suite]),
+            "tasks": [
+                {"id": task["id"], "title": task.get("title", ""), "prompt": task["prompt"]}
+                for task in suite_tasks[suite]
+            ],
             "runs": sorted(
                 suite_rows,
                 key=lambda row: (-row["score"], row["model"], row["reasoning_effort"]),
