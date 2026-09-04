@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "run": {
+    "model": "gpt-5.6-terra",
+    "provider": "KyleHub AI Proxy (CPAMP)",
+    "model_version": "gpt-5.6-terra",
+    "date": "2026-09-04",
+    "task_set": "public-0.1",
+    "temperature": null,
+    "system_prompt": "",
+    "evaluator": "gpt-5.6-sol max (AI provisional)",
+    "reasoning_effort": "high",
+    "max_output_tokens": 5000,
+    "service_tier": "provider default",
+    "invocation": "direct OpenAI Responses-compatible API",
+    "human_evaluation": false,
+    "evaluation_type": "ai_provisional",
+    "evaluation": {
+      "judge_model": "gpt-5.6-sol",
+      "judge_reasoning_effort": "max",
+      "judge_prompt_version": "ai-provisional-independent-v0.2",
+      "judge_prompt_sha256": "4035936bdd5d2b8a400f8f39d741119588a1fcd32ace4e124619f4d467925d78",
+      "independent_call_per_answer": true,
+      "model_and_effort_blinded": true,
+      "human_validated": false,
+      "date": "2026-09-04"
+    }
+  },
+  "items": [
+    {
+      "task_id": "public-de-product-a2-01",
+      "output": "**Frisches Mittagessen für unterwegs**\n\nDiese isolierte Lunchbox ist gut für Ihren Arbeitstag. Sie hält Ihr Essen bis zu 6 Stunden kühl. Die Box fasst 1,2 Liter. So haben Sie genug Platz für Ihr Mittagessen. Der Einsatz kann herausgenommen werden. Nach dem Essen darf die Lunchbox in die Spülmaschine. Das macht die Reinigung einfach. Nehmen Sie Ihr Mittagessen mit zur Arbeit und probieren Sie die Lunchbox aus!",
+      "scores": {
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
+      },
+      "notes": "AI provisional: Die klare, einfache Beschreibung erfüllt Format und Länge, ergänzt mit „genug Platz“ jedoch eine nicht ausdrücklich belegte Aussage.",
+      "generation": {
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 427,
+        "output_tokens": 422,
+        "total_tokens": 849,
+        "latency_ms": 9099,
+        "attempts": 1,
+        "max_output_tokens": 5000
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 942,
+        "output_tokens": 776,
+        "total_tokens": 1718,
+        "latency_ms": 15906,
+        "attempts": 1,
+        "max_output_tokens": 6000
+      }
+    },
+    {
+      "task_id": "public-en-product-a2-01",
+      "output": "**Fresh Lunch, Easy Day**\n\nTake your lunch to work with this insulated lunch box. It keeps food cool for up to 6 hours. The box holds 1.2 litres, so there is space for your meal. It has a removable insert for easy use. After lunch, you can put it in the dishwasher. Enjoy a cool, simple lunch at work—get yours today!",
+      "scores": {
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
+      },
+      "notes": "AI provisional: Strong, clear A2 copy, but “for easy use” adds an unsupported benefit.",
+      "generation": {
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 401,
+        "output_tokens": 83,
+        "total_tokens": 484,
+        "latency_ms": 2933,
+        "attempts": 1,
+        "max_output_tokens": 5000
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 899,
+        "output_tokens": 562,
+        "total_tokens": 1461,
+        "latency_ms": 12579,
+        "attempts": 1,
+        "max_output_tokens": 6000
+      }
+    },
+    {
+      "task_id": "public-de-landing-b1-01",
+      "output": "**Dein Auto, wenn du es brauchst – in Leipzig**\n\nBuche dein Carsharing-Auto einfach per App. Ohne monatliche Grundgebühr und rund um die Uhr verfügbar.\n\n- Ab 0,31 € pro Minute  \n- Buchung schnell per App  \n- Auto nutzen, wenn es zu deinem Alltag passt  \n\n**Jetzt Auto in der App buchen**",
+      "scores": {
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
+      },
+      "notes": "AI provisional: Die klare, passende Struktur überzeugt, aber „einfach“ und „schnell“ sind unbelegte Zusatzversprechen.",
+      "generation": {
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 421,
+        "output_tokens": 77,
+        "total_tokens": 498,
+        "latency_ms": 3589,
+        "attempts": 1,
+        "max_output_tokens": 5000
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 922,
+        "output_tokens": 584,
+        "total_tokens": 1506,
+        "latency_ms": 12508,
+        "attempts": 1,
+        "max_output_tokens": 6000
+      }
+    },
+    {
+      "task_id": "public-en-landing-b1-01",
+      "output": "**A car when you need one**\n\nFor Manchester adults who only need a car sometimes. Book through the app, with prices from £0.28 per minute.\n\n- Cars available 24/7  \n- No monthly fee  \n- Simple app booking  \n\n**Join the car club**",
+      "scores": {
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
+      },
+      "notes": "AI provisional: Concise, clear and well structured, but “simple app booking” adds an unsupported ease claim.",
+      "generation": {
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 412,
+        "output_tokens": 180,
+        "total_tokens": 592,
+        "latency_ms": 5151,
+        "attempts": 1,
+        "max_output_tokens": 5000
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 898,
+        "output_tokens": 374,
+        "total_tokens": 1272,
+        "latency_ms": 8357,
+        "attempts": 1,
+        "max_output_tokens": 6000
+      }
+    },
+    {
+      "task_id": "public-de-social-b2-01",
+      "output": "Deine Sneaker brauchen eine Pause vom Berliner Alltag? 👟\n\nWir holen deine Schuhe in Berlin ab und bringen sie sauber innerhalb von 48 Stunden zurück.  \nFestpreis: 24 € pro Paar.  \n\nBei deiner ersten Buchung bekommst du 10 % Rabatt.  \n\nBuche jetzt deine Reinigung und lass deine Sneaker wieder gepflegt aussehen.",
+      "scores": {
+        "copy_quality": 5,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": true,
+        "would_use": true
+      },
+      "notes": "AI provisional: Klar, knapp und briefgetreu; nur die Wortstellung in „sauber innerhalb von 48 Stunden zurück“ wirkt leicht holprig.",
+      "generation": {
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 431,
+        "output_tokens": 110,
+        "total_tokens": 541,
+        "latency_ms": 3746,
+        "attempts": 1,
+        "max_output_tokens": 5000
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 930,
+        "output_tokens": 444,
+        "total_tokens": 1374,
+        "latency_ms": 11265,
+        "attempts": 1,
+        "max_output_tokens": 6000
+      }
+    },
+    {
+      "task_id": "public-en-social-b2-01",
+      "output": "Your trainers, cleaned without leaving home. 👟\n\nBook collection and return anywhere in London for a fixed £22 per pair. Your trainers will be returned within 48 hours, and you’ll get 10% off your first booking.\n\nKeep your favourite pair ready for city life.\n\nBook your first clean today.",
+      "scores": {
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
+      },
+      "notes": "AI provisional: Clear, concise and well pitched, but “without leaving home” is unsupported and the two booking imperatives weaken the single-CTA requirement.",
+      "generation": {
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 407,
+        "output_tokens": 67,
+        "total_tokens": 474,
+        "latency_ms": 2758,
+        "attempts": 1,
+        "max_output_tokens": 5000
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 893,
+        "output_tokens": 725,
+        "total_tokens": 1618,
+        "latency_ms": 14908,
+        "attempts": 1,
+        "max_output_tokens": 6000
+      }
+    },
+    {
+      "task_id": "public-de-email-c1-01",
+      "output": "**Betreff:** Der nächste Schritt für Ihr Projekt: Teammitglied einladen\n\nSie haben bereits ein Projekt in [Produktname] angelegt – ein guter Ausgangspunkt, um die Zusammenarbeit in Ihrer Agentur klar zu strukturieren. Der nächste sinnvolle Schritt ist eine erste Einladung: Holen Sie beispielsweise die Person dazu, die Aufgaben koordiniert oder Kundenanforderungen mitbearbeitet.\n\nDie Einladung erfolgt per E-Mail. Dabei legen Sie direkt fest, ob das Teammitglied das Projekt lediglich „Ansehen“ oder auch „Bearbeiten“ darf. So können Sie die Zusammenarbeit passend zu Ihren Zuständigkeiten starten, ohne mehr Zugriff zu vergeben als nötig.\n\nIhre Testphase läuft noch 14 Tage. Wenn Sie möchten, beginnen Sie bewusst klein: Laden Sie zunächst nur eine Person zu einem bereits angelegten Projekt ein. Nutzen Sie die verbleibende Zeit, um den gemeinsamen Einstieg in einem konkreten Projekt auszuprobieren und zu prüfen, wie sich Ihre aktuelle Projektarbeit im Team abbilden lässt.\n\n**CTA:** Teammitglied einladen",
+      "scores": {
+        "copy_quality": 5,
+        "naturalness": 5,
+        "cefr_fit": 5,
+        "facts_ok": true,
+        "would_use": true
+      },
+      "notes": "AI provisional: Die E-Mail erfüllt Format, Wortumfang und Ton präzise und führt mit konkreten, ausschließlich erlaubten Produktangaben überzeugend zur ersten Einladung.",
+      "generation": {
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 448,
+        "output_tokens": 902,
+        "total_tokens": 1350,
+        "latency_ms": 17915,
+        "attempts": 1,
+        "max_output_tokens": 5000
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 1082,
+        "output_tokens": 1108,
+        "total_tokens": 2190,
+        "latency_ms": 22048,
+        "attempts": 1,
+        "max_output_tokens": 6000
+      }
+    },
+    {
+      "task_id": "public-en-email-c1-01",
+      "output": "**Subject:** Your next project step: invite a teammate\n\nYou have already set up a project in [Product], giving your agency work a clear starting point. The next useful step is to invite the person who will help move it forward.\n\nYour trial has 14 days remaining. Invitations are sent by email, and you can choose the access level that fits their involvement: **View** for someone who needs visibility, or **Edit** for someone who will contribute directly.\n\nFor a small agency, starting with one colleague is a straightforward way to bring another perspective into the project. Consider who needs to see the work, who needs to make changes, and send the invitation when it suits your current priorities.\n\nReturn to your account and make your first invitation before your trial ends.\n\n**CTA:** Invite your first team member",
+      "scores": {
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": true,
+        "would_use": true
+      },
+      "notes": "AI provisional: Clear, compliant and appropriately measured, with only the slightly unidiomatic phrase “make your first invitation” needing revision.",
+      "generation": {
+        "response_model": "gpt-5.6-terra",
+        "response_status": "completed",
+        "input_tokens": 431,
+        "output_tokens": 439,
+        "total_tokens": 870,
+        "latency_ms": 9976,
+        "attempts": 1,
+        "max_output_tokens": 5000
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 1019,
+        "output_tokens": 1619,
+        "total_tokens": 2638,
+        "latency_ms": 30791,
+        "attempts": 1,
+        "max_output_tokens": 6000
+      }
+    }
+  ]
+}

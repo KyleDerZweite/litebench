@@ -314,8 +314,8 @@
       </div>
       <div class="system" aria-label="Benchmark status">
         <span>system</span><b>public</b>
-        <span>models</span><b id="model-count">—</b>
-        <span>total runs</span><b id="run-count">—</b>
+        <span>models</span><b id="model-count">...</b>
+        <span>total runs</span><b id="run-count">...</b>
       </div>
     </header>
 
@@ -330,7 +330,7 @@
       </div>
 
       <div class="filter-wrap" id="filter-wrap">
-        <button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-menu">Filter models [—/—]</button>
+        <button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-menu">Filter models [.../...]</button>
         <div class="filter-menu" id="filter-menu" hidden>
           <div class="filter-title">
             <span class="micro">Models</span>
@@ -348,10 +348,10 @@
     <section class="panel" role="tabpanel" aria-live="polite">
       <header class="panel-head">
         <h2 id="view-title">Copy quality distribution</h2>
-        <p class="micro" id="view-subtitle">Human rating across 8 public briefs · higher is better</p>
+        <p class="micro" id="view-subtitle">AI-provisional Sol max rubric score across 8 public briefs · higher is better</p>
       </header>
-      <div class="notice" id="notice" hidden>
-        <b>Human review pending.</b>
+      <div class="notice" id="notice">
+        <b>AI scores only.</b>
         <span id="notice-text"></span>
       </div>
       <div id="chart-view">
@@ -381,7 +381,7 @@
     </section>
 
     <footer>
-      <span>Raw output ≠ human evaluation · unrated runs never rank</span>
+      <span>AI-provisional scores · no human validation</span>
       <span><a href="https://github.com/KyleDerZweite/copybench-lite" target="_blank" rel="noreferrer">GitHub / source ↗</a></span>
     </footer>
   </main>
@@ -391,37 +391,37 @@
     const views = {
       copy_quality: {
         title: "Copy quality distribution",
-        subtitle: "Human rating across 8 public briefs · higher is better",
+        subtitle: "AI-provisional Sol max rubric score across 8 public briefs · higher is better",
         max: 5,
         suffix: " / 5"
       },
       naturalness: {
         title: "Naturalness distribution",
-        subtitle: "Perceived specificity, idiom and non-formulaic voice · higher is better",
+        subtitle: "AI-provisional Sol max naturalness score · higher is better",
         max: 5,
         suffix: " / 5"
       },
       cefr_fit: {
         title: "CEFR fit distribution",
-        subtitle: "Match to the requested A2–C1 language level · higher is better",
+        subtitle: "AI-provisional Sol max CEFR-fit score · higher is better",
         max: 5,
         suffix: " / 5"
       },
       facts_ok_pct: {
         title: "Factual discipline",
-        subtitle: "Outputs without unsupported claims · higher is better",
+        subtitle: "AI-provisional Sol max unsupported-claim check · higher is better",
         max: 100,
         suffix: "%"
       },
       would_use_pct: {
         title: "Would-use rate",
-        subtitle: "Usable after at most ten minutes of editing · higher is better",
+        subtitle: "AI-provisional Sol max usability decision · higher is better",
         max: 100,
         suffix: "%"
       },
       matrix: {
         title: "Result matrix",
-        subtitle: "All evaluation dimensions · raw runs remain visible but unranked"
+        subtitle: "All AI-provisional Sol max scores · no human validation"
       }
     };
     const state = { data: null, view: "copy_quality", selected: new Set() };
@@ -451,6 +451,18 @@
 
     function modelNames() {
       return [...new Set(state.data.runs.map(function (run) { return run.model; }))].sort();
+    }
+
+    function runName(run) {
+      return run.model + (run.reasoning_effort ? " [" + run.reasoning_effort + "]" : "");
+    }
+
+    function evaluationLabel(run) {
+      if (run.human_evaluation) return run.rated + "/" + run.total + " human-rated";
+      if (run.evaluation_type === "ai_provisional") {
+        return run.rated + "/" + run.total + " AI-provisional · no human validation";
+      }
+      return run.rated ? run.rated + "/" + run.total + " self-reported" : "awaiting evaluation";
     }
 
     function filteredRuns() {
@@ -483,11 +495,12 @@
     }
 
     function renderNotice(runs) {
-      const pending = runs.filter(function (run) { return !run.rated; }).length;
-      document.querySelector("#notice").hidden = pending === 0;
-      document.querySelector("#notice-text").textContent = " " + pending +
-        (pending === 1 ? " run has" : " runs have") +
-        " raw AI outputs without human ratings and cannot enter the charts.";
+      const provisional = runs.filter(function (run) { return run.evaluation_type === "ai_provisional"; }).length;
+      const human = runs.filter(function (run) { return run.human_evaluation; }).length;
+      document.querySelector("#notice").hidden = runs.length === 0;
+      document.querySelector("#notice-text").textContent = " " + provisional +
+        (provisional === 1 ? " selected run uses" : " selected runs use") +
+        " independent GPT-5.6 Sol max judgments. " + human + " have human validation.";
     }
 
     function renderChart(runs) {
@@ -507,8 +520,8 @@
         row.style.setProperty("--row-color", color);
         row.appendChild(node("span", "rank", String(index + 1).padStart(2, "0")));
 
-        const model = node("span", "model", run.model);
-        model.appendChild(node("small", "", [run.provider, run.model_version].filter(Boolean).join(" · ")));
+        const model = node("span", "model", runName(run));
+        model.appendChild(node("small", "", [run.provider, evaluationLabel(run)].filter(Boolean).join(" · ")));
         row.appendChild(model);
 
         const track = node("span", "track");
@@ -532,11 +545,8 @@
       runs.forEach(function (run) {
         const row = document.createElement("tr");
         const model = node("td", "matrix-model");
-        model.appendChild(node("strong", "", run.model));
-        const status = run.rated
-          ? run.rated + "/" + run.total + " human-rated"
-          : run.generated + " raw outputs · awaiting human review";
-        model.appendChild(node("small", "", [run.provider, run.model_version, status].filter(Boolean).join(" · ")));
+        model.appendChild(node("strong", "", runName(run)));
+        model.appendChild(node("small", "", [run.provider, evaluationLabel(run)].filter(Boolean).join(" · ")));
         row.appendChild(model);
         scoreCell(row, run.copy_quality, "copy_quality");
         scoreCell(row, run.naturalness, "naturalness");
@@ -553,7 +563,7 @@
           link.rel = "noreferrer";
           raw.appendChild(link);
         } else {
-          raw.textContent = "—";
+          raw.textContent = "-";
         }
         row.appendChild(raw);
         matrixBody.appendChild(row);

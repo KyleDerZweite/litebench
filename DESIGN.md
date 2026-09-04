@@ -11,7 +11,7 @@ unaffordable once the goal changes from a publication-grade benchmark to:
 > editing and no invented facts?
 
 That question can be answered directionally with a small prompt set, honest
-raw outputs, and one consistent human evaluator.
+raw outputs, and transparent evaluation provenance.
 
 ## What survived the research
 
@@ -30,8 +30,8 @@ raw outputs, and one consistent human evaluator.
 | A1–C2 full matrix | A2, B1, B2, C1 | The useful middle; A1/C2 add edge-case cost |
 | Writing and speech | Writing only | Speech evaluates an LLM + TTS system and needs a new rubric |
 | Human control corpus | None | Needed for scientific human-vs-AI claims, not model selection |
-| Expert and naive rater panels | One named evaluator | Personal preference is the actual target signal |
-| LLM judge ensemble | Manual ratings | Cheaper and avoids judge-model preference becoming truth |
+| Expert and naive rater panels | No panel | Personal preference is the eventual target signal |
+| LLM judge ensemble | One blinded judge call per output | Cheap first pass with judge bias clearly labelled |
 | AI-text detectors | None | They do not measure quality and can penalize L2 writing |
 | Dynamic rubrics | Five fixed fields | Easier to understand and compare over time |
 | Elo, confidence intervals, Rasch models | Raw means and rates | Eight tasks cannot support fake statistical precision |
@@ -70,9 +70,15 @@ copy quality | naturalness | CEFR fit | facts okay % | would use %
 ```
 
 Ratings are subjective by design. Consistency matters more than pretending
-they are objective. For a fair comparison, rate outputs in a shuffled copy of
-the files with model names hidden. A second evaluator may add a separate run;
-do not average people with different needs without showing who they were.
+they are objective. The first published batch uses a separate `gpt-5.6-sol`
+max-reasoning call for each answer. The candidate model and reasoning effort
+were hidden from the judge. The exact prompt is committed at
+`data/judge-ai-provisional-v0.2.txt`. These scores are provisional and have no
+human validation.
+
+For a human comparison, rate outputs in a shuffled copy of the files with model
+names hidden. Add human ratings as separate runs and do not average evaluators
+with different needs without showing who they were.
 
 ## Result presentation
 
@@ -124,21 +130,22 @@ A result PR should contain:
 - one raw output for every public task;
 - exact model/provider/date and known generation settings;
 - one evaluator name or handle;
-- either all ratings plus an evaluator, or all-null ratings clearly marked as
-  awaiting human review;
+- either all ratings plus transparent evaluator metadata, or all-null ratings
+  clearly marked as awaiting review;
 - regenerated static leaderboard data.
 
 Maintainers review schema and obvious protocol violations, not whether a
 subjective rating is "correct." Competing evaluations can coexist as separate
-runs. Unrated runs remain visible as raw evidence but are excluded from metric
-rankings. Verified hidden runs are a maintainer annotation, not something a
-contributor can self-assert.
+runs. AI ratings must be labelled provisional and must not imply human
+validation. Unrated runs remain visible as raw evidence but are excluded from
+metric rankings. Verified hidden runs are a maintainer annotation, not
+something a contributor can self-assert.
 
 ## Cost ceiling
 
 Infrastructure cost is zero: Python standard library plus GitHub Pages. The
-only monetary cost is model generation. Human cost is the evaluator's time.
-No paid annotation or hosted database is needed for V0.
+only monetary cost is model generation and optional judge calls. No paid
+annotation or hosted database is needed for V0.
 
 ## Add things only when pain proves the need
 

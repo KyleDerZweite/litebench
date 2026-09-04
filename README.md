@@ -1,21 +1,23 @@
 # CopyBench Lite
 
 A tiny, bilingual copywriting smoke test for choosing models you would actually
-use. It is a personal decision aid first and a community dataset second—not a
+use. It is a personal decision aid first and a community dataset second, not a
 scientific claim about the "best" writing model.
 
 Live dashboard: <https://kylederzweite.github.io/copybench-lite/>
 
-> **Current limitation:** A generated run can be published before human review,
-> but it is labelled **unrated** and excluded from every metric ranking. Raw AI
-> output is evidence of a run, not evidence of quality.
+> **Current limitation:** The dashboard contains 15 runs and 120 outputs. Every
+> output was scored in a separate, blinded `gpt-5.6-sol` max-reasoning call.
+> These ratings are **AI-provisional** and none have been human-validated.
 
 V0 deliberately contains only:
 
 - 8 public writing tasks: 4 localized DE/EN pairs across A2, B1, B2, and C1
-- 1 output per task and model
+- 3 GPT-5.6 model variants across low, medium, high, xhigh, and max reasoning
+- 1 output per task and model configuration
 - 3 separate 1–5 ratings plus 2 practical yes/no checks
 - raw outputs and run metadata in reviewable JSON files
+- transparent evaluator metadata and the exact provisional [judge prompt](data/judge-ai-provisional-v0.2.txt)
 - a dependency-free Python helper and a static GitHub Pages site
 - a small, local-only hidden canary set
 
@@ -28,12 +30,14 @@ single magic score. The reasoning is in [DESIGN.md](DESIGN.md).
 |---|---|
 | `copy_quality` | Is the copy clear, useful, persuasive, and on-brief? |
 | `naturalness` | Does it sound specific, idiomatic, and non-formulaic? |
-| `cefr_fit` | Does the language fit the requested level—not merely look advanced? |
+| `cefr_fit` | Does the language fit the requested level, not merely look advanced? |
 | `facts_ok` | Are all factual claims supported by the brief? |
 | `would_use` | Would you use it after at most ten minutes of editing? |
 
-The three scores stay separate. `naturalness` is a reader impression, not
-proof that text was written by a human.
+The three scores stay separate. `naturalness` is an evaluator impression, not
+proof that text was written by a human. The current dashboard uses one AI judge
+as a cheap first pass. Human ratings should be stored as separate runs rather
+than presented as interchangeable with AI ratings.
 
 Rating anchors:
 
@@ -58,7 +62,7 @@ The second command creates a dated file under `results/`. For every task:
 1. Start from a clean conversation/session.
 2. Send the exact prompt with no extra optimization.
 3. Paste the unedited output into the result file.
-4. Fill in the five ratings, ideally without looking at the model name—or leave
+4. Fill in the five ratings, ideally without looking at the model name, or leave
    every rating `null` and publish the run transparently as awaiting review.
 
 Then validate the file and rebuild the page data:
@@ -80,6 +84,9 @@ from the repository's `/docs` folder; there is no build step.
   system prompt in `run`.
 - Keep the model output byte-for-byte except for JSON escaping.
 - State who rated the run in `run.evaluator`.
+- Mark AI ratings with `evaluation_type: "ai_provisional"` and
+  `human_evaluation: false`. Record the judge model, effort, prompt version, and
+  whether each answer was judged independently.
 - A rerun is a new result file; never replace an older run silently.
 
 One sample is intentionally cheap but noisy. Before making an expensive model
@@ -93,8 +100,9 @@ containing the raw result and updated `docs/leaderboard.json`.
 
 Scores are self-reported unless a maintainer says otherwise. Reviewers can
 inspect every public output, metadata field, and rating. This is collaborative
-evidence, not an audit certificate. Unrated runs are welcome as raw evidence,
-but the site keeps them out of the visual ranking until a human evaluates them.
+evidence, not an audit certificate. The dashboard labels AI scores as
+provisional and exposes whether human validation exists. Unrated runs are
+welcome as raw evidence but stay out of the visual ranking.
 
 ## Hidden canary set
 

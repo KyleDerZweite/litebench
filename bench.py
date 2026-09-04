@@ -136,12 +136,19 @@ def aggregate(data):
         "model": run["model"],
         "provider": run.get("provider", ""),
         "model_version": run.get("model_version", ""),
+        "reasoning_effort": run.get("reasoning_effort", ""),
         "date": run.get("date", ""),
         "evaluator": run.get("evaluator", ""),
+        "evaluation_type": run.get("evaluation_type", ""),
+        "human_evaluation": bool(run.get("human_evaluation", False)),
         "generated": len(generated),
         "rated": len(rated),
         "total": len(items),
-        "status": "scored" if len(rated) == len(items) else "partially_scored" if rated else "unrated",
+        "status": (
+            "human_scored" if len(rated) == len(items) and run.get("human_evaluation")
+            else "ai_scored" if len(rated) == len(items) and run.get("evaluation_type") == "ai_provisional"
+            else "partially_scored" if rated else "unrated"
+        ),
     }
     for field in SCALE_FIELDS:
         summary[field] = round(fmean(item["scores"][field] for item in rated), 2) if rated else None
@@ -155,9 +162,9 @@ def aggregate(data):
 
 def command_prompts(args):
     data, tasks = load_tasks(args.tasks)
-    print(f"CopyBench Lite — {task_set_name(data)} — {len(tasks)} tasks")
+    print(f"CopyBench Lite - {task_set_name(data)} - {len(tasks)} tasks")
     for index, task in enumerate(tasks, 1):
-        print(f"\n[{index}/{len(tasks)}] {task['id']} — {task.get('title', '')}")
+        print(f"\n[{index}/{len(tasks)}] {task['id']} - {task.get('title', '')}")
         print(task["prompt"])
     return 0
 
@@ -213,20 +220,25 @@ def check_file(path):
         return False
     summary = aggregate(data)
     if summary and summary["rated"]:
+        rating_label = (
+            "human" if summary["human_evaluation"]
+            else "AI provisional" if summary["evaluation_type"] == "ai_provisional"
+            else "self-reported"
+        )
         print(
-            f"{path}: OK — {summary['generated']}/{summary['total']} generated, "
-            f"{summary['rated']}/{summary['total']} rated; "
+            f"{path}: OK - {summary['generated']}/{summary['total']} generated, "
+            f"{summary['rated']}/{summary['total']} {rating_label}-rated; "
             f"copy {summary['copy_quality']}/5; natural {summary['naturalness']}/5; "
             f"CEFR {summary['cefr_fit']}/5; facts {summary['facts_ok_pct']}%; "
             f"would use {summary['would_use_pct']}%"
         )
     elif summary:
         print(
-            f"{path}: OK raw run — {summary['generated']}/{summary['total']} generated, "
-            "0 human-rated; excluded from rankings"
+            f"{path}: OK raw run - {summary['generated']}/{summary['total']} generated, "
+            "0 rated; excluded from rankings"
         )
     else:
-        print(f"{path}: OK draft — 0/{len(data['items'])} rated")
+        print(f"{path}: OK draft - 0/{len(data['items'])} rated")
     return True
 
 
@@ -282,7 +294,13 @@ def command_self_test(_args):
     assert task_set_name(task_data) == "public-0.1"
     assert len(tasks) == 8
     sample = {
-        "run": {"model": "test", "task_set": "test-0"},
+        "run": {
+            "model": "test",
+            "task_set": "test-0",
+            "reasoning_effort": "high",
+            "evaluation_type": "ai_provisional",
+            "human_evaluation": False,
+        },
         "items": [
             {
                 "task_id": "one",
@@ -313,6 +331,8 @@ def command_self_test(_args):
     assert summary["generated"] == 2
     assert summary["copy_quality"] == 4
     assert summary["facts_ok_pct"] == 50
+    assert summary["reasoning_effort"] == "high"
+    assert summary["status"] == "ai_scored"
     print("self-test: OK")
     return 0
 

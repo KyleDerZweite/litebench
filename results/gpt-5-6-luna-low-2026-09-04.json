@@ -8,163 +8,287 @@
     "task_set": "public-0.1",
     "temperature": null,
     "system_prompt": "",
-    "evaluator": "",
+    "evaluator": "gpt-5.6-sol max (AI provisional)",
     "reasoning_effort": "low",
     "service_tier": "default",
     "invocation": "direct OpenAI Responses-compatible API",
-    "human_evaluation": false
+    "human_evaluation": false,
+    "max_output_tokens": "1000 first task; 1200 remaining tasks",
+    "evaluation_type": "ai_provisional",
+    "evaluation": {
+      "judge_model": "gpt-5.6-sol",
+      "judge_reasoning_effort": "max",
+      "judge_prompt_version": "ai-provisional-independent-v0.2",
+      "judge_prompt_sha256": "4035936bdd5d2b8a400f8f39d741119588a1fcd32ace4e124619f4d467925d78",
+      "independent_call_per_answer": true,
+      "model_and_effort_blinded": true,
+      "human_validated": false,
+      "date": "2026-09-04"
+    }
   },
   "items": [
     {
       "task_id": "public-de-product-a2-01",
       "output": "### Isolierte Lunchbox für die Arbeit\n\nDiese isolierte Lunchbox ist für Ihr Mittagessen bei der Arbeit. Sie hält Ihr Essen bis zu sechs Stunden kühl. Die Box fasst 1,2 Liter. Der Einsatz ist herausnehmbar. Nach dem Essen können Sie die Lunchbox in die Spülmaschine geben. So ist sie einfach zu reinigen. Nehmen Sie Ihr Mittagessen mit zur Arbeit. Probieren Sie die Lunchbox jetzt gern aus!",
       "scores": {
-        "copy_quality": null,
-        "naturalness": null,
-        "cefr_fit": null,
-        "facts_ok": null,
-        "would_use": null
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
       },
-      "notes": "",
+      "notes": "AI provisional: The copy meets the length, format, and A2 requirements, but “einfach zu reinigen” adds an unsupported ease-of-cleaning claim.",
       "generation": {
         "response_model": "gpt-5.6-luna",
         "input_tokens": 427,
         "output_tokens": 616,
         "total_tokens": 1043,
         "latency_ms": 13523
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 939,
+        "output_tokens": 731,
+        "total_tokens": 1670,
+        "latency_ms": 18133,
+        "attempts": 1,
+        "max_output_tokens": 6000
       }
     },
     {
       "task_id": "public-en-product-a2-01",
       "output": "### Insulated Lunch Box\n\nKeep your lunch cool for up to 6 hours with this insulated lunch box. It holds 1.2 litres, making it a good choice for your work lunch. The insert is removable, so you can take it out easily. The lunch box is also dishwasher safe for simple cleaning. Pack your lunch with ease and enjoy a cool meal at work. Choose yours today!",
       "scores": {
-        "copy_quality": null,
-        "naturalness": null,
-        "cefr_fit": null,
-        "facts_ok": null,
-        "would_use": null
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
       },
-      "notes": "",
+      "notes": "AI provisional: Clear, well-structured A2 copy that meets the length and format, but “with ease” and “simple cleaning” add unsupported ease claims.",
       "generation": {
         "response_model": "gpt-5.6-luna",
         "input_tokens": 401,
         "output_tokens": 485,
         "total_tokens": 886,
         "latency_ms": 10113
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 900,
+        "output_tokens": 589,
+        "total_tokens": 1489,
+        "latency_ms": 12178,
+        "attempts": 1,
+        "max_output_tokens": 6000
       }
     },
     {
       "task_id": "public-de-landing-b1-01",
       "output": "## Dein Auto in Leipzig – wenn du es brauchst\n\nAutos sind rund um die Uhr verfügbar. Buche dein Auto einfach per App und zahle nur, wenn du fährst.\n\n- Keine monatliche Grundgebühr  \n- Buchung per App  \n- Preise ab 0,31 € pro Minute  \n\n**Jetzt per App buchen**",
       "scores": {
-        "copy_quality": null,
-        "naturalness": null,
-        "cefr_fit": null,
-        "facts_ok": null,
-        "would_use": null
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
       },
-      "notes": "",
+      "notes": "AI provisional: Klar, passend aufgebaut und leicht verständlich, aber „zahle nur, wenn du fährst“ ist durch die erlaubten Fakten nicht eindeutig belegt.",
       "generation": {
         "response_model": "gpt-5.6-luna",
         "input_tokens": 421,
         "output_tokens": 127,
         "total_tokens": 548,
         "latency_ms": 5009
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 916,
+        "output_tokens": 592,
+        "total_tokens": 1508,
+        "latency_ms": 11935,
+        "attempts": 1,
+        "max_output_tokens": 6000
       }
     },
     {
       "task_id": "public-en-landing-b1-01",
       "output": "## A car when you need one in Manchester\n\nFor working adults who only need a car sometimes. Book through the app and drive without a monthly fee.\n\n- Cars available 24/7  \n- Book in the app  \n- Prices from £0.28 per minute  \n\n**Download the app and book your car.**",
       "scores": {
-        "copy_quality": null,
-        "naturalness": null,
-        "cefr_fit": null,
-        "facts_ok": null,
-        "would_use": null
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": true,
+        "would_use": true
       },
-      "notes": "",
+      "notes": "AI provisional: Clear, concise and on brief, though the subheading feels slightly mechanical and repeats the app benefit.",
       "generation": {
         "response_model": "gpt-5.6-luna",
         "input_tokens": 412,
         "output_tokens": 134,
         "total_tokens": 546,
         "latency_ms": 3935
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 905,
+        "output_tokens": 517,
+        "total_tokens": 1422,
+        "latency_ms": 11245,
+        "attempts": 1,
+        "max_output_tokens": 6000
       }
     },
     {
       "task_id": "public-de-social-b2-01",
       "output": "**Deine Sneaker verdienen einen frischen Start.**\n\nUnser neuer Sneaker-Reinigungsservice holt dein Paar in Berlin ab und bringt es innerhalb von 48 Stunden sauber zurück. Der Festpreis: 24 € pro Paar. Bei deiner ersten Buchung erhältst du 10 % Rabatt.\n\nBuche jetzt bequem deine Reinigung und gib deinen Sneakern eine zweite Chance. 👟✨",
       "scores": {
-        "copy_quality": null,
-        "naturalness": null,
-        "cefr_fit": null,
-        "facts_ok": null,
-        "would_use": null
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": true,
+        "would_use": true
       },
-      "notes": "",
+      "notes": "AI provisional: Die Anzeige ist klar, knapp und vollständig briefkonform, wirkt durch Formulierungen wie „frischer Start“ und „zweite Chance“ aber etwas formelhaft.",
       "generation": {
         "response_model": "gpt-5.6-luna",
         "input_tokens": 431,
         "output_tokens": 134,
         "total_tokens": 565,
         "latency_ms": 3948
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 933,
+        "output_tokens": 594,
+        "total_tokens": 1527,
+        "latency_ms": 12451,
+        "attempts": 1,
+        "max_output_tokens": 6000
       }
     },
     {
       "task_id": "public-en-social-b2-01",
       "output": "**Your trainers deserve a fresh start.** 👟\n\nOur new trainer-cleaning service collects and returns within London for a fixed price of £22 per pair. Your cleaned trainers will be returned within 48 hours, so you can get back to city life without the wait.\n\nEnjoy 10% off your first booking.\n\n**Book your first clean today.** ✨",
       "scores": {
-        "copy_quality": null,
-        "naturalness": null,
-        "cefr_fit": null,
-        "facts_ok": null,
-        "would_use": null
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": true,
+        "would_use": true
       },
-      "notes": "",
+      "notes": "AI provisional: Clear, concise and compliant, though the Markdown bold would need removing for Instagram.",
       "generation": {
         "response_model": "gpt-5.6-luna",
         "input_tokens": 407,
         "output_tokens": 138,
         "total_tokens": 545,
         "latency_ms": 3826
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 904,
+        "output_tokens": 504,
+        "total_tokens": 1408,
+        "latency_ms": 11783,
+        "attempts": 1,
+        "max_output_tokens": 6000
       }
     },
     {
       "task_id": "public-de-email-c1-01",
       "output": "**Betreff:** Laden Sie Ihr erstes Teammitglied in Ihr Projekt ein\n\nVor 21 Tagen haben Sie ein Konto erstellt und Ihr erstes Projekt angelegt. Der nächste sinnvolle Schritt könnte sein, eine Person aus Ihrem Team einzuladen – damit Aufgaben, Abstimmungen und Projektinformationen direkt am richtigen Ort zusammenkommen.\n\nDie Einladung erfolgt unkompliziert per E-Mail. Sie entscheiden dabei selbst, welchen Zugriff die jeweilige Person erhält: **„Ansehen“** für einen reinen Überblick oder **„Bearbeiten“**, wenn sie aktiv im Projekt mitarbeiten soll.\n\nIhre Testphase läuft noch 14 Tage. Nutzen Sie die verbleibende Zeit, um den gemeinsamen Arbeitsbereich mit einer ersten Einladung praktisch zu erproben. Öffnen Sie dazu Ihr Projekt, wählen Sie ein Teammitglied aus und legen Sie die passende Rolle fest.\n\nSo erhalten Sie einen realistischen Eindruck davon, wie sich Ihr Projekt im Team nutzen lässt – ohne den nächsten Schritt größer zu machen, als er ist.\n\n**CTA:** Erstes Teammitglied einladen",
       "scores": {
-        "copy_quality": null,
-        "naturalness": null,
-        "cefr_fit": null,
-        "facts_ok": null,
-        "would_use": null
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 5,
+        "facts_ok": false,
+        "would_use": true
       },
-      "notes": "",
+      "notes": "AI provisional: Stark strukturiert und passend im Ton, nennt aber mit Aufgaben, Abstimmungen und der Auswahl eines Teammitglieds nicht belegte Funktions- beziehungsweise Prozessdetails.",
       "generation": {
         "response_model": "gpt-5.6-luna",
         "input_tokens": 448,
         "output_tokens": 266,
         "total_tokens": 714,
         "latency_ms": 9857
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 1079,
+        "output_tokens": 944,
+        "total_tokens": 2023,
+        "latency_ms": 26425,
+        "attempts": 1,
+        "max_output_tokens": 6000
       }
     },
     {
       "task_id": "public-en-email-c1-01",
       "output": "**Subject:** Bring your first project into the team\n\nYou set up your first project 21 days ago — now is a good time to bring one colleague into the workflow.\n\nInvite a team member by email and give them the level of access they need: **View** to keep them informed, or **Edit** to let them contribute to the project. Starting with one trusted colleague can make it easier to establish how your agency will use the project together, before your trial ends.\n\nYou have 14 days remaining in your trial, so take a few minutes to involve someone who works closely with you. Their perspective can help you decide whether the setup fits the way your team manages work.\n\nReturn to your account, choose a colleague and send your first invitation today.\n\n**CTA:** Invite a team member",
       "scores": {
-        "copy_quality": null,
-        "naturalness": null,
-        "cefr_fit": null,
-        "facts_ok": null,
-        "would_use": null
+        "copy_quality": 4,
+        "naturalness": 4,
+        "cefr_fit": 4,
+        "facts_ok": false,
+        "would_use": true
       },
-      "notes": "",
+      "notes": "AI provisional: Strong, concise and non-pushy, but it incorrectly implies that the project itself was set up 21 days ago rather than only the account.",
       "generation": {
         "response_model": "gpt-5.6-luna",
         "input_tokens": 431,
         "output_tokens": 214,
         "total_tokens": 645,
         "latency_ms": 6142
+      },
+      "evaluation": {
+        "type": "ai_provisional",
+        "judge_model": "gpt-5.6-sol",
+        "judge_reasoning_effort": "max",
+        "judge_prompt_version": "ai-provisional-independent-v0.2",
+        "independent_call": true,
+        "human_validated": false,
+        "input_tokens": 1016,
+        "output_tokens": 1106,
+        "total_tokens": 2122,
+        "latency_ms": 21753,
+        "attempts": 1,
+        "max_output_tokens": 6000
       }
     }
   ]
