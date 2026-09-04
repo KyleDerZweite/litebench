@@ -1,84 +1,91 @@
 # LiteBench
 
-LiteBench is a small open-source home for focused AI writing benchmarks. Each
-suite owns one question, one prompt set, and one evaluator. The shared
-visualizer is adapted from
-[SkateBench](https://github.com/T3-Content/skatebench/tree/main/visualizer).
+LiteBench contains small tests for AI writing models. Each suite tests one
+thing with its own prompts and evaluator.
 
-Live dashboard: <https://kylederzweite.github.io/litebench/>
+Live results: <https://kylederzweite.github.io/litebench/>
 
 ## Included suites
 
-| Suite | Primary question | Status |
+| Suite | Question | Status |
 |---|---|---|
-| **CopyBench Lite** | Does the answer fulfil the copy brief well? | 15 configurations, 120 outputs |
-| **NaturalBench Lite** | Does the writing sound idiomatic and non-formulaic? | Prompts and evaluator ready, no runs |
-| **CEFRBench Lite** | Does the language match the requested CEFR level? | Prompts and evaluator ready, no runs |
+| **CopyBench Lite** | Does the writing follow the copy brief? | 15 configurations, 120 outputs |
+| **NaturalBench Lite** | Does the writing sound idiomatic and free of stock AI habits? | Prompts and evaluator ready, no runs |
+| **CEFRBench Lite** | Does the writing match the requested CEFR level? | Prompts and evaluator ready, no runs |
 
-Existing scores belong only to CopyBench Lite. NaturalBench Lite and CEFRBench
-Lite do not reuse those scores.
+CopyBench scores do not count toward the other suites.
 
-> **Current limitation:** Each of the 120 CopyBench outputs was scored by a
-> separate, blinded `gpt-5.6-sol` max-reasoning call. The ratings are
-> **AI-provisional** and none have human validation.
+The 120 CopyBench outputs were each judged in a separate, blinded
+`gpt-5.6-sol` max call. No person has reviewed those scores. The site labels
+them as provisional AI scores.
 
 ## Dashboard
 
-The visualizer uses SkateBench's visual language and core stack with
-[DeepSWE's](https://deepswe.datacurve.ai/) single-page layout: a
-score-versus-efficiency plot above a compact leaderboard.
-The plot can compare score against estimated average cost, output tokens, or
-latency and connects every reasoning level for each model.
+The site uses [SkateBench](https://github.com/T3-Content/skatebench/tree/main/visualizer)
+styling with the [DeepSWE](https://deepswe.datacurve.ai/) layout. One chart
+plots score against average cost, output tokens, or latency. Lines connect the
+reasoning levels for each model. The table below shows either the best level per
+model or every level.
 
-`Best` selects the highest CopyBench score for each model. Equal scores prefer
-the lower reasoning effort. `All effort levels` exposes every configuration.
+All scores are out of 100. When scores tie, `Best` picks the lower reasoning
+level.
 
-Pass@1 is intentionally absent for now. CopyBench currently has a graded quality
-rubric, not a deterministic binary verifier. Add Pass@1 and its distribution
-only after a public pass rule exists.
+There is no Pass@1 yet. CopyBench has a graded rubric, not a binary pass rule.
+Choosing a threshold after seeing the results would bias it.
 
-Average cost is an estimate for candidate generation only. `bench.py` combines
-recorded input and output tokens with the OpenAI rates captured in
-[`pricing.json`](pricing.json) from [models.dev](https://models.dev/api.json).
-It excludes cache discounts, proxy fees, and evaluator cost.
+Cost is estimated for candidate generation only. `bench.py` combines recorded
+token counts with the OpenAI rates saved in [`pricing.json`](pricing.json) from
+[models.dev](https://models.dev/api.json). The estimate excludes cache
+discounts, proxy fees, and judge calls.
 
-## Repository layout
+## NaturalBench scoring
+
+The NaturalBench evaluator reports a score plus machine-readable `slop_flags`.
+Each flag has a stable code, a count, and short quotes from the output. The
+codes cover stock phrasing, inflated wording, vague claims, rigid structure,
+punctuation habits, formatting habits, filler, and chatbot residue.
+
+This schema is ready for automatic judging one output at a time. It has not
+been calibrated against human ratings, so future results must keep the
+evaluator model and prompt version.
+
+## Files
 
 ```text
 benches/
-  copybench/       prompts, evaluator, hidden-set commitment, results
-  naturalbench/    independent prompts and evaluator
-  cefrbench/       independent prompts and evaluator
-visualizer/        adapted SkateBench visualizer
-bench.py           dependency-free result validation and aggregation
-pricing.json       versioned models.dev rates used for cost estimates
+  copybench/       prompts, evaluator, hidden-set hash, results
+  naturalbench/    prompts and slop-aware evaluator
+  cefrbench/       prompts and evaluator
+visualizer/        static Next.js site
+bench.py           result checks and aggregation
+pricing.json       models.dev rates used for cost estimates
 ```
 
 ## Run CopyBench Lite
 
-Requirements: Python 3.9+ and whatever model interface you already use.
+You need Python 3.9 or newer and your own model interface.
 
 ```bash
 python3 bench.py prompts
 python3 bench.py new "Model Name" --provider "Provider"
 ```
 
-For every task:
+For each task:
 
-1. Start from a clean model session.
-2. Send the exact prompt with no extra optimisation.
-3. Store the model output unchanged.
-4. Record generation metadata.
-5. Add transparent evaluator metadata or leave all scores `null`.
+1. Start a clean model session.
+2. Send the prompt without changes.
+3. Store the output without edits.
+4. Record the generation metadata.
+5. Add the evaluator metadata, or leave the scores `null`.
 
-Validate and aggregate:
+Check the files and rebuild the data:
 
 ```bash
 python3 bench.py check
 python3 bench.py build
 ```
 
-Run the visualizer:
+Run the site:
 
 ```bash
 cd visualizer
@@ -86,48 +93,32 @@ bun install
 bun run dev
 ```
 
-## Result rules
+## Add a CopyBench result
 
-- Use every public task and do not cherry-pick outputs.
-- Use one generation per task for the normal track.
-- Keep model output byte-for-byte except for JSON escaping.
-- Record provider, model version, date, reasoning effort, and known settings.
-- Mark AI ratings with `evaluation_type: "ai_provisional"` and
-  `human_evaluation: false`.
-- Treat latency as directional because it includes proxy and network effects.
-- Label token-derived monetary cost as estimated and commit its source rates.
+Fork the repository and add one complete JSON run under
+`benches/copybench/results/`. Run the two check commands above, then include the
+raw run and rebuilt `visualizer/data/leaderboard.json` in the pull request.
 
-## Contribute a CopyBench result
+Do not edit model output. Record the model, settings, evaluator, and evaluation
+type. `bench.py` supports CopyBench Lite today. The other suites will get result
+support with their first runs.
 
-Fork the repository, add one complete JSON run under
-`benches/copybench/results/`, then run:
+## Hidden prompts
 
-```bash
-python3 bench.py check
-python3 bench.py build
-```
-
-Open a pull request containing the raw run and regenerated
-`visualizer/data/leaderboard.json`. Keep every model output unchanged and state
-the evaluator and evaluation type. The helper currently supports CopyBench Lite;
-the other two suites will get result support with their first real runs.
-
-## Hidden canary
-
-`private/hidden.json` remains local and Git-ignored. The public commitment is
-stored at `benches/copybench/hidden.sha256`.
+The private canary stays in `private/hidden.json`, which Git ignores. Its public
+hash is `benches/copybench/hidden.sha256`.
 
 ```bash
 python3 bench.py prompts --tasks private/hidden.json
 sha256sum -c benches/copybench/hidden.sha256
 ```
 
-Do not publish hidden prompts or their raw outputs. If the set leaks, move it
-into the public set and replace it.
+Never publish the hidden prompts or their raw outputs. If they leak, move them
+to the public set and replace them.
 
-## License and attribution
+## License and credits
 
-LiteBench code and original benchmark material are MIT licensed. The visualizer
-contains an MIT-licensed adaptation of SkateBench. See
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Model outputs may be subject
-to provider terms.
+LiteBench code and original benchmark material use the MIT License. The
+visualizer adapts MIT-licensed SkateBench code. See
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md). Model outputs may have
+separate provider terms.

@@ -1,6 +1,6 @@
 # Third-party notices
 
-The LiteBench visualizer is adapted from the
+LiteBench adapts the
 [SkateBench visualizer](https://github.com/T3-Content/skatebench/tree/main/visualizer).
 
 SkateBench is licensed under the MIT License:
@@ -32,6 +32,5 @@ SOFTWARE.
 Provider logos remain trademarks of their respective owners and are used only
 to identify model providers.
 
-The dashboard information layout was informed by
-[DeepSWE](https://deepswe.datacurve.ai/). No DeepSWE source code or assets are
-included.
+LiteBench uses [DeepSWE's](https://deepswe.datacurve.ai/) chart-above-table
+layout. It includes no DeepSWE source code or assets.

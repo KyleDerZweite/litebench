@@ -66,7 +66,7 @@ const suites = [
   {
     id: "copybench" as const,
     label: "CopyBench Lite",
-    description: "Copy quality and brief fulfilment",
+    description: "Scores how well the writing follows a copy brief",
     ready: true,
     prompts: "benches/copybench/public.json",
     judge: "benches/copybench/judge-ai-provisional-v0.2.txt",
@@ -74,7 +74,7 @@ const suites = [
   {
     id: "naturalbench" as const,
     label: "NaturalBench Lite",
-    description: "Idiomatic, non-formulaic writing",
+    description: "Scores idiomatic writing and formulaic habits",
     ready: false,
     prompts: "benches/naturalbench/public.json",
     judge: "benches/naturalbench/judge.txt",
@@ -82,7 +82,7 @@ const suites = [
   {
     id: "cefrbench" as const,
     label: "CEFRBench Lite",
-    description: "Requested language-level fit",
+    description: "Checks whether the writing matches the requested CEFR level",
     ready: false,
     prompts: "benches/cefrbench/public.json",
     judge: "benches/cefrbench/judge.txt",
@@ -138,8 +138,8 @@ function ModelLogo({ className = "h-4 w-4" }: { className?: string }) {
 
 function LiteMark() {
   return (
-    <div className="relative grid h-14 w-14 rotate-[-4deg] place-items-center border-2 border-white text-3xl font-black text-orange-500 shadow-[0_0_35px_rgb(249_115_22_/_0.12)]">
-      “
+    <div className="relative grid h-14 w-14 rotate-[-4deg] place-items-center border-2 border-white text-sm font-black tracking-tight text-orange-500 shadow-[0_0_35px_rgb(249_115_22_/_0.12)]">
+      LB
     </div>
   );
 }
@@ -234,7 +234,7 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange }: {
   onAxisChange: (axis: MatrixAxis) => void;
 }) {
   const axisDefinition = {
-    cost: { label: "Avg cost", value: (run: Run) => run.average_cost_usd, format: (value: number) => formatCost(value) },
+    cost: { label: "Avg cost", value: (run: Run) => run.average_cost_usd, format: (value: number) => mobile ? `$${value.toFixed(3)}` : formatCost(value) },
     tokens: { label: "Output tokens", value: (run: Run) => run.average_output_tokens, format: (value: number) => compactTokens(value) },
     latency: { label: "Latency", value: (run: Run) => run.average_latency_ms === null ? null : run.average_latency_ms / 1000, format: (value: number) => `${formatNumber(value, 2)}s` },
   }[axis];
@@ -389,7 +389,7 @@ function LeaderboardTable({ runs, scope, onScopeChange, models, selectedModels, 
         </table>
       </div>
       <p className="mt-3 font-mono text-[9px] leading-4 text-neutral-700">
-        Avg cost is estimated candidate-generation cost from recorded input and output tokens using OpenAI rates captured from <a className="hover:text-orange-500" href={data.pricing.source} rel="noreferrer" target="_blank">models.dev</a> on {data.pricing.retrieved_at}. Cache discounts, proxy fees, and evaluator cost are excluded.
+        Cost is estimated from recorded input and output tokens using OpenAI rates from <a className="hover:text-orange-500" href={data.pricing.source} rel="noreferrer" target="_blank">models.dev</a>, captured {data.pricing.retrieved_at}. It excludes cache discounts, proxy fees, and judge calls.
       </p>
     </section>
   );
@@ -399,9 +399,8 @@ function PendingSuite({ suite }: { suite: (typeof suites)[number] }) {
   return (
     <section className="glass-card grid min-h-[430px] place-items-center p-8 text-center">
       <div className="max-w-2xl">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-orange-500">Dedicated suite, not run yet</p>
-        <h2 className="stencil-text mt-3 text-3xl">{suite.label}</h2>
-        <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-neutral-500">{suite.description}. Its prompts and evaluator are separate from CopyBench Lite, so no existing scores are reused.</p>
+        <h2 className="stencil-text text-3xl">{suite.label}</h2>
+        <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-neutral-500">{suite.description}. CopyBench scores do not count here.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-3 font-mono text-[10px] uppercase">
           <a className="border border-neutral-800 px-4 py-3 text-neutral-300 hover:border-neutral-600" href={`${repository}/blob/main/${suite.prompts}`} rel="noreferrer" target="_blank">View prompts</a>
           <a className="border border-neutral-800 px-4 py-3 text-neutral-300 hover:border-neutral-600" href={`${repository}/blob/main/${suite.judge}`} rel="noreferrer" target="_blank">View evaluator</a>
@@ -441,8 +440,8 @@ export default function LiteBenchVisualizer() {
             </div>
           </div>
           <div className="flex flex-col items-end gap-2 font-mono text-[10px] uppercase text-neutral-500">
-            <div className="flex gap-4"><span>System: public</span><span>Models: {suiteModelCount}</span><span>Runs: {suiteRunCount}</span></div>
-            <span>{suite.ready ? "AI-provisional · 0 human-validated" : "Awaiting first run"}</span>
+            <div className="flex gap-4"><span>Models: {suiteModelCount}</span><span>Runs: {suiteRunCount}</span></div>
+            {suite.ready && <span>Provisional AI scores · no human review</span>}
           </div>
         </div>
       </header>
@@ -465,10 +464,7 @@ export default function LiteBenchVisualizer() {
         {!suite.ready ? <PendingSuite suite={suite} /> : (
           <>
             <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <h2 className="text-xl font-semibold text-neutral-100">Leaderboard</h2>
-                <p className="mt-1 font-mono text-[9px] uppercase tracking-wider text-neutral-600">Score and efficiency across reasoning levels</p>
-              </div>
+              <h2 className="text-xl font-semibold text-neutral-100">Leaderboard</h2>
               <span className="font-mono text-[9px] uppercase text-neutral-600">Score out of 100 · lower cost, tokens, and latency are better</span>
             </div>
             {selectedModels.size === 0 ? (
@@ -488,9 +484,8 @@ export default function LiteBenchVisualizer() {
         )}
       </main>
 
-      <footer className="relative z-10 mx-auto flex max-w-7xl flex-wrap justify-between gap-3 border-t border-white/5 px-4 py-6 font-mono text-[9px] uppercase tracking-wider text-neutral-700">
-        <span>{suite.ready ? "120 outputs · 120 independent Sol max judgments · no human validation" : `${suite.label} · prompts and evaluator ready · 0 runs`}</span>
-        <span>Design adapted from <a className="hover:text-orange-500" href="https://github.com/T3-Content/skatebench" rel="noreferrer" target="_blank">SkateBench</a> under MIT · <a className="hover:text-orange-500" href={repository} rel="noreferrer" target="_blank">Source</a></span>
+      <footer className="relative z-10 mx-auto flex max-w-7xl justify-end border-t border-white/5 px-4 py-6 font-mono text-[9px] uppercase tracking-wider text-neutral-700">
+        <span><a className="hover:text-orange-500" href="https://github.com/T3-Content/skatebench" rel="noreferrer" target="_blank">SkateBench design</a>, MIT · <a className="hover:text-orange-500" href={repository} rel="noreferrer" target="_blank">Source</a></span>
       </footer>
       <div className="scanline" />
     </div>

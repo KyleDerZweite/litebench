@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Small, dependency-free helper for LiteBench."""
+"""Validate and aggregate LiteBench result files."""
 
 import argparse
 import json

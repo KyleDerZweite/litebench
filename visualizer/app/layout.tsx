@@ -5,7 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "LiteBench",
-  description: "Small, open benchmarks for AI writing models",
+  description: "Small benchmarks for AI copy, naturalness, and CEFR fit",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

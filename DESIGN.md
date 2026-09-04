@@ -1,102 +1,90 @@
 # LiteBench design
 
-## Decision
+## One question per suite
 
-LiteBench is an umbrella for small benchmarks, not one score that mixes several
-writing constructs. Every included suite must own:
+LiteBench does not combine copy quality, naturalness, and CEFR fit into one
+score. A model may write useful copy that still sounds formulaic. It may also
+write fluent text at the wrong language level. Separate suites make those
+failures visible.
 
-- one primary question;
-- its own public prompts;
-- its own evaluator instructions;
-- its own results;
-- the same visualizer and contribution format.
+Each suite keeps its prompts, evaluator, results, and main score separate. They
+share the same file format and results page.
 
-This keeps a result interpretable. A model can be good at copy, sound formulaic,
-and miss a requested CEFR level. Those are three findings, not one blended score.
+## CopyBench Lite
 
-## Suites
+CopyBench asks whether the output follows the brief, fits the audience and
+channel, makes a clear case, and sticks to the supplied facts.
 
-### CopyBench Lite
+The current batch has 8 bilingual prompts. Fifteen GPT-5.6 model and effort
+configurations produced 120 outputs. A separate, blinded `gpt-5.6-sol` max call
+judged each output. These scores are provisional, and no person has reviewed
+them.
 
-Primary metric: copy quality. It asks whether an answer fulfils the brief,
-serves the audience and channel, communicates clearly, persuades appropriately,
-and respects factual constraints.
+The public prompts and v0.2 evaluator stay unchanged because the result files
+refer to them. A changed prompt or rubric must use a new version.
 
-The first published batch contains 8 bilingual prompts, 15 GPT-5.6 model and
-effort configurations, and 120 outputs. Its existing Sol max scores are
-AI-provisional and have no human validation.
+## NaturalBench Lite
 
-### NaturalBench Lite
+NaturalBench asks whether the output sounds idiomatic and written for its exact
+situation. Its evaluator checks rhythm, concrete wording, register, and fit
+between the sender and reader. It also flags stock AI writing habits.
 
-Primary metric: perceived naturalness. Its prompts avoid CEFR targets and do not
-ask the evaluator to reward persuasion. The evaluator looks for idiomatic
-phrasing, situated voice, rhythm, register, and formulaic model habits.
+The evaluator returns stable flag codes, counts, and short quotes. This makes
+future automatic runs easy to aggregate without turning one suspicious word
+into proof of AI authorship. Context still matters. The first automatic results
+must name the evaluator model and prompt version, and the site must call them
+provisional until they have been checked against human ratings.
 
-The initial public set has 4 bilingual tasks. It has no model runs yet.
+The public set has 4 bilingual tasks and no runs.
 
-### CEFRBench Lite
+## CEFRBench Lite
 
-Primary metric: CEFR fit. It uses neutral functional-writing tasks across A2,
-B1, B2, and C1 in German and British English. The evaluator does not reward
-copy quality, persuasion, or human-likeness.
+CEFRBench asks whether the output matches the requested CEFR level. Its tasks
+cover A2, B1, B2, and C1 in German and British English. The evaluator does not
+reward persuasion or naturalness.
 
-The initial public set has 8 tasks. It has no model runs yet.
+The public set has 8 tasks and no runs.
 
-## Shared result layout
+## Results page
 
-The visualizer adapts SkateBench's MIT-licensed visual language and focused
-Next.js, Tailwind, and Recharts stack. Its information layout follows DeepSWE:
-a score-versus-efficiency plot above a compact leaderboard with model,
-reasoning effort, score, estimated cost, output tokens, latency, and raw-result
-access. The plot switches between cost, output tokens, and latency while keeping
-score on the vertical axis.
+The site uses SkateBench styling and a DeepSWE-style layout. The chart keeps
+score on the vertical axis and switches the horizontal axis between cost,
+output tokens, and latency. It connects all effort levels for each model.
 
-`Best` means the configuration with the highest primary score for each base
-model. A score tie prefers the lower reasoning effort. `All effort levels`
-reveals every configuration. The tradeoff plot always includes every effort
-level so the trajectory remains visible.
+The table starts with the highest-scoring effort per model. A tied score picks
+the lower effort. `All effort levels` shows every configuration.
 
-## Pass@1 and distributions
+## Pass@1
 
-Pass@1 is meaningful only when a suite has a deterministic binary pass rule.
-CopyBench currently uses a graded quality rubric, so converting it to Pass@1
-would invent a threshold after seeing the data. The UI and result schema can add
-Pass@1 and a pass distribution once a public verifier defines success before a
-run is generated.
+There is no Pass@1 yet. CopyBench has no binary verifier, and choosing a cutoff
+after seeing the scores would bias it. Define and publish a pass rule before
+adding that chart.
 
-The current leaderboard already exposes the 0–100 primary score. A dedicated
-score distribution can be added beside Pass@1 after the binary verifier exists.
+## Runtime measurements
 
-## Operational metrics
+Token counts and latency come from each generation response. Latency includes
+network and proxy time, so it is only useful for these runs.
 
-Latency and token use come from the original generation response. Judge usage is
-not counted as model performance. Latency includes network and proxy effects and
-is therefore directional.
+CPAMP does not report prices. LiteBench estimates generation cost from the
+recorded input and output tokens and the OpenAI rates in `pricing.json`. The
+file records the models.dev source and capture date. The estimate does not
+include cache discounts, proxy fees, or judge calls. A provider-reported
+`cost_usd` value wins when a result contains one.
 
-CPAMP's model endpoint exposes no price metadata. For the current runs, cost is
-estimated from recorded input and output tokens using the OpenAI prices captured
-in `pricing.json` from `https://models.dev/api.json`. The calculation uses the
-normal uncached input and output rates per million tokens. It excludes cache
-discounts, CPAMP or proxy fees, and judge usage. The UI labels this as an
-estimate. A provider-reported `cost_usd` value takes precedence when present.
+## Public and hidden prompts
 
-## Public and hidden data
+Public prompts let contributors reproduce a run and inspect each output. The
+private canary stays in `private/hidden.json`, which Git ignores. The public
+hash at `benches/copybench/hidden.sha256` proves which file was used without
+revealing it.
 
-Public prompts enable reproduction and community pull requests. A small private
-canary remains at `private/hidden.json`; Git ignores it. The committed hash at
-`benches/copybench/hidden.sha256` proves which bytes were used without revealing
-the prompts.
+The canary has only 4 items. It can catch a large mismatch with the public set,
+but it cannot support its own ranking.
 
-The hidden set is only a canary. Four private items cannot support a second
-leaderboard or strong statistical claims.
+## Results and review
 
-## Contribution boundary
+A result must contain every task, the unedited output, generation metadata, and
+the evaluator details. AI scores stay separate from later human scores.
 
-A public run should contain every task, unchanged output, generation metadata,
-and transparent evaluation provenance. AI scores must remain visibly
-provisional. Human and AI evaluations should be separate records rather than
-silently averaged.
-
-No speech benchmark, detector ensemble, database, paid rater panel, or composite
-cross-suite score is included. Add one only when a concrete use case justifies
-its cost.
+LiteBench does not include speech, AI authorship detection, a database, or paid
+raters. Add one only when a benchmark needs it.
