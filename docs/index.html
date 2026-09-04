@@ -16,6 +16,7 @@
       --ink: #fafafa;
       --muted: #777;
       --accent: #a3ff12;
+      --brand: #f97316;
       --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
@@ -28,7 +29,7 @@
       background:
         linear-gradient(rgb(255 255 255 / .025) 1px, transparent 1px),
         linear-gradient(90deg, rgb(255 255 255 / .025) 1px, transparent 1px),
-        radial-gradient(circle at 11% 0%, rgb(163 255 18 / .045), transparent 29rem),
+        radial-gradient(circle at 11% 0%, rgb(249 115 22 / .05), transparent 29rem),
         var(--bg);
       background-size: 48px 48px, 48px 48px, auto, auto;
       font: 15px/1.45 var(--sans);
@@ -41,7 +42,7 @@
     .shell { width: min(1380px, calc(100% - 2rem)); margin: auto; padding-bottom: 2rem; }
     .header {
       display: flex;
-      min-height: 138px;
+      min-height: 142px;
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
@@ -54,7 +55,7 @@
       height: 48px;
       place-items: center;
       border: 2px solid var(--ink);
-      color: var(--accent);
+      color: var(--brand);
       font: 900 2rem/1 Georgia, serif;
       transform: rotate(-4deg);
     }
@@ -65,8 +66,8 @@
       line-height: .9;
       letter-spacing: -.07em;
     }
-    h1 span { color: var(--accent); }
-    .dateline, .system, .micro {
+    h1 span { color: var(--brand); }
+    .dateline, .micro {
       color: var(--muted);
       font: 700 .65rem/1.5 var(--mono);
       letter-spacing: .11em;
@@ -79,18 +80,16 @@
       width: 7px;
       height: 7px;
       margin-right: .55rem;
-      background: var(--accent);
-      box-shadow: 0 0 9px rgb(163 255 18 / .6);
+      background: var(--brand);
+      box-shadow: 0 0 9px rgb(249 115 22 / .6);
     }
-    .system { display: grid; grid-template-columns: auto auto; gap: .25rem 1rem; text-align: right; }
-    .system b { color: #aaa; font-weight: 700; }
     .toolbar {
       position: relative;
       display: flex;
-      min-height: 86px;
       align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
+      justify-content: flex-end;
+      gap: 2rem;
+      margin-left: auto;
     }
     .tabs { display: flex; flex-wrap: wrap; gap: 1.6rem; }
     .tab {
@@ -171,11 +170,17 @@
     .filter-actions button:last-child { border-right: 0; }
     .filter-actions button:hover { color: var(--ink); background: #121212; }
     .panel {
-      min-height: 555px;
+      margin-top: 2.75rem;
       border: 1px solid var(--line);
       background: linear-gradient(135deg, rgb(255 255 255 / .012), transparent 45%), rgb(7 7 7 / .94);
     }
-    .panel-head { padding: 2.1rem 2.25rem 1.5rem; }
+    .panel-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 2rem 2rem 1.35rem;
+    }
     h2 {
       margin: 0;
       font-size: clamp(1.35rem, 3vw, 1.8rem);
@@ -184,44 +189,71 @@
       text-transform: uppercase;
     }
     .panel-head p { margin: .35rem 0 0; }
+    .scope-toggle { display: flex; flex: none; border: 1px solid var(--line); }
+    .scope-toggle button {
+      min-height: 32px;
+      padding: 0 .75rem;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: transparent;
+      color: #686868;
+      cursor: pointer;
+      font: 700 .59rem var(--mono);
+      text-transform: uppercase;
+    }
+    .scope-toggle button:last-child { border-right: 0; }
+    .scope-toggle button:hover { color: #bbb; }
+    .scope-toggle button[aria-pressed="true"] { background: #151515; color: var(--ink); }
     .notice {
-      margin: 0 2.25rem;
-      padding: .7rem .85rem;
+      margin: 0 2rem;
+      padding: .58rem .75rem;
       border-left: 2px solid #f59e0b;
       background: rgb(245 158 11 / .055);
       color: #a68e68;
-      font: 650 .65rem var(--mono);
+      font: 650 .59rem var(--mono);
       letter-spacing: .035em;
       text-transform: uppercase;
     }
     .notice b { color: #f5b841; }
-    .ranking { margin: 0; padding: 1.25rem 2.25rem 2rem; list-style: none; }
+    .ranking { margin: 0; padding: 1rem 2rem 2rem; list-style: none; }
     .rank-row {
       --row-color: #555;
       display: grid;
-      grid-template-columns: 2.5rem minmax(190px, 300px) minmax(180px, 1fr) 6rem;
-      min-height: 58px;
+      grid-template-columns: 2.25rem minmax(215px, 285px) minmax(180px, 1fr) 5.8rem;
+      min-height: 43px;
       align-items: center;
-      gap: 1rem;
+      gap: .8rem;
+      padding: 0 .8rem;
       border-bottom: 1px solid #121212;
     }
+    .rank-row.top { background: rgb(255 255 255 / .016); }
     .rank-row:last-child { border-bottom: 0; }
     .rank { color: var(--row-color); font: 700 .66rem var(--mono); }
     .model {
+      display: flex;
       min-width: 0;
+      align-items: center;
+      gap: .5rem;
       overflow: hidden;
-      font-weight: 720;
-      text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .model small {
-      display: block;
+    .model-logo {
+      display: grid;
+      width: 17px;
+      height: 17px;
+      flex: none;
+      place-items: center;
+      border: 1px solid #5c5c5c;
+      border-radius: 50%;
+      color: #888;
+      font: 800 .52rem var(--mono);
+    }
+    .model-name {
       overflow: hidden;
-      margin-top: .12rem;
-      color: #5f5f5f;
-      font: .61rem var(--mono);
+      font: 720 .78rem var(--mono);
       text-overflow: ellipsis;
     }
+    .effort { flex: none; color: #626262; font: 650 .66rem var(--mono); }
     .track { height: 5px; overflow: hidden; background: #171717; }
     .fill {
       display: block;
@@ -234,7 +266,7 @@
     .rank-row.pending .track {
       background: repeating-linear-gradient(90deg, #191919 0 8px, #0f0f0f 8px 16px);
     }
-    .rank-value { color: #d8d8d8; text-align: right; font: 800 .72rem var(--mono); }
+    .rank-value { color: #d8d8d8; text-align: right; white-space: nowrap; font: 800 .68rem var(--mono); }
     .rank-row.pending .rank-value { color: #686868; font-size: .61rem; }
     .empty { display: grid; min-height: 370px; place-items: center; padding: 2rem; color: #5d5d5d; text-align: center; }
     .matrix-wrap { overflow-x: auto; padding: 1.25rem 2.25rem 2.25rem; }
@@ -248,7 +280,8 @@
       text-transform: uppercase;
     }
     tbody tr:hover { background: rgb(255 255 255 / .018); }
-    .matrix-model strong { display: block; }
+    .matrix-model strong { display: flex; align-items: baseline; gap: .45rem; }
+    .matrix-model .effort { font-size: .61rem; }
     .matrix-model small { display: block; color: #5f5f5f; font: .6rem var(--mono); }
     .matrix-score { color: #d0d0d0; font: 750 .69rem var(--mono); }
     .matrix-score.pending { color: #555; }
@@ -278,20 +311,24 @@
       border: 0;
     }
     @media (max-width: 860px) {
-      .header { align-items: flex-start; flex-direction: column; justify-content: center; }
-      .system { text-align: left; }
-      .toolbar { align-items: flex-start; flex-direction: column; padding: 1.25rem 0; }
+      .header { align-items: flex-start; flex-direction: column; justify-content: center; padding: 1.75rem 0; }
+      .toolbar { width: 100%; gap: 1rem; margin-left: 0; }
+      .tabs { flex: 1; }
+      .panel { margin-top: 1.5rem; }
+    }
+    @media (max-width: 620px) {
+      .toolbar { align-items: flex-start; flex-direction: column; }
       .tabs { gap: .7rem 1.25rem; }
       .filter-toggle { width: 100%; }
       .filter-wrap { width: 100%; }
       .filter-menu { right: auto; left: 0; }
-      .rank-row { grid-template-columns: 2rem 1fr auto; gap: .65rem; padding: .5rem 0; }
+      .rank-row { grid-template-columns: 1.7rem minmax(0, 1fr) auto; gap: .65rem; padding: .55rem; }
       .rank-row .track { grid-column: 2 / 4; }
+      .panel-head { align-items: flex-start; flex-direction: column; }
     }
     @media (max-width: 520px) {
       .shell { width: min(100% - 1rem, 1380px); }
       .mark { width: 40px; height: 40px; }
-      .system { grid-template-columns: 1fr auto; width: 100%; }
       .panel-head { padding: 1.5rem 1.2rem 1rem; }
       .notice { margin: 0 1.2rem; }
       .ranking, .matrix-wrap { padding-right: 1.2rem; padding-left: 1.2rem; }
@@ -309,46 +346,46 @@
         <div class="mark" aria-hidden="true">“</div>
         <div>
           <h1>COPY<span>BENCH</span></h1>
-          <p class="dateline">AI copywriting / benchmark v0.1</p>
+          <p class="dateline">Data / public v0.1 · <span id="model-count">...</span> models · <span id="run-count">...</span> runs</p>
         </div>
       </div>
-      <div class="system" aria-label="Benchmark status">
-        <span>system</span><b>public</b>
-        <span>models</span><b id="model-count">...</b>
-        <span>total runs</span><b id="run-count">...</b>
+      <div class="toolbar">
+        <div class="tabs" role="tablist" aria-label="Result views">
+        <button class="tab" type="button" role="tab" data-view="copy_quality" aria-selected="true">Copy</button>
+        <button class="tab" type="button" role="tab" data-view="naturalness" aria-selected="false">Natural</button>
+        <button class="tab" type="button" role="tab" data-view="cefr_fit" aria-selected="false">CEFR</button>
+        <button class="tab" type="button" role="tab" data-view="facts_ok_pct" aria-selected="false">Facts</button>
+        <button class="tab" type="button" role="tab" data-view="would_use_pct" aria-selected="false">Would use</button>
+        <button class="tab" type="button" role="tab" data-view="matrix" aria-selected="false">Detailed</button>
+        </div>
+
+        <div class="filter-wrap" id="filter-wrap">
+          <button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-menu">Filter models [.../...]</button>
+          <div class="filter-menu" id="filter-menu" hidden>
+            <div class="filter-title">
+              <span class="micro">Models</span>
+              <span class="micro" id="filter-count"></span>
+            </div>
+            <div class="filter-options" id="filter-options"></div>
+            <div class="filter-actions">
+              <button type="button" id="select-all">Select all</button>
+              <button type="button" id="select-none">Clear</button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
-    <div class="toolbar">
-      <div class="tabs" role="tablist" aria-label="Result views">
-        <button class="tab" type="button" role="tab" data-view="copy_quality" aria-selected="true">Copy quality</button>
-        <button class="tab" type="button" role="tab" data-view="naturalness" aria-selected="false">Naturalness</button>
-        <button class="tab" type="button" role="tab" data-view="cefr_fit" aria-selected="false">CEFR fit</button>
-        <button class="tab" type="button" role="tab" data-view="facts_ok_pct" aria-selected="false">Facts OK</button>
-        <button class="tab" type="button" role="tab" data-view="would_use_pct" aria-selected="false">Would use</button>
-        <button class="tab" type="button" role="tab" data-view="matrix" aria-selected="false">Matrix</button>
-      </div>
-
-      <div class="filter-wrap" id="filter-wrap">
-        <button class="filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-menu">Filter models [.../...]</button>
-        <div class="filter-menu" id="filter-menu" hidden>
-          <div class="filter-title">
-            <span class="micro">Models</span>
-            <span class="micro" id="filter-count"></span>
-          </div>
-          <div class="filter-options" id="filter-options"></div>
-          <div class="filter-actions">
-            <button type="button" id="select-all">Select all</button>
-            <button type="button" id="select-none">Clear</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <section class="panel" role="tabpanel" aria-live="polite">
       <header class="panel-head">
-        <h2 id="view-title">Copy quality distribution</h2>
-        <p class="micro" id="view-subtitle">AI-provisional Sol max rubric score across 8 public briefs · higher is better</p>
+        <div>
+          <h2 id="view-title">Copy quality distribution</h2>
+          <p class="micro" id="view-subtitle">Score out of 100 across 8 public briefs · higher is better</p>
+        </div>
+        <div class="scope-toggle" id="scope-toggle" role="group" aria-label="Reasoning level scope">
+          <button type="button" data-scope="best" aria-pressed="true">Best</button>
+          <button type="button" data-scope="all" aria-pressed="false">All effort levels</button>
+        </div>
       </header>
       <div class="notice" id="notice">
         <b>AI scores only.</b>
@@ -364,11 +401,11 @@
             <thead>
               <tr>
                 <th>Model / run</th>
-                <th>Copy</th>
-                <th>Natural</th>
-                <th>CEFR</th>
-                <th>Facts OK</th>
-                <th>Would use</th>
+                <th>Copy /100</th>
+                <th>Natural /100</th>
+                <th>CEFR /100</th>
+                <th>Facts /100</th>
+                <th>Would use /100</th>
                 <th>Coverage</th>
                 <th>Raw</th>
               </tr>
@@ -391,41 +428,37 @@
     const views = {
       copy_quality: {
         title: "Copy quality distribution",
-        subtitle: "AI-provisional Sol max rubric score across 8 public briefs · higher is better",
-        max: 5,
-        suffix: " / 5"
+        subtitle: "Score out of 100 across 8 public briefs · higher is better",
+        max: 100
       },
       naturalness: {
         title: "Naturalness distribution",
-        subtitle: "AI-provisional Sol max naturalness score · higher is better",
-        max: 5,
-        suffix: " / 5"
+        subtitle: "Naturalness score out of 100 · higher is better",
+        max: 100
       },
       cefr_fit: {
         title: "CEFR fit distribution",
-        subtitle: "AI-provisional Sol max CEFR-fit score · higher is better",
-        max: 5,
-        suffix: " / 5"
+        subtitle: "CEFR-fit score out of 100 · higher is better",
+        max: 100
       },
       facts_ok_pct: {
         title: "Factual discipline",
-        subtitle: "AI-provisional Sol max unsupported-claim check · higher is better",
-        max: 100,
-        suffix: "%"
+        subtitle: "Supported-claim rate out of 100 · higher is better",
+        max: 100
       },
       would_use_pct: {
         title: "Would-use rate",
-        subtitle: "AI-provisional Sol max usability decision · higher is better",
-        max: 100,
-        suffix: "%"
+        subtitle: "Usability rate out of 100 · higher is better",
+        max: 100
       },
       matrix: {
         title: "Result matrix",
         subtitle: "All AI-provisional Sol max scores · no human validation"
       }
     };
-    const state = { data: null, view: "copy_quality", selected: new Set() };
+    const state = { data: null, view: "copy_quality", scope: "best", selected: new Set() };
     const tabs = [...document.querySelectorAll(".tab")];
+    const scopeButtons = [...document.querySelectorAll("[data-scope]")];
     const ranking = document.querySelector("#ranking");
     const matrixBody = document.querySelector("#matrix-body");
     const filterToggle = document.querySelector("#filter-toggle");
@@ -444,17 +477,24 @@
       return value !== null && value !== undefined && Number.isFinite(Number(value));
     }
 
-    function display(value, view) {
+    function display(value) {
       if (!available(value)) return "PENDING";
-      return view.max === 100 ? Math.round(value) + view.suffix : Number(value).toFixed(1) + view.suffix;
+      const number = Number(value);
+      return (Number.isInteger(number) ? number.toFixed(0) : number.toFixed(1)) + " / 100";
     }
 
     function modelNames() {
       return [...new Set(state.data.runs.map(function (run) { return run.model; }))].sort();
     }
 
-    function runName(run) {
-      return run.model + (run.reasoning_effort ? " [" + run.reasoning_effort + "]" : "");
+    function appendModelLabel(parent, run, logo) {
+      if (logo) {
+        const badge = node("span", "model-logo", "AI");
+        badge.setAttribute("aria-hidden", "true");
+        parent.appendChild(badge);
+      }
+      parent.appendChild(node("span", "model-name", run.model));
+      if (run.reasoning_effort) parent.appendChild(node("span", "effort", "[" + run.reasoning_effort + "]"));
     }
 
     function evaluationLabel(run) {
@@ -467,6 +507,22 @@
 
     function filteredRuns() {
       return state.data.runs.filter(function (run) { return state.selected.has(run.model); });
+    }
+
+    function bestRuns(runs) {
+      const effortOrder = { low: 0, medium: 1, high: 2, xhigh: 3, max: 4 };
+      const best = new Map();
+      runs.forEach(function (run) {
+        const current = best.get(run.model);
+        const value = available(run[state.view]) ? Number(run[state.view]) : -Infinity;
+        const currentValue = current && available(current[state.view]) ? Number(current[state.view]) : -Infinity;
+        const effort = effortOrder[run.reasoning_effort] ?? 99;
+        const currentEffort = current ? (effortOrder[current.reasoning_effort] ?? 99) : 99;
+        if (!current || value > currentValue || (value === currentValue && effort < currentEffort)) {
+          best.set(run.model, run);
+        }
+      });
+      return [...best.values()];
     }
 
     function updateFilterLabel() {
@@ -505,7 +561,8 @@
 
     function renderChart(runs) {
       const view = views[state.view];
-      const ordered = runs.slice().sort(function (a, b) {
+      const visible = state.scope === "best" ? bestRuns(runs) : runs;
+      const ordered = visible.slice().sort(function (a, b) {
         const left = available(a[state.view]) ? Number(a[state.view]) : -Infinity;
         const right = available(b[state.view]) ? Number(b[state.view]) : -Infinity;
         return right - left;
@@ -515,13 +572,13 @@
       ordered.forEach(function (run, index) {
         const value = run[state.view];
         const scored = available(value);
-        const row = node("li", "rank-row" + (scored ? "" : " pending"));
+        const row = node("li", "rank-row" + (scored ? "" : " pending") + (index < 3 ? " top" : ""));
         const color = scored ? (podium[index] || "#555") : "#3a3a3a";
         row.style.setProperty("--row-color", color);
         row.appendChild(node("span", "rank", String(index + 1).padStart(2, "0")));
 
-        const model = node("span", "model", runName(run));
-        model.appendChild(node("small", "", [run.provider, evaluationLabel(run)].filter(Boolean).join(" · ")));
+        const model = node("span", "model");
+        appendModelLabel(model, run, true);
         row.appendChild(model);
 
         const track = node("span", "track");
@@ -529,13 +586,13 @@
         fill.style.width = scored ? Math.max(0, Math.min(100, 100 * Number(value) / view.max)) + "%" : "0";
         track.appendChild(fill);
         row.appendChild(track);
-        row.appendChild(node("span", "rank-value", display(value, view)));
+        row.appendChild(node("span", "rank-value", display(value)));
         ranking.appendChild(row);
       });
     }
 
-    function scoreCell(row, value, viewKey) {
-      const cell = node("td", "matrix-score" + (available(value) ? "" : " pending"), display(value, views[viewKey]));
+    function scoreCell(row, value) {
+      const cell = node("td", "matrix-score" + (available(value) ? "" : " pending"), display(value));
       row.appendChild(cell);
     }
 
@@ -545,14 +602,16 @@
       runs.forEach(function (run) {
         const row = document.createElement("tr");
         const model = node("td", "matrix-model");
-        model.appendChild(node("strong", "", runName(run)));
+        const modelTitle = node("strong");
+        appendModelLabel(modelTitle, run, false);
+        model.appendChild(modelTitle);
         model.appendChild(node("small", "", [run.provider, evaluationLabel(run)].filter(Boolean).join(" · ")));
         row.appendChild(model);
-        scoreCell(row, run.copy_quality, "copy_quality");
-        scoreCell(row, run.naturalness, "naturalness");
-        scoreCell(row, run.cefr_fit, "cefr_fit");
-        scoreCell(row, run.facts_ok_pct, "facts_ok_pct");
-        scoreCell(row, run.would_use_pct, "would_use_pct");
+        scoreCell(row, run.copy_quality);
+        scoreCell(row, run.naturalness);
+        scoreCell(row, run.cefr_fit);
+        scoreCell(row, run.facts_ok_pct);
+        scoreCell(row, run.would_use_pct);
         row.appendChild(node("td", "matrix-score", run.rated + "/" + run.total));
 
         const raw = document.createElement("td");
@@ -574,14 +633,18 @@
       if (!state.data) return;
       const view = views[state.view];
       const runs = filteredRuns();
+      const matrix = state.view === "matrix";
       document.querySelector("#view-title").textContent = view.title;
       document.querySelector("#view-subtitle").textContent = view.subtitle;
       tabs.forEach(function (tab) {
         tab.setAttribute("aria-selected", String(tab.dataset.view === state.view));
         tab.tabIndex = tab.dataset.view === state.view ? 0 : -1;
       });
+      scopeButtons.forEach(function (button) {
+        button.setAttribute("aria-pressed", String(button.dataset.scope === state.scope));
+      });
+      document.querySelector("#scope-toggle").hidden = matrix;
       renderNotice(runs);
-      const matrix = state.view === "matrix";
       document.querySelector("#chart-view").hidden = matrix;
       document.querySelector("#matrix-view").hidden = !matrix;
       if (matrix) renderMatrix(runs);
@@ -591,6 +654,13 @@
     tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
         state.view = tab.dataset.view;
+        render();
+      });
+    });
+
+    scopeButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        state.scope = button.dataset.scope;
         render();
       });
     });

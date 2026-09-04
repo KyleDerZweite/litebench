@@ -15,7 +15,7 @@ V0 deliberately contains only:
 - 8 public writing tasks: 4 localized DE/EN pairs across A2, B1, B2, and C1
 - 3 GPT-5.6 model variants across low, medium, high, xhigh, and max reasoning
 - 1 output per task and model configuration
-- 3 separate 1–5 ratings plus 2 practical yes/no checks
+- 3 separate 1–5 item ratings plus 2 practical yes/no checks, all summarized out of 100
 - raw outputs and run metadata in reviewable JSON files
 - transparent evaluator metadata and the exact provisional [judge prompt](data/judge-ai-provisional-v0.2.txt)
 - a dependency-free Python helper and a static GitHub Pages site
@@ -47,6 +47,11 @@ Rating anchors:
 
 For `cefr_fit`, 5 means a clear fit to the requested level. It does not mean
 "more sophisticated language." For the two booleans, use `true` or `false`.
+The dashboard averages each field and normalizes every displayed result to a
+0–100 scale. Raw result files retain the judge's original 1–5 item ratings.
+Charts default to the best-scoring reasoning effort for each model on the
+selected metric. A tie prefers the lower effort. Use **All effort levels** for
+all 15 configurations; **Detailed** always shows the complete matrix.
 
 ## Run it
 

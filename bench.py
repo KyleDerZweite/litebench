@@ -151,7 +151,7 @@ def aggregate(data):
         ),
     }
     for field in SCALE_FIELDS:
-        summary[field] = round(fmean(item["scores"][field] for item in rated), 2) if rated else None
+        summary[field] = round(20 * fmean(item["scores"][field] for item in rated), 1) if rated else None
     for field in BOOL_FIELDS:
         summary[f"{field}_pct"] = (
             round(100 * fmean(item["scores"][field] for item in rated), 1)
@@ -228,9 +228,9 @@ def check_file(path):
         print(
             f"{path}: OK - {summary['generated']}/{summary['total']} generated, "
             f"{summary['rated']}/{summary['total']} {rating_label}-rated; "
-            f"copy {summary['copy_quality']}/5; natural {summary['naturalness']}/5; "
-            f"CEFR {summary['cefr_fit']}/5; facts {summary['facts_ok_pct']}%; "
-            f"would use {summary['would_use_pct']}%"
+            f"copy {summary['copy_quality']}/100; natural {summary['naturalness']}/100; "
+            f"CEFR {summary['cefr_fit']}/100; facts {summary['facts_ok_pct']}/100; "
+            f"would use {summary['would_use_pct']}/100"
         )
     elif summary:
         print(
@@ -281,6 +281,7 @@ def command_build(args):
     payload = {
         "benchmark": "CopyBench Lite",
         "task_set": expected_name,
+        "score_scale": 100,
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "runs": rows,
     }
@@ -329,7 +330,7 @@ def command_self_test(_args):
     assert not validation_errors(sample)
     summary = aggregate(sample)
     assert summary["generated"] == 2
-    assert summary["copy_quality"] == 4
+    assert summary["copy_quality"] == 80
     assert summary["facts_ok_pct"] == 50
     assert summary["reasoning_effort"] == "high"
     assert summary["status"] == "ai_scored"

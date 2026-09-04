@@ -62,11 +62,12 @@ handled economically: repeat only finalists, not every model.
 
 ## Evaluation protocol
 
-The evaluator assigns three 1–5 scores and two booleans. The headline result is
-a scorecard, never a winner number:
+The evaluator assigns three 1–5 scores and two booleans. Dashboard aggregates
+normalize every field to 100. The headline result is a scorecard, never a
+winner number:
 
 ```text
-copy quality | naturalness | CEFR fit | facts okay % | would use %
+copy quality /100 | naturalness /100 | CEFR fit /100 | facts /100 | would use /100
 ```
 
 Ratings are subjective by design. Consistency matters more than pretending
@@ -88,11 +89,16 @@ The static UI follows the single-panel information architecture of
 bar, one model filter, and one chart area whose content changes in place. It
 does not reuse their logos or benchmark content.
 
-Each score dimension gets a selectable CSS bar chart; `Matrix` swaps the same
+Each score dimension gets a selectable CSS bar chart; `Detailed` swaps the same
 panel to the full score table. This preserves the interaction and visual density
 without adding their Next.js, Tailwind, Radix UI, and Recharts stack. A scatter
 plot remains inappropriate until V0 collects another continuous measure such as
 cost or latency.
+
+The main charts default to the best-scoring reasoning effort per model for the
+selected metric. Equal scores prefer the lower effort. The `All effort levels`
+control and detailed matrix expose every configuration, so the compact default
+does not hide the underlying runs.
 
 ## Public and hidden tracks
 
