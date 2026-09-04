@@ -1,0 +1,886 @@
+{
+  "schema_version": 2,
+  "evaluation": {
+    "id": "2026-09-05-astra-xhigh-v0.1",
+    "type": "personal_ai_indicator",
+    "protocol_version": "personal-astra-v0.1",
+    "protocol_file": "benches/judge-astra-v0.1.json",
+    "protocol_sha256": "8d1535b1d97c773ee9780d8a4435e243ad11d97a94bde15eb6edf8911ea6bc0f",
+    "source_file": "benches/naturalbench/generations/2026-09-04-rerun-01/gpt-5-6-terra-medium.json",
+    "source_sha256": "64c9751b1ba407586c5ffc5bdeb0c130f4cfa955ad43a07979ce910f835c3ab5",
+    "judge": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh"
+    },
+    "unslop_file": "benches/unslop-v1.md",
+    "unslop_sha256": "181883e539caec8258ec9129e3ba5f133409144a2cbf2aa361158ab94cfc3441",
+    "purpose": "demonstration",
+    "human_validated": false,
+    "provider_endpoint": "https://ai-proxy.kylehub.dev/v1",
+    "pricing": {
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "retrieved_at": "2026-09-05",
+      "unit": "USD per 1M tokens",
+      "input": 10,
+      "cache_read": 1,
+      "output": 50,
+      "basis": "Direct-provider standard short-context estimate; gateway charges and unreported usage are unknown."
+    },
+    "created_at": "2026-09-04T22:48:54.771851+00:00"
+  },
+  "items": [
+    {
+      "task_id": "natural-en-service-01",
+      "judgment": {
+        "criteria": {
+          "idiom": {
+            "score": 5,
+            "reason": "The wording, grammar and time notation are natural for a British English customer update."
+          },
+          "voice": {
+            "score": 5,
+            "reason": "Calm, considerate and direct. The conditional planning advice is compatible with the reassurance that no action is required."
+          },
+          "specificity": {
+            "score": 4,
+            "reason": "The essential details are concrete, but the second sentence largely repeats the first sentence's explanation of the outage."
+          },
+          "natural_style": {
+            "score": 5,
+            "reason": "Plain support language without inflated claims or conspicuous stylistic devices; the short subject and conventional thanks suit the situation."
+          }
+        },
+        "brief_ok": false,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "below_minimum_word_count",
+            "category": "brief",
+            "severity": "major",
+            "evidence": "",
+            "explanation": "The update has 63 body words, or 68 including the subject line and its label, falling below the required 80-word minimum."
+          },
+          {
+            "code": "repeated_outage_information",
+            "category": "quality",
+            "severity": "minor",
+            "evidence": "During this period, you will not be able to generate or download account exports.",
+            "explanation": "This largely restates the preceding announcement that account exports will be unavailable rather than adding useful detail."
+          }
+        ],
+        "note": "The update communicates all required facts in an appropriate support voice without unsupported promises. Its main weakness is the word-count shortfall, with some avoidable repetition.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:48:54.771983+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_03bd0f50ae2e70f4016a9b4ad77f3c87d29572559d65e68264",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_03bd0f50ae2e70f4016a9b4ad78bb887d2928e42e8d8b584d2": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2670,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2670,
+                  "output_tokens": 0
+                },
+                "rs_03bd0f50ae2e70f4016a9b4ad8b75087d2aba3b94ccc74311c": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_03bd0f50ae2e70f4016a9b4ae8107087d2a4766904f0dcdbb3": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_03bd0f50ae2e70f4016a9b4afb56ac87d28e9bed7fb7bd7d4b": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 179
+                },
+                "msg_03bd0f50ae2e70f4016a9b4b00f21087d29e455f9e4100a405": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 380
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 380
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 2968,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1593,
+            "output_tokens_details": {
+              "reasoning_tokens": 1213
+            },
+            "total_tokens": 4561
+          },
+          "latency_ms": 52919,
+          "raw_output": "{\n  \"criteria\": {\n    \"idiom\": {\n      \"score\": 5,\n      \"reason\": \"The wording, grammar and time notation are natural for a British English customer update.\"\n    },\n    \"voice\": {\n      \"score\": 5,\n      \"reason\": \"Calm, considerate and direct. The conditional planning advice is compatible with the reassurance that no action is required.\"\n    },\n    \"specificity\": {\n      \"score\": 4,\n      \"reason\": \"The essential details are concrete, but the second sentence largely repeats the first sentence's explanation of the outage.\"\n    },\n    \"natural_style\": {\n      \"score\": 5,\n      \"reason\": \"Plain support language without inflated claims or conspicuous stylistic devices; the short subject and conventional thanks suit the situation.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"below_minimum_word_count\",\n      \"category\": \"brief\",\n      \"severity\": \"major\",\n      \"evidence\": \"\",\n      \"explanation\": \"The update has 63 body words, or 68 including the subject line and its label, falling below the required 80-word minimum.\"\n    },\n    {\n      \"code\": \"repeated_outage_information\",\n      \"category\": \"quality\",\n      \"severity\": \"minor\",\n      \"evidence\": \"During this period, you will not be able to generate or download account exports.\",\n      \"explanation\": \"This largely restates the preceding announcement that account exports will be unavailable rather than adding useful detail.\"\n    }\n  ],\n  \"note\": \"The update communicates all required facts in an appropriate support voice without unsupported promises. Its main weakness is the word-count shortfall, with some avoidable repetition.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.10933
+        }
+      ],
+      "prompt_sha256": "9ff6446bd9d974ad8379511f5893f2d061feb44dd485da81065140bfd5b7c932",
+      "raw_output": "{\n  \"criteria\": {\n    \"idiom\": {\n      \"score\": 5,\n      \"reason\": \"The wording, grammar and time notation are natural for a British English customer update.\"\n    },\n    \"voice\": {\n      \"score\": 5,\n      \"reason\": \"Calm, considerate and direct. The conditional planning advice is compatible with the reassurance that no action is required.\"\n    },\n    \"specificity\": {\n      \"score\": 4,\n      \"reason\": \"The essential details are concrete, but the second sentence largely repeats the first sentence's explanation of the outage.\"\n    },\n    \"natural_style\": {\n      \"score\": 5,\n      \"reason\": \"Plain support language without inflated claims or conspicuous stylistic devices; the short subject and conventional thanks suit the situation.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"below_minimum_word_count\",\n      \"category\": \"brief\",\n      \"severity\": \"major\",\n      \"evidence\": \"\",\n      \"explanation\": \"The update has 63 body words, or 68 including the subject line and its label, falling below the required 80-word minimum.\"\n    },\n    {\n      \"code\": \"repeated_outage_information\",\n      \"category\": \"quality\",\n      \"severity\": \"minor\",\n      \"evidence\": \"During this period, you will not be able to generate or download account exports.\",\n      \"explanation\": \"This largely restates the preceding announcement that account exports will be unavailable rather than adding useful detail.\"\n    }\n  ],\n  \"note\": \"The update communicates all required facts in an appropriate support voice without unsupported promises. Its main weakness is the word-count shortfall, with some avoidable repetition.\"\n}",
+      "response": {
+        "id": "resp_03bd0f50ae2e70f4016a9b4ad77f3c87d29572559d65e68264",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_03bd0f50ae2e70f4016a9b4ad78bb887d2928e42e8d8b584d2": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2670,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2670,
+                "output_tokens": 0
+              },
+              "rs_03bd0f50ae2e70f4016a9b4ad8b75087d2aba3b94ccc74311c": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_03bd0f50ae2e70f4016a9b4ae8107087d2a4766904f0dcdbb3": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_03bd0f50ae2e70f4016a9b4afb56ac87d28e9bed7fb7bd7d4b": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 179
+              },
+              "msg_03bd0f50ae2e70f4016a9b4b00f21087d29e455f9e4100a405": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 380
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 380
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 2968,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1593,
+          "output_tokens_details": {
+            "reasoning_tokens": 1213
+          },
+          "total_tokens": 4561
+        },
+        "latency_ms": 52919
+      }
+    },
+    {
+      "task_id": "natural-de-service-01",
+      "judgment": {
+        "criteria": {
+          "idiom": {
+            "score": 5,
+            "reason": "The German is grammatically sound and idiomatic, with appropriate time notation and customer-facing wording."
+          },
+          "voice": {
+            "score": 4,
+            "reason": "Calm and courteous overall, but the no-action reassurance sounds more like a system message than an attentive support lead."
+          },
+          "specificity": {
+            "score": 5,
+            "reason": "Clearly covers the outage window, continued access to saved reports and absence of required action. The availability statements reasonably paraphrase the supplied facts."
+          },
+          "natural_style": {
+            "score": 5,
+            "reason": "Restrained formatting and ordinary support conventions fit this notice; there is no meaningful puffery, formulaic flourish or em-dash use."
+          }
+        },
+        "brief_ok": false,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "below_minimum_word_count",
+            "category": "brief",
+            "severity": "major",
+            "evidence": "",
+            "explanation": "The notice contains 69 words including the subject line, or 62 without it, falling below the required minimum of 80 under either convention."
+          },
+          {
+            "code": "impersonal_reassurance",
+            "category": "quality",
+            "severity": "minor",
+            "evidence": "Für Sie ist keine Aktion erforderlich.",
+            "explanation": "This interface-like formulation slightly weakens the attentive support-lead voice requested for the reassurance."
+          }
+        ],
+        "note": "The notice communicates all three required facts calmly and clearly. Its main defect is the missed word minimum, with a small tonal weakness in the no-action reassurance.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:49:47.691911+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_0b332ebc46f73777016a9b4b0c7bb487d297bf6e45514768e3",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_0b332ebc46f73777016a9b4b0c886c87d2ba4a7815ca53aa94": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2705,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2705,
+                  "output_tokens": 0
+                },
+                "rs_0b332ebc46f73777016a9b4b0dfe6087d2899c7da5da900a4d": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_0b332ebc46f73777016a9b4b1d789887d2b016caff4e1e1c95": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0b332ebc46f73777016a9b4b3452fc87d29243efd30481c6ad": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0b332ebc46f73777016a9b4b471c8c87d2992d6d49af7b851d": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0b332ebc46f73777016a9b4b5aa1c887d2b8bda00d82ea8026": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 103
+                },
+                "msg_0b332ebc46f73777016a9b4b5e5d1c87d2959d90e63af7e303": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 385
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 385
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3003,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 2558,
+            "output_tokens_details": {
+              "reasoning_tokens": 2173
+            },
+            "total_tokens": 5561
+          },
+          "latency_ms": 91535,
+          "raw_output": "{\n  \"criteria\": {\n    \"idiom\": {\n      \"score\": 5,\n      \"reason\": \"The German is grammatically sound and idiomatic, with appropriate time notation and customer-facing wording.\"\n    },\n    \"voice\": {\n      \"score\": 4,\n      \"reason\": \"Calm and courteous overall, but the no-action reassurance sounds more like a system message than an attentive support lead.\"\n    },\n    \"specificity\": {\n      \"score\": 5,\n      \"reason\": \"Clearly covers the outage window, continued access to saved reports and absence of required action. The availability statements reasonably paraphrase the supplied facts.\"\n    },\n    \"natural_style\": {\n      \"score\": 5,\n      \"reason\": \"Restrained formatting and ordinary support conventions fit this notice; there is no meaningful puffery, formulaic flourish or em-dash use.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"below_minimum_word_count\",\n      \"category\": \"brief\",\n      \"severity\": \"major\",\n      \"evidence\": \"\",\n      \"explanation\": \"The notice contains 69 words including the subject line, or 62 without it, falling below the required minimum of 80 under either convention.\"\n    },\n    {\n      \"code\": \"impersonal_reassurance\",\n      \"category\": \"quality\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Für Sie ist keine Aktion erforderlich.\",\n      \"explanation\": \"This interface-like formulation slightly weakens the attentive support-lead voice requested for the reassurance.\"\n    }\n  ],\n  \"note\": \"The notice communicates all three required facts calmly and clearly. Its main defect is the missed word minimum, with a small tonal weakness in the no-action reassurance.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.15793
+        }
+      ],
+      "prompt_sha256": "e1879ffd7c674cc4ab1024254ed3ee54e22a8bba62e35c7864d07067e369459b",
+      "raw_output": "{\n  \"criteria\": {\n    \"idiom\": {\n      \"score\": 5,\n      \"reason\": \"The German is grammatically sound and idiomatic, with appropriate time notation and customer-facing wording.\"\n    },\n    \"voice\": {\n      \"score\": 4,\n      \"reason\": \"Calm and courteous overall, but the no-action reassurance sounds more like a system message than an attentive support lead.\"\n    },\n    \"specificity\": {\n      \"score\": 5,\n      \"reason\": \"Clearly covers the outage window, continued access to saved reports and absence of required action. The availability statements reasonably paraphrase the supplied facts.\"\n    },\n    \"natural_style\": {\n      \"score\": 5,\n      \"reason\": \"Restrained formatting and ordinary support conventions fit this notice; there is no meaningful puffery, formulaic flourish or em-dash use.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"below_minimum_word_count\",\n      \"category\": \"brief\",\n      \"severity\": \"major\",\n      \"evidence\": \"\",\n      \"explanation\": \"The notice contains 69 words including the subject line, or 62 without it, falling below the required minimum of 80 under either convention.\"\n    },\n    {\n      \"code\": \"impersonal_reassurance\",\n      \"category\": \"quality\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Für Sie ist keine Aktion erforderlich.\",\n      \"explanation\": \"This interface-like formulation slightly weakens the attentive support-lead voice requested for the reassurance.\"\n    }\n  ],\n  \"note\": \"The notice communicates all three required facts calmly and clearly. Its main defect is the missed word minimum, with a small tonal weakness in the no-action reassurance.\"\n}",
+      "response": {
+        "id": "resp_0b332ebc46f73777016a9b4b0c7bb487d297bf6e45514768e3",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_0b332ebc46f73777016a9b4b0c886c87d2ba4a7815ca53aa94": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2705,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2705,
+                "output_tokens": 0
+              },
+              "rs_0b332ebc46f73777016a9b4b0dfe6087d2899c7da5da900a4d": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_0b332ebc46f73777016a9b4b1d789887d2b016caff4e1e1c95": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0b332ebc46f73777016a9b4b3452fc87d29243efd30481c6ad": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0b332ebc46f73777016a9b4b471c8c87d2992d6d49af7b851d": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0b332ebc46f73777016a9b4b5aa1c887d2b8bda00d82ea8026": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 103
+              },
+              "msg_0b332ebc46f73777016a9b4b5e5d1c87d2959d90e63af7e303": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 385
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 385
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3003,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 2558,
+          "output_tokens_details": {
+            "reasoning_tokens": 2173
+          },
+          "total_tokens": 5561
+        },
+        "latency_ms": 91535
+      }
+    },
+    {
+      "task_id": "natural-en-founder-01",
+      "judgment": {
+        "criteria": {
+          "idiom": {
+            "score": 5,
+            "reason": "The wording is idiomatic, conversational English, with clear grammar and natural contractions."
+          },
+          "voice": {
+            "score": 5,
+            "reason": "The founder takes responsibility and explains the delay without sounding corporate or making the apology dramatic."
+          },
+          "specificity": {
+            "score": 5,
+            "reason": "Covers the original timing, timezone problem, revised timing, and unaffected scheduling within the word limit, without prohibited additions."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The prose is plain and appropriately informal; the em dash in the signature is a small mismatch with Kyle's explicit preference."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "em_dash",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "— [Founder Name]",
+            "explanation": "The signature uses an em dash, which Kyle explicitly prefers to avoid."
+          }
+        ],
+        "note": "This is a candid, usable founder update that explains both the delay and what remains unaffected. The only meaningful preference mismatch is the signature's em dash.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:51:19.229013+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_046f8893ddd015e3016a9b4b68a15487d2acaeb8c30a8014d0",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_046f8893ddd015e3016a9b4b68bb7487d2b341632374c16686": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2711,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2711,
+                  "output_tokens": 0
+                },
+                "rs_046f8893ddd015e3016a9b4b6a11d087d2a53d94b780cd9136": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_046f8893ddd015e3016a9b4b798c1887d29a1cd25056ff72f5": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_046f8893ddd015e3016a9b4b8cd19887d29a1d343201aa79cf": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 223
+                },
+                "msg_046f8893ddd015e3016a9b4b9417e887d29a9def5faea44352": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 291
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 291
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3009,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1548,
+            "output_tokens_details": {
+              "reasoning_tokens": 1257
+            },
+            "total_tokens": 4557
+          },
+          "latency_ms": 52889,
+          "raw_output": "{\n  \"criteria\": {\n    \"idiom\": {\n      \"score\": 5,\n      \"reason\": \"The wording is idiomatic, conversational English, with clear grammar and natural contractions.\"\n    },\n    \"voice\": {\n      \"score\": 5,\n      \"reason\": \"The founder takes responsibility and explains the delay without sounding corporate or making the apology dramatic.\"\n    },\n    \"specificity\": {\n      \"score\": 5,\n      \"reason\": \"Covers the original timing, timezone problem, revised timing, and unaffected scheduling within the word limit, without prohibited additions.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is plain and appropriately informal; the em dash in the signature is a small mismatch with Kyle's explicit preference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"em_dash\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"— [Founder Name]\",\n      \"explanation\": \"The signature uses an em dash, which Kyle explicitly prefers to avoid.\"\n    }\n  ],\n  \"note\": \"This is a candid, usable founder update that explains both the delay and what remains unaffected. The only meaningful preference mismatch is the signature's em dash.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.10749
+        }
+      ],
+      "prompt_sha256": "68f3f53856c1fc75100165c788cb8051b432766e7362e7f5086e1695d28040fd",
+      "raw_output": "{\n  \"criteria\": {\n    \"idiom\": {\n      \"score\": 5,\n      \"reason\": \"The wording is idiomatic, conversational English, with clear grammar and natural contractions.\"\n    },\n    \"voice\": {\n      \"score\": 5,\n      \"reason\": \"The founder takes responsibility and explains the delay without sounding corporate or making the apology dramatic.\"\n    },\n    \"specificity\": {\n      \"score\": 5,\n      \"reason\": \"Covers the original timing, timezone problem, revised timing, and unaffected scheduling within the word limit, without prohibited additions.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is plain and appropriately informal; the em dash in the signature is a small mismatch with Kyle's explicit preference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"em_dash\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"— [Founder Name]\",\n      \"explanation\": \"The signature uses an em dash, which Kyle explicitly prefers to avoid.\"\n    }\n  ],\n  \"note\": \"This is a candid, usable founder update that explains both the delay and what remains unaffected. The only meaningful preference mismatch is the signature's em dash.\"\n}",
+      "response": {
+        "id": "resp_046f8893ddd015e3016a9b4b68a15487d2acaeb8c30a8014d0",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_046f8893ddd015e3016a9b4b68bb7487d2b341632374c16686": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2711,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2711,
+                "output_tokens": 0
+              },
+              "rs_046f8893ddd015e3016a9b4b6a11d087d2a53d94b780cd9136": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_046f8893ddd015e3016a9b4b798c1887d29a1cd25056ff72f5": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_046f8893ddd015e3016a9b4b8cd19887d29a1d343201aa79cf": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 223
+              },
+              "msg_046f8893ddd015e3016a9b4b9417e887d29a9def5faea44352": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 291
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 291
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3009,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1548,
+          "output_tokens_details": {
+            "reasoning_tokens": 1257
+          },
+          "total_tokens": 4557
+        },
+        "latency_ms": 52889
+      }
+    },
+    {
+      "task_id": "natural-de-founder-01",
+      "judgment": {
+        "criteria": {
+          "idiom": {
+            "score": 4,
+            "reason": "Mostly idiomatic German, though the opening's 'zum geplanten Teilen von Kalendern informieren' construction is slightly cumbersome."
+          },
+          "voice": {
+            "score": 5,
+            "reason": "The founder addresses users directly, acknowledges their disappointment and apologizes without corporate language or drama."
+          },
+          "specificity": {
+            "score": 5,
+            "reason": "All four required facts are clearly covered within the word limit. The possible scheduling errors explain the timezone problem without inventing a technical mechanism."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The prose is mostly plain and unforced, but the en-dash sentence break conflicts with the reference's punctuation preference."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "awkward_opening",
+            "category": "quality",
+            "severity": "minor",
+            "evidence": "ich möchte euch direkt zum geplanten Teilen von Kalendern informieren.",
+            "explanation": "The combination of 'zum geplanten Teilen' and 'informieren' makes the opening less idiomatic than the otherwise straightforward German."
+          },
+          {
+            "code": "dash_separator",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "werden – und das möchten wir nicht veröffentlichen.",
+            "explanation": "This is an en dash, not an em dash, but its use as a sentence separator still conflicts with the reference's preference for periods or commas."
+          }
+        ],
+        "note": "A useful, appropriately candid founder update that meets the brief. Only the slightly awkward opening and the dash separator need attention for Kyle's preferences.",
+        "score_5": 4.5,
+        "score": 90.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:52:12.120739+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_012863a6ef2f21f8016a9b4b9cd33087d29adf6a2cd3936421",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_012863a6ef2f21f8016a9b4b9cdefc87d2a8eee3932fe074da": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2758,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2758,
+                  "output_tokens": 0
+                },
+                "rs_012863a6ef2f21f8016a9b4b9e144487d2b95f30458d2950af": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_012863a6ef2f21f8016a9b4bad913887d2b0d74aeebfd0a5ac": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_012863a6ef2f21f8016a9b4bbd1f4887d2a5f73005d190c5a2": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_012863a6ef2f21f8016a9b4bcca44c87d282c634932ec02853": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "msg_012863a6ef2f21f8016a9b4bdd78d887d28c1d4b83961c5736": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 401
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 401
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3056,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 2471,
+            "output_tokens_details": {
+              "reasoning_tokens": 2070
+            },
+            "total_tokens": 5527
+          },
+          "latency_ms": 76252,
+          "raw_output": "{\n  \"criteria\": {\n    \"idiom\": {\n      \"score\": 4,\n      \"reason\": \"Mostly idiomatic German, though the opening's 'zum geplanten Teilen von Kalendern informieren' construction is slightly cumbersome.\"\n    },\n    \"voice\": {\n      \"score\": 5,\n      \"reason\": \"The founder addresses users directly, acknowledges their disappointment and apologizes without corporate language or drama.\"\n    },\n    \"specificity\": {\n      \"score\": 5,\n      \"reason\": \"All four required facts are clearly covered within the word limit. The possible scheduling errors explain the timezone problem without inventing a technical mechanism.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is mostly plain and unforced, but the en-dash sentence break conflicts with the reference's punctuation preference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"awkward_opening\",\n      \"category\": \"quality\",\n      \"severity\": \"minor\",\n      \"evidence\": \"ich möchte euch direkt zum geplanten Teilen von Kalendern informieren.\",\n      \"explanation\": \"The combination of 'zum geplanten Teilen' and 'informieren' makes the opening less idiomatic than the otherwise straightforward German.\"\n    },\n    {\n      \"code\": \"dash_separator\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"werden – und das möchten wir nicht veröffentlichen.\",\n      \"explanation\": \"This is an en dash, not an em dash, but its use as a sentence separator still conflicts with the reference's preference for periods or commas.\"\n    }\n  ],\n  \"note\": \"A useful, appropriately candid founder update that meets the brief. Only the slightly awkward opening and the dash separator need attention for Kyle's preferences.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.15411
+        }
+      ],
+      "prompt_sha256": "f01251e6bc05994b3331a98d613cb23632c0cfcb7326c640154be71cc5d8c55e",
+      "raw_output": "{\n  \"criteria\": {\n    \"idiom\": {\n      \"score\": 4,\n      \"reason\": \"Mostly idiomatic German, though the opening's 'zum geplanten Teilen von Kalendern informieren' construction is slightly cumbersome.\"\n    },\n    \"voice\": {\n      \"score\": 5,\n      \"reason\": \"The founder addresses users directly, acknowledges their disappointment and apologizes without corporate language or drama.\"\n    },\n    \"specificity\": {\n      \"score\": 5,\n      \"reason\": \"All four required facts are clearly covered within the word limit. The possible scheduling errors explain the timezone problem without inventing a technical mechanism.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is mostly plain and unforced, but the en-dash sentence break conflicts with the reference's punctuation preference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"awkward_opening\",\n      \"category\": \"quality\",\n      \"severity\": \"minor\",\n      \"evidence\": \"ich möchte euch direkt zum geplanten Teilen von Kalendern informieren.\",\n      \"explanation\": \"The combination of 'zum geplanten Teilen' and 'informieren' makes the opening less idiomatic than the otherwise straightforward German.\"\n    },\n    {\n      \"code\": \"dash_separator\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"werden – und das möchten wir nicht veröffentlichen.\",\n      \"explanation\": \"This is an en dash, not an em dash, but its use as a sentence separator still conflicts with the reference's preference for periods or commas.\"\n    }\n  ],\n  \"note\": \"A useful, appropriately candid founder update that meets the brief. Only the slightly awkward opening and the dash separator need attention for Kyle's preferences.\"\n}",
+      "response": {
+        "id": "resp_012863a6ef2f21f8016a9b4b9cd33087d29adf6a2cd3936421",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_012863a6ef2f21f8016a9b4b9cdefc87d2a8eee3932fe074da": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2758,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2758,
+                "output_tokens": 0
+              },
+              "rs_012863a6ef2f21f8016a9b4b9e144487d2b95f30458d2950af": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_012863a6ef2f21f8016a9b4bad913887d2b0d74aeebfd0a5ac": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_012863a6ef2f21f8016a9b4bbd1f4887d2a5f73005d190c5a2": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_012863a6ef2f21f8016a9b4bcca44c87d282c634932ec02853": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "msg_012863a6ef2f21f8016a9b4bdd78d887d28c1d4b83961c5736": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 401
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 401
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3056,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 2471,
+          "output_tokens_details": {
+            "reasoning_tokens": 2070
+          },
+          "total_tokens": 5527
+        },
+        "latency_ms": 76252
+      }
+    }
+  ]
+}

@@ -1,0 +1,1619 @@
+{
+  "schema_version": 2,
+  "evaluation": {
+    "id": "2026-09-05-astra-xhigh-v0.1",
+    "type": "personal_ai_indicator",
+    "protocol_version": "personal-astra-v0.1",
+    "protocol_file": "benches/judge-astra-v0.1.json",
+    "protocol_sha256": "8d1535b1d97c773ee9780d8a4435e243ad11d97a94bde15eb6edf8911ea6bc0f",
+    "source_file": "benches/cefrbench/generations/2026-09-04-rerun-01/gpt-5-6-sol-xhigh.json",
+    "source_sha256": "eaa03721ab71da007e56670ccbfa22d19e81985225fce1910cfbb83aa6696fd7",
+    "judge": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh"
+    },
+    "unslop_file": "benches/unslop-v1.md",
+    "unslop_sha256": "181883e539caec8258ec9129e3ba5f133409144a2cbf2aa361158ab94cfc3441",
+    "purpose": "demonstration",
+    "human_validated": false,
+    "provider_endpoint": "https://ai-proxy.kylehub.dev/v1",
+    "pricing": {
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "retrieved_at": "2026-09-05",
+      "unit": "USD per 1M tokens",
+      "input": 10,
+      "cache_read": 1,
+      "output": 50,
+      "basis": "Direct-provider standard short-context estimate; gateway charges and unreported usage are unknown."
+    },
+    "created_at": "2026-09-04T22:52:48.362902+00:00"
+  },
+  "items": [
+    {
+      "task_id": "cefr-en-a2-01",
+      "judgment": {
+        "criteria": {
+          "vocabulary_fit": {
+            "score": 5,
+            "reason": "Everyday library vocabulary and concrete time expressions suit A2 visitors."
+          },
+          "syntax_fit": {
+            "score": 5,
+            "reason": "Present-tense statements and familiar connectors such as 'so', 'when' and 'if' keep the grammatical demands appropriate for A2."
+          },
+          "cohesion_fit": {
+            "score": 5,
+            "reason": "The short notice clearly connects closing, reopening and book returns. The polite call to action fits the task."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The wording is plain and appropriate for a public notice, but the title-case heading conflicts with Kyle's sentence-case preference."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": "A2",
+        "issues": [
+          {
+            "code": "title_case_heading",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "### Library Notice",
+            "explanation": "Capitalising 'Notice' gives the heading title case rather than Kyle's preferred sentence case."
+          }
+        ],
+        "note": "The 57-word body includes all required facts in accessible English without unsupported additions. The only notable style mismatch is the heading's capitalisation.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:52:48.363311+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_065f1932dc372556016a9b4bc1136087d28c994bafe9806a11",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_065f1932dc372556016a9b4bc11d5c87d281748de3cc6a596f": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2659,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2659,
+                  "output_tokens": 0
+                },
+                "rs_065f1932dc372556016a9b4bc24e1c87d28192d4cfd35f49fa": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_065f1932dc372556016a9b4bd1cec087d2bbedd0e58037a39f": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_065f1932dc372556016a9b4be32f7087d2924dec71c83f25f3": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 160
+                },
+                "msg_065f1932dc372556016a9b4be981c087d2a3b8998880c39998": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 304
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 304
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 2957,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1498,
+            "output_tokens_details": {
+              "reasoning_tokens": 1194
+            },
+            "total_tokens": 4455
+          },
+          "latency_ms": 48536,
+          "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"Everyday library vocabulary and concrete time expressions suit A2 visitors.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Present-tense statements and familiar connectors such as 'so', 'when' and 'if' keep the grammatical demands appropriate for A2.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The short notice clearly connects closing, reopening and book returns. The polite call to action fits the task.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The wording is plain and appropriate for a public notice, but the title-case heading conflicts with Kyle's sentence-case preference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"A2\",\n  \"issues\": [\n    {\n      \"code\": \"title_case_heading\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"### Library Notice\",\n      \"explanation\": \"Capitalising 'Notice' gives the heading title case rather than Kyle's preferred sentence case.\"\n    }\n  ],\n  \"note\": \"The 57-word body includes all required facts in accessible English without unsupported additions. The only notable style mismatch is the heading's capitalisation.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.10447
+        }
+      ],
+      "prompt_sha256": "3d83df900fa3b627142d8be7ea57189917c7e0d99a2fe532922c242439406e32",
+      "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"Everyday library vocabulary and concrete time expressions suit A2 visitors.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Present-tense statements and familiar connectors such as 'so', 'when' and 'if' keep the grammatical demands appropriate for A2.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The short notice clearly connects closing, reopening and book returns. The polite call to action fits the task.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The wording is plain and appropriate for a public notice, but the title-case heading conflicts with Kyle's sentence-case preference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"A2\",\n  \"issues\": [\n    {\n      \"code\": \"title_case_heading\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"### Library Notice\",\n      \"explanation\": \"Capitalising 'Notice' gives the heading title case rather than Kyle's preferred sentence case.\"\n    }\n  ],\n  \"note\": \"The 57-word body includes all required facts in accessible English without unsupported additions. The only notable style mismatch is the heading's capitalisation.\"\n}",
+      "response": {
+        "id": "resp_065f1932dc372556016a9b4bc1136087d28c994bafe9806a11",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_065f1932dc372556016a9b4bc11d5c87d281748de3cc6a596f": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2659,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2659,
+                "output_tokens": 0
+              },
+              "rs_065f1932dc372556016a9b4bc24e1c87d28192d4cfd35f49fa": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_065f1932dc372556016a9b4bd1cec087d2bbedd0e58037a39f": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_065f1932dc372556016a9b4be32f7087d2924dec71c83f25f3": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 160
+              },
+              "msg_065f1932dc372556016a9b4be981c087d2a3b8998880c39998": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 304
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 304
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 2957,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1498,
+          "output_tokens_details": {
+            "reasoning_tokens": 1194
+          },
+          "total_tokens": 4455
+        },
+        "latency_ms": 48536
+      }
+    },
+    {
+      "task_id": "cefr-de-a2-01",
+      "judgment": {
+        "criteria": {
+          "vocabulary_fit": {
+            "score": 5,
+            "reason": "The vocabulary is concrete and suitable for A2 readers; the required term 'Rückgabebox' is explained through its use."
+          },
+          "syntax_fit": {
+            "score": 4,
+            "reason": "Most sentences suit A2, but combining a conditional clause and an 'auch wenn' clause creates a small processing burden."
+          },
+          "cohesion_fit": {
+            "score": 5,
+            "reason": "Within this short notice, the sequence from opening hours to returns is easy to follow, and the polite register suits library visitors."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The language is plain and appropriate, but the final sentence repeats information already explained."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": "A2",
+        "issues": [
+          {
+            "code": "clause_load",
+            "category": "cefr",
+            "severity": "minor",
+            "evidence": "Wenn Sie etwas zurückgeben möchten, können Sie die Box benutzen, auch wenn die Bibliothek geschlossen ist.",
+            "explanation": "Combining conditional and concessive clauses in one sentence makes this passage slightly demanding for A2 readers."
+          },
+          {
+            "code": "redundant_restatement",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "Eine Rückgabe ist über die Box weiterhin möglich.",
+            "explanation": "The closing sentence repeats the box's availability for returns without adding information."
+          }
+        ],
+        "note": "All required details are present in 56 body words, with no unsupported factual additions. Lighter clause structure and less repetition would improve the notice while preserving the required length.",
+        "score_5": 4.5,
+        "score": 90.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:53:36.903428+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_05a1f14f43fda727016a9b4bf194a487d2b6b63dfe7be99bf3",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_05a1f14f43fda727016a9b4bf19f9887d2aa405f08cb46f6c8": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2689,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2689,
+                  "output_tokens": 0
+                },
+                "rs_05a1f14f43fda727016a9b4bf2b93887d28264120fe4cc279c": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_05a1f14f43fda727016a9b4c02691887d280b986eb6fb301c8": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_05a1f14f43fda727016a9b4c17e8bc87d28827ef9a4be04680": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 455
+                },
+                "msg_05a1f14f43fda727016a9b4c28fe7887d29ee9d5125d004564": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 400
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 400
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 2987,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1889,
+            "output_tokens_details": {
+              "reasoning_tokens": 1489
+            },
+            "total_tokens": 4876
+          },
+          "latency_ms": 66078,
+          "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The vocabulary is concrete and suitable for A2 readers; the required term 'Rückgabebox' is explained through its use.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 4,\n      \"reason\": \"Most sentences suit A2, but combining a conditional clause and an 'auch wenn' clause creates a small processing burden.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"Within this short notice, the sequence from opening hours to returns is easy to follow, and the polite register suits library visitors.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The language is plain and appropriate, but the final sentence repeats information already explained.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"A2\",\n  \"issues\": [\n    {\n      \"code\": \"clause_load\",\n      \"category\": \"cefr\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Wenn Sie etwas zurückgeben möchten, können Sie die Box benutzen, auch wenn die Bibliothek geschlossen ist.\",\n      \"explanation\": \"Combining conditional and concessive clauses in one sentence makes this passage slightly demanding for A2 readers.\"\n    },\n    {\n      \"code\": \"redundant_restatement\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Eine Rückgabe ist über die Box weiterhin möglich.\",\n      \"explanation\": \"The closing sentence repeats the box's availability for returns without adding information.\"\n    }\n  ],\n  \"note\": \"All required details are present in 56 body words, with no unsupported factual additions. Lighter clause structure and less repetition would improve the notice while preserving the required length.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.12432
+        }
+      ],
+      "prompt_sha256": "74f1833d30ee7c2d954632e244c0a04fbf2ba0eae060d39d718209f0220e2879",
+      "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The vocabulary is concrete and suitable for A2 readers; the required term 'Rückgabebox' is explained through its use.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 4,\n      \"reason\": \"Most sentences suit A2, but combining a conditional clause and an 'auch wenn' clause creates a small processing burden.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"Within this short notice, the sequence from opening hours to returns is easy to follow, and the polite register suits library visitors.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The language is plain and appropriate, but the final sentence repeats information already explained.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"A2\",\n  \"issues\": [\n    {\n      \"code\": \"clause_load\",\n      \"category\": \"cefr\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Wenn Sie etwas zurückgeben möchten, können Sie die Box benutzen, auch wenn die Bibliothek geschlossen ist.\",\n      \"explanation\": \"Combining conditional and concessive clauses in one sentence makes this passage slightly demanding for A2 readers.\"\n    },\n    {\n      \"code\": \"redundant_restatement\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Eine Rückgabe ist über die Box weiterhin möglich.\",\n      \"explanation\": \"The closing sentence repeats the box's availability for returns without adding information.\"\n    }\n  ],\n  \"note\": \"All required details are present in 56 body words, with no unsupported factual additions. Lighter clause structure and less repetition would improve the notice while preserving the required length.\"\n}",
+      "response": {
+        "id": "resp_05a1f14f43fda727016a9b4bf194a487d2b6b63dfe7be99bf3",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_05a1f14f43fda727016a9b4bf19f9887d2aa405f08cb46f6c8": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2689,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2689,
+                "output_tokens": 0
+              },
+              "rs_05a1f14f43fda727016a9b4bf2b93887d28264120fe4cc279c": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_05a1f14f43fda727016a9b4c02691887d280b986eb6fb301c8": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_05a1f14f43fda727016a9b4c17e8bc87d28827ef9a4be04680": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 455
+              },
+              "msg_05a1f14f43fda727016a9b4c28fe7887d29ee9d5125d004564": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 400
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 400
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 2987,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1889,
+          "output_tokens_details": {
+            "reasoning_tokens": 1489
+          },
+          "total_tokens": 4876
+        },
+        "latency_ms": 66078
+      }
+    },
+    {
+      "task_id": "cefr-en-b1-01",
+      "judgment": {
+        "criteria": {
+          "vocabulary_fit": {
+            "score": 5,
+            "reason": "The practical vocabulary suits B1, with topic-specific terms supported by clear context."
+          },
+          "syntax_fit": {
+            "score": 5,
+            "reason": "Short sentences, straightforward relative clauses and a clear conditional keep the grammatical demands appropriate for B1."
+          },
+          "cohesion_fit": {
+            "score": 5,
+            "reason": "The explanation moves clearly from application details to allocation, then closes with a relevant deadline reminder."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "Mostly plain and direct, but one sentence repeats the random-selection rule without making it clearer."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": "B1",
+        "issues": [
+          {
+            "code": "redundant_explanation",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "This means every applicant will take part in the same random selection process.",
+            "explanation": "This restates the preceding rule in longer, more abstract wording rather than explaining what selection at random means."
+          }
+        ],
+        "note": "The 88-word explanation covers the required facts, uses suitable British English and fits B1. Its main weakness for Kyle's preferences is one padded restatement, not an unsupported factual promise.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:54:42.983776+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_06ea1c0f38d21150016a9b4c33e64487d285b8121ff0df7aad",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_06ea1c0f38d21150016a9b4c33f00887d2a72281c63328a9a9": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2690,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2690,
+                  "output_tokens": 0
+                },
+                "rs_06ea1c0f38d21150016a9b4c35133887d2b253a225172ed585": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_06ea1c0f38d21150016a9b4c448c9887d29194c0f4c350c8d5": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_06ea1c0f38d21150016a9b4c56c55087d28ce88889947d6e39": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "msg_06ea1c0f38d21150016a9b4c6bc6b887d2afdd4a1b400d06d5": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 314
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 314
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 2988,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1866,
+            "output_tokens_details": {
+              "reasoning_tokens": 1552
+            },
+            "total_tokens": 4854
+          },
+          "latency_ms": 64322,
+          "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The practical vocabulary suits B1, with topic-specific terms supported by clear context.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Short sentences, straightforward relative clauses and a clear conditional keep the grammatical demands appropriate for B1.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The explanation moves clearly from application details to allocation, then closes with a relevant deadline reminder.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly plain and direct, but one sentence repeats the random-selection rule without making it clearer.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"B1\",\n  \"issues\": [\n    {\n      \"code\": \"redundant_explanation\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"This means every applicant will take part in the same random selection process.\",\n      \"explanation\": \"This restates the preceding rule in longer, more abstract wording rather than explaining what selection at random means.\"\n    }\n  ],\n  \"note\": \"The 88-word explanation covers the required facts, uses suitable British English and fits B1. Its main weakness for Kyle's preferences is one padded restatement, not an unsupported factual promise.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.12318
+        }
+      ],
+      "prompt_sha256": "a98c19f9da37ac41a356e020e4be894c32354248d4274d65b19b04210264226b",
+      "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The practical vocabulary suits B1, with topic-specific terms supported by clear context.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Short sentences, straightforward relative clauses and a clear conditional keep the grammatical demands appropriate for B1.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The explanation moves clearly from application details to allocation, then closes with a relevant deadline reminder.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly plain and direct, but one sentence repeats the random-selection rule without making it clearer.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"B1\",\n  \"issues\": [\n    {\n      \"code\": \"redundant_explanation\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"This means every applicant will take part in the same random selection process.\",\n      \"explanation\": \"This restates the preceding rule in longer, more abstract wording rather than explaining what selection at random means.\"\n    }\n  ],\n  \"note\": \"The 88-word explanation covers the required facts, uses suitable British English and fits B1. Its main weakness for Kyle's preferences is one padded restatement, not an unsupported factual promise.\"\n}",
+      "response": {
+        "id": "resp_06ea1c0f38d21150016a9b4c33e64487d285b8121ff0df7aad",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_06ea1c0f38d21150016a9b4c33f00887d2a72281c63328a9a9": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2690,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2690,
+                "output_tokens": 0
+              },
+              "rs_06ea1c0f38d21150016a9b4c35133887d2b253a225172ed585": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_06ea1c0f38d21150016a9b4c448c9887d29194c0f4c350c8d5": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_06ea1c0f38d21150016a9b4c56c55087d28ce88889947d6e39": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "msg_06ea1c0f38d21150016a9b4c6bc6b887d2afdd4a1b400d06d5": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 314
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 314
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 2988,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1866,
+          "output_tokens_details": {
+            "reasoning_tokens": 1552
+          },
+          "total_tokens": 4854
+        },
+        "latency_ms": 64322
+      }
+    },
+    {
+      "task_id": "cefr-de-b1-01",
+      "judgment": {
+        "criteria": {
+          "vocabulary_fit": {
+            "score": 5,
+            "reason": "The gardening and application vocabulary suits B1; administrative terms are understandable in context."
+          },
+          "syntax_fit": {
+            "score": 5,
+            "reason": "Conditional clauses, short passive constructions and the final 'Wer' clause provide appropriate, manageable B1 complexity."
+          },
+          "cohesion_fit": {
+            "score": 5,
+            "reason": "Within this short explanation, the application process, fee and random selection follow a clear sequence in a consistent public-information register."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The language is plain and restrained, but the second sentence immediately repeats the first sentence's deadline and submission method."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": "B1",
+        "issues": [
+          {
+            "code": "redundant_restatement",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "Die Bewerbung muss spätestens an diesem Tag online eingereicht werden.",
+            "explanation": "This immediately repeats the preceding sentence's deadline and online submission requirement without adding useful information."
+          }
+        ],
+        "note": "At 82 words, the explanation meets the length limit and covers all required facts in B1-appropriate German without inventing material facts. The immediate repetition of the deadline is the main style weakness.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:55:47.308805+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_0a2ade3c1d0bc33e016a9b4c73f79c87d2a8492a38aa6f97d1",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_0a2ade3c1d0bc33e016a9b4c7402ac87d285f11b9d128d1b89": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2722,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2722,
+                  "output_tokens": 0
+                },
+                "rs_0a2ade3c1d0bc33e016a9b4c753edc87d282535a39a687353e": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_0a2ade3c1d0bc33e016a9b4c84c30c87d2aeb77b9ca9fbeca4": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "msg_0a2ade3c1d0bc33e016a9b4c973a5487d2b095b38b1c2840fe": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 323
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 323
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3020,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1357,
+            "output_tokens_details": {
+              "reasoning_tokens": 1034
+            },
+            "total_tokens": 4377
+          },
+          "latency_ms": 43323,
+          "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The gardening and application vocabulary suits B1; administrative terms are understandable in context.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Conditional clauses, short passive constructions and the final 'Wer' clause provide appropriate, manageable B1 complexity.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"Within this short explanation, the application process, fee and random selection follow a clear sequence in a consistent public-information register.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The language is plain and restrained, but the second sentence immediately repeats the first sentence's deadline and submission method.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"B1\",\n  \"issues\": [\n    {\n      \"code\": \"redundant_restatement\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Die Bewerbung muss spätestens an diesem Tag online eingereicht werden.\",\n      \"explanation\": \"This immediately repeats the preceding sentence's deadline and online submission requirement without adding useful information.\"\n    }\n  ],\n  \"note\": \"At 82 words, the explanation meets the length limit and covers all required facts in B1-appropriate German without inventing material facts. The immediate repetition of the deadline is the main style weakness.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.09805
+        }
+      ],
+      "prompt_sha256": "5c93ec093da4a9ff882d2dd80af1a52e7e710d3d5c756ddaf0a008ef782f40ad",
+      "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The gardening and application vocabulary suits B1; administrative terms are understandable in context.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Conditional clauses, short passive constructions and the final 'Wer' clause provide appropriate, manageable B1 complexity.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"Within this short explanation, the application process, fee and random selection follow a clear sequence in a consistent public-information register.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The language is plain and restrained, but the second sentence immediately repeats the first sentence's deadline and submission method.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"B1\",\n  \"issues\": [\n    {\n      \"code\": \"redundant_restatement\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Die Bewerbung muss spätestens an diesem Tag online eingereicht werden.\",\n      \"explanation\": \"This immediately repeats the preceding sentence's deadline and online submission requirement without adding useful information.\"\n    }\n  ],\n  \"note\": \"At 82 words, the explanation meets the length limit and covers all required facts in B1-appropriate German without inventing material facts. The immediate repetition of the deadline is the main style weakness.\"\n}",
+      "response": {
+        "id": "resp_0a2ade3c1d0bc33e016a9b4c73f79c87d2a8492a38aa6f97d1",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_0a2ade3c1d0bc33e016a9b4c7402ac87d285f11b9d128d1b89": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2722,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2722,
+                "output_tokens": 0
+              },
+              "rs_0a2ade3c1d0bc33e016a9b4c753edc87d282535a39a687353e": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_0a2ade3c1d0bc33e016a9b4c84c30c87d2aeb77b9ca9fbeca4": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "msg_0a2ade3c1d0bc33e016a9b4c973a5487d2b095b38b1c2840fe": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 323
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 323
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3020,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1357,
+          "output_tokens_details": {
+            "reasoning_tokens": 1034
+          },
+          "total_tokens": 4377
+        },
+        "latency_ms": 43323
+      }
+    },
+    {
+      "task_id": "cefr-en-b2-01",
+      "judgment": {
+        "criteria": {
+          "vocabulary_fit": {
+            "score": 5,
+            "reason": "Workplace vocabulary such as 'arrangements', 'exception' and 'working pattern' suits B2 staff readers without unnecessary abstraction."
+          },
+          "syntax_fit": {
+            "score": 5,
+            "reason": "Clear main clauses combine with relative clauses, passive forms and an 'unless' condition at an appropriate B2 level."
+          },
+          "cohesion_fit": {
+            "score": 5,
+            "reason": "The explanation moves logically from weekly arrangements to exceptions and review, with clear references and a consistent internal-policy register."
+          },
+          "natural_style": {
+            "score": 5,
+            "reason": "The wording is plain and neutral. Repeated policy terms support clarity, and the closing reminder is functional rather than empty filler."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": "B2",
+        "issues": [],
+        "note": "The 117-word explanation covers every required detail in British English without adding substantive facts or judging the policy. No meaningful editorial defect stands out, although the short sample supports only a tentative B2 diagnosis.",
+        "score_5": 5.0,
+        "score": 100.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:56:30.633515+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_0d42eaf2db577e8d016a9b4c9f7d5087d28bf9c885a153134b",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_0d42eaf2db577e8d016a9b4c9f88e087d28bdc96dfaaf8c48a": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2738,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2738,
+                  "output_tokens": 0
+                },
+                "rs_0d42eaf2db577e8d016a9b4ca0cb3087d2b5f12c2d70188d71": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_0d42eaf2db577e8d016a9b4cb176f487d29273001d2ced9388": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0d42eaf2db577e8d016a9b4cc5ea7887d2a6f9300ba2ad5acf": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 357
+                },
+                "msg_0d42eaf2db577e8d016a9b4cd3f14c87d29e1521eb3079703e": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 262
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 262
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3036,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1653,
+            "output_tokens_details": {
+              "reasoning_tokens": 1391
+            },
+            "total_tokens": 4689
+          },
+          "latency_ms": 62991,
+          "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"Workplace vocabulary such as 'arrangements', 'exception' and 'working pattern' suits B2 staff readers without unnecessary abstraction.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Clear main clauses combine with relative clauses, passive forms and an 'unless' condition at an appropriate B2 level.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The explanation moves logically from weekly arrangements to exceptions and review, with clear references and a consistent internal-policy register.\"\n    },\n    \"natural_style\": {\n      \"score\": 5,\n      \"reason\": \"The wording is plain and neutral. Repeated policy terms support clarity, and the closing reminder is functional rather than empty filler.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"B2\",\n  \"issues\": [],\n  \"note\": \"The 117-word explanation covers every required detail in British English without adding substantive facts or judging the policy. No meaningful editorial defect stands out, although the short sample supports only a tentative B2 diagnosis.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.11301
+        }
+      ],
+      "prompt_sha256": "fca2f992c3713f458070c45a89154dbada65eb731f8b6a4de2791ab093ec27ce",
+      "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"Workplace vocabulary such as 'arrangements', 'exception' and 'working pattern' suits B2 staff readers without unnecessary abstraction.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Clear main clauses combine with relative clauses, passive forms and an 'unless' condition at an appropriate B2 level.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The explanation moves logically from weekly arrangements to exceptions and review, with clear references and a consistent internal-policy register.\"\n    },\n    \"natural_style\": {\n      \"score\": 5,\n      \"reason\": \"The wording is plain and neutral. Repeated policy terms support clarity, and the closing reminder is functional rather than empty filler.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"B2\",\n  \"issues\": [],\n  \"note\": \"The 117-word explanation covers every required detail in British English without adding substantive facts or judging the policy. No meaningful editorial defect stands out, although the short sample supports only a tentative B2 diagnosis.\"\n}",
+      "response": {
+        "id": "resp_0d42eaf2db577e8d016a9b4c9f7d5087d28bf9c885a153134b",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_0d42eaf2db577e8d016a9b4c9f88e087d28bdc96dfaaf8c48a": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2738,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2738,
+                "output_tokens": 0
+              },
+              "rs_0d42eaf2db577e8d016a9b4ca0cb3087d2b5f12c2d70188d71": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_0d42eaf2db577e8d016a9b4cb176f487d29273001d2ced9388": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0d42eaf2db577e8d016a9b4cc5ea7887d2a6f9300ba2ad5acf": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 357
+              },
+              "msg_0d42eaf2db577e8d016a9b4cd3f14c87d29e1521eb3079703e": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 262
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 262
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3036,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1653,
+          "output_tokens_details": {
+            "reasoning_tokens": 1391
+          },
+          "total_tokens": 4689
+        },
+        "latency_ms": 62991
+      }
+    },
+    {
+      "task_id": "cefr-de-b2-01",
+      "judgment": {
+        "criteria": {
+          "vocabulary_fit": {
+            "score": 5,
+            "reason": "The workplace vocabulary and moderate abstraction suit B2 readers and an internal policy explanation."
+          },
+          "syntax_fit": {
+            "score": 5,
+            "reason": "Conditional clauses, passive constructions and straightforward main clauses provide appropriate B2 structures without excessive complexity."
+          },
+          "cohesion_fit": {
+            "score": 5,
+            "reason": "The progression from working arrangements to exceptions and review timing is accessible, with a consistent internal-information register."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The prose is mostly plain and neutral, but the final sentence unnecessarily repeats the review timing."
+          }
+        },
+        "brief_ok": false,
+        "realized_cefr": "B2",
+        "issues": [
+          {
+            "code": "unsupported_validity_period",
+            "category": "brief",
+            "severity": "major",
+            "evidence": "gilt zunächst für einen Zeitraum von sechs Monaten.",
+            "explanation": "This adds an initial six-month validity period, whereas the brief specifies only a review after six months."
+          },
+          {
+            "code": "redundant_closing_sentence",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "Nach Ablauf dieser sechs Monate wird sie überprüft. Die Überprüfung findet somit sechs Monate nach dem Beginn der Regelung statt.",
+            "explanation": "The final sentence repeats the immediately preceding review timing without adding useful information."
+          }
+        ],
+        "note": "The text meets the word limit and provides a clear B2-level internal explanation. Its main defect is the unsupported validity period, with a smaller stylistic weakness in the repetitive ending.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:57:33.627404+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_074724ac736a68ae016a9b4cde7cc887d2b2293666b78c9b0d",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_074724ac736a68ae016a9b4cdee8d087d299b019ed58ab7908": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2785,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2785,
+                  "output_tokens": 0
+                },
+                "rs_074724ac736a68ae016a9b4ce15b7887d2a02f84cbd4007b71": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_074724ac736a68ae016a9b4cf0dd3487d2be4c8e3befc126a7": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_074724ac736a68ae016a9b4d0063c487d280592ec98b73a852": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "msg_074724ac736a68ae016a9b4d1107c887d2a886026cf2bf05ae": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 388
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 388
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3083,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1940,
+            "output_tokens_details": {
+              "reasoning_tokens": 1552
+            },
+            "total_tokens": 5023
+          },
+          "latency_ms": 62137,
+          "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The workplace vocabulary and moderate abstraction suit B2 readers and an internal policy explanation.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Conditional clauses, passive constructions and straightforward main clauses provide appropriate B2 structures without excessive complexity.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The progression from working arrangements to exceptions and review timing is accessible, with a consistent internal-information register.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is mostly plain and neutral, but the final sentence unnecessarily repeats the review timing.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": \"B2\",\n  \"issues\": [\n    {\n      \"code\": \"unsupported_validity_period\",\n      \"category\": \"brief\",\n      \"severity\": \"major\",\n      \"evidence\": \"gilt zunächst für einen Zeitraum von sechs Monaten.\",\n      \"explanation\": \"This adds an initial six-month validity period, whereas the brief specifies only a review after six months.\"\n    },\n    {\n      \"code\": \"redundant_closing_sentence\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Nach Ablauf dieser sechs Monate wird sie überprüft. Die Überprüfung findet somit sechs Monate nach dem Beginn der Regelung statt.\",\n      \"explanation\": \"The final sentence repeats the immediately preceding review timing without adding useful information.\"\n    }\n  ],\n  \"note\": \"The text meets the word limit and provides a clear B2-level internal explanation. Its main defect is the unsupported validity period, with a smaller stylistic weakness in the repetitive ending.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.12783
+        }
+      ],
+      "prompt_sha256": "4f8f0c0da3380f5d2953ef8764e946d19345f2eee1e5eb5b7db8aab272752012",
+      "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The workplace vocabulary and moderate abstraction suit B2 readers and an internal policy explanation.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Conditional clauses, passive constructions and straightforward main clauses provide appropriate B2 structures without excessive complexity.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The progression from working arrangements to exceptions and review timing is accessible, with a consistent internal-information register.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is mostly plain and neutral, but the final sentence unnecessarily repeats the review timing.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": \"B2\",\n  \"issues\": [\n    {\n      \"code\": \"unsupported_validity_period\",\n      \"category\": \"brief\",\n      \"severity\": \"major\",\n      \"evidence\": \"gilt zunächst für einen Zeitraum von sechs Monaten.\",\n      \"explanation\": \"This adds an initial six-month validity period, whereas the brief specifies only a review after six months.\"\n    },\n    {\n      \"code\": \"redundant_closing_sentence\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Nach Ablauf dieser sechs Monate wird sie überprüft. Die Überprüfung findet somit sechs Monate nach dem Beginn der Regelung statt.\",\n      \"explanation\": \"The final sentence repeats the immediately preceding review timing without adding useful information.\"\n    }\n  ],\n  \"note\": \"The text meets the word limit and provides a clear B2-level internal explanation. Its main defect is the unsupported validity period, with a smaller stylistic weakness in the repetitive ending.\"\n}",
+      "response": {
+        "id": "resp_074724ac736a68ae016a9b4cde7cc887d2b2293666b78c9b0d",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_074724ac736a68ae016a9b4cdee8d087d299b019ed58ab7908": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2785,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2785,
+                "output_tokens": 0
+              },
+              "rs_074724ac736a68ae016a9b4ce15b7887d2a02f84cbd4007b71": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_074724ac736a68ae016a9b4cf0dd3487d2be4c8e3befc126a7": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_074724ac736a68ae016a9b4d0063c487d280592ec98b73a852": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "msg_074724ac736a68ae016a9b4d1107c887d2a886026cf2bf05ae": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 388
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 388
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3083,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1940,
+          "output_tokens_details": {
+            "reasoning_tokens": 1552
+          },
+          "total_tokens": 5023
+        },
+        "latency_ms": 62137
+      }
+    },
+    {
+      "task_id": "cefr-en-c1-01",
+      "judgment": {
+        "criteria": {
+          "vocabulary_fit": {
+            "score": 5,
+            "reason": "Precise formal vocabulary suits the C1 summary task without unnecessary ornament or unexplained jargon."
+          },
+          "syntax_fit": {
+            "score": 5,
+            "reason": "Controlled conditional, relative and subordinate clauses express the trade-offs clearly, providing suitable structural range for this short C1 task."
+          },
+          "cohesion_fit": {
+            "score": 5,
+            "reason": "The progression from supporters to opponents and proposed access measures is clear, balanced and accessible."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The prose is restrained and specific, but the additional sentence explaining supporters' position repeats an established point."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": "C1",
+        "issues": [
+          {
+            "code": "redundant_elaboration",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "They regard the plan as an opportunity to reduce the presence of cars during the weekend and give people on foot greater freedom to move around the area.",
+            "explanation": "This repeats the proposed car restriction and the preceding pedestrian-space benefit rather than developing the explanation."
+          }
+        ],
+        "note": "The 173-word summary meets the length and British English requirements, covers the supplied facts and remains balanced without unsupported factual additions. Its main weakness for Kyle's preferences is the redundant elaboration of supporters' position.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:58:35.767148+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_02f61de2b08ecb40016a9b4d1c54f887d29c1820917cc0b2d3",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_02f61de2b08ecb40016a9b4d1c6e6487d298a7dd0d079f62fb": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2803,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2803,
+                  "output_tokens": 0
+                },
+                "rs_02f61de2b08ecb40016a9b4d1de6b887d2bc70852aac9b1ae4": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_02f61de2b08ecb40016a9b4d2d6b9887d2bc1c468df579e1b7": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_02f61de2b08ecb40016a9b4d3d817087d28994eb7f921f1576": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 428
+                },
+                "msg_02f61de2b08ecb40016a9b4d4bc3a487d2b18d3b588389182a": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 338
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 338
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3101,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1800,
+            "output_tokens_details": {
+              "reasoning_tokens": 1462
+            },
+            "total_tokens": 4901
+          },
+          "latency_ms": 56530,
+          "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"Precise formal vocabulary suits the C1 summary task without unnecessary ornament or unexplained jargon.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Controlled conditional, relative and subordinate clauses express the trade-offs clearly, providing suitable structural range for this short C1 task.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The progression from supporters to opponents and proposed access measures is clear, balanced and accessible.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is restrained and specific, but the additional sentence explaining supporters' position repeats an established point.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"C1\",\n  \"issues\": [\n    {\n      \"code\": \"redundant_elaboration\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"They regard the plan as an opportunity to reduce the presence of cars during the weekend and give people on foot greater freedom to move around the area.\",\n      \"explanation\": \"This repeats the proposed car restriction and the preceding pedestrian-space benefit rather than developing the explanation.\"\n    }\n  ],\n  \"note\": \"The 173-word summary meets the length and British English requirements, covers the supplied facts and remains balanced without unsupported factual additions. Its main weakness for Kyle's preferences is the redundant elaboration of supporters' position.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.12101
+        }
+      ],
+      "prompt_sha256": "839d85b12481b24da4587bb685de3badd3cc0854beedc059a6823027f6fc05d1",
+      "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"Precise formal vocabulary suits the C1 summary task without unnecessary ornament or unexplained jargon.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Controlled conditional, relative and subordinate clauses express the trade-offs clearly, providing suitable structural range for this short C1 task.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"The progression from supporters to opponents and proposed access measures is clear, balanced and accessible.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is restrained and specific, but the additional sentence explaining supporters' position repeats an established point.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"C1\",\n  \"issues\": [\n    {\n      \"code\": \"redundant_elaboration\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"They regard the plan as an opportunity to reduce the presence of cars during the weekend and give people on foot greater freedom to move around the area.\",\n      \"explanation\": \"This repeats the proposed car restriction and the preceding pedestrian-space benefit rather than developing the explanation.\"\n    }\n  ],\n  \"note\": \"The 173-word summary meets the length and British English requirements, covers the supplied facts and remains balanced without unsupported factual additions. Its main weakness for Kyle's preferences is the redundant elaboration of supporters' position.\"\n}",
+      "response": {
+        "id": "resp_02f61de2b08ecb40016a9b4d1c54f887d29c1820917cc0b2d3",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_02f61de2b08ecb40016a9b4d1c6e6487d298a7dd0d079f62fb": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2803,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2803,
+                "output_tokens": 0
+              },
+              "rs_02f61de2b08ecb40016a9b4d1de6b887d2bc70852aac9b1ae4": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_02f61de2b08ecb40016a9b4d2d6b9887d2bc1c468df579e1b7": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_02f61de2b08ecb40016a9b4d3d817087d28994eb7f921f1576": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 428
+              },
+              "msg_02f61de2b08ecb40016a9b4d4bc3a487d2b18d3b588389182a": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 338
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 338
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3101,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1800,
+          "output_tokens_details": {
+            "reasoning_tokens": 1462
+          },
+          "total_tokens": 4901
+        },
+        "latency_ms": 56530
+      }
+    },
+    {
+      "task_id": "cefr-de-c1-01",
+      "judgment": {
+        "criteria": {
+          "vocabulary_fit": {
+            "score": 5,
+            "reason": "The formal civic vocabulary and abstract discussion of access and competing priorities suit the requested C1 audience."
+          },
+          "syntax_fit": {
+            "score": 5,
+            "reason": "Subordinate clauses, relative clauses, and conditional reporting provide appropriate grammatical range without making sentences difficult to follow."
+          },
+          "cohesion_fit": {
+            "score": 5,
+            "reason": "Within this short sample, the progression from proposal to opposing concerns and proposed access measures is clear, balanced, and appropriately formal."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The prose is mostly restrained, but one sentence pads the summary by restating the pedestrian-space benefit."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": "C1",
+        "issues": [
+          {
+            "code": "redundant_restatement",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "Damit verbinden sie die Aussicht auf eine Innenstadt, in der der öffentliche Raum weniger durch private Fahrzeuge beansprucht wird.",
+            "explanation": "This repeats the preceding expectation of more space for pedestrians without adding a distinct point about the tradeoff."
+          }
+        ],
+        "note": "The 176-word summary covers all required points, remains neutral, and adds no unsupported factual promises. Its main weakness is a redundant restatement rather than a mismatch with the requested level.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:59:32.299252+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_0b94a474f97dce31016a9b4d54ff3087d289e9deabb8ca06cc",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_0b94a474f97dce31016a9b4d5507a887d29e241bfdecae3209": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2901,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2901,
+                  "output_tokens": 0
+                },
+                "rs_0b94a474f97dce31016a9b4d56af7087d29a1917fb218882f5": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_0b94a474f97dce31016a9b4d6638fc87d2a328546fd2cc376c": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0b94a474f97dce31016a9b4d75c82087d2965e00d8973b46cd": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "msg_0b94a474f97dce31016a9b4d886e0887d2a851744d45ebca02": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 335
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 335
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3199,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1887,
+            "output_tokens_details": {
+              "reasoning_tokens": 1552
+            },
+            "total_tokens": 5086
+          },
+          "latency_ms": 60241,
+          "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The formal civic vocabulary and abstract discussion of access and competing priorities suit the requested C1 audience.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Subordinate clauses, relative clauses, and conditional reporting provide appropriate grammatical range without making sentences difficult to follow.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"Within this short sample, the progression from proposal to opposing concerns and proposed access measures is clear, balanced, and appropriately formal.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is mostly restrained, but one sentence pads the summary by restating the pedestrian-space benefit.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"C1\",\n  \"issues\": [\n    {\n      \"code\": \"redundant_restatement\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Damit verbinden sie die Aussicht auf eine Innenstadt, in der der öffentliche Raum weniger durch private Fahrzeuge beansprucht wird.\",\n      \"explanation\": \"This repeats the preceding expectation of more space for pedestrians without adding a distinct point about the tradeoff.\"\n    }\n  ],\n  \"note\": \"The 176-word summary covers all required points, remains neutral, and adds no unsupported factual promises. Its main weakness is a redundant restatement rather than a mismatch with the requested level.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.12634
+        }
+      ],
+      "prompt_sha256": "39603a9f695a8d46e239f79103e62160da6cd979363be4bac360b6f1586d0f04",
+      "raw_output": "{\n  \"criteria\": {\n    \"vocabulary_fit\": {\n      \"score\": 5,\n      \"reason\": \"The formal civic vocabulary and abstract discussion of access and competing priorities suit the requested C1 audience.\"\n    },\n    \"syntax_fit\": {\n      \"score\": 5,\n      \"reason\": \"Subordinate clauses, relative clauses, and conditional reporting provide appropriate grammatical range without making sentences difficult to follow.\"\n    },\n    \"cohesion_fit\": {\n      \"score\": 5,\n      \"reason\": \"Within this short sample, the progression from proposal to opposing concerns and proposed access measures is clear, balanced, and appropriately formal.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The prose is mostly restrained, but one sentence pads the summary by restating the pedestrian-space benefit.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"C1\",\n  \"issues\": [\n    {\n      \"code\": \"redundant_restatement\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Damit verbinden sie die Aussicht auf eine Innenstadt, in der der öffentliche Raum weniger durch private Fahrzeuge beansprucht wird.\",\n      \"explanation\": \"This repeats the preceding expectation of more space for pedestrians without adding a distinct point about the tradeoff.\"\n    }\n  ],\n  \"note\": \"The 176-word summary covers all required points, remains neutral, and adds no unsupported factual promises. Its main weakness is a redundant restatement rather than a mismatch with the requested level.\"\n}",
+      "response": {
+        "id": "resp_0b94a474f97dce31016a9b4d54ff3087d289e9deabb8ca06cc",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_0b94a474f97dce31016a9b4d5507a887d29e241bfdecae3209": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2901,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2901,
+                "output_tokens": 0
+              },
+              "rs_0b94a474f97dce31016a9b4d56af7087d29a1917fb218882f5": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_0b94a474f97dce31016a9b4d6638fc87d2a328546fd2cc376c": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0b94a474f97dce31016a9b4d75c82087d2965e00d8973b46cd": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "msg_0b94a474f97dce31016a9b4d886e0887d2a851744d45ebca02": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 335
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 335
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3199,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1887,
+          "output_tokens_details": {
+            "reasoning_tokens": 1552
+          },
+          "total_tokens": 5086
+        },
+        "latency_ms": 60241
+      }
+    }
+  ]
+}

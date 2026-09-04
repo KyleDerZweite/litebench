@@ -4,8 +4,8 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "LiteBench",
-  description: "Small benchmarks for AI copy, naturalness, and CEFR fit",
+  title: "LiteBench · Kyle's personal writing bench",
+  description: "Read prompts, compare unedited AI answers, and inspect a draft personal writing rubric. Demo results while Kyle develops LiteBench.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

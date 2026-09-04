@@ -1,0 +1,1682 @@
+{
+  "schema_version": 2,
+  "evaluation": {
+    "id": "2026-09-05-astra-xhigh-v0.1",
+    "type": "personal_ai_indicator",
+    "protocol_version": "personal-astra-v0.1",
+    "protocol_file": "benches/judge-astra-v0.1.json",
+    "protocol_sha256": "8d1535b1d97c773ee9780d8a4435e243ad11d97a94bde15eb6edf8911ea6bc0f",
+    "source_file": "benches/copybench/generations/2026-09-04-rerun-01/gpt-5-6-terra-medium.json",
+    "source_sha256": "c62c42cebeb15019efe7941be0742285ed32c08c8fc807dd1610a8a62c13fcc9",
+    "judge": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "xhigh"
+    },
+    "unslop_file": "benches/unslop-v1.md",
+    "unslop_sha256": "181883e539caec8258ec9129e3ba5f133409144a2cbf2aa361158ab94cfc3441",
+    "purpose": "demonstration",
+    "human_validated": false,
+    "provider_endpoint": "https://ai-proxy.kylehub.dev/v1",
+    "pricing": {
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "retrieved_at": "2026-09-05",
+      "unit": "USD per 1M tokens",
+      "input": 10,
+      "cache_read": 1,
+      "output": 50,
+      "basis": "Direct-provider standard short-context estimate; gateway charges and unreported usage are unknown."
+    },
+    "created_at": "2026-09-04T22:41:40.051669+00:00"
+  },
+  "items": [
+    {
+      "task_id": "public-de-product-a2-01",
+      "judgment": {
+        "criteria": {
+          "brief_fit": {
+            "score": 5,
+            "reason": "Alle vier Fakten, Überschrift und CTA sind enthalten. Die kurzen deutschen Sätze passen weitgehend zu A2. Inklusive Überschrift sind es je nach Zählung von \"1,2\" 59 oder 60 Wörter, also eine vertretbare Grenzlage."
+          },
+          "copy_craft": {
+            "score": 5,
+            "reason": "Die Beschreibung spricht Menschen an, die ihr Mittagessen zur Arbeit mitnehmen, nennt die relevanten Produktdaten und endet mit einer passenden Bestellaufforderung."
+          },
+          "clarity": {
+            "score": 5,
+            "reason": "Die Informationen folgen einer nachvollziehbaren Reihenfolge und sind in kurzen, verständlichen Sätzen formuliert."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "Überwiegend schlicht und konkret; nur der allgemeine Satz zur einfachen Nutzung fügt wenig hinzu."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "generic_filler",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "So ist die Box einfach zu nutzen.",
+            "explanation": "Der Satz nennt keinen konkreten Nutzen des herausnehmbaren Einsatzes und bleibt eine austauschbare Bewertung."
+          }
+        ],
+        "note": "Die Beschreibung passt insgesamt gut zum Arbeitsalltag der Zielgruppe und vermittelt sämtliche erlaubten Produktdaten. Der pauschale Satz zur einfachen Nutzung ist die einzige nennenswerte stilistische Schwäche.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:41:40.052483+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_0bf91f61130c9e8d016a9b4925267c87d2b2a93e365df78cd0",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_0bf91f61130c9e8d016a9b4925324887d289b33bc8fabdbedd": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2708,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2708,
+                  "output_tokens": 0
+                },
+                "rs_0bf91f61130c9e8d016a9b4926502887d2bca9054c7b3724f1": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_0bf91f61130c9e8d016a9b4935e5f087d2afdebe3721f34392": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0bf91f61130c9e8d016a9b4945693087d2b26fb4ed4eb9b298": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0bf91f61130c9e8d016a9b49550b4487d2b3417b0403cc138a": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "msg_0bf91f61130c9e8d016a9b4964794c87d29a1f807a0fd0ee9d": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 364
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 364
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3006,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 2434,
+            "output_tokens_details": {
+              "reasoning_tokens": 2070
+            },
+            "total_tokens": 5440
+          },
+          "latency_ms": 79816,
+          "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Alle vier Fakten, Überschrift und CTA sind enthalten. Die kurzen deutschen Sätze passen weitgehend zu A2. Inklusive Überschrift sind es je nach Zählung von \\\"1,2\\\" 59 oder 60 Wörter, also eine vertretbare Grenzlage.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Die Beschreibung spricht Menschen an, die ihr Mittagessen zur Arbeit mitnehmen, nennt die relevanten Produktdaten und endet mit einer passenden Bestellaufforderung.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"Die Informationen folgen einer nachvollziehbaren Reihenfolge und sind in kurzen, verständlichen Sätzen formuliert.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Überwiegend schlicht und konkret; nur der allgemeine Satz zur einfachen Nutzung fügt wenig hinzu.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"A2\",\n  \"issues\": [\n    {\n      \"code\": \"generic_filler\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"So ist die Box einfach zu nutzen.\",\n      \"explanation\": \"Der Satz nennt keinen konkreten Nutzen des herausnehmbaren Einsatzes und bleibt eine austauschbare Bewertung.\"\n    }\n  ],\n  \"note\": \"Die Beschreibung passt insgesamt gut zum Arbeitsalltag der Zielgruppe und vermittelt sämtliche erlaubten Produktdaten. Der pauschale Satz zur einfachen Nutzung ist die einzige nennenswerte stilistische Schwäche.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.15176
+        }
+      ],
+      "prompt_sha256": "a612bafed6e2282ed3c94279fbc3eab3f7685615a36854aca99f82963ce9a352",
+      "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Alle vier Fakten, Überschrift und CTA sind enthalten. Die kurzen deutschen Sätze passen weitgehend zu A2. Inklusive Überschrift sind es je nach Zählung von \\\"1,2\\\" 59 oder 60 Wörter, also eine vertretbare Grenzlage.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Die Beschreibung spricht Menschen an, die ihr Mittagessen zur Arbeit mitnehmen, nennt die relevanten Produktdaten und endet mit einer passenden Bestellaufforderung.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"Die Informationen folgen einer nachvollziehbaren Reihenfolge und sind in kurzen, verständlichen Sätzen formuliert.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Überwiegend schlicht und konkret; nur der allgemeine Satz zur einfachen Nutzung fügt wenig hinzu.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"A2\",\n  \"issues\": [\n    {\n      \"code\": \"generic_filler\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"So ist die Box einfach zu nutzen.\",\n      \"explanation\": \"Der Satz nennt keinen konkreten Nutzen des herausnehmbaren Einsatzes und bleibt eine austauschbare Bewertung.\"\n    }\n  ],\n  \"note\": \"Die Beschreibung passt insgesamt gut zum Arbeitsalltag der Zielgruppe und vermittelt sämtliche erlaubten Produktdaten. Der pauschale Satz zur einfachen Nutzung ist die einzige nennenswerte stilistische Schwäche.\"\n}",
+      "response": {
+        "id": "resp_0bf91f61130c9e8d016a9b4925267c87d2b2a93e365df78cd0",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_0bf91f61130c9e8d016a9b4925324887d289b33bc8fabdbedd": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2708,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2708,
+                "output_tokens": 0
+              },
+              "rs_0bf91f61130c9e8d016a9b4926502887d2bca9054c7b3724f1": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_0bf91f61130c9e8d016a9b4935e5f087d2afdebe3721f34392": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0bf91f61130c9e8d016a9b4945693087d2b26fb4ed4eb9b298": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0bf91f61130c9e8d016a9b49550b4487d2b3417b0403cc138a": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "msg_0bf91f61130c9e8d016a9b4964794c87d29a1f807a0fd0ee9d": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 364
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 364
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3006,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 2434,
+          "output_tokens_details": {
+            "reasoning_tokens": 2070
+          },
+          "total_tokens": 5440
+        },
+        "latency_ms": 79816
+      }
+    },
+    {
+      "task_id": "public-en-product-a2-01",
+      "judgment": {
+        "criteria": {
+          "brief_fit": {
+            "score": 5,
+            "reason": "Includes all four supplied facts, uses British English, and meets the length requirement at 61 words including the required heading."
+          },
+          "copy_craft": {
+            "score": 5,
+            "reason": "Connects the product to taking lunch to work and cleaning up afterwards, with a friendly call to action and no material unsupported promises."
+          },
+          "clarity": {
+            "score": 5,
+            "reason": "Short, straightforward sentences make the capacity, cooling time and cleaning method easy to understand."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The wording is plain and situation-specific, but the title-case heading conflicts with Kyle's sentence-case preference."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "title_case_heading",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "Fresh Lunch at Work",
+            "explanation": "The heading uses title case rather than the sentence case preferred in Kyle's editorial reference."
+          }
+        ],
+        "note": "The copy gives work-lunch readers the required facts in accessible language without adding material product claims. The only notable style adjustment is the heading's capitalisation.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:42:59.869906+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_047423b611bb4e5b016a9b49749da887d2b452a953f59c4172",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_047423b611bb4e5b016a9b4974a73487d292f004c9ed543028": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2673,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2673,
+                  "output_tokens": 0
+                },
+                "rs_047423b611bb4e5b016a9b4975d8ec87d2a60e0e1624edd3a7": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_047423b611bb4e5b016a9b4987ca5487d292ff5cb2301b2912": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "msg_047423b611bb4e5b016a9b499d1e5887d2bdeb24af78d18f36": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 307
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 307
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 2971,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1341,
+            "output_tokens_details": {
+              "reasoning_tokens": 1034
+            },
+            "total_tokens": 4312
+          },
+          "latency_ms": 50282,
+          "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes all four supplied facts, uses British English, and meets the length requirement at 61 words including the required heading.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Connects the product to taking lunch to work and cleaning up afterwards, with a friendly call to action and no material unsupported promises.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"Short, straightforward sentences make the capacity, cooling time and cleaning method easy to understand.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The wording is plain and situation-specific, but the title-case heading conflicts with Kyle's sentence-case preference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"A2\",\n  \"issues\": [\n    {\n      \"code\": \"title_case_heading\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Fresh Lunch at Work\",\n      \"explanation\": \"The heading uses title case rather than the sentence case preferred in Kyle's editorial reference.\"\n    }\n  ],\n  \"note\": \"The copy gives work-lunch readers the required facts in accessible language without adding material product claims. The only notable style adjustment is the heading's capitalisation.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.09676
+        }
+      ],
+      "prompt_sha256": "0ff8e6b5de99ce616d96711065d4cad1202fb5885cc5c72c7dd1d7d24e982869",
+      "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes all four supplied facts, uses British English, and meets the length requirement at 61 words including the required heading.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Connects the product to taking lunch to work and cleaning up afterwards, with a friendly call to action and no material unsupported promises.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"Short, straightforward sentences make the capacity, cooling time and cleaning method easy to understand.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The wording is plain and situation-specific, but the title-case heading conflicts with Kyle's sentence-case preference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": \"A2\",\n  \"issues\": [\n    {\n      \"code\": \"title_case_heading\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Fresh Lunch at Work\",\n      \"explanation\": \"The heading uses title case rather than the sentence case preferred in Kyle's editorial reference.\"\n    }\n  ],\n  \"note\": \"The copy gives work-lunch readers the required facts in accessible language without adding material product claims. The only notable style adjustment is the heading's capitalisation.\"\n}",
+      "response": {
+        "id": "resp_047423b611bb4e5b016a9b49749da887d2b452a953f59c4172",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_047423b611bb4e5b016a9b4974a73487d292f004c9ed543028": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2673,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2673,
+                "output_tokens": 0
+              },
+              "rs_047423b611bb4e5b016a9b4975d8ec87d2a60e0e1624edd3a7": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_047423b611bb4e5b016a9b4987ca5487d292ff5cb2301b2912": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "msg_047423b611bb4e5b016a9b499d1e5887d2bdeb24af78d18f36": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 307
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 307
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 2971,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1341,
+          "output_tokens_details": {
+            "reasoning_tokens": 1034
+          },
+          "total_tokens": 4312
+        },
+        "latency_ms": 50282
+      }
+    },
+    {
+      "task_id": "public-de-landing-b1-01",
+      "judgment": {
+        "criteria": {
+          "brief_fit": {
+            "score": 5,
+            "reason": "Includes every required element and all four allowed facts, stays comfortably below 90 words, and uses B1-accessible German without adding factual promises."
+          },
+          "copy_craft": {
+            "score": 5,
+            "reason": "Addresses occasional car use with relevant everyday examples and a direct booking CTA suited to the landing page."
+          },
+          "clarity": {
+            "score": 5,
+            "reason": "The headline, subheadline, three benefits and CTA are easy to scan; availability, fees and pricing are unambiguous."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "Friendly, restrained and concrete, with only a small punctuation mismatch against the supplied reference."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "en_dash_separator",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "per App – für Termine, Einkäufe oder spontane Pläne.",
+            "explanation": "This is an en dash, not an em dash, but its use as a separator conflicts with the reference's explicit preference for commas or periods rather than dash substitutes."
+          }
+        ],
+        "note": "A strong fit for the brief: the practical information and next action are clear, with no unsupported claims. The only identified weakness is a minor punctuation preference.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:43:50.152944+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_0a3648b7eba74199016a9b49a76c8c87d2926aaacaf67311a5",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_0a3648b7eba74199016a9b49a7ab1487d2b74086ad5da900c5": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2688,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2688,
+                  "output_tokens": 0
+                },
+                "rs_0a3648b7eba74199016a9b49a974d087d2b31794de2fece5d6": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_0a3648b7eba74199016a9b49bf2dac87d2816997f1d5bcec8c": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0a3648b7eba74199016a9b49d1975887d293bee229288de32a": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0a3648b7eba74199016a9b49e77e8487d2a9c2b91cde92092d": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 172
+                },
+                "msg_0a3648b7eba74199016a9b49edea8887d294c2c5a09d71d35b": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 331
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 331
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 2986,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 2055,
+            "output_tokens_details": {
+              "reasoning_tokens": 1724
+            },
+            "total_tokens": 5041
+          },
+          "latency_ms": 83005,
+          "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes every required element and all four allowed facts, stays comfortably below 90 words, and uses B1-accessible German without adding factual promises.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Addresses occasional car use with relevant everyday examples and a direct booking CTA suited to the landing page.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"The headline, subheadline, three benefits and CTA are easy to scan; availability, fees and pricing are unambiguous.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Friendly, restrained and concrete, with only a small punctuation mismatch against the supplied reference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"en_dash_separator\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"per App – für Termine, Einkäufe oder spontane Pläne.\",\n      \"explanation\": \"This is an en dash, not an em dash, but its use as a separator conflicts with the reference's explicit preference for commas or periods rather than dash substitutes.\"\n    }\n  ],\n  \"note\": \"A strong fit for the brief: the practical information and next action are clear, with no unsupported claims. The only identified weakness is a minor punctuation preference.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.13261
+        }
+      ],
+      "prompt_sha256": "ec965428c1ca9f32a3781a133134a7d3e0dfc59ac3bad7e939c0431ecd395ad4",
+      "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes every required element and all four allowed facts, stays comfortably below 90 words, and uses B1-accessible German without adding factual promises.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Addresses occasional car use with relevant everyday examples and a direct booking CTA suited to the landing page.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"The headline, subheadline, three benefits and CTA are easy to scan; availability, fees and pricing are unambiguous.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Friendly, restrained and concrete, with only a small punctuation mismatch against the supplied reference.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"en_dash_separator\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"per App – für Termine, Einkäufe oder spontane Pläne.\",\n      \"explanation\": \"This is an en dash, not an em dash, but its use as a separator conflicts with the reference's explicit preference for commas or periods rather than dash substitutes.\"\n    }\n  ],\n  \"note\": \"A strong fit for the brief: the practical information and next action are clear, with no unsupported claims. The only identified weakness is a minor punctuation preference.\"\n}",
+      "response": {
+        "id": "resp_0a3648b7eba74199016a9b49a76c8c87d2926aaacaf67311a5",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_0a3648b7eba74199016a9b49a7ab1487d2b74086ad5da900c5": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2688,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2688,
+                "output_tokens": 0
+              },
+              "rs_0a3648b7eba74199016a9b49a974d087d2b31794de2fece5d6": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_0a3648b7eba74199016a9b49bf2dac87d2816997f1d5bcec8c": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0a3648b7eba74199016a9b49d1975887d293bee229288de32a": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0a3648b7eba74199016a9b49e77e8487d2a9c2b91cde92092d": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 172
+              },
+              "msg_0a3648b7eba74199016a9b49edea8887d294c2c5a09d71d35b": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 331
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 331
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 2986,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 2055,
+          "output_tokens_details": {
+            "reasoning_tokens": 1724
+          },
+          "total_tokens": 5041
+        },
+        "latency_ms": 83005
+      }
+    },
+    {
+      "task_id": "public-en-landing-b1-01",
+      "judgment": {
+        "criteria": {
+          "brief_fit": {
+            "score": 4,
+            "reason": "Includes every required element and supplied fact, stays below 90 words, and uses accessible British English. However, app-based trip management is an additional factual claim."
+          },
+          "copy_craft": {
+            "score": 5,
+            "reason": "Everyday uses make the offer relevant to occasional drivers, the benefits are easy to scan, and the call to action is direct without being pushy."
+          },
+          "clarity": {
+            "score": 5,
+            "reason": "The headline establishes the location and purpose, while the supporting copy clearly explains booking, availability and pricing."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "The wording is friendly, concrete and restrained, but the em dash conflicts with Kyle's stated preference."
+          }
+        },
+        "brief_ok": false,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "unsupported_app_capability",
+            "category": "brief",
+            "severity": "minor",
+            "evidence": "Book and manage trips in the app",
+            "explanation": "The brief permits app-based booking but does not establish additional trip-management functionality."
+          },
+          {
+            "code": "em_dash",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "weekends away—without paying a monthly fee.",
+            "explanation": "The em dash is an authored-prose style choice Kyle explicitly dislikes."
+          }
+        ],
+        "note": "This is a strong, concise hero for occasional drivers in Manchester. Limit the app claim to the supplied booking capability and remove the em dash to meet the brief and Kyle's preferences.",
+        "score_5": 4.5,
+        "score": 90.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:45:13.160087+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_0bafaa1981ac46ff016a9b49f9fe9c87d28c0f4a844d6ea8fd",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_0bafaa1981ac46ff016a9b49fa091487d2b2ef5b2bb6677fae": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2689,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2689,
+                  "output_tokens": 0
+                },
+                "rs_0bafaa1981ac46ff016a9b49fd49bc87d29f25f7386245a652": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_0bafaa1981ac46ff016a9b4a0cd57487d29b5307393adf694b": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0bafaa1981ac46ff016a9b4a1c5b4887d2a86b6216210a0243": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 425
+                },
+                "msg_0bafaa1981ac46ff016a9b4a291cc087d2ba716e5fb8babe36": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 388
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 388
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 2987,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1847,
+            "output_tokens_details": {
+              "reasoning_tokens": 1459
+            },
+            "total_tokens": 4834
+          },
+          "latency_ms": 59669,
+          "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 4,\n      \"reason\": \"Includes every required element and supplied fact, stays below 90 words, and uses accessible British English. However, app-based trip management is an additional factual claim.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Everyday uses make the offer relevant to occasional drivers, the benefits are easy to scan, and the call to action is direct without being pushy.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"The headline establishes the location and purpose, while the supporting copy clearly explains booking, availability and pricing.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The wording is friendly, concrete and restrained, but the em dash conflicts with Kyle's stated preference.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"unsupported_app_capability\",\n      \"category\": \"brief\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Book and manage trips in the app\",\n      \"explanation\": \"The brief permits app-based booking but does not establish additional trip-management functionality.\"\n    },\n    {\n      \"code\": \"em_dash\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"weekends away—without paying a monthly fee.\",\n      \"explanation\": \"The em dash is an authored-prose style choice Kyle explicitly dislikes.\"\n    }\n  ],\n  \"note\": \"This is a strong, concise hero for occasional drivers in Manchester. Limit the app claim to the supplied booking capability and remove the em dash to meet the brief and Kyle's preferences.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.12222
+        }
+      ],
+      "prompt_sha256": "6f8ee608712e8eb4dbc7c3d67b1a2e7f9675d69a486f5ca9e7dfd95b3b89a783",
+      "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 4,\n      \"reason\": \"Includes every required element and supplied fact, stays below 90 words, and uses accessible British English. However, app-based trip management is an additional factual claim.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Everyday uses make the offer relevant to occasional drivers, the benefits are easy to scan, and the call to action is direct without being pushy.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"The headline establishes the location and purpose, while the supporting copy clearly explains booking, availability and pricing.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"The wording is friendly, concrete and restrained, but the em dash conflicts with Kyle's stated preference.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"unsupported_app_capability\",\n      \"category\": \"brief\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Book and manage trips in the app\",\n      \"explanation\": \"The brief permits app-based booking but does not establish additional trip-management functionality.\"\n    },\n    {\n      \"code\": \"em_dash\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"weekends away—without paying a monthly fee.\",\n      \"explanation\": \"The em dash is an authored-prose style choice Kyle explicitly dislikes.\"\n    }\n  ],\n  \"note\": \"This is a strong, concise hero for occasional drivers in Manchester. Limit the app claim to the supplied booking capability and remove the em dash to meet the brief and Kyle's preferences.\"\n}",
+      "response": {
+        "id": "resp_0bafaa1981ac46ff016a9b49f9fe9c87d28c0f4a844d6ea8fd",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_0bafaa1981ac46ff016a9b49fa091487d2b2ef5b2bb6677fae": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2689,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2689,
+                "output_tokens": 0
+              },
+              "rs_0bafaa1981ac46ff016a9b49fd49bc87d29f25f7386245a652": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_0bafaa1981ac46ff016a9b4a0cd57487d29b5307393adf694b": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0bafaa1981ac46ff016a9b4a1c5b4887d2a86b6216210a0243": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 425
+              },
+              "msg_0bafaa1981ac46ff016a9b4a291cc087d2ba716e5fb8babe36": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 388
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 388
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 2987,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1847,
+          "output_tokens_details": {
+            "reasoning_tokens": 1459
+          },
+          "total_tokens": 4834
+        },
+        "latency_ms": 59669
+      }
+    },
+    {
+      "task_id": "public-de-social-b2-01",
+      "judgment": {
+        "criteria": {
+          "brief_fit": {
+            "score": 5,
+            "reason": "Includes all supplied service and offer details, stays below 90 words, and uses accessible German, one emoji and no hashtags. No material invented service or promise."
+          },
+          "copy_craft": {
+            "score": 5,
+            "reason": "The informal address suits the audience, the offer is easy to scan, and the booking CTA gives readers a clear next action without pressure or hype."
+          },
+          "clarity": {
+            "score": 5,
+            "reason": "Pickup, turnaround, price and introductory discount are clearly stated and logically ordered."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "Mostly concrete and restrained, with a mildly formulaic promotional opening."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "stock_opening",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "Deine Sneaker verdienen einen frischen Start.",
+            "explanation": "The 'deserve a fresh start' framing is a stock promotional hook rather than a concrete statement about the cleaning service."
+          }
+        ],
+        "note": "The ad fits the brief and makes the service, price and booking action clear. For Kyle's preferences, the main improvement would be a less formulaic opening.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:46:12.832166+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_04f164414a1062ef016a9b4a35862887d2bc5c25a330921f33",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_04f164414a1062ef016a9b4a35d94087d289bfc23d3ab6382d": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2707,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2707,
+                  "output_tokens": 0
+                },
+                "rs_04f164414a1062ef016a9b4a38c83487d2af1957c98d6be4fc": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_04f164414a1062ef016a9b4a4b6ea087d2a7fc9ab02ab7f9cb": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 345
+                },
+                "msg_04f164414a1062ef016a9b4a56904487d2b16319d0b3c2014e": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 319
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 319
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3005,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1180,
+            "output_tokens_details": {
+              "reasoning_tokens": 861
+            },
+            "total_tokens": 4185
+          },
+          "latency_ms": 41861,
+          "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes all supplied service and offer details, stays below 90 words, and uses accessible German, one emoji and no hashtags. No material invented service or promise.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"The informal address suits the audience, the offer is easy to scan, and the booking CTA gives readers a clear next action without pressure or hype.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"Pickup, turnaround, price and introductory discount are clearly stated and logically ordered.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly concrete and restrained, with a mildly formulaic promotional opening.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"stock_opening\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Deine Sneaker verdienen einen frischen Start.\",\n      \"explanation\": \"The 'deserve a fresh start' framing is a stock promotional hook rather than a concrete statement about the cleaning service.\"\n    }\n  ],\n  \"note\": \"The ad fits the brief and makes the service, price and booking action clear. For Kyle's preferences, the main improvement would be a less formulaic opening.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.08905
+        }
+      ],
+      "prompt_sha256": "78a2e23b20449b3c2bc8213fbedb5f7f24956e6cb54be581548f49ff42da1189",
+      "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes all supplied service and offer details, stays below 90 words, and uses accessible German, one emoji and no hashtags. No material invented service or promise.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"The informal address suits the audience, the offer is easy to scan, and the booking CTA gives readers a clear next action without pressure or hype.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"Pickup, turnaround, price and introductory discount are clearly stated and logically ordered.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly concrete and restrained, with a mildly formulaic promotional opening.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"stock_opening\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Deine Sneaker verdienen einen frischen Start.\",\n      \"explanation\": \"The 'deserve a fresh start' framing is a stock promotional hook rather than a concrete statement about the cleaning service.\"\n    }\n  ],\n  \"note\": \"The ad fits the brief and makes the service, price and booking action clear. For Kyle's preferences, the main improvement would be a less formulaic opening.\"\n}",
+      "response": {
+        "id": "resp_04f164414a1062ef016a9b4a35862887d2bc5c25a330921f33",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_04f164414a1062ef016a9b4a35d94087d289bfc23d3ab6382d": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2707,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2707,
+                "output_tokens": 0
+              },
+              "rs_04f164414a1062ef016a9b4a38c83487d2af1957c98d6be4fc": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_04f164414a1062ef016a9b4a4b6ea087d2a7fc9ab02ab7f9cb": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 345
+              },
+              "msg_04f164414a1062ef016a9b4a56904487d2b16319d0b3c2014e": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 319
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 319
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3005,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1180,
+          "output_tokens_details": {
+            "reasoning_tokens": 861
+          },
+          "total_tokens": 4185
+        },
+        "latency_ms": 41861
+      }
+    },
+    {
+      "task_id": "public-en-social-b2-01",
+      "judgment": {
+        "criteria": {
+          "brief_fit": {
+            "score": 5,
+            "reason": "Includes all required offer details, stays below 90 words, and uses British English accessible at B2. It has one emoji, no hashtags and no material invented claims."
+          },
+          "copy_craft": {
+            "score": 5,
+            "reason": "The service, price, turnaround and introductory discount make a useful Instagram offer for London residents. The booking action is clear and consistent."
+          },
+          "clarity": {
+            "score": 5,
+            "reason": "Short paragraphs make the offer easy to scan, and the standard price and first-booking discount are clearly distinguished."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "Mostly plain and restrained, with a generic opening slogan and a little routine-related filler."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "stock_opening",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "Your trainers deserve a fresh start.",
+            "explanation": "The familiar 'deserve a fresh start' slogan gives the opening little character specific to this London service."
+          },
+          {
+            "code": "generic_filler",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "so you can get back to your routine quickly.",
+            "explanation": "This is harmless connective language rather than an invented service promise, but it adds vague reassurance after the concrete 48-hour turnaround."
+          }
+        ],
+        "note": "The copy fits the brief and makes the practical offer easy to understand. A less generic opening and tighter turnaround sentence would better match Kyle's editorial preferences.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:46:54.698196+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_0a13a0510b7dbacb016a9b4a5f563487d299b1b57e24cb08af",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_0a13a0510b7dbacb016a9b4a5f617087d2943ff28fd8f02f7a": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2673,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2673,
+                  "output_tokens": 0
+                },
+                "rs_0a13a0510b7dbacb016a9b4a618f4887d2987e8f314a96d50c": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_0a13a0510b7dbacb016a9b4a71afcc87d2bfbec95589e96a5e": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_0a13a0510b7dbacb016a9b4a85daa487d2af0ebb3273a59391": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 245
+                },
+                "msg_0a13a0510b7dbacb016a9b4a8f1b7887d28a4c3ebc72cf3b28": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 396
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 396
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 2971,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 1675,
+            "output_tokens_details": {
+              "reasoning_tokens": 1279
+            },
+            "total_tokens": 4646
+          },
+          "latency_ms": 58804,
+          "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes all required offer details, stays below 90 words, and uses British English accessible at B2. It has one emoji, no hashtags and no material invented claims.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"The service, price, turnaround and introductory discount make a useful Instagram offer for London residents. The booking action is clear and consistent.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"Short paragraphs make the offer easy to scan, and the standard price and first-booking discount are clearly distinguished.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly plain and restrained, with a generic opening slogan and a little routine-related filler.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"stock_opening\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Your trainers deserve a fresh start.\",\n      \"explanation\": \"The familiar 'deserve a fresh start' slogan gives the opening little character specific to this London service.\"\n    },\n    {\n      \"code\": \"generic_filler\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"so you can get back to your routine quickly.\",\n      \"explanation\": \"This is harmless connective language rather than an invented service promise, but it adds vague reassurance after the concrete 48-hour turnaround.\"\n    }\n  ],\n  \"note\": \"The copy fits the brief and makes the practical offer easy to understand. A less generic opening and tighter turnaround sentence would better match Kyle's editorial preferences.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.11346
+        }
+      ],
+      "prompt_sha256": "50d40bf1bb07a57b03227c5aadc9e9bebaedcc9cc389e7fc947d5d83de8e82c5",
+      "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes all required offer details, stays below 90 words, and uses British English accessible at B2. It has one emoji, no hashtags and no material invented claims.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"The service, price, turnaround and introductory discount make a useful Instagram offer for London residents. The booking action is clear and consistent.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"Short paragraphs make the offer easy to scan, and the standard price and first-booking discount are clearly distinguished.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly plain and restrained, with a generic opening slogan and a little routine-related filler.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"stock_opening\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Your trainers deserve a fresh start.\",\n      \"explanation\": \"The familiar 'deserve a fresh start' slogan gives the opening little character specific to this London service.\"\n    },\n    {\n      \"code\": \"generic_filler\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"so you can get back to your routine quickly.\",\n      \"explanation\": \"This is harmless connective language rather than an invented service promise, but it adds vague reassurance after the concrete 48-hour turnaround.\"\n    }\n  ],\n  \"note\": \"The copy fits the brief and makes the practical offer easy to understand. A less generic opening and tighter turnaround sentence would better match Kyle's editorial preferences.\"\n}",
+      "response": {
+        "id": "resp_0a13a0510b7dbacb016a9b4a5f563487d299b1b57e24cb08af",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_0a13a0510b7dbacb016a9b4a5f617087d2943ff28fd8f02f7a": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2673,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2673,
+                "output_tokens": 0
+              },
+              "rs_0a13a0510b7dbacb016a9b4a618f4887d2987e8f314a96d50c": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_0a13a0510b7dbacb016a9b4a71afcc87d2bfbec95589e96a5e": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_0a13a0510b7dbacb016a9b4a85daa487d2af0ebb3273a59391": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 245
+              },
+              "msg_0a13a0510b7dbacb016a9b4a8f1b7887d28a4c3ebc72cf3b28": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 396
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 396
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 2971,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 1675,
+          "output_tokens_details": {
+            "reasoning_tokens": 1279
+          },
+          "total_tokens": 4646
+        },
+        "latency_ms": 58804
+      }
+    },
+    {
+      "task_id": "public-de-email-c1-01",
+      "judgment": {
+        "criteria": {
+          "brief_fit": {
+            "score": 5,
+            "reason": "Includes a subject, 121 words of body copy and a CTA. Preserves the supplied facts, uses appropriate German and adds no unsupported feature or success promise."
+          },
+          "copy_craft": {
+            "score": 5,
+            "reason": "Connects to the recipient's previous activity, explains the invitation and roles, and encourages a first invitation without pressuring the reader."
+          },
+          "clarity": {
+            "score": 5,
+            "reason": "The sequence is easy to follow, the two roles are understandable, and the remaining trial time and next action are explicit."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "Mostly concrete and restrained, but the closing sentence feels padded: it gives an abstract rationale for steps already explained."
+          }
+        },
+        "brief_ok": true,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "padded_closing",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "Eine erste Einladung ist ein konkreter Anlass, Ihr angelegtes Projekt gemeinsam zu öffnen und die passende Zugriffsart festzulegen.",
+            "explanation": "Calling the invitation a 'konkreter Anlass' adds a generic rationale while recycling the project-opening and role-selection instructions."
+          }
+        ],
+        "note": "This is a strong fit for Kyle's brief: factual, calm and actionable. The main improvement would be a less padded closing sentence.",
+        "score_5": 4.75,
+        "score": 95.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:47:53.505876+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_088de0c19086f7b9016a9b4a9a375487d2a2195460821a8911",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_088de0c19086f7b9016a9b4a9a44b087d2924472d9dcb51bc7": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2840,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2840,
+                  "output_tokens": 0
+                },
+                "rs_088de0c19086f7b9016a9b4a9b95bc87d289148081456e4f28": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_088de0c19086f7b9016a9b4aacf6b887d2b230617195fc0846": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_088de0c19086f7b9016a9b4abf7e1087d28970380dcb11d7f7": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_088de0c19086f7b9016a9b4ad5916c87d289e62f2991d2723d": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 464
+                },
+                "msg_088de0c19086f7b9016a9b4aeae7c087d28fe504f8ad304126": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 348
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 348
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3138,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 2364,
+            "output_tokens_details": {
+              "reasoning_tokens": 2016
+            },
+            "total_tokens": 5502
+          },
+          "latency_ms": 90952,
+          "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes a subject, 121 words of body copy and a CTA. Preserves the supplied facts, uses appropriate German and adds no unsupported feature or success promise.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Connects to the recipient's previous activity, explains the invitation and roles, and encourages a first invitation without pressuring the reader.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"The sequence is easy to follow, the two roles are understandable, and the remaining trial time and next action are explicit.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly concrete and restrained, but the closing sentence feels padded: it gives an abstract rationale for steps already explained.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"padded_closing\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Eine erste Einladung ist ein konkreter Anlass, Ihr angelegtes Projekt gemeinsam zu öffnen und die passende Zugriffsart festzulegen.\",\n      \"explanation\": \"Calling the invitation a 'konkreter Anlass' adds a generic rationale while recycling the project-opening and role-selection instructions.\"\n    }\n  ],\n  \"note\": \"This is a strong fit for Kyle's brief: factual, calm and actionable. The main improvement would be a less padded closing sentence.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.14958
+        }
+      ],
+      "prompt_sha256": "8e5960e6ef8eea3da51712fcd5dfc4dfe705b4e936cc935b8b5c9d59efe8a391",
+      "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 5,\n      \"reason\": \"Includes a subject, 121 words of body copy and a CTA. Preserves the supplied facts, uses appropriate German and adds no unsupported feature or success promise.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"Connects to the recipient's previous activity, explains the invitation and roles, and encourages a first invitation without pressuring the reader.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"The sequence is easy to follow, the two roles are understandable, and the remaining trial time and next action are explicit.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly concrete and restrained, but the closing sentence feels padded: it gives an abstract rationale for steps already explained.\"\n    }\n  },\n  \"brief_ok\": true,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"padded_closing\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"Eine erste Einladung ist ein konkreter Anlass, Ihr angelegtes Projekt gemeinsam zu öffnen und die passende Zugriffsart festzulegen.\",\n      \"explanation\": \"Calling the invitation a 'konkreter Anlass' adds a generic rationale while recycling the project-opening and role-selection instructions.\"\n    }\n  ],\n  \"note\": \"This is a strong fit for Kyle's brief: factual, calm and actionable. The main improvement would be a less padded closing sentence.\"\n}",
+      "response": {
+        "id": "resp_088de0c19086f7b9016a9b4a9a375487d2a2195460821a8911",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_088de0c19086f7b9016a9b4a9a44b087d2924472d9dcb51bc7": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2840,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2840,
+                "output_tokens": 0
+              },
+              "rs_088de0c19086f7b9016a9b4a9b95bc87d289148081456e4f28": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_088de0c19086f7b9016a9b4aacf6b887d2b230617195fc0846": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_088de0c19086f7b9016a9b4abf7e1087d28970380dcb11d7f7": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_088de0c19086f7b9016a9b4ad5916c87d289e62f2991d2723d": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 464
+              },
+              "msg_088de0c19086f7b9016a9b4aeae7c087d28fe504f8ad304126": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 348
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 348
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3138,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 2364,
+          "output_tokens_details": {
+            "reasoning_tokens": 2016
+          },
+          "total_tokens": 5502
+        },
+        "latency_ms": 90952
+      }
+    },
+    {
+      "task_id": "public-en-email-c1-01",
+      "judgment": {
+        "criteria": {
+          "brief_fit": {
+            "score": 3,
+            "reason": "Includes the required deliverables and facts, with an acceptable word count when the greeting and CTA are included. However, it adds an unsupported promise about when roles can be assigned and access takes effect."
+          },
+          "copy_craft": {
+            "score": 5,
+            "reason": "The focus on inviting one person, practical recipient-selection advice and clear CTA suit small-agency owners without applying undue pressure."
+          },
+          "clarity": {
+            "score": 5,
+            "reason": "The email moves coherently from the existing project to invitations, role choices and a specific next action."
+          },
+          "natural_style": {
+            "score": 4,
+            "reason": "Mostly plain and situation-specific, with a mildly inflated congratulatory opener."
+          }
+        },
+        "brief_ok": false,
+        "realized_cefr": null,
+        "issues": [
+          {
+            "code": "unsupported_invitation_workflow",
+            "category": "brief",
+            "severity": "major",
+            "evidence": "You can decide their role before sending the invitation, so they receive the right level of access from the outset.",
+            "explanation": "The supplied facts establish that roles can be assigned, but not that they can be set before sending an invitation or that the intended access applies from the outset."
+          },
+          {
+            "code": "stock_congratulatory_framing",
+            "category": "slop",
+            "severity": "minor",
+            "evidence": "You have already made the important first move",
+            "explanation": "This adds stock congratulatory framing rather than stating the reader's progress directly."
+          }
+        ],
+        "note": "The single-person invitation and practical recipient suggestion are a good direction for Kyle's audience. The main correction is the unverified access-setting promise, with a smaller opportunity to tone down the opener.",
+        "score_5": 4.25,
+        "score": 85.0
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-09-04T22:49:24.462821+00:00",
+          "max_output_tokens": 8000,
+          "status": "completed",
+          "model": "gpt-6-astra",
+          "response_id": "resp_07eba1638a92b04f016a9b4af56dec87d2b19abd5d6b2e9046",
+          "usage": {
+            "attribution": {
+              "items": {
+                "msg_07eba1638a92b04f016a9b4af57a7487d2a3ed35a25844fcb3": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 2795,
+                      "output_tokens": 0
+                    }
+                  ],
+                  "input_tokens": 2795,
+                  "output_tokens": 0
+                },
+                "rs_07eba1638a92b04f016a9b4af8147c87d2af2d4100810dc220": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 2,
+                  "output_tokens": 516
+                },
+                "rs_07eba1638a92b04f016a9b4b07944c87d29bc6dca06f2ad32e": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_07eba1638a92b04f016a9b4b17230887d2a616dd5206fb9938": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_07eba1638a92b04f016a9b4b26add487d28d6753c5ef571ad7": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "rs_07eba1638a92b04f016a9b4b36687487d2851061184bfc0275": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 0,
+                  "output_tokens": 518
+                },
+                "msg_07eba1638a92b04f016a9b4b4a191087d2a7f7b7069d5e3b18": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "content": [
+                    {
+                      "cache_write_tokens": 0,
+                      "cached_tokens": 0,
+                      "input_tokens": 0,
+                      "output_tokens": 422
+                    }
+                  ],
+                  "input_tokens": 0,
+                  "output_tokens": 422
+                }
+              },
+              "request_fields": {
+                "tools": {
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "input_tokens": 296,
+                  "output_tokens": 0
+                }
+              }
+            },
+            "input_tokens": 3093,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 0
+            },
+            "output_tokens": 3010,
+            "output_tokens_details": {
+              "reasoning_tokens": 2588
+            },
+            "total_tokens": 6103
+          },
+          "latency_ms": 95271,
+          "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 3,\n      \"reason\": \"Includes the required deliverables and facts, with an acceptable word count when the greeting and CTA are included. However, it adds an unsupported promise about when roles can be assigned and access takes effect.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"The focus on inviting one person, practical recipient-selection advice and clear CTA suit small-agency owners without applying undue pressure.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"The email moves coherently from the existing project to invitations, role choices and a specific next action.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly plain and situation-specific, with a mildly inflated congratulatory opener.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"unsupported_invitation_workflow\",\n      \"category\": \"brief\",\n      \"severity\": \"major\",\n      \"evidence\": \"You can decide their role before sending the invitation, so they receive the right level of access from the outset.\",\n      \"explanation\": \"The supplied facts establish that roles can be assigned, but not that they can be set before sending an invitation or that the intended access applies from the outset.\"\n    },\n    {\n      \"code\": \"stock_congratulatory_framing\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"You have already made the important first move\",\n      \"explanation\": \"This adds stock congratulatory framing rather than stating the reader's progress directly.\"\n    }\n  ],\n  \"note\": \"The single-person invitation and practical recipient suggestion are a good direction for Kyle's audience. The main correction is the unverified access-setting promise, with a smaller opportunity to tone down the opener.\"\n}",
+          "validation": "passed",
+          "estimated_cost_usd": 0.18143
+        }
+      ],
+      "prompt_sha256": "3970286afb9f44cdf8c4b62546eb1fd4de7b767ae5e0bb39900d08f11cc40f53",
+      "raw_output": "{\n  \"criteria\": {\n    \"brief_fit\": {\n      \"score\": 3,\n      \"reason\": \"Includes the required deliverables and facts, with an acceptable word count when the greeting and CTA are included. However, it adds an unsupported promise about when roles can be assigned and access takes effect.\"\n    },\n    \"copy_craft\": {\n      \"score\": 5,\n      \"reason\": \"The focus on inviting one person, practical recipient-selection advice and clear CTA suit small-agency owners without applying undue pressure.\"\n    },\n    \"clarity\": {\n      \"score\": 5,\n      \"reason\": \"The email moves coherently from the existing project to invitations, role choices and a specific next action.\"\n    },\n    \"natural_style\": {\n      \"score\": 4,\n      \"reason\": \"Mostly plain and situation-specific, with a mildly inflated congratulatory opener.\"\n    }\n  },\n  \"brief_ok\": false,\n  \"realized_cefr\": null,\n  \"issues\": [\n    {\n      \"code\": \"unsupported_invitation_workflow\",\n      \"category\": \"brief\",\n      \"severity\": \"major\",\n      \"evidence\": \"You can decide their role before sending the invitation, so they receive the right level of access from the outset.\",\n      \"explanation\": \"The supplied facts establish that roles can be assigned, but not that they can be set before sending an invitation or that the intended access applies from the outset.\"\n    },\n    {\n      \"code\": \"stock_congratulatory_framing\",\n      \"category\": \"slop\",\n      \"severity\": \"minor\",\n      \"evidence\": \"You have already made the important first move\",\n      \"explanation\": \"This adds stock congratulatory framing rather than stating the reader's progress directly.\"\n    }\n  ],\n  \"note\": \"The single-person invitation and practical recipient suggestion are a good direction for Kyle's audience. The main correction is the unverified access-setting promise, with a smaller opportunity to tone down the opener.\"\n}",
+      "response": {
+        "id": "resp_07eba1638a92b04f016a9b4af56dec87d2b19abd5d6b2e9046",
+        "model": "gpt-6-astra",
+        "status": "completed",
+        "usage": {
+          "attribution": {
+            "items": {
+              "msg_07eba1638a92b04f016a9b4af57a7487d2a3ed35a25844fcb3": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 2795,
+                    "output_tokens": 0
+                  }
+                ],
+                "input_tokens": 2795,
+                "output_tokens": 0
+              },
+              "rs_07eba1638a92b04f016a9b4af8147c87d2af2d4100810dc220": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 2,
+                "output_tokens": 516
+              },
+              "rs_07eba1638a92b04f016a9b4b07944c87d29bc6dca06f2ad32e": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_07eba1638a92b04f016a9b4b17230887d2a616dd5206fb9938": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_07eba1638a92b04f016a9b4b26add487d28d6753c5ef571ad7": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "rs_07eba1638a92b04f016a9b4b36687487d2851061184bfc0275": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 518
+              },
+              "msg_07eba1638a92b04f016a9b4b4a191087d2a7f7b7069d5e3b18": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "content": [
+                  {
+                    "cache_write_tokens": 0,
+                    "cached_tokens": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 422
+                  }
+                ],
+                "input_tokens": 0,
+                "output_tokens": 422
+              }
+            },
+            "request_fields": {
+              "tools": {
+                "cache_write_tokens": 0,
+                "cached_tokens": 0,
+                "input_tokens": 296,
+                "output_tokens": 0
+              }
+            }
+          },
+          "input_tokens": 3093,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 3010,
+          "output_tokens_details": {
+            "reasoning_tokens": 2588
+          },
+          "total_tokens": 6103
+        },
+        "latency_ms": 95271
+      }
+    }
+  ]
+}

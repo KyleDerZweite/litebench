@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import leaderboardData from "../data/leaderboard.json";
 import { useIsMobile } from "../hooks/use-mobile";
+import { evidenceSegments } from "./evidence";
 
 type SuiteId = "copybench" | "naturalbench" | "cefrbench";
 type Scope = "best" | "all";
@@ -24,10 +25,12 @@ interface Task {
 }
 
 interface Judgment {
+  criteria: Record<string, { score: number; reason: string }>;
+  score_5: number;
   score: number;
   brief_ok: boolean;
   realized_cefr: string | null;
-  issues: { code: string; evidence: string }[];
+  issues: { code: string; category: string; severity: string; evidence: string; explanation: string }[];
   note: string;
 }
 
@@ -35,26 +38,19 @@ interface RunItem {
   task_id: string;
   output: string;
   generation: {
-    input_tokens: number;
-    output_tokens: number;
-    total_tokens: number;
-    latency_ms: number;
+    input_tokens: number | null;
+    output_tokens: number | null;
+    total_tokens: number | null;
+    latency_ms: number | null;
   };
   score: number;
-  judge_stddev: number;
-  brief_ok_votes: number;
-  judgments: Record<string, Judgment>;
+  judgment: Judgment;
 }
 
 interface Run {
   model: string;
   reasoning_effort: string;
   score: number;
-  judge_stddev: number;
-  judge_range: number;
-  judge_scores: Record<string, number>;
-  average_item_judge_stddev: number;
-  disagreement_count: number;
   brief_ok_pct: number;
   average_latency_ms: number | null;
   average_input_tokens: number | null;
@@ -88,8 +84,9 @@ interface Leaderboard {
     id: string;
     type: string;
     protocol_version: string;
+    protocol_file: string;
     human_validated: boolean;
-    judges: Record<string, { model: string; reasoning_effort: string; focus: string }>;
+    judge: { model: string; reasoning_effort: string };
   };
   suites: Record<SuiteId, {
     name: string;
@@ -103,7 +100,6 @@ interface Leaderboard {
 const data = leaderboardData as unknown as Leaderboard;
 const repository = "https://github.com/KyleDerZweite/litebench";
 const effortOrder: Record<string, number> = { low: 0, medium: 1, high: 2, xhigh: 3, max: 4 };
-const effortLevels = ["low", "medium", "high", "xhigh", "max"];
 const modelColors: Record<string, string> = {
   "gpt-5.6-luna": "#3fa66b",
   "gpt-5.6-terra": "#3fa66b",
@@ -127,18 +123,12 @@ const suites = [
   },
 ];
 
-const judgeLabels: Record<string, string> = {
-  sol_max: "Sol max",
-  gemini_high: "Gemini high",
-  glm_high: "GLM high",
-};
-
 function formatNumber(value: number, decimals = 1) {
   return Number.isInteger(value) ? value.toFixed(0) : value.toFixed(decimals);
 }
 
 function formatScore(value: number) {
-  return value.toFixed(2);
+  return `${value.toFixed(1)}%`;
 }
 
 function compactTokens(value: number | null) {
@@ -148,6 +138,7 @@ function compactTokens(value: number | null) {
 
 function formatCost(value: number | null) {
   if (value === null) return "N/A";
+  if (value > 0 && value < 0.0001) return "<$0.0001";
   return `$${value < 0.01 ? value.toFixed(4) : value.toFixed(3)}`;
 }
 
@@ -157,10 +148,6 @@ function runLabel(run: Run) {
 
 function runKey(run: Pick<Run, "model" | "reasoning_effort">) {
   return `${run.model}::${run.reasoning_effort}`;
-}
-
-function detailsId(run: Run) {
-  return `details-${runKey(run).replace(/[^a-z0-9]+/gi, "-")}`;
 }
 
 function bestByModel(runs: Run[]) {
@@ -203,7 +190,7 @@ function ScopeToggle({ value, onChange }: { value: Scope; onChange: (scope: Scop
           onClick={() => onChange(scope)}
           type="button"
         >
-          {scope === "best" ? "Best" : "All effort levels"}
+          {scope === "best" ? "Best observed effort" : "All effort levels"}
         </button>
       ))}
     </div>
@@ -232,7 +219,6 @@ function ModelFilter({ runs, selected, onChange }: {
             const selectedCount = modelKeys.filter((key) => selected.has(key)).length;
             const allSelected = selectedCount === modelKeys.length;
             const someSelected = selectedCount > 0 && !allSelected;
-            const available = new Set(modelRuns.map((run) => run.reasoning_effort));
 
             return (
               <div className="border-b border-white/5 px-2 py-3 last:border-0" key={model}>
@@ -256,17 +242,15 @@ function ModelFilter({ runs, selected, onChange }: {
                   <span className="font-mono text-[10px] text-neutral-600">{selectedCount}/{modelRuns.length}</span>
                 </div>
                 <div className="ml-6 mt-2 flex flex-wrap gap-1.5">
-                  {effortLevels.map((effort) => {
-                    const availableEffort = available.has(effort);
-                    const key = `${model}::${effort}`;
-                    const active = availableEffort && selected.has(key);
+                  {modelRuns.map((run) => {
+                    const key = runKey(run);
+                    const active = selected.has(key);
                     return (
                       <button
-                        aria-label={`${model} ${effort} reasoning`}
+                        aria-label={`${model} ${run.reasoning_effort} reasoning`}
                         aria-pressed={active}
-                        className={`border px-2 py-1 font-mono text-[9px] uppercase tracking-wide ${!availableEffort ? "cursor-not-allowed border-neutral-900 text-neutral-800 line-through" : active ? "border-neutral-400 bg-neutral-100 text-black" : "border-neutral-800 text-neutral-600 hover:border-neutral-600 hover:text-neutral-300"}`}
-                        disabled={!availableEffort}
-                        key={effort}
+                        className={`border px-2 py-1 font-mono text-[9px] uppercase tracking-wide ${active ? "border-neutral-500 bg-white/[.035] text-neutral-200" : "border-neutral-800 text-neutral-600 hover:border-neutral-600 hover:text-neutral-300"}`}
+                        key={run.reasoning_effort}
                         onClick={() => {
                           const next = new Set(selected);
                           if (next.has(key)) next.delete(key);
@@ -275,7 +259,7 @@ function ModelFilter({ runs, selected, onChange }: {
                         }}
                         type="button"
                       >
-                        {effort}
+                        {run.reasoning_effort}
                       </button>
                     );
                   })}
@@ -299,15 +283,12 @@ function MatrixTooltip({ active, payload }: any) {
   return (
     <div className="chart-tooltip">
       <strong>{point?.label}</strong>
-      <div>Score: {formatScore(point?.score)}</div>
-      {Object.entries(point?.judgeScores || {}).map(([judge, score]) => (
-        <div key={judge}>{judgeLabels[judge] || judge}: {formatScore(score as number)}</div>
-      ))}
-      <div>Brief OK: {formatScore(point?.briefOkPct)}%</div>
+      <div>Astra indicator: {formatScore(point?.score)}</div>
+      <div>Brief met: {formatScore(point?.briefOkPct)}</div>
       <div>{point?.axisLabel}: {point?.xDisplay}</div>
-      <div>Estimated cost: {formatCost(point?.cost)}</div>
+      <div>{point?.costBasis} generation cost: {formatCost(point?.cost)}</div>
       <div>Output: {compactTokens(point?.outputTokens)} tok</div>
-      <div>Latency: {formatNumber(point?.latency / 1000, 2)}s</div>
+      <div>Latency: {point?.latency == null ? "N/A" : `${formatNumber(point.latency / 1000, 2)}s`}</div>
     </div>
   );
 }
@@ -321,7 +302,7 @@ function MatrixPoint({ activeModel, cx, cy, fill, maxX, mobile, onModelHover, pa
   const nearLeft = maxX > 0 && payload.x >= maxX * 0.82;
   const textAnchor = nearRight ? "end" : nearLeft ? "start" : "middle";
   const labelX = cx + (nearRight ? -8 : nearLeft ? 8 : 0);
-  const labelY = cy + (payload.model === "z-ai/glm-5.3-flash" ? 18 : -13);
+  const labelY = cy + (["gpt-5.6-terra", "z-ai/glm-5.3-flash"].includes(payload.model) ? 18 : -13);
   return (
     <g onMouseEnter={() => onModelHover(payload.model)}>
       {point}
@@ -360,12 +341,12 @@ function PerformanceChart({ runs, configurations, mobile, axis, onAxisChange, se
         return x === null ? null : {
           x,
           score: run.score,
-          judgeScores: run.judge_scores,
           briefOkPct: run.brief_ok_pct,
           label: runLabel(run),
           axisLabel: axisDefinition.label,
           xDisplay: axisDefinition.format(x),
           cost: run.average_cost_usd,
+          costBasis: run.cost_basis,
           outputTokens: run.average_output_tokens,
           latency: run.average_latency_ms,
           effort: effortOrder[run.reasoning_effort] ?? 99,
@@ -460,106 +441,121 @@ function PerformanceChart({ runs, configurations, mobile, axis, onAxisChange, se
   );
 }
 
-function RunDetails({ run, tasks }: { run: Run; tasks: Task[] }) {
-  const [taskId, setTaskId] = useState(run.items[0]?.task_id || "");
-  const item = run.items.find((entry) => entry.task_id === taskId) || run.items[0];
-  const task = tasks.find((entry) => entry.id === item?.task_id);
-  if (!item || !task) return null;
+function TaskBrowser({ runs, tasks, selectedRun, onSelectRun }: {
+  runs: Run[];
+  tasks: Task[];
+  selectedRun: string;
+  onSelectRun: (key: string) => void;
+}) {
+  const [taskId, setTaskId] = useState(tasks[0]?.id || "");
+  const [showHighlights, setShowHighlights] = useState(true);
+  const [copyStatus, setCopyStatus] = useState("");
+  const run = runs.find((entry) => runKey(entry) === selectedRun) || runs[0];
+  const task = tasks.find((entry) => entry.id === taskId) || tasks[0];
+  const item = run?.items.find((entry) => entry.task_id === task?.id);
+  const judgment = item?.judgment;
+  if (!run || !task) return null;
 
   return (
-    <section className="mt-3 border border-neutral-800 bg-[#111] p-4 sm:p-6" id={detailsId(run)}>
-      <div className="flex flex-wrap items-start justify-between gap-4 border-b border-white/5 pb-4">
-        <div>
-          <div className="flex items-center gap-2 text-sm text-neutral-100">
-            <ModelMark model={run.model} />
-            <strong>{run.model}</strong>
-            <span className="font-mono text-xs uppercase text-neutral-500">[{run.reasoning_effort}]</span>
-          </div>
-          <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 font-mono text-[10px] uppercase text-neutral-500">
-            <span>Score {formatScore(run.score)} ±{formatScore(run.judge_stddev)}</span>
-            <span>Cost {formatCost(run.average_cost_usd)}</span>
-            <span>Output {compactTokens(run.average_output_tokens)} tok</span>
-            <span>Latency {run.average_latency_ms === null ? "N/A" : `${formatNumber(run.average_latency_ms / 1000, 2)}s`}</span>
-          </div>
-        </div>
-        <label className="flex items-center gap-2 font-mono text-[9px] uppercase text-neutral-600">
-          Task
-          <select className="max-w-64 border border-neutral-700 bg-neutral-950 px-3 py-2 text-[10px] normal-case text-neutral-300" onChange={(event) => setTaskId(event.target.value)} value={item.task_id}>
-            {run.items.map((entry, index) => (
-              <option key={entry.task_id} value={entry.task_id}>{index + 1}. {tasks.find((candidate) => candidate.id === entry.task_id)?.title || entry.task_id}</option>
-            ))}
+    <section className="mb-10 scroll-mt-4 border border-neutral-800 bg-[#111] p-4 sm:p-6" id="read-answers" tabIndex={-1}>
+      <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
+        <h2 className="text-xl font-semibold">Read it for yourself</h2>
+        <span className="font-mono text-[10px] uppercase text-orange-400">Demo outputs · unedited</span>
+      </div>
+      <div className="mb-5 grid gap-4 sm:grid-cols-2">
+        <label className="grid gap-2 font-mono text-[10px] uppercase text-neutral-400">
+          Prompt
+          <select className="w-full min-w-0 border border-neutral-700 bg-neutral-950 px-3 py-3 text-xs normal-case text-neutral-100" onChange={(event) => { setTaskId(event.target.value); setCopyStatus(""); }} value={task.id}>
+            {tasks.map((entry, index) => <option key={entry.id} value={entry.id}>{index + 1}. {entry.title}</option>)}
+          </select>
+        </label>
+        <label className="grid gap-2 font-mono text-[10px] uppercase text-neutral-400">
+          Answer from
+          <select className="w-full min-w-0 border border-neutral-700 bg-neutral-950 px-3 py-3 text-xs normal-case text-neutral-100" onChange={(event) => { onSelectRun(event.target.value); setCopyStatus(""); }} value={runKey(run)}>
+            {runs.map((entry) => <option key={runKey(entry)} value={runKey(entry)}>{runLabel(entry)}</option>)}
           </select>
         </label>
       </div>
-
-      <div className="mt-4 grid gap-4 lg:grid-cols-2">
-        <article className="border border-white/5 bg-black/20 p-4">
-          <h4 className="mb-3 font-mono text-[9px] uppercase tracking-wider text-neutral-600">Input · {task.title}</h4>
-          <p className="whitespace-pre-wrap text-sm leading-6 text-neutral-300">{task.prompt}</p>
+      <p className="mb-4 text-xs leading-5 text-neutral-400">Keep the prompt selected and switch answers to compare. The highlights are Astra's criticisms under my draft criteria. Decide which ones matter to you.</p>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <article className="min-w-0 border border-white/5 bg-black/20 p-4">
+          <h3 className="mb-3 font-mono text-[10px] uppercase tracking-wider text-neutral-400">Input · {task.title}</h3>
+          <div className="whitespace-pre-wrap break-words text-sm leading-6 text-neutral-300">{task.prompt}</div>
         </article>
-        <article className="border border-white/5 bg-black/20 p-4">
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-            <h4 className="font-mono text-[9px] uppercase tracking-wider text-neutral-600">Output</h4>
-            <span className="font-mono text-[9px] uppercase text-neutral-600">
-              {compactTokens(item.generation.input_tokens)} in · {compactTokens(item.generation.output_tokens)} out · {formatNumber(item.generation.latency_ms / 1000, 2)}s
-            </span>
+        <article className="min-w-0 border border-white/5 bg-black/20 p-4">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h3 className="font-mono text-[10px] uppercase tracking-wider text-neutral-400">Original answer</h3>
+            {item && <div className="flex flex-wrap gap-3 text-xs text-neutral-300">
+              <label className="flex cursor-pointer items-center gap-2"><input checked={showHighlights} onChange={(event) => setShowHighlights(event.target.checked)} type="checkbox" />Highlights</label>
+              <button className="underline underline-offset-4 hover:text-orange-400" onClick={async () => {
+                try { await navigator.clipboard.writeText(item.output); setCopyStatus("Copied original answer"); }
+                catch { setCopyStatus("Copy failed. Select the answer text to copy it."); }
+              }} type="button">Copy answer</button>
+            </div>}
           </div>
-          <p className="max-h-96 overflow-y-auto whitespace-pre-wrap text-sm leading-6 text-neutral-200">{item.output}</p>
+          {item ? <div className="whitespace-pre-wrap break-words text-sm leading-6 text-neutral-200" data-original-answer>
+            {showHighlights && judgment ? evidenceSegments(item.output, judgment.issues.map((issue) => issue.evidence)).map((segment, index) =>
+              segment.issues.length ? <mark className="evidence-mark" key={index}><a aria-describedby={segment.issues.map((issue) => `astra-issue-${issue}`).join(" ")} href={`#astra-issue-${segment.issues[0]}`}>{segment.text}</a></mark> : <span key={index}>{segment.text}</span>
+            ) : item.output}
+          </div> : <p className="text-sm text-neutral-400">No answer is available for this configuration and prompt.</p>}
+          <p aria-live="polite" className="mt-2 text-xs text-neutral-400">{copyStatus}</p>
+          {item && <p className="mt-3 font-mono text-[10px] text-neutral-500">{compactTokens(item.generation.input_tokens)} input tokens · {compactTokens(item.generation.output_tokens)} output tokens · {item.generation.latency_ms === null ? "N/A" : `${formatNumber(item.generation.latency_ms / 1000, 2)}s`}</p>}
         </article>
       </div>
 
-      <div className="mt-4">
-        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-          <h4 className="font-mono text-[9px] uppercase tracking-wider text-neutral-600">Judge assessments</h4>
-          <span className="font-mono text-[9px] uppercase text-neutral-600">Item score {formatScore(item.score)} ±{formatScore(item.judge_stddev)} · brief OK {item.brief_ok_votes}/3</span>
+      {item && judgment && <div className="mt-5 border-t border-white/5 pt-5">
+        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
+          <h3 className="font-mono text-xs uppercase text-neutral-300">Astra xhigh assessment</h3>
+          <span className="font-mono text-sm text-orange-400">{formatScore(item.score)} <span className="text-xs text-neutral-500">personal fit indicator</span></span>
         </div>
-        <div className="grid gap-3 lg:grid-cols-3">
-          {Object.entries(item.judgments).map(([judge, judgment]) => (
-            <article className="border border-white/5 bg-black/20 p-4" key={judge}>
-              <div className="flex items-center justify-between gap-3">
-                <h5 className="font-mono text-[10px] uppercase text-neutral-400">{judgeLabels[judge] || judge}</h5>
-                <span className="font-mono text-xs font-bold text-neutral-100">{formatScore(judgment.score)}</span>
-              </div>
-              <div className="mt-2 flex flex-wrap gap-2 font-mono text-[9px] uppercase">
-                <span className={judgment.brief_ok ? "text-emerald-500" : "text-orange-500"}>Brief {judgment.brief_ok ? "OK" : "miss"}</span>
-                {judgment.realized_cefr && <span className="text-neutral-600">CEFR {judgment.realized_cefr}</span>}
-              </div>
-              <p className="mt-3 text-xs leading-5 text-neutral-400">{judgment.note}</p>
-              {judgment.issues.length > 0 && (
-                <ul className="mt-3 space-y-2 border-t border-white/5 pt-3 text-xs leading-5 text-neutral-500">
-                  {judgment.issues.map((issue, index) => (
-                    <li key={`${issue.code}-${index}`}>
-                      <span className="font-mono text-[9px] uppercase text-neutral-600">{issue.code.replace(/_/g, " ")}</span>
-                      {issue.evidence && <span className="block text-neutral-400">"{issue.evidence}"</span>}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </article>
-          ))}
+        <p className="text-sm leading-6 text-neutral-300">{judgment.note}</p>
+        <div className="mt-2 flex flex-wrap gap-4 text-xs text-neutral-400">
+          <span>Brief {judgment.brief_ok ? "met" : "flagged"}</span>
+          {judgment.realized_cefr && <span>Estimated level {judgment.realized_cefr}</span>}
+          <span>AI assessment · not yet reviewed by Kyle</span>
         </div>
-      </div>
 
-      <div className="mt-4 flex justify-end gap-4 font-mono text-[9px] uppercase">
-        <a className="text-neutral-600 hover:text-orange-500" href={`${repository}/blob/main/${run.generation_file}`} rel="noreferrer" target="_blank">Raw output JSON</a>
-        <a className="text-neutral-600 hover:text-orange-500" href={`${repository}/blob/main/${run.file}`} rel="noreferrer" target="_blank">Raw judge JSON</a>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2">
+          {judgment.issues.map((issue, index) => <article className="issue-card border border-orange-500/20 bg-orange-500/[.035] p-4" id={`astra-issue-${index}`} key={index} tabIndex={-1}>
+            <h4 className="font-mono text-[10px] uppercase text-orange-400">Astra flagged · {issue.category} · {issue.severity}</h4>
+            <p className="mt-2 text-xs font-medium text-neutral-200">{issue.code.replace(/_/g, " ")}</p>
+            {issue.evidence ? <blockquote className="mt-2 whitespace-pre-wrap break-words border-l border-orange-500/40 pl-3 text-sm text-neutral-300">{issue.evidence}</blockquote> : <p className="mt-2 text-xs text-neutral-500">Missing from the answer; no passage to highlight.</p>}
+            <p className="mt-2 text-sm leading-6 text-neutral-400">{issue.explanation}</p>
+          </article>)}
+          {!judgment.issues.length && <p className="text-sm text-neutral-400">Astra did not flag a specific passage. You may still disagree with its assessment.</p>}
+        </div>
+
+        <details className="mt-5 border border-white/10 p-4">
+          <summary className="cursor-pointer text-sm text-neutral-300">Criterion scores and reasons · 0 to 5</summary>
+          <p className="mt-3 text-xs leading-5 text-neutral-400">The percentage is the mean criterion score divided by 5. It is a rubric index, not a probability of success. Natural style includes the unslop guidance and contributes to the score.</p>
+          <dl className="mt-4 grid gap-4 sm:grid-cols-2">
+            {Object.entries(judgment.criteria).map(([criterion, rating]) => <div key={criterion}>
+              <dt className="flex items-center justify-between gap-3 text-sm text-neutral-200"><span>{criterion.replace(/_/g, " ")}</span><span className="font-mono">{rating.score}/5</span></dt>
+              <dd className="mt-1 text-xs leading-5 text-neutral-400">{rating.reason}</dd>
+            </div>)}
+          </dl>
+        </details>
+      </div>}
+      {item && !judgment && <p className="mt-5 text-sm text-neutral-400">The new Astra assessment is not available for this answer yet.</p>}
+      <div className="mt-5 flex flex-wrap gap-4 font-mono text-[10px] uppercase">
+        <a className="text-neutral-400 underline underline-offset-4 hover:text-orange-400" href={`${repository}/blob/main/${run.generation_file}`} rel="noreferrer" target="_blank">Original generation JSON</a>
+        <a className="text-neutral-400 underline underline-offset-4 hover:text-orange-400" href={`${repository}/blob/main/${run.file}`} rel="noreferrer" target="_blank">Assessment JSON</a>
+        <a className="text-neutral-400 underline underline-offset-4 hover:text-orange-400" href={`${repository}/blob/main/${data.evaluation.protocol_file}`} rel="noreferrer" target="_blank">Criteria and judging protocol</a>
       </div>
     </section>
   );
 }
 
-function LeaderboardTable({ runs, tasks, scope, onScopeChange, onModelHover }: {
+function LeaderboardTable({ runs, scope, onScopeChange, onModelHover, onInspect }: {
   runs: Run[];
-  tasks: Task[];
   scope: Scope;
   onScopeChange: (scope: Scope) => void;
   onModelHover: (model: string | null) => void;
+  onInspect: (run: Run) => void;
 }) {
-  const [expanded, setExpanded] = useState<string | null>(null);
   const rows = (scope === "best" ? bestByModel(runs) : runs)
     .slice()
     .sort((a, b) => b.score - a.score);
-  const expandedRun = rows.find((run) => runKey(run) === expanded);
 
   return (
     <section className="mt-8">
@@ -572,18 +568,18 @@ function LeaderboardTable({ runs, tasks, scope, onScopeChange, onModelHover }: {
           <thead className="text-[9px] uppercase text-neutral-600">
             <tr>
               <th className="px-4 py-3 text-left font-medium">Model</th>
-              <th className="px-3 py-3 text-right font-medium">Score</th>
-              <th className="px-3 py-3 text-right font-medium">Brief OK</th>
+              <th className="px-3 py-3 text-right font-medium">Personal fit</th>
+              <th className="px-3 py-3 text-right font-medium">Brief met</th>
               <th className="px-3 py-3 text-right font-medium">Avg cost</th>
               <th className="px-3 py-3 text-right font-medium">Out tok</th>
               <th className="px-3 py-3 text-right font-medium">Latency</th>
-              <th className="px-4 py-3 text-right font-medium">Details</th>
+              <th className="px-4 py-3 text-right font-medium">Inspect</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((run) => (
               <tr
-                className={`border-t border-white/5 text-neutral-400 hover:bg-white/[.025] ${expanded === runKey(run) ? "bg-white/[.035]" : ""}`}
+                className="border-t border-white/5 text-neutral-400 hover:bg-white/[.025]"
                 key={runKey(run)}
                 onMouseEnter={() => onModelHover(run.model)}
                 onMouseLeave={() => onModelHover(null)}
@@ -598,22 +594,22 @@ function LeaderboardTable({ runs, tasks, scope, onScopeChange, onModelHover }: {
                     <span className="block h-full" style={{ background: modelColors[run.model] || "#888", width: `${run.score}%` }} />
                   </span>
                 </td>
-                <td className="px-3 py-3 text-right font-bold text-neutral-100" title={Object.entries(run.judge_scores).map(([judge, score]) => `${judgeLabels[judge] || judge}: ${formatScore(score)}`).join("\n")}>
-                  {formatScore(run.score)} <span className="font-normal text-neutral-600">±{formatScore(run.judge_stddev)}</span>
+                <td className="px-3 py-3 text-right font-bold text-neutral-100">
+                  {formatScore(run.score)}
                 </td>
-                <td className="px-3 py-3 text-right">{formatScore(run.brief_ok_pct)}%</td>
+                <td className="px-3 py-3 text-right">{formatScore(run.brief_ok_pct)}</td>
                 <td className="px-3 py-3 text-right" title={`${run.cost_basis} generation cost`}>{formatCost(run.average_cost_usd)}</td>
                 <td className="px-3 py-3 text-right">{compactTokens(run.average_output_tokens)}</td>
                 <td className="px-3 py-3 text-right">{run.average_latency_ms === null ? "N/A" : `${formatNumber(run.average_latency_ms / 1000, 2)}s`}</td>
                 <td className="px-4 py-3 text-right">
                   <button
-                    aria-controls={detailsId(run)}
-                    aria-expanded={expanded === runKey(run)}
+                    aria-controls="read-answers"
+                    aria-label={`Read answers from ${runLabel(run)}`}
                     className="uppercase text-neutral-500 hover:text-orange-500"
-                    onClick={() => setExpanded(expanded === runKey(run) ? null : runKey(run))}
+                    onClick={() => onInspect(run)}
                     type="button"
                   >
-                    {expanded === runKey(run) ? "Close" : "View"}
+                    Read answers
                   </button>
                 </td>
               </tr>
@@ -621,7 +617,6 @@ function LeaderboardTable({ runs, tasks, scope, onScopeChange, onModelHover }: {
           </tbody>
         </table>
       </div>
-      {expandedRun && <RunDetails key={expandedRun.file} run={expandedRun} tasks={tasks} />}
     </section>
   );
 }
@@ -638,6 +633,7 @@ export default function LiteBenchVisualizer() {
   const [scope, setScope] = useState<Scope>("best");
   const [axis, setAxis] = useState<MatrixAxis>("cost");
   const [hoveredModel, setHoveredModel] = useState<string | null>(null);
+  const [inspectedRun, setInspectedRun] = useState("");
   const suite = suites.find((item) => item.id === suiteId) || suites[0];
   const suiteData = data.suites[suiteId];
   const filtered = suiteData.runs.filter((run) => selectedConfigurations.has(runKey(run)));
@@ -663,12 +659,17 @@ export default function LiteBenchVisualizer() {
           </div>
           <div className="flex flex-col items-end gap-2 font-mono text-[10px] uppercase text-neutral-500">
             <div className="flex gap-4"><span>Models: {suiteModelCount}</span><span>Runs: {suiteRunCount}</span></div>
-            <span>Three-judge AI scores · no human review</span>
+            <span>Astra xhigh · AI assessment</span>
           </div>
         </div>
       </header>
 
       <main className="relative z-10 mx-auto max-w-7xl px-4 py-8">
+        <section className="mb-8 max-w-3xl">
+          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-orange-400">Kyle's personal writing bench · work in progress</p>
+          <p className="text-lg leading-7 text-neutral-200">These are the writing tasks and qualities I care about. Read the prompts, compare the answers, and make your own call.</p>
+          <p className="mt-3 text-sm leading-6 text-neutral-400">The current generations are demo material while I build this page and find flaws in the workflow. Astra's scores are an early indicator under my draft criteria. I haven't reviewed these assessments yet.</p>
+        </section>
         <nav aria-label="LiteBench suites" className="mb-8 flex flex-wrap gap-2 border-b border-white/5 pb-4">
           {suites.map((item) => (
             <button
@@ -686,7 +687,9 @@ export default function LiteBenchVisualizer() {
           ))}
         </nav>
 
-        <h2 className="mb-4 text-xl font-semibold text-neutral-100">Leaderboard</h2>
+        <TaskBrowser key={suiteId} onSelectRun={setInspectedRun} runs={suiteData.runs} selectedRun={inspectedRun} tasks={suiteData.tasks} />
+        <h2 className="mb-2 text-xl font-semibold text-neutral-100">Demo results</h2>
+        <p className="mb-5 text-sm leading-6 text-neutral-400">Percentages summarize Astra's 0 to 5 criterion ratings. They show fit to this rubric, not a pass probability or a general model ranking. {suiteId === "cefrbench" && "Level and style fit is a provisional estimate for the requested audience, not a CEFR certificate."}</p>
         {filtered.length === 0 ? (
           <section className="glass-card grid min-h-[350px] place-items-center p-6 text-center font-mono text-xs uppercase text-neutral-600">
             <div>
@@ -711,7 +714,12 @@ export default function LiteBenchVisualizer() {
               scoreLabel={suiteData.score_label}
               selectedConfigurations={selectedConfigurations}
             />
-            <LeaderboardTable onModelHover={setHoveredModel} onScopeChange={setScope} runs={filtered} scope={scope} tasks={suiteData.tasks} />
+            <LeaderboardTable onInspect={(run) => {
+              setInspectedRun(runKey(run));
+              const browser = document.getElementById("read-answers");
+              browser?.focus({ preventScroll: true });
+              browser?.scrollIntoView({ block: "start" });
+            }} onModelHover={setHoveredModel} onScopeChange={setScope} runs={filtered} scope={scope} />
           </>
         )}
       </main>

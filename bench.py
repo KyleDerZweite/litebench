@@ -1,31 +1,27 @@
 #!/usr/bin/env python3
-"""Validate and aggregate LiteBench result files."""
+"""Validate LiteBench's demonstration data and build its personal results page."""
 
 import argparse
+import copy
 import hashlib
 import json
+import math
 import re
 import sys
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from statistics import fmean
 
-
 ROOT = Path(__file__).resolve().parent
-PUBLIC_TASKS = ROOT / "benches" / "copybench" / "public.json"
-RESULTS_DIR = ROOT / "benches" / "copybench" / "results"
-LEADERBOARD = ROOT / "visualizer" / "data" / "leaderboard.json"
+PUBLIC_TASKS = ROOT / "benches/copybench/public.json"
+LEADERBOARD = ROOT / "visualizer/data/leaderboard.json"
 PRICING = ROOT / "pricing.json"
-PANEL_EVALUATION = "2026-09-04-panel-v0.1"
-PANEL_SUITES = {
-    "copybench": ("CopyBench Lite", "CopyBench score"),
-    "naturalbench": ("NaturalBench Lite", "Naturalness score"),
-    "cefrbench": ("CEFRBench Lite", "CEFR fit score"),
-}
-DETAIL_GENERATION_FIELDS = ("input_tokens", "output_tokens", "total_tokens", "latency_ms")
-DETAIL_JUDGMENT_FIELDS = ("score", "brief_ok", "realized_cefr", "issues", "note")
-SCALE_FIELDS = ("copy_quality", "naturalness", "cefr_fit")
-BOOL_FIELDS = ("facts_ok", "would_use")
+EVALUATION = "2026-09-05-astra-xhigh-v0.1"
+GENERATION = "2026-09-04-rerun-01"
+PROTOCOL = "benches/judge-astra-v0.1.json"
+UNSLOP = "benches/unslop-v1.md"
+SUITES = {"copybench": "CopyBench Lite", "naturalbench": "NaturalBench Lite", "cefrbench": "CEFRBench Lite"}
+DETAIL_FIELDS = ("input_tokens", "output_tokens", "total_tokens", "latency_ms")
 
 
 def read_json(path):
@@ -41,16 +37,28 @@ def write_json(path, data):
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def sha256(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def indexed_items(items, key="task_id"):
+    if not isinstance(items, list) or not items:
+        raise ValueError("expected a non-empty items list")
+    result = {}
+    for item in items:
+        identity = item.get(key) if isinstance(item, dict) else None
+        if not isinstance(identity, str) or not identity or identity in result:
+            raise ValueError(f"every {key} must be unique and non-empty")
+        result[identity] = item
+    return result
+
+
 def load_tasks(path):
     data = read_json(path)
     tasks = data.get("tasks") if isinstance(data, dict) else None
-    if not isinstance(tasks, list) or not tasks:
-        raise ValueError(f"{path}: expected a non-empty 'tasks' list")
-    ids = [task.get("id") for task in tasks if isinstance(task, dict)]
-    if len(ids) != len(tasks) or any(not item_id for item_id in ids):
-        raise ValueError(f"{path}: every task needs an id")
-    if len(ids) != len(set(ids)):
-        raise ValueError(f"{path}: duplicate task id")
+    indexed_items(tasks, "id")
+    if any(not isinstance(task.get("prompt"), str) or not task["prompt"] for task in tasks):
+        raise ValueError(f"{path}: every task needs a prompt")
     return data, tasks
 
 
@@ -58,643 +66,317 @@ def task_set_name(data):
     return f"{data.get('name', 'tasks')}-{data.get('version', 'unknown')}"
 
 
-def slug(text):
-    value = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
-    return value or "model"
+def require_hash(path, expected):
+    if sha256(path) != expected:
+        raise ValueError(f"{path}: SHA-256 does not match")
 
 
-def blank_scores():
-    return {field: None for field in SCALE_FIELDS + BOOL_FIELDS}
+def load_generation(path, suite):
+    path = Path(path).resolve()
+    public_dir = ROOT / "benches" / suite / "generations"
+    if not path.is_relative_to(public_dir.resolve()) or not path.is_file():
+        raise ValueError("generation source must be inside the matching public generations directory")
+    data = read_json(path)
+    batch = data.get("batch") if isinstance(data, dict) else None
+    if not isinstance(data, dict) or data.get("schema_version") != 1 or not isinstance(batch, dict):
+        raise ValueError(f"{path}: expected schema 1 and batch metadata")
+    task_file = f"benches/{suite}/public.json"
+    if batch.get("suite") != suite or batch.get("task_file") != task_file:
+        raise ValueError(f"{path}: batch must reference its suite's public task file")
+    require_hash(ROOT / task_file, batch.get("task_file_sha256"))
+    task_data, tasks = load_tasks(ROOT / task_file)
+    if batch.get("task_set") != task_set_name(task_data):
+        raise ValueError(f"{path}: task set does not match")
+    for field in ("model", "reasoning_effort", "id"):
+        if not isinstance(batch.get(field), str) or not batch[field]:
+            raise ValueError(f"{path}: batch.{field} is required")
+    items = indexed_items(data.get("items"))
+    if set(items) != {task["id"] for task in tasks}:
+        raise ValueError(f"{path}: generation task coverage does not match public tasks")
+    if any(not isinstance(item.get("output"), str) or not isinstance(item.get("generation"), dict) for item in items.values()):
+        raise ValueError(f"{path}: every item needs its original output and generation metadata")
+    return data, tasks
 
 
-def validation_errors(data):
-    errors = []
-    if not isinstance(data, dict):
-        return ["root must be a JSON object"]
-    if data.get("schema_version") not in (None, 1):
-        errors.append("schema_version must be 1")
-    run = data.get("run")
-    if not isinstance(run, dict) or not str(run.get("model", "")).strip():
-        errors.append("run.model must be a non-empty string")
-    elif not str(run.get("task_set", "")).strip():
-        errors.append("run.task_set must be a non-empty string")
-    items = data.get("items")
-    if not isinstance(items, list) or not items:
-        errors.append("items must be a non-empty list")
-        return errors
+def load_evaluation(path):
+    from judge import make_prompt, parse_judgment, validate_judgment
 
-    seen = set()
-    for index, item in enumerate(items, 1):
-        label = f"items[{index}]"
-        if not isinstance(item, dict):
-            errors.append(f"{label} must be an object")
-            continue
-        task_id = item.get("task_id")
-        if not isinstance(task_id, str) or not task_id:
-            errors.append(f"{label}.task_id must be a non-empty string")
-        elif task_id in seen:
-            errors.append(f"{label}.task_id is duplicated: {task_id}")
-        else:
-            seen.add(task_id)
-        if not isinstance(item.get("output", ""), str):
-            errors.append(f"{label}.output must be a string")
-        scores = item.get("scores")
-        if not isinstance(scores, dict):
-            errors.append(f"{label}.scores must be an object")
-            continue
-        for field in SCALE_FIELDS:
-            value = scores.get(field)
-            if value is not None and (type(value) is not int or not 1 <= value <= 5):
-                errors.append(f"{label}.scores.{field} must be null or an integer from 1 to 5")
-        for field in BOOL_FIELDS:
-            value = scores.get(field)
-            if value is not None and type(value) is not bool:
-                errors.append(f"{label}.scores.{field} must be null, true, or false")
-    return errors
-
-
-def task_coverage_errors(data, expected_name, expected_ids):
-    errors = []
-    run = data.get("run", {})
-    if run.get("task_set") != expected_name:
-        errors.append(f"run.task_set must be {expected_name!r}")
-    actual = {item.get("task_id") for item in data.get("items", []) if isinstance(item, dict)}
-    missing = sorted(expected_ids - actual)
-    extra = sorted(actual - expected_ids)
-    if missing:
-        errors.append(f"missing task ids: {', '.join(missing)}")
-    if extra:
-        errors.append(f"unknown task ids: {', '.join(extra)}")
-    return errors
-
-
-def is_rated(item):
-    scores = item.get("scores", {})
-    return bool(item.get("output", "").strip()) and all(
-        scores.get(field) is not None for field in SCALE_FIELDS + BOOL_FIELDS
-    )
+    path = Path(path).resolve()
+    try:
+        parts = path.relative_to(ROOT).parts
+    except ValueError as exc:
+        raise ValueError("evaluation must be inside the repository") from exc
+    if len(parts) != 5 or parts[0] != "benches" or parts[1] not in SUITES or parts[2] != "evaluations":
+        raise ValueError("evaluation must be inside a public suite's evaluations directory")
+    suite = parts[1]
+    data = read_json(path)
+    if not isinstance(data, dict) or data.get("schema_version") != 2 or not isinstance(data.get("evaluation"), dict):
+        raise ValueError(f"{path}: expected evaluation schema 2")
+    evaluation = data["evaluation"]
+    if evaluation.get("id") != parts[3]:
+        raise ValueError(f"{path}: evaluation id does not match directory")
+    if evaluation.get("judge") != {"model": "gpt-6-astra", "reasoning_effort": "xhigh"}:
+        raise ValueError(f"{path}: judge must be GPT-6-Astra xhigh")
+    if evaluation.get("purpose") != "demonstration" or evaluation.get("human_validated") is not False:
+        raise ValueError(f"{path}: expected demonstration, without human validation")
+    for field, expected_path in (("protocol", PROTOCOL), ("unslop", UNSLOP)):
+        if evaluation.get(f"{field}_file") != expected_path:
+            raise ValueError(f"{path}: unexpected {field} file")
+        require_hash(ROOT / expected_path, evaluation.get(f"{field}_sha256"))
+    protocol = read_json(ROOT / PROTOCOL)
+    if evaluation.get("protocol_version") != protocol["version"]:
+        raise ValueError(f"{path}: protocol version does not match")
+    source_file = evaluation.get("source_file")
+    if not isinstance(source_file, str):
+        raise ValueError(f"{path}: source_file is required")
+    source = ROOT / source_file
+    generation, tasks = load_generation(source, suite)
+    require_hash(source, evaluation.get("source_sha256"))
+    source_items, items = indexed_items(generation["items"]), indexed_items(data.get("items"))
+    if set(items) != set(source_items):
+        raise ValueError(f"{path}: evaluation task coverage does not match generations")
+    joined = []
+    unslop_text = (ROOT / UNSLOP).read_text(encoding="utf-8")
+    for task in tasks:
+        task_id = task["id"]
+        item, original = items[task_id], source_items[task_id]
+        errors = validate_judgment(item.get("judgment"), suite, original["output"], protocol)
+        if errors:
+            raise ValueError(f"{path}: {task_id}: {'; '.join(errors)}")
+        if not isinstance(item.get("raw_output"), str) or parse_judgment(item["raw_output"], suite, original["output"], protocol) != item["judgment"]:
+            raise ValueError(f"{path}: {task_id}: saved judgment does not match the raw judge JSON")
+        prompt = make_prompt(protocol, suite, task["prompt"], original["output"], unslop_text)
+        if item.get("prompt_sha256") != hashlib.sha256(prompt.encode()).hexdigest():
+            raise ValueError(f"{path}: {task_id}: judge prompt hash does not match")
+        response = item.get("response")
+        if not isinstance(response, dict) or not isinstance(response.get("usage"), dict):
+            raise ValueError(f"{path}: {task_id}: response usage is required")
+        if response.get("model") != "gpt-6-astra" or response.get("status") != "completed":
+            raise ValueError(f"{path}: {task_id}: expected a completed Astra response")
+        if not isinstance(item.get("attempts"), list) or not item["attempts"]:
+            raise ValueError(f"{path}: {task_id}: attempt metadata is required")
+        joined.append({"task_id": task_id, "output": original["output"],
+                       "generation": {field: original["generation"].get(field) for field in DETAIL_FIELDS},
+                       "score": item["judgment"]["score"], "judgment": item["judgment"]})
+    return suite, data, generation, tasks, joined
 
 
-def aggregate(data):
-    items = data["items"]
-    generated = [item for item in items if item.get("output", "").strip()]
-    rated = [item for item in items if is_rated(item)]
-    if not generated:
-        return None
-    run = data["run"]
-    summary = {
-        "model": run["model"],
-        "provider": run.get("provider", ""),
-        "model_version": run.get("model_version", ""),
-        "reasoning_effort": run.get("reasoning_effort", ""),
-        "date": run.get("date", ""),
-        "evaluator": run.get("evaluator", ""),
-        "evaluation_type": run.get("evaluation_type", ""),
-        "human_evaluation": bool(run.get("human_evaluation", False)),
-        "generated": len(generated),
-        "rated": len(rated),
-        "total": len(items),
-        "status": (
-            "human_scored" if len(rated) == len(items) and run.get("human_evaluation")
-            else "ai_scored" if len(rated) == len(items) and run.get("evaluation_type") == "ai_provisional"
-            else "partially_scored" if rated else "unrated"
-        ),
-    }
-    for field in SCALE_FIELDS:
-        summary[field] = round(20 * fmean(item["scores"][field] for item in rated), 1) if rated else None
-    for field in BOOL_FIELDS:
-        summary[f"{field}_pct"] = (
-            round(100 * fmean(item["scores"][field] for item in rated), 1)
-            if rated else None
-        )
-    generations = [item.get("generation") for item in generated]
-    for field in ("latency_ms", "input_tokens", "output_tokens", "total_tokens"):
-        values = [entry.get(field) for entry in generations if isinstance(entry, dict)]
-        summary[f"average_{field}"] = (
-            round(fmean(values))
-            if len(values) == len(generated) and all(type(value) in (int, float) for value in values)
-            else None
-        )
-    costs = [entry.get("cost_usd") for entry in generations if isinstance(entry, dict)]
-    if len(costs) == len(generated) and all(type(value) in (int, float) for value in costs):
-        summary["average_cost_usd"] = round(fmean(costs), 6)
-        summary["cost_basis"] = "reported"
-    else:
-        pricing = read_json(PRICING)
-        rates = pricing.get("models", {}).get(run["model"])
-        token_pairs = [
-            (
-                entry.get("input_tokens"),
-                entry.get("total_tokens") - entry.get("input_tokens")
-                if type(entry.get("total_tokens")) in (int, float)
-                and type(entry.get("input_tokens")) in (int, float)
-                else entry.get("output_tokens"),
-            )
-            for entry in generations
-            if isinstance(entry, dict)
-        ]
-        if rates and len(token_pairs) == len(generated) and all(
-            type(input_tokens) in (int, float) and type(output_tokens) in (int, float)
-            for input_tokens, output_tokens in token_pairs
-        ):
-            estimates = [
-                (input_tokens * rates["input"] + output_tokens * rates["output"]) / 1_000_000
-                for input_tokens, output_tokens in token_pairs
-            ]
-            summary["average_cost_usd"] = round(fmean(estimates), 6)
-            summary["cost_basis"] = "estimated"
-        else:
-            summary["average_cost_usd"] = None
-            summary["cost_basis"] = "unavailable"
-    return summary
+def numeric(value):
+    return type(value) in (int, float) and math.isfinite(value) and value >= 0
+
+
+def generation_summary(data, pricing):
+    batch, items = data["batch"], data["items"]
+    metadata = [item["generation"] for item in items]
+    result = {field: batch.get(field, "") for field in ("model", "provider", "reasoning_effort")}
+    result.update(date=batch.get("created_at", "")[:10], generated=len(items), total=len(items))
+    for field in DETAIL_FIELDS:
+        values = [entry.get(field) for entry in metadata]
+        result[f"average_{field}"] = round(fmean(values)) if all(numeric(value) for value in values) else None
+    costs, basis = [entry.get("cost_usd") for entry in metadata], "reported"
+    if not all(numeric(value) for value in costs):
+        basis, costs = "estimated", []
+        rates = pricing.get("models", {}).get(batch["model"])
+        for entry in metadata:
+            input_tokens = entry.get("input_tokens")
+            output_tokens = entry.get("billable_output_tokens", entry.get("output_tokens"))
+            if not rates or not numeric(input_tokens) or not numeric(output_tokens):
+                break
+            costs.append((input_tokens * rates["input"] + output_tokens * rates["output"]) / 1_000_000)
+    complete = len(costs) == len(items) and all(numeric(value) for value in costs)
+    result["average_cost_usd"] = round(fmean(costs), 6) if complete else None
+    result["cost_basis"] = basis if complete else "unavailable"
+    return result
+
+
+def evaluation_paths(evaluation_id):
+    if not re.fullmatch(r"[A-Za-z0-9._-]+", evaluation_id):
+        raise ValueError("evaluation id must be a directory name")
+    return sorted(path for suite in SUITES for path in (ROOT / "benches" / suite / "evaluations" / evaluation_id).glob("*.json"))
+
+
+def require_generation_coverage(sources):
+    expected = {path.relative_to(ROOT).as_posix() for suite in SUITES
+                for path in (ROOT / "benches" / suite / "generations" / GENERATION).glob("*.json")}
+    missing, extra = expected - sources, sources - expected
+    if not expected or missing or extra:
+        raise ValueError(f"Evaluation must cover the complete retained generation batch: {len(missing)} missing, {len(extra)} unexpected sources")
 
 
 def command_prompts(args):
     data, tasks = load_tasks(args.tasks)
-    print(f"LiteBench / CopyBench Lite - {task_set_name(data)} - {len(tasks)} tasks")
-    for index, task in enumerate(tasks, 1):
-        print(f"\n[{index}/{len(tasks)}] {task['id']} - {task.get('title', '')}")
-        print(task["prompt"])
+    print(f"LiteBench / {task_set_name(data)} / {len(tasks)} prompts")
+    for task in tasks:
+        print(f"\n{task['id']} / {task.get('title', '')}\n{task['prompt']}")
     return 0
-
-
-def command_new(args):
-    task_data, tasks = load_tasks(args.tasks)
-    output = Path(args.out) if args.out else RESULTS_DIR / f"{slug(args.model)}-{args.date}.json"
-    if output.exists():
-        raise ValueError(f"Refusing to overwrite existing file: {output}")
-    result = {
-        "schema_version": 1,
-        "run": {
-            "model": args.model,
-            "provider": args.provider,
-            "model_version": "",
-            "date": args.date,
-            "task_set": task_set_name(task_data),
-            "temperature": None,
-            "system_prompt": "",
-            "evaluator": "",
-        },
-        "items": [
-            {
-                "task_id": task["id"],
-                "output": "",
-                "scores": blank_scores(),
-                "notes": "",
-            }
-            for task in tasks
-        ],
-    }
-    write_json(output, result)
-    print(output)
-    return 0
-
-
-def check_file(path):
-    data = read_json(path)
-    errors = validation_errors(data)
-    if not errors:
-        for task_path in (PUBLIC_TASKS, ROOT / "private" / "hidden.json"):
-            if not task_path.exists():
-                continue
-            task_data, tasks = load_tasks(task_path)
-            name = task_set_name(task_data)
-            if data["run"].get("task_set") == name:
-                ids = {task["id"] for task in tasks}
-                errors.extend(task_coverage_errors(data, name, ids))
-                break
-    if errors:
-        for error in errors:
-            print(f"{path}: {error}", file=sys.stderr)
-        return False
-    summary = aggregate(data)
-    if summary and summary["rated"]:
-        rating_label = (
-            "human" if summary["human_evaluation"]
-            else "AI provisional" if summary["evaluation_type"] == "ai_provisional"
-            else "self-reported"
-        )
-        print(
-            f"{path}: OK - {summary['generated']}/{summary['total']} generated, "
-            f"{summary['rated']}/{summary['total']} {rating_label}-rated; "
-            f"copy {summary['copy_quality']}/100; natural {summary['naturalness']}/100; "
-            f"CEFR {summary['cefr_fit']}/100; facts {summary['facts_ok_pct']}/100; "
-            f"would use {summary['would_use_pct']}/100"
-        )
-    elif summary:
-        print(
-            f"{path}: OK raw run - {summary['generated']}/{summary['total']} generated, "
-            "0 rated; excluded from rankings"
-        )
-    else:
-        print(f"{path}: OK draft - 0/{len(data['items'])} rated")
-    return True
 
 
 def command_check(args):
-    paths = [Path(path) for path in args.paths]
-    if not paths:
-        paths = sorted(RESULTS_DIR.glob("*.json"))
-    if not paths:
-        print("No result JSON files found.")
-        return 0
+    paths = [Path(path).resolve() for path in args.paths] or sorted(ROOT.glob(f"benches/*/generations/{GENERATION}/*.json"))
     valid = True
     for path in paths:
-        valid = check_file(path) and valid
-    return 0 if valid else 1
-
-
-def command_legacy_build(args):
-    result_dir = Path(args.results)
-    task_data, tasks = load_tasks(PUBLIC_TASKS)
-    expected_name = task_set_name(task_data)
-    expected_ids = {task["id"] for task in tasks}
-    rows = []
-    valid = True
-    for path in sorted(result_dir.glob("*.json")):
-        data = read_json(path)
-        errors = validation_errors(data)
-        if not errors:
-            errors.extend(task_coverage_errors(data, expected_name, expected_ids))
-        if errors:
+        try:
+            parts = path.relative_to(ROOT).parts
+            if len(parts) != 5 or parts[1] not in SUITES:
+                raise ValueError("expected a public generation file")
+            data, _ = load_generation(path, parts[1])
+            print(f"{path.relative_to(ROOT)}: OK, {len(data['items'])} preserved outputs")
+        except ValueError as exc:
+            print(f"{path}: {exc}", file=sys.stderr)
             valid = False
-            for error in errors:
-                print(f"{path}: {error}", file=sys.stderr)
-            continue
-        summary = aggregate(data)
-        if summary:
-            resolved = path.resolve()
-            summary["file"] = resolved.relative_to(ROOT).as_posix() if resolved.is_relative_to(ROOT) else path.name
-            rows.append(summary)
-    if not valid:
-        return 1
-    payload = {
-        "benchmark": "LiteBench",
-        "suite": "CopyBench Lite",
-        "task_set": expected_name,
-        "score_scale": 100,
-        "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
-        "pricing": read_json(PRICING),
-        "runs": rows,
-    }
-    write_json(args.out, payload)
-    print(f"{args.out}: wrote {len(rows)} run(s)")
-    return 0
+    return 0 if paths and valid else 1
 
 
-def panel_validation_errors(data):
-    errors = []
-    if not isinstance(data, dict) or data.get("schema_version") != 1:
-        return ["schema_version must be 1"]
-    evaluation = data.get("evaluation")
-    summary = data.get("summary")
-    items = data.get("items")
-    if not isinstance(evaluation, dict):
-        errors.append("evaluation must be an object")
-        return errors
-    if not isinstance(summary, dict) or not str(summary.get("model", "")).strip():
-        errors.append("summary.model must be a non-empty string")
-    if not isinstance(items, list) or not items:
-        errors.append("items must be a non-empty list")
-        return errors
-    judges = evaluation.get("judges")
-    judge_ids = set(judges) if isinstance(judges, dict) else set()
-    if len(judge_ids) != 3:
-        errors.append("evaluation.judges must contain three judges")
-    seen = set()
-    for index, item in enumerate(items, 1):
-        label = f"items[{index}]"
-        task_id = item.get("task_id") if isinstance(item, dict) else None
-        if not isinstance(task_id, str) or not task_id or task_id in seen:
-            errors.append(f"{label}.task_id must be unique and non-empty")
-        else:
-            seen.add(task_id)
-        score = item.get("score") if isinstance(item, dict) else None
-        judgments = item.get("judgments") if isinstance(item, dict) else None
-        if isinstance(score, bool) or not isinstance(score, (int, float)) or not 0 <= score <= 100:
-            errors.append(f"{label}.score must be numeric from 0 to 100")
-        if not isinstance(judgments, dict) or set(judgments) != judge_ids:
-            errors.append(f"{label}.judgments must match the panel")
-            continue
-        scores = [judgment.get("score") for judgment in judgments.values() if isinstance(judgment, dict)]
-        if len(scores) != 3 or any(
-            isinstance(value, bool)
-            or not isinstance(value, (int, float))
-            or not 0 <= value <= 100
-            for value in scores
-        ):
-            errors.append(f"{label} has invalid judge scores")
-        elif round(fmean(scores), 2) != score:
-            errors.append(f"{label}.score does not match the judge mean")
-    return errors
-
-
-def panel_paths(evaluation_id):
-    return sorted(ROOT.glob(f"benches/*/evaluations/{evaluation_id}/*.json"))
-
-
-def run_detail_items(path, data, tasks):
-    """Join one panel evaluation to its generation records for the static site."""
-    expected_ids = {task["id"] for task in tasks}
-    evaluation_items = data.get("items", [])
-    evaluation_by_id = {item["task_id"]: item for item in evaluation_items}
-    if set(evaluation_by_id) != expected_ids:
-        missing = sorted(expected_ids - set(evaluation_by_id))
-        extra = sorted(set(evaluation_by_id) - expected_ids)
-        details = []
-        if missing:
-            details.append(f"missing {', '.join(missing)}")
-        if extra:
-            details.append(f"unknown {', '.join(extra)}")
-        raise ValueError(f"{path}: evaluation task ids do not match task set ({'; '.join(details)})")
-
-    source_file = data.get("evaluation", {}).get("source_file")
-    if not isinstance(source_file, str) or not source_file:
-        raise ValueError(f"{path}: evaluation.source_file is required")
-    source_path = (ROOT / source_file).resolve()
-    if not source_path.is_relative_to(ROOT) or not source_path.exists():
-        raise ValueError(f"{path}: evaluation.source_file is missing or outside the repository")
-    generation_data = read_json(source_path)
-    generation_items = generation_data.get("items") if isinstance(generation_data, dict) else None
-    if not isinstance(generation_items, list):
-        raise ValueError(f"{source_path}: expected an items list")
-    generation_by_id = {}
-    for item in generation_items:
-        task_id = item.get("task_id") if isinstance(item, dict) else None
-        if not isinstance(task_id, str) or not task_id:
-            raise ValueError(f"{source_path}: every generation item needs a task_id")
-        if task_id in generation_by_id:
-            raise ValueError(f"{source_path}: duplicate task id {task_id}")
-        generation_by_id[task_id] = item
-    if set(generation_by_id) != expected_ids:
-        missing = sorted(expected_ids - set(generation_by_id))
-        extra = sorted(set(generation_by_id) - expected_ids)
-        details = []
-        if missing:
-            details.append(f"missing {', '.join(missing)}")
-        if extra:
-            details.append(f"unknown {', '.join(extra)}")
-        raise ValueError(f"{source_path}: generation task ids do not match task set ({'; '.join(details)})")
-
-    joined = []
-    for task in tasks:
-        task_id = task["id"]
-        generated = generation_by_id[task_id]
-        output = generated.get("output")
-        if not isinstance(output, str):
-            raise ValueError(f"{source_path}: {task_id}.output must be a string")
-        generation = generated.get("generation")
-        if not isinstance(generation, dict):
-            generation = {}
-        generation_detail = {field: generation.get(field) for field in DETAIL_GENERATION_FIELDS}
-        evaluation_item = evaluation_by_id[task_id]
-        judgments = {}
-        for judge_id, judgment in evaluation_item["judgments"].items():
-            if not isinstance(judgment, dict):
-                raise ValueError(f"{path}: {task_id}.{judge_id} must be an object")
-            issues = judgment.get("issues", [])
-            if not isinstance(issues, list):
-                raise ValueError(f"{path}: {task_id}.{judge_id}.issues must be a list")
-            parsed_issues = []
-            for issue in issues:
-                if not isinstance(issue, dict):
-                    raise ValueError(f"{path}: {task_id}.{judge_id}.issues must contain objects")
-                parsed_issues.append({"code": issue.get("code", ""), "evidence": issue.get("evidence", "")})
-            judgments[judge_id] = {
-                field: (parsed_issues if field == "issues" else judgment.get(field))
-                for field in DETAIL_JUDGMENT_FIELDS
-            }
-        joined.append({
-            "task_id": task_id,
-            "output": output,
-            "generation": generation_detail,
-            "score": evaluation_item["score"],
-            "judge_stddev": evaluation_item["judge_stddev"],
-            "brief_ok_votes": evaluation_item["brief_ok_votes"],
-            "judgments": judgments,
-        })
-    return joined
-
-
-def command_panel_check(args):
-    paths = [Path(path) for path in args.paths] or panel_paths(args.evaluation)
-    if not paths:
-        print("No panel evaluation files found.")
-        return 1
+def command_evaluation_check(args):
+    paths = [Path(path) for path in args.paths] or evaluation_paths(args.evaluation)
     valid = True
     for path in paths:
-        data = read_json(path)
-        errors = panel_validation_errors(data)
-        evaluation = data.get("evaluation", {}) if isinstance(data, dict) else {}
-        for field in ("protocol_file", "source_file"):
-            relative = evaluation.get(field)
-            if not isinstance(relative, str):
-                errors.append(f"evaluation.{field} must be a string")
-                continue
-            target = (ROOT / relative).resolve()
-            if not target.is_relative_to(ROOT) or not target.exists():
-                errors.append(f"evaluation.{field} is missing or outside the repository")
-                continue
-            expected = evaluation.get(field.replace("_file", "_sha256"))
-            actual = hashlib.sha256(target.read_bytes()).hexdigest()
-            if expected != actual:
-                errors.append(f"evaluation.{field} hash does not match")
-        if errors:
+        try:
+            _, data, _, _, _ = load_evaluation(path)
+            print(f"{path}: OK, {len(data['items'])} Astra xhigh annotations")
+        except ValueError as exc:
+            print(f"{path}: {exc}", file=sys.stderr)
             valid = False
-            for error in errors:
-                print(f"{path}: {error}", file=sys.stderr)
-        else:
-            print(f"{path}: OK - {len(data['items'])} outputs, three judges")
-    return 0 if valid else 1
+    if not paths:
+        print("No evaluation files found.", file=sys.stderr)
+    return 0 if paths and valid else 1
 
 
 def command_build(args):
-    paths = panel_paths(args.evaluation)
+    from judge import estimated_cost
+
+    paths = evaluation_paths(args.evaluation)
     if not paths:
-        raise ValueError(f"No panel evaluations found for {args.evaluation}")
-    rows = {suite: [] for suite in PANEL_SUITES}
-    suite_tasks = {
-        suite: load_tasks(ROOT / "benches" / suite / "public.json")[1]
-        for suite in PANEL_SUITES
-    }
-    panel = None
-    valid = True
-    for path in paths:
-        data = read_json(path)
-        errors = panel_validation_errors(data)
-        if errors:
-            valid = False
-            for error in errors:
-                print(f"{path}: {error}", file=sys.stderr)
-            continue
-        evaluation = data["evaluation"]
-        if panel is None:
-            panel = evaluation
-        elif evaluation["protocol_sha256"] != panel["protocol_sha256"]:
-            valid = False
-            print(f"{path}: evaluator protocol does not match the other runs", file=sys.stderr)
-            continue
-        source_file = evaluation.get("source_file")
-        source_parts = Path(source_file).parts if isinstance(source_file, str) else ()
-        suite = source_parts[1] if len(source_parts) > 1 and source_parts[0] == "benches" else ""
-        if suite not in rows:
-            valid = False
-            print(f"{path}: unknown suite {suite}", file=sys.stderr)
-            continue
-        summary = dict(data["summary"])
-        summary["file"] = path.relative_to(ROOT).as_posix()
-        summary["items"] = run_detail_items(path, data, suite_tasks[suite])
-        rows[suite].append(summary)
-    if not valid:
-        return 1
+        raise ValueError(f"No evaluations found for {args.evaluation}")
+    protocol, pricing = read_json(ROOT / PROTOCOL), read_json(PRICING)
     payload = {
-        "benchmark": "LiteBench",
-        "score_scale": 100,
-        "evaluation": {
-            "id": args.evaluation,
-            "type": "ai_panel_provisional",
-            "protocol_version": panel["protocol_version"],
-            "human_validated": False,
-            "judges": panel["judges"],
-        },
-        "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
-        "pricing": read_json(PRICING),
-        "suites": {},
+        "benchmark": "LiteBench", "personal": True, "owner": "Kyle", "demonstration": True, "score_scale": 100,
+        "evaluation": {"id": args.evaluation, "type": "ai_personal_proxy", "judge": protocol["judge"],
+                       "protocol_file": PROTOCOL, "protocol_version": protocol["version"], "score_scale": 5,
+                       "display_scale": 100, "purpose": "demonstration", "human_validated": False, "unslop_file": UNSLOP},
+        "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(), "pricing": pricing, "suites": {},
     }
-    for suite, suite_rows in rows.items():
-        name, score_label = PANEL_SUITES[suite]
+    for suite, name in SUITES.items():
+        _, tasks = load_tasks(ROOT / "benches" / suite / "public.json")
+        rubric = protocol["suites"][suite]
         payload["suites"][suite] = {
-            "name": name,
-            "score_label": score_label,
-            "task_count": len(suite_tasks[suite]),
-            "tasks": [
-                {"id": task["id"], "title": task.get("title", ""), "prompt": task["prompt"]}
-                for task in suite_tasks[suite]
-            ],
-            "runs": sorted(
-                suite_rows,
-                key=lambda row: (-row["score"], row["model"], row["reasoning_effort"]),
-            ),
+            "name": name, "score_label": rubric["label"], "question": rubric["question"], "criteria": rubric["criteria"],
+            "task_count": len(tasks), "tasks": [{key: task.get(key, "") for key in ("id", "title", "prompt")} for task in tasks], "runs": [],
         }
+    seen, attempt_costs = set(), []
+    for path in paths:
+        suite, data, generation, _, joined = load_evaluation(path)
+        source_file = data["evaluation"]["source_file"]
+        if source_file in seen:
+            raise ValueError(f"Duplicate evaluation source: {source_file}")
+        seen.add(source_file)
+        attempt_costs.extend(estimated_cost(attempt.get("usage"), protocol["pricing"])
+                             for item in data["items"] for attempt in item["attempts"])
+        row = generation_summary(generation, pricing)
+        row.update(score=round(fmean(item["score"] for item in joined), 2),
+                   brief_ok_pct=round(100 * fmean(item["judgment"]["brief_ok"] for item in joined), 2),
+                   rated=len(joined), file=path.relative_to(ROOT).as_posix(), generation_file=source_file, items=joined)
+        payload["suites"][suite]["runs"].append(row)
+    require_generation_coverage(seen)
+    for suite in payload["suites"].values():
+        suite["runs"].sort(key=lambda row: (-row["score"], row["model"], row["reasoning_effort"]))
+    known_costs = [cost for cost in attempt_costs if numeric(cost)]
+    payload["evaluation"]["cost"] = {
+        "known_estimate_usd": round(sum(known_costs), 6),
+        "attempt_count": len(attempt_costs),
+        "unknown_cost_attempts": len(attempt_costs) - len(known_costs),
+        "basis": "evaluation attempts, separate from candidate generation; not a reconciled bill",
+        "pricing": protocol.get("pricing"),
+    }
     write_json(args.out, payload)
-    print(f"{args.out}: wrote {sum(len(value) for value in rows.values())} panel run(s)")
+    print(f"{args.out}: wrote {len(paths)} demonstration configurations")
     return 0
 
 
 def command_self_test(_args):
-    task_data, tasks = load_tasks(PUBLIC_TASKS)
-    assert task_set_name(task_data) == "public-0.1"
-    assert len(tasks) == 8
-    sample = {
-        "run": {
-            "model": "gpt-5.6-luna",
-            "task_set": "test-0",
-            "reasoning_effort": "high",
-            "evaluation_type": "ai_provisional",
-            "human_evaluation": False,
-        },
-        "items": [
-            {
-                "task_id": "one",
-                "output": "x",
-                "generation": {"latency_ms": 1000, "input_tokens": 100, "output_tokens": 200, "total_tokens": 300},
-                "scores": {
-                    "copy_quality": 3,
-                    "naturalness": 4,
-                    "cefr_fit": 5,
-                    "facts_ok": True,
-                    "would_use": False,
-                },
-            },
-            {
-                "task_id": "two",
-                "output": "y",
-                "generation": {"latency_ms": 3000, "input_tokens": 200, "output_tokens": 400, "total_tokens": 600},
-                "scores": {
-                    "copy_quality": 5,
-                    "naturalness": 2,
-                    "cefr_fit": 3,
-                    "facts_ok": False,
-                    "would_use": True,
-                },
-            },
-        ],
+    from io import BytesIO
+    from judge import estimated_cost, extract_text, parse_response_stream, validate_judgment
+
+    protocol = read_json(ROOT / PROTOCOL)
+    judgment = {
+        "criteria": {key: {"score": 4, "reason": "Specific and clear."} for key in protocol["suites"]["copybench"]["criteria"]},
+        "score_5": 4, "score": 80, "brief_ok": True, "realized_cefr": None,
+        "issues": [{"code": "stock_phrase", "category": "slop", "severity": "minor", "evidence": "vibrant", "explanation": "Promotional filler."}],
+        "note": "Some wording needs editing.",
     }
-    assert not validation_errors(sample)
-    summary = aggregate(sample)
-    assert summary["generated"] == 2
-    assert summary["copy_quality"] == 80
-    assert summary["facts_ok_pct"] == 50
-    assert summary["reasoning_effort"] == "high"
-    assert summary["status"] == "ai_scored"
-    assert summary["average_latency_ms"] == 2000
-    assert summary["average_output_tokens"] == 300
-    assert summary["average_cost_usd"] == 0.00039
-    assert summary["cost_basis"] == "estimated"
-    panel_sample = {
-        "schema_version": 1,
-        "evaluation": {"judges": {"one": {}, "two": {}, "three": {}}},
-        "summary": {"model": "sample"},
-        "items": [
-            {
-                "task_id": "sample-task",
-                "score": 80.0,
-                "judgments": {
-                    "one": {"score": 70.0},
-                    "two": {"score": 80.0},
-                    "three": {"score": 90.0},
-                },
-            }
-        ],
-    }
-    assert not panel_validation_errors(panel_sample)
-    panel_sample["items"][0]["score"] = 81.0
-    assert panel_validation_errors(panel_sample)
-    panel_sample["items"][0]["score"] = 80.0
-    panel_sample["items"][0]["judgments"]["one"]["score"] = 101.0
-    panel_sample["items"][0]["judgments"]["three"]["score"] = 59.0
-    assert panel_validation_errors(panel_sample)
-    print("self-test: OK")
+    assert not validate_judgment(judgment, "copybench", "A vibrant lunchbox.", protocol)
+    for change in ("evidence", "score"):
+        bad = copy.deepcopy(judgment)
+        if change == "evidence":
+            bad["issues"][0]["evidence"] = "not in the output"
+        else:
+            bad["score"] = 81
+        assert validate_judgment(bad, "copybench", "A vibrant lunchbox.", protocol)
+    for operation in (lambda: require_hash(ROOT / PROTOCOL, "0" * 64),
+                      lambda: indexed_items([{"task_id": "one"}, {"task_id": "one"}]),
+                      lambda: load_generation(ROOT / "private/hidden.json", "copybench")):
+        try:
+            operation()
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("invalid data accepted")
+    malformed = copy.deepcopy(judgment)
+    malformed["issues"][0]["category"] = []
+    assert validate_judgment(malformed, "copybench", "A vibrant lunchbox.", protocol)
+    try:
+        extract_text({"output": [{"type": "message", "content": None}]})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("malformed API output accepted")
+    assert estimated_cost({"input_tokens": 1000, "output_tokens": 1000, "output_tokens_details": {"reasoning_tokens": 500}}, protocol["pricing"]) == 0.06
+    assert estimated_cost({"input_tokens": 1000, "output_tokens": 1000, "input_tokens_details": []}, protocol["pricing"]) is None
+    for status in ("completed", "incomplete", "failed"):
+        response = {"status": status, "model": "gpt-6-astra", "usage": {"input_tokens": 1000, "output_tokens": 1000}}
+        frame = f': keepalive\r\nevent: response.{status}\r\ndata: {{"type":"response.{status}",\r\ndata: "response":{json.dumps(response)}}}\r\n\r\n'
+        assert parse_response_stream(BytesIO(frame.encode())) == response
+    for stream in (b'', b'data: [DONE]\n\n', b'data: {"type":"response.output_text.delta","delta":"partial"}\n\n',
+                   b'data: {"type":"response.completed","response":null}\n\n', b'data: []\n\n',
+                   b'data: {"type":"error"}\n\n', b'data: invalid\n\n'):
+        try:
+            parse_response_stream(BytesIO(stream))
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("invalid or unterminated Responses stream accepted")
+    sources = {path.relative_to(ROOT).as_posix() for path in ROOT.glob(f"benches/*/generations/{GENERATION}/*.json")}
+    require_generation_coverage(sources)
+    for incomplete in (set(), sources - {next(iter(sources))}, sources | {"unexpected.json"}):
+        try:
+            require_generation_coverage(incomplete)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("incomplete or extra generation coverage accepted")
+    print("self-test: OK, evidence, derived score, hash, duplicate, private-source, SSE and batch coverage checks")
     return 0
 
 
 def parser():
     cli = argparse.ArgumentParser(description=__doc__)
     commands = cli.add_subparsers(dest="command", required=True)
-
     prompts = commands.add_parser("prompts", help="print a task set")
     prompts.add_argument("--tasks", default=PUBLIC_TASKS, type=Path)
     prompts.set_defaults(func=command_prompts)
-
-    new = commands.add_parser("new", help="create an empty result file")
-    new.add_argument("model")
-    new.add_argument("--provider", default="")
-    new.add_argument("--date", default=date.today().isoformat())
-    new.add_argument("--tasks", default=PUBLIC_TASKS, type=Path)
-    new.add_argument("--out", type=Path)
-    new.set_defaults(func=command_new)
-
-    check = commands.add_parser("check", help="validate and summarize result files")
+    check = commands.add_parser("check", help="validate preserved public generations")
     check.add_argument("paths", nargs="*")
     check.set_defaults(func=command_check)
-
-    panel_check = commands.add_parser("panel-check", help="validate panel evaluation files")
-    panel_check.add_argument("paths", nargs="*")
-    panel_check.add_argument("--evaluation", default=PANEL_EVALUATION)
-    panel_check.set_defaults(func=command_panel_check)
-
-    build = commands.add_parser("build", help="rebuild static panel leaderboard data")
-    build.add_argument("--evaluation", default=PANEL_EVALUATION)
+    for name in ("evaluation-check", "panel-check"):
+        check = commands.add_parser(name, help="validate current Astra evaluations")
+        check.add_argument("paths", nargs="*")
+        check.add_argument("--evaluation", default=EVALUATION)
+        check.set_defaults(func=command_evaluation_check)
+    build = commands.add_parser("build", help="rebuild personal demonstration results")
+    build.add_argument("--evaluation", default=EVALUATION)
     build.add_argument("--out", default=LEADERBOARD, type=Path)
     build.set_defaults(func=command_build)
-
-    legacy_build = commands.add_parser("legacy-build", help="rebuild the earlier CopyBench leaderboard")
-    legacy_build.add_argument("--results", default=RESULTS_DIR, type=Path)
-    legacy_build.add_argument("--out", default=LEADERBOARD, type=Path)
-    legacy_build.set_defaults(func=command_legacy_build)
-
-    self_test = commands.add_parser("self-test", help="run the smallest useful check")
-    self_test.set_defaults(func=command_self_test)
+    commands.add_parser("self-test", help="run offline validation checks").set_defaults(func=command_self_test)
     return cli
 
 
@@ -702,7 +384,7 @@ def main():
     args = parser().parse_args()
     try:
         return args.func(args)
-    except ValueError as exc:
+    except (ValueError, OSError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 

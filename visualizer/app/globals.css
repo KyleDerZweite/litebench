@@ -23,6 +23,7 @@
     font-family: var(--font-sans), sans-serif;
   }
   button, summary, input { font: inherit; }
+  :focus-visible { outline: 2px solid #fb923c; outline-offset: 4px; }
 }
 
 .noise-overlay {
@@ -68,6 +69,12 @@
 .model-filter summary { list-style: none; }
 .model-filter summary::-webkit-details-marker { display: none; }
 .model-filter[open] summary { border-color: #444; background: #151515; }
+
+.evidence-mark { background: rgb(249 115 22 / .17); color: inherit; }
+.evidence-mark a { color: inherit; text-decoration: underline; text-decoration-color: #c26e39; text-underline-offset: 3px; }
+.evidence-mark a:hover, .evidence-mark a:focus-visible { background: rgb(249 115 22 / .24); }
+.issue-card { scroll-margin-top: 1rem; }
+.issue-card:target { border-color: #fb923c; background: rgb(249 115 22 / .08); }
 
 .scanline {
   position: fixed;

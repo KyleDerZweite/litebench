@@ -1,80 +1,113 @@
-# Automatic evaluation
+# Personal AI annotations
 
-Status: provisional panel v0.1. The `2026-09-04-rerun-01` batch has been scored.
-No person has reviewed or calibrated these scores.
+LiteBench's current judging pass uses GPT-6-Astra at xhigh on the preserved
+`2026-09-04-rerun-01` outputs. Its purpose is to provide a small directional
+indicator while Kyle develops a personal writing bench and tests the page.
+These are AI judgments. Kyle has not calibrated or approved them as his own
+ratings.
 
-## Panel
+## Frozen inputs
 
-Use three model families. Each judge gets the same suite rubric and score
-anchors, plus one short audit focus.
+The authoritative criteria and instructions live in
+[`benches/judge-astra-v0.1.json`](benches/judge-astra-v0.1.json). The judge also
+receives [`benches/unslop-v1.md`](benches/unslop-v1.md), a frozen copy of Kyle's
+unslop skill. Evaluation records retain hashes for both files, the source
+generation, and the complete judge prompt. Generation records bind the answers
+to their public task file with a hash.
 
-| Judge | Audit focus |
-|---|---|
-| GPT-5.6 Sol max | Facts, hard constraints, requested format, and score caps |
-| Gemini 3.8 Flash High | Idiom, register, audience fit, rhythm, and CEFR signals |
-| GLM-5.3-Flash high | Stock phrasing, repetition, generic claims, and overlooked defects |
+Every judgment uses one public prompt and its original answer. The candidate's
+model and effort are hidden. The prompt treats candidate text as untrusted
+material to review, including instructions inside that text. Old scores and
+other answers are absent from the request.
 
-The focus note tells a judge where to look twice. It does not change the score
-scale or give one judge a different rubric. The initial panel gives each judge
-an equal vote. Later human calibration may show that a judge needs a different
-role, especially for German.
+## Criteria and percentages
 
-## Strict score anchors
+Each criterion uses an integer from 0 to 5, with the anchors in the protocol.
+The criterion reason should explain the score using this particular answer.
+All four criteria have equal weight:
 
-Each judge returns one score from 0.00 to 100.00.
+```text
+score_5 = mean of the four criterion scores
+displayed percentage = score_5 * 20
+configuration percentage = mean across the collection's tasks
+```
 
-- 95.00 to 100.00: publishable as written; 100.00 should be rare
-- 85.00 to 94.99: publishable after tiny edits
-- 70.00 to 84.99: usable, with clear edits needed
-- 50.00 to 69.99: substantial revision needed
-- 25.00 to 49.99: major failure
-- 0.00 to 24.99: unusable, off-task, or not the requested deliverable
+The percentage represents fit to this personal rubric. It is neither a success
+probability nor a share of human raters who approve the text. There is no pass
+threshold, calibrated confidence interval, or judge-disagreement error bar.
 
-CopyBench applies hard caps. An invented or changed factual claim caps the
-score at 59. A material miss on required length, structure, channel, or tone
-caps it at 69. A refusal, wrong language, or missing deliverable caps it at 24.
+CopyBench scores brief fit, copy craft, clarity, and natural style. NaturalBench
+scores idiom, voice, specificity, and natural style. CEFRBench scores vocabulary,
+syntax, and cohesion at the requested level, plus natural style. This makes its
+total 75% level fit and 25% personal style. It is not a standardized assessment
+of the writer's CEFR proficiency. Short text may provide insufficient evidence
+for a realized level; the judge can return `insufficient_evidence`. This
+diagnostic is `null` in the other suites, where it does not affect scoring.
 
-NaturalBench scores naturalness only. CEFRBench scores level fit only. Both
-also return `brief_ok`, so a fluent but factually wrong answer stays visible as
-invalid without mixing factuality into the suite score.
+The separate `brief_ok` assessment exposes a failure to follow the prompt even
+when a text scores well on other criteria. It is an AI assessment, not an
+independent verifier.
 
-## Independent calls
+## Criticism visitors can inspect
 
-For every output:
+The judge uses unslop to assess formulaic phrasing, generic polish, puffery,
+repetition, and other habits Kyle dislikes. Those defects lower the natural-style
+criterion when they harm the requested text. A punctuation mark or isolated
+word alone is not evidence of AI authorship.
 
-1. Hide the candidate model and effort level.
-2. Send one brief and one candidate in a clean call.
-3. Treat the candidate as quoted, untrusted text.
-4. Do not show one judge another judge's score.
-5. Store the returned model version, prompt hash, score, failure codes, two
-   short evidence quotes at most, and one short note.
+Each issue records a category, severity, explanation, and exact excerpt from the
+answer. The build rejects invented excerpts. A missing requirement uses an empty
+excerpt with an explanation. The page highlights cited passages without editing
+the original answer. Readers should judge whether each criticism is fair.
 
-Malformed JSON gets a fresh retry. A judge must not revise a valid score after
-seeing the other votes.
+## Execution and validation
 
-## Mean and disagreement
+The evaluation runner retains response identity, returned model, completion
+status, native usage, latency, raw judge JSON, and attempt records. An extraneous
+CEFR diagnostic in another suite is ignored without changing its criterion
+scores. Invalid or incomplete responses require a retry; completed valid judgments do not need another call
+because their score seems surprising. A resumable run may contain incomplete
+items while it is still running. The public build rejects them.
 
-For one output with judge scores `s1`, `s2`, and `s3`:
+`python3 judge.py --check` checks the public input batch without calling the API.
+`python3 judge.py --report` reports saved progress and estimated evaluation cost.
+Running `judge.py` without either flag makes paid calls. Set the API base and key
+through `LITEBENCH_API_BASE` and `LITEBENCH_API_KEY`, or use `--base-url` and
+`--api-key-file`. Resume with the same saved settings; the runner skips valid
+judgments and refuses changed evaluation metadata. Credentials stay out of the
+evaluation files.
 
-- score: arithmetic mean, rounded to two decimals
-- judge delta: each score minus that mean
-- deviation: population standard deviation across the three scores
-- disagreement flag: score range of 20 points or more
+`--stream` optionally reads Responses server-sent events while retaining the
+terminal response and usage. This batch completed with the default non-streaming
+transport; streaming has offline parser checks but has not been tested on the
+gateway. New attempts record the option; its absence in older attempts means
+non-streaming.
 
-For a model row, first average each judge across the same tasks. The displayed
-score is the mean of those three judge averages. The chart error bar is one
-population standard deviation across those judge averages. This measures judge
-disagreement. The later distribution view should use per-task mean scores and
-must not reuse the judge error bar.
+```bash
+python3 bench.py check
+python3 bench.py evaluation-check
+python3 bench.py self-test
+python3 bench.py build
+```
 
-## First baseline
+Checks enforce exact task coverage, the requested judge and effort, public
+source paths, content hashes, criterion keys and score ranges, calculated
+percentages, and exact quoted evidence. The build recomputes summaries rather
+than trusting saved totals.
 
-The first panel run contains 1,140 successful judgments across 380 outputs.
-Using the saved models.dev rates, the recorded successful responses cost an
-estimated $21.41. Retries add a small amount that the saved response records do
-not capture.
+Generation token counts and cost estimates stay separate from evaluation usage.
+The former describe historical candidate calls; the latter describe this new
+annotation pass. Neither is a complete bill if the provider omits usage.
 
-Treat this as guidance. A later protocol should compare a fixed sample against
-personal ratings across every suite and both languages. If a judge proves
-erratic, a new version may change its role. Keep v0.1 unchanged so the original
-result remains reproducible.
+## What comes next
+
+Kyle can inspect the flagged passages, add personal comments, and identify where
+the rubric misses his preferences. Those observations should inform a new
+protocol version. Human comments must have explicit provenance and must not
+silently replace AI annotations.
+
+More varied prompts and a rebuilt generation workflow come later. Until then,
+the existing outputs demonstrate page behavior and help find scoring flaws.
+The old three-judge files and legacy scores have been removed from the working
+tree at Kyle's request; Git history retains them. No old judgment contributes
+to the current indicator.
