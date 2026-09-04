@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "cefrbench",
+    "task_set": "cefrbench-public-0.1",
+    "task_file": "benches/cefrbench/public.json",
+    "task_file_sha256": "5a51cde0f9b7e1eff6aab162b820a6ed83348e1a800d8d942340ea1649d9423e",
+    "provider": "kylehub",
+    "model": "z-ai/glm-5.3-flash",
+    "reasoning_effort": "max",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T15:17:41.540747+00:00"
+  },
+  "items": [
+    {
+      "task_id": "cefr-en-a2-01",
+      "output": "**Notice to Library Visitors**\n\nDear visitors,\n\nPlease note our change of hours this week.\n\nOn Friday, the library will close early at 17:00. On Saturday, we will open later, at 10:00. We are sorry for any problems this may cause.\n\nThe return box outside the library stays open all the time. You can put your books in it at any hour.\n\nThank you for your understanding.\n\nThe Library Team",
+      "generation": {
+        "response_id": "gen-1788535061-qz9FzOMPpiG8YUaoMit2",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 68,
+        "cached_input_tokens": 0,
+        "output_tokens": 108,
+        "billable_output_tokens": 108,
+        "reasoning_tokens": 0,
+        "total_tokens": 176,
+        "latency_ms": 4043,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-a2-01",
+      "output": "# Hinweis für unsere Besucher\n\nLiebe Besucherinnen und Besucher,\n\nam Freitag schließt unsere Bibliothek schon um 17:00 Uhr. Am Samstag öffnet die Bibliothek wieder um 10:00 Uhr. Bitte denken Sie daran: Die Rückgabebox bleibt offen. Sie können Ihre Bücher jederzeit in die Box legen. Das ist einfach. Bei Fragen sprechen Sie bitte unser Personal an oder rufen Sie uns an. Wir wünschen Ihnen viel Spaß beim Lesen!\n\nIhr Bibliotheksteam\n\n*(64 Wörter, Niveau A2)*",
+      "generation": {
+        "response_id": "gen-1788535065-pcNLlRHu5n6QYUc5eh56",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 88,
+        "cached_input_tokens": 0,
+        "output_tokens": 808,
+        "billable_output_tokens": 808,
+        "reasoning_tokens": 0,
+        "total_tokens": 896,
+        "latency_ms": 10216,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-b1-01",
+      "output": "Residents who would like a community garden plot can now apply online. The last day to apply is 30 April, so do not leave it too late. A plot costs £25 for the whole year. However, it is possible that more people will apply than there are plots available. In that case, names will be chosen by chance, which means that not everyone may receive a plot. If you are interested in having a garden plot, remember to send your application online before the deadline. Good luck to everyone who applies!",
+      "generation": {
+        "response_id": "gen-1788535075-BPODPvpNf7q2HHORx0gC",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 73,
+        "cached_input_tokens": 0,
+        "output_tokens": 1955,
+        "billable_output_tokens": 1955,
+        "reasoning_tokens": 0,
+        "total_tokens": 2028,
+        "latency_ms": 38700,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-b1-01",
+      "output": "**Gemeinschaftsgarten: Jetzt bewerben!**\n\nAlle Einwohner können sich bis zum 30. April online für ein Beet im Gemeinschaftsgarten bewerben. Jedes Beet kostet 25 Euro pro Jahr. Diese Gebühr muss man zahlen, wenn man einen Platz bekommt. Es ist möglich, dass sich mehr Personen bewerben, als Beete zur Verfügung stehen. In diesem Fall werden die Namen zufällig ausgewählt. Das bedeutet, jeder hat die gleiche Chance, ein Beet zu bekommen. Wenn Sie Interesse haben, schicken Sie also rechtzeitig Ihre Bewerbung ab. Nutzen Sie die Gelegenheit, denn Gemeinschaftsgärten sind eine tolle Möglichkeit, zusammen zu gärtnern!\n\n*(92 Wörter)*",
+      "generation": {
+        "response_id": "gen-1788535114-c9fEID355KHMZPnQ1w5B",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 99,
+        "cached_input_tokens": 0,
+        "output_tokens": 190,
+        "billable_output_tokens": 190,
+        "reasoning_tokens": 0,
+        "total_tokens": 289,
+        "latency_ms": 10328,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-b2-01",
+      "output": "**New Hybrid Working Arrangement**\n\nFrom 1 November, colleagues may work remotely for up to three days each week. The remaining days should be spent in the office. To make planning easier, each team will choose two shared office days when everyone is expected to be present. These days will help with meetings, collaboration and team discussion.\n\nIf your circumstances mean you cannot follow this arrangement, please speak to your team lead. Exceptions can be made, but only with their agreement.\n\nThe policy will be reviewed after six months.\n\nIf you have questions about how the policy applies to your team, please contact your team lead in the first instance.\n\nThank you for your cooperation.\n\n*(Word count: 125)*",
+      "generation": {
+        "response_id": "gen-1788535124-V6W6lFVn6U8P8hoLIJYQ",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 86,
+        "cached_input_tokens": 0,
+        "output_tokens": 1259,
+        "billable_output_tokens": 1259,
+        "reasoning_tokens": 0,
+        "total_tokens": 1345,
+        "latency_ms": 22715,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-b2-01",
+      "output": "**Interne Erklärung: Regelung zum mobilen Arbeiten**\n\nLiebe Kolleginnen und Kollegen,\n\nab dem 1. November gilt eine neue Regelung für mobiles Arbeiten. Ab diesem Datum könnt ihr bis zu drei Tage pro Woche von zu Hause aus arbeiten. Die übrigen Tage findet das Arbeiten im Büro statt.\n\nWichtig ist, dass jedes Team zwei gemeinsame Bürotage festlegt. Diese Tage sollen alle Teammitglieder im Büro verbringen. An diesen Tagen finden bitte auch Besprechungen und Absprachen statt.\n\nWenn jemand ausnahmsweise an einem gemeinsamen Bürotag nicht im Büro sein kann, muss diese Ausnahme vorher mit der Teamleitung geklärt werden. Eine Ausnahme ohne Absprache ist nicht möglich.\n\nDie Regelung beginnt am 1. November und gilt zunächst für sechs Monate. Danach wird geprüft, ob sie weiter so funktioniert.\n\nBei Fragen wendet euch bitte an eure Teamleitung.\n\nVielen Dank für eure Mitarbeit.\n\nDie Geschäftsleitung",
+      "generation": {
+        "response_id": "gen-1788535147-7bNnIsXrzUvKtU7NjyxV",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 105,
+        "cached_input_tokens": 0,
+        "output_tokens": 241,
+        "billable_output_tokens": 241,
+        "reasoning_tokens": 0,
+        "total_tokens": 346,
+        "latency_ms": 10162,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-en-c1-01",
+      "output": "**Consultation Weighs Weekend Pedestrianisation of Town Centre**\n\nA local council consultation is examining a proposal to remove private cars from the town centre at weekends. The scheme has prompted mixed reactions from residents and businesses alike.\n\nSupporters argue that the measure would deliver quieter streets and create additional space for pedestrians, potentially making the centre a more pleasant environment for shopping and leisure. They envisage a calmer atmosphere in which people can move about freely without competing with vehicle traffic.\n\nOpponents, however, have raised concerns about practicality and inclusion. They point to potential difficulties for older residents who rely on cars for access, as well as questions over how deliveries to shops and businesses would be managed without weekday-style arrangements.\n\nIn response, the council has proposed two peripheral car parks situated outside the pedestrianised zone, together with a free shuttle service to transport visitors into the centre. Whether these provisions would adequately address accessibility concerns remains a matter of debate as the consultation continues, with stakeholders on both sides awaiting the outcome.",
+      "generation": {
+        "response_id": "gen-1788535157-qAvD6XRhafY9HFj7dRFx",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 90,
+        "cached_input_tokens": 0,
+        "output_tokens": 224,
+        "billable_output_tokens": 224,
+        "reasoning_tokens": 0,
+        "total_tokens": 314,
+        "latency_ms": 6963,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "cefr-de-c1-01",
+      "output": "# Autofreie Innenstadt am Wochenende: Konsultation eröffnet\n\nEine kommunale Konsultation prüft derzeit, ob private Autos an Wochenenden aus der Innenstadt ausgeschlossen werden sollen. Der Vorschlag sieht vor, zwei Parkplätze am Stadtrand einzurichten und einen kostenlosen Shuttle-Service anzubieten, der Besucherinnen und Besucher in das Zentrum bringen soll.\n\nBefürworter des Vorhabens versprechen sich ruhigere Straßen und mehr öffentlichen Raum für Fußgängerinnen und Fußgänger. Sie argumentieren, dass die Innenstadt dadurch lebenswerter und attraktiver werde.\n\nGegner des Plans äußern hingegen Bedenken hinsichtlich der Zugänglichkeit. Insbesondere ältere Menschen könnten Schwierigkeiten haben, das Zentrum ohne eigenes Fahrzeug zu erreichen. Auch die Versorgung mit Waren bereitet Sorge: Unklar ist, wie Lieferungen künftig abgewickelt werden sollen.\n\nDer Vorschlag verdeutlicht damit einen klassischen Zielkonflikt zwischen der Aufwertung des öffentlichen Raums einerseits und der Barrierefreiheit sowie logistischen Erfordernissen andererseits. Bis zum Abschluss der Konsultation bleibt abzuwarten, welche Ergebnisse die Beteiligung hervorbringt und wie die Gemeinde damit umgehen wird.",
+      "generation": {
+        "response_id": "gen-1788535164-USxkpo87fqql5R1eRqkE",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 133,
+        "cached_input_tokens": 0,
+        "output_tokens": 276,
+        "billable_output_tokens": 276,
+        "reasoning_tokens": 0,
+        "total_tokens": 409,
+        "latency_ms": 6201,
+        "attempts": 1
+      }
+    }
+  ]
+}

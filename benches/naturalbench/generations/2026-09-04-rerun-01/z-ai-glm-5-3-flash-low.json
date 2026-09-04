@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "naturalbench",
+    "task_set": "naturalbench-public-0.1",
+    "task_file": "benches/naturalbench/public.json",
+    "task_file_sha256": "7b069666c7181bc432c57a811d704d364360bf4fc5121338bd0f07af75d2e77f",
+    "provider": "kylehub",
+    "model": "z-ai/glm-5.3-flash",
+    "reasoning_effort": "low",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T15:19:30.550965+00:00"
+  },
+  "items": [
+    {
+      "task_id": "natural-en-service-01",
+      "output": "**Subject: Planned maintenance this Saturday: exports briefly unavailable**\n\nHello,\n\nA quick note to let you know that account exports will be unavailable this Saturday between 07:00 and 09:00 UK time while we carry out routine maintenance.\n\nEverything else will work as usual during this window. Any reports you've saved will remain fully available, and you'll still be able to access your account throughout.\n\nThere's nothing you need to do on your side. If you can, simply avoid scheduling any exports during that two-hour period.\n\nIf you have any questions, please do get in touch — we're happy to help.\n\nBest regards,\nThe Support Team",
+      "generation": {
+        "response_id": "gen-1788535172-ZanoKZAAuT8oLBvw2spb",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 97,
+        "cached_input_tokens": 0,
+        "output_tokens": 132,
+        "billable_output_tokens": 132,
+        "reasoning_tokens": 0,
+        "total_tokens": 229,
+        "latency_ms": 6720,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-de-service-01",
+      "output": "**Betreff: Wartung am Samstag – Kontoexporte vorübergehend nicht verfügbar**\n\nLiebe Kundinnen und Kunden,\n\nam kommenden Samstag stehen Kontoexporte zwischen 07:00 und 09:00 Uhr nicht zur Verfügung. Wir führen in diesem Zeitraum Wartungsarbeiten durch.\n\nGespeicherte Berichte sind von der Wartung nicht betroffen und bleiben wie gewohnt verfügbar.\n\nFür Sie besteht kein Handlungsbedarf – alle Funktionen stehen danach wieder wie gewohnt zur Verfügung.\n\nBei Fragen erreichen Sie uns wie üblich über den Support.\n\nVielen Dank für Ihr Verständnis.\n\nIhr Support-Team",
+      "generation": {
+        "response_id": "gen-1788535177-FOwTSdWbaxCWXQNMToMP",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 119,
+        "cached_input_tokens": 0,
+        "output_tokens": 131,
+        "billable_output_tokens": 131,
+        "reasoning_tokens": 0,
+        "total_tokens": 250,
+        "latency_ms": 1753,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-en-founder-01",
+      "output": "Hey everyone,\n\nQuick update on calendar sharing. We planned to release it this month, but during testing we kept running into timezone problems — events were showing up at the wrong times for some users, and that's not something we're willing to ship. So the release is moving to next month.\n\nI know delays are frustrating, especially when you've been waiting on this feature. We're not padding the timeline here; it just needs more time to get right.\n\nThe good news: everything you use today — booking, scheduling, reminders — works exactly as it always has. Nothing about this change affects your current setup.\n\nThanks for your patience. We'd rather get this right than get it out fast.\n\n— [Name], Founder",
+      "generation": {
+        "response_id": "gen-1788535179-ShPNvHPkz7aexbyh3j0m",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 87,
+        "cached_input_tokens": 0,
+        "output_tokens": 147,
+        "billable_output_tokens": 147,
+        "reasoning_tokens": 0,
+        "total_tokens": 234,
+        "latency_ms": 5451,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "natural-de-founder-01",
+      "output": "Hallo zusammen,\n\nich wollte ehrlich mit euch sein: Das Teilen von Kalendern, das eigentlich für diesen Monat geplant war, verschieben wir auf den nächsten Monat.\n\nDer Grund: Bei unseren Tests ist die Funktion mit Zeitzonen noch nicht zuverlässig genug. Wer einen Termin mit jemandem in einer anderen Zeitzone teilt, darf sich nicht auf falsche Uhrzeiten verlassen müssen. So, wie es aktuell ist, wollen wir das nicht freigeben. Das wäre für euch frustrierend und für uns auch keine gute Lösung.\n\nIch weiß, das ist ärgerlich, wenn man sich darauf gefreut hat. Aber lieber verschieben wir richtig als halbfertig.\n\nGute Nachricht: Die Terminplanung, die ihr kennt und nutzt, funktioniert wie gewohnt. Alles andere bleibt unverändert.\n\nDanke für eure Geduld und euer Vertrauen – und sorry für die Verspätung.\n\n[Name]",
+      "generation": {
+        "response_id": "gen-1788535184-Qg4CihstEZOvFeP1JZpz",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 132,
+        "cached_input_tokens": 0,
+        "output_tokens": 201,
+        "billable_output_tokens": 201,
+        "reasoning_tokens": 0,
+        "total_tokens": 333,
+        "latency_ms": 2725,
+        "attempts": 1
+      }
+    }
+  ]
+}

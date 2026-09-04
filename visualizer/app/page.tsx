@@ -57,9 +57,11 @@ const repository = "https://github.com/KyleDerZweite/litebench";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const effortOrder: Record<string, number> = { low: 0, medium: 1, high: 2, xhigh: 3, max: 4 };
 const modelColors: Record<string, string> = {
-  "gpt-5.6-luna": "#5bcf91",
-  "gpt-5.6-terra": "#4da3ff",
-  "gpt-5.6-sol": "#ff925c",
+  "gpt-5.6-luna": "#3fa66b",
+  "gpt-5.6-terra": "#3fa66b",
+  "gpt-5.6-sol": "#3fa66b",
+  "gemini-3.8-flash-high": "#54a7f5",
+  "z-ai/glm-5.3-flash": "#b58cff",
 };
 
 const suites = [
@@ -109,10 +111,6 @@ function formatDate(value: string) {
 
 function runLabel(run: Run) {
   return `${run.model} [${run.reasoning_effort}]`;
-}
-
-function shortRunLabel(run: Run) {
-  return `${run.model.replace("gpt-5.6-", "")} ${run.reasoning_effort}`;
 }
 
 function bestByModel(runs: Run[]) {
@@ -214,34 +212,42 @@ function MatrixTooltip({ active, payload }: any) {
   );
 }
 
-function MatrixPoint({ cx, cy, fill, mobile, payload }: any) {
-  if (mobile) return <circle cx={cx} cy={cy} fill={fill} r={4} />;
-  const offset = payload.effort % 2 === 0 ? -9 : 15;
+function MatrixPoint({ cx, cy, fill, maxX, mobile, payload }: any) {
+  if (mobile || !payload.highlight) return <circle cx={cx} cy={cy} fill={fill} r={3.5} />;
+  const nearRight = maxX > 0 && payload.x <= maxX * 0.18;
+  const nearLeft = maxX > 0 && payload.x >= maxX * 0.82;
+  const textAnchor = nearRight ? "end" : nearLeft ? "start" : "middle";
+  const labelX = cx + (nearRight ? -8 : nearLeft ? 8 : 0);
+  const labelY = cy - 13;
   return (
     <g>
-      <circle cx={cx} cy={cy} fill={fill} r={4} />
-      <text fill={fill} fontFamily="var(--font-mono)" fontSize={9} fontWeight={700} textAnchor="middle" x={cx} y={cy + offset}>
-        {payload.shortLabel}
+      <circle cx={cx} cy={cy} fill={fill} r={3.5} />
+      <text fill={fill} fontFamily="var(--font-sans)" fontSize={12} fontWeight={600} textAnchor={textAnchor} x={labelX} y={labelY}>
+        <tspan x={labelX}>{payload.model}</tspan>
+        <tspan fontFamily="var(--font-mono)" fontSize={7} fontWeight={500} letterSpacing=".08em" x={labelX} dy={9}>
+          {payload.reasoningEffort.toUpperCase()}
+        </tspan>
       </text>
     </g>
   );
 }
 
-function PerformanceChart({ runs, mobile, axis, onAxisChange }: {
+function PerformanceChart({ runs, mobile, axis, onAxisChange, models, selectedModels, onModelsChange }: {
   runs: Run[];
   mobile: boolean;
   axis: MatrixAxis;
   onAxisChange: (axis: MatrixAxis) => void;
+  models: string[];
+  selectedModels: Set<string>;
+  onModelsChange: (models: Set<string>) => void;
 }) {
   const axisDefinition = {
-    cost: { label: "Avg cost", value: (run: Run) => run.average_cost_usd, format: (value: number) => mobile ? `$${value.toFixed(3)}` : formatCost(value) },
-    tokens: { label: "Output tokens", value: (run: Run) => run.average_output_tokens, format: (value: number) => compactTokens(value) },
-    latency: { label: "Latency", value: (run: Run) => run.average_latency_ms === null ? null : run.average_latency_ms / 1000, format: (value: number) => `${formatNumber(value, 2)}s` },
+    cost: { label: "Avg cost per task", value: (run: Run) => run.average_cost_usd, format: (value: number) => value === 0 ? "$0" : mobile ? `$${value.toFixed(3)}` : formatCost(value) },
+    tokens: { label: "Avg output tokens per task", value: (run: Run) => run.average_output_tokens, format: (value: number) => compactTokens(value) },
+    latency: { label: "Avg latency per task", value: (run: Run) => run.average_latency_ms === null ? null : run.average_latency_ms / 1000, format: (value: number) => `${formatNumber(value, 2)}s` },
   }[axis];
-  const groups = [...new Set(runs.map((run) => run.model))].map((model) => ({
-    model,
-    color: modelColors[model] || "#888",
-    points: runs
+  const groups = [...new Set(runs.map((run) => run.model))].map((model) => {
+    const points = runs
       .filter((run) => run.model === model)
       .map((run) => {
         const x = axisDefinition.value(run);
@@ -249,7 +255,6 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange }: {
           x,
           score: run.copy_quality,
           label: runLabel(run),
-          shortLabel: shortRunLabel(run),
           axisLabel: axisDefinition.label,
           xDisplay: axisDefinition.format(x),
           cost: run.average_cost_usd,
@@ -257,15 +262,23 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange }: {
           latency: run.average_latency_ms,
           effort: effortOrder[run.reasoning_effort] ?? 99,
           model: run.model,
+          reasoningEffort: run.reasoning_effort,
         };
       })
       .filter((point): point is NonNullable<typeof point> => point !== null)
-      .sort((a, b) => a.effort - b.effort),
-  }));
+      .sort((a, b) => a.effort - b.effort);
+    const highlight = points.reduce((best, point) => !best || point.score > best.score ? point : best, points[0]);
+    return {
+      model,
+      color: modelColors[model] || "#888",
+      points: points.map((point) => ({ ...point, highlight: point === highlight })),
+    };
+  });
+  const maxX = Math.max(0, ...groups.flatMap((group) => group.points.map((point) => point.x)));
 
   return (
-    <section className="glass-card overflow-hidden">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/5 px-4 py-3 sm:px-6">
+    <div>
+      <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
         <div className="flex border border-neutral-800 font-mono text-[10px] uppercase">
           {(["cost", "tokens", "latency"] as MatrixAxis[]).map((option) => (
             <button
@@ -275,27 +288,31 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange }: {
               onClick={() => onAxisChange(option)}
               type="button"
             >
-              {option === "cost" ? "Avg cost" : option === "tokens" ? "Output tokens" : "Latency"}
+              {option === "cost" ? "Cost" : option === "tokens" ? "Output tokens" : "Latency"}
             </button>
           ))}
         </div>
-        <span className="font-mono text-[9px] uppercase text-neutral-600">8 briefs · updated {formatDate(data.generated_at)}</span>
-      </div>
-      <div className="p-4 sm:p-6">
-        <div className="mb-2 flex items-baseline justify-between gap-4">
-          <h3 className="text-sm font-semibold text-neutral-200">CopyBench score</h3>
-          <span className="font-mono text-[9px] uppercase text-neutral-600">Best value at top right</span>
+        <div className="flex items-center gap-3">
+          <span className="hidden font-mono text-[9px] uppercase text-neutral-600 sm:inline">8 tasks · updated {formatDate(data.generated_at)}</span>
+          <ModelFilter models={models} onChange={onModelsChange} selected={selectedModels} />
         </div>
-        <div className="h-[470px] w-full">
+      </div>
+      <section className="border border-neutral-800 bg-[#151515] p-4 sm:p-6">
+        <div className="mb-1 flex items-baseline justify-between gap-4">
+          <h3 className="text-sm font-semibold text-neutral-200">CopyBench score</h3>
+          <span className="font-mono text-[9px] italic text-neutral-600">most efficient ↗</span>
+        </div>
+        <div className="h-[390px] w-full sm:h-[540px]">
           <ResponsiveContainer height="100%" width="100%">
-            <ScatterChart margin={{ top: 28, right: mobile ? 8 : 68, bottom: 42, left: mobile ? -8 : 12 }}>
-              <CartesianGrid stroke="rgba(255,255,255,.08)" />
+            <ScatterChart margin={{ top: 32, right: mobile ? 6 : 18, bottom: 42, left: mobile ? -10 : 4 }}>
+              <CartesianGrid stroke="rgba(255,255,255,.13)" />
               <XAxis
-                axisLine={false}
+                axisLine={{ stroke: "rgba(255,255,255,.16)" }}
                 dataKey="x"
-                label={{ value: axisDefinition.label.toUpperCase(), position: "insideBottom", offset: -28, fill: "#666", fontFamily: "var(--font-mono)", fontSize: 10 }}
+                domain={[0, (value: number) => value === 0 ? 1 : value * 1.08]}
+                label={{ value: axisDefinition.label, position: "insideBottom", offset: -29, fill: "#d4d4d4", fontFamily: "var(--font-sans)", fontSize: 12 }}
                 reversed
-                tick={{ fill: "#666", fontFamily: "var(--font-mono)", fontSize: 10 }}
+                tick={{ fill: "#999", fontFamily: "var(--font-sans)", fontSize: 11 }}
                 tickFormatter={axisDefinition.format}
                 tickLine={false}
                 type="number"
@@ -304,8 +321,7 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange }: {
                 axisLine={false}
                 dataKey="score"
                 domain={[0, 100]}
-                label={mobile ? undefined : { value: "SCORE", angle: -90, position: "insideLeft", fill: "#666", fontFamily: "var(--font-mono)", fontSize: 10 }}
-                tick={{ fill: "#666", fontFamily: "var(--font-mono)", fontSize: 10 }}
+                tick={{ fill: "#999", fontFamily: "var(--font-sans)", fontSize: 11 }}
                 tickFormatter={(value) => `${value}%`}
                 tickLine={false}
                 type="number"
@@ -318,27 +334,24 @@ function PerformanceChart({ runs, mobile, axis, onAxisChange }: {
                   key={group.model}
                   line={{ stroke: group.color, strokeWidth: 1.5 }}
                   name={group.model}
-                  shape={<MatrixPoint mobile={mobile} />}
+                  shape={<MatrixPoint maxX={maxX} mobile={mobile} />}
                 />
               ))}
             </ScatterChart>
           </ResponsiveContainer>
         </div>
-        <div className="flex flex-wrap gap-4 font-mono text-[10px] uppercase text-neutral-500">
+        <div className="flex flex-wrap gap-4 font-mono text-[10px] uppercase text-neutral-500 sm:hidden">
           {groups.map((group) => <span className="flex items-center gap-2" key={group.model}><i className="h-2 w-2 rounded-full" style={{ background: group.color }} />{group.model}</span>)}
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
-function LeaderboardTable({ runs, scope, onScopeChange, models, selectedModels, onModelsChange }: {
+function LeaderboardTable({ runs, scope, onScopeChange }: {
   runs: Run[];
   scope: Scope;
   onScopeChange: (scope: Scope) => void;
-  models: string[];
-  selectedModels: Set<string>;
-  onModelsChange: (models: Set<string>) => void;
 }) {
   const rows = (scope === "best" ? bestByModel(runs) : runs)
     .slice()
@@ -348,10 +361,7 @@ function LeaderboardTable({ runs, scope, onScopeChange, models, selectedModels, 
     <section className="mt-8">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <ScopeToggle onChange={onScopeChange} value={scope} />
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-[9px] uppercase text-neutral-600">{rows.length} configurations</span>
-          <ModelFilter models={models} onChange={onModelsChange} selected={selectedModels} />
-        </div>
+        <span className="font-mono text-[9px] uppercase text-neutral-600">{rows.length} configurations</span>
       </div>
       <div className="overflow-x-auto border border-white/5 bg-neutral-900/30">
         <table className="w-full min-w-[780px] border-collapse font-mono text-[11px]">
@@ -476,8 +486,8 @@ export default function LiteBenchVisualizer() {
               </section>
             ) : (
               <>
-                <PerformanceChart axis={axis} mobile={mobile} onAxisChange={setAxis} runs={filtered} />
-                <LeaderboardTable models={models} onModelsChange={setSelectedModels} onScopeChange={setScope} runs={filtered} scope={scope} selectedModels={selectedModels} />
+                <PerformanceChart axis={axis} mobile={mobile} models={models} onAxisChange={setAxis} onModelsChange={setSelectedModels} runs={filtered} selectedModels={selectedModels} />
+                <LeaderboardTable onScopeChange={setScope} runs={filtered} scope={scope} />
               </>
             )}
           </>

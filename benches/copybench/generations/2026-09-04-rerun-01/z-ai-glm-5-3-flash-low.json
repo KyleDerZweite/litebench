@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "batch": {
+    "id": "2026-09-04-rerun-01",
+    "suite": "copybench",
+    "task_set": "public-0.1",
+    "task_file": "benches/copybench/public.json",
+    "task_file_sha256": "7fb90cc89091c77eca6b6678df56b4c6814d04fa665a8ef176c4958e6375f797",
+    "provider": "kylehub",
+    "model": "z-ai/glm-5.3-flash",
+    "reasoning_effort": "low",
+    "max_output_tokens": 5000,
+    "store": false,
+    "scored": false,
+    "created_at": "2026-09-04T15:15:55.202217+00:00"
+  },
+  "items": [
+    {
+      "task_id": "public-de-product-a2-01",
+      "output": "## Frisch bis zum Mittagessen\n\nDiese Lunchbox ist perfekt für die Arbeit. Sie hält dein Essen bis zu 6 Stunden kühl. Die Box hat Platz für viel Essen: 1,2 Liter. Du kannst den Einsatz herausnehmen. Das macht die Reinigung leicht. Nach dem Essen darfst du die Box in die Spülmaschine tun. Das ist schnell und einfach. So ist dein Mittagessen jeden Tag frisch und lecker.\n\nBestell deine Lunchbox noch heute!",
+      "generation": {
+        "response_id": "gen-1788534955-ECUFAB3P8bYADNuy78UU",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 149,
+        "cached_input_tokens": 0,
+        "output_tokens": 103,
+        "billable_output_tokens": 103,
+        "reasoning_tokens": 0,
+        "total_tokens": 252,
+        "latency_ms": 5195,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-product-a2-01",
+      "output": "**Insulated Lunch Box for Work**\n\nThis lunch box keeps your food cool for up to 6 hours. It holds 1.2 litres, so there is space for your lunch and a snack. The insert inside can be removed, so it is easy to clean. You can also put it in the dishwasher. No more boring or warm lunches at work! Order yours today and enjoy a fresh lunch every day.",
+      "generation": {
+        "response_id": "gen-1788534960-24pqMckrM2Wf67EDq2qm",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 111,
+        "cached_input_tokens": 0,
+        "output_tokens": 86,
+        "billable_output_tokens": 86,
+        "reasoning_tokens": 0,
+        "total_tokens": 197,
+        "latency_ms": 4403,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-landing-b1-01",
+      "output": "# Auto in Leipzig – wann du es brauchst\n\n**Headline:**\nEin Auto, wenn du eines brauchst. Keine Grundgebühr, wenn nicht.\n\n**Subheadline:**\nBuche dein Auto einfach per App – rund um die Uhr verfügbar. Du zahlst nur, wenn du fährst: ab 0,31 € pro Minute.\n\n**Deine Vorteile:**\n- 🚗 Autos rund um die Uhr verfügbar\n- 📱 Buchung ganz einfach per App\n- 💶 Keine monatliche Grundgebühr – nur 0,31 € pro Minute\n\n**Call-to-Action:**\n👉 **Jetzt App herunterladen und losfahren**",
+      "generation": {
+        "response_id": "gen-1788534964-iFR1oy9T7PFKd0xezbnc",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 141,
+        "cached_input_tokens": 0,
+        "output_tokens": 143,
+        "billable_output_tokens": 143,
+        "reasoning_tokens": 0,
+        "total_tokens": 284,
+        "latency_ms": 48024,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-landing-b1-01",
+      "output": "**Headline:** A car when you need one. Nothing when you don't.\n\n**Subheading:** Our car club is for people in Manchester who only need a car now and then.\n\n**Benefits:**\n- Book in the app, 24/7\n- No monthly fee\n- From £0.28 per minute\n\n**Call to action:** Get the app",
+      "generation": {
+        "response_id": "gen-1788535012-kczzO1B161Uaq5TNecas",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 122,
+        "cached_input_tokens": 0,
+        "output_tokens": 4287,
+        "billable_output_tokens": 4287,
+        "reasoning_tokens": 0,
+        "total_tokens": 4409,
+        "latency_ms": 103151,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-social-b2-01",
+      "output": "🧼 Deine Sneaker verdienen eine zweite Chance!\n\nBerlin ist staubig, deine Schuhe müssen es nicht sein. Wir holen deine Sneaker ab, reinigen sie professionell und bringen sie zurück – ganz ohne Aufwand für dich.\n\n✅ Abholung & Rückgabe in ganz Berlin\n✅ Festpreis: nur 24 € pro Paar\n✅ Fertig in 48 Stunden\n\nJetzt 10 % Rabatt auf deine erste Buchung sichern!\n\nBuch dir deinen Termin über den Link in unserer Bio – deine Sneaker werden es dir danken. 👟",
+      "generation": {
+        "response_id": "gen-1788535116-irpC4CVkdPWm9tD3L00o",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 152,
+        "cached_input_tokens": 0,
+        "output_tokens": 124,
+        "billable_output_tokens": 124,
+        "reasoning_tokens": 0,
+        "total_tokens": 276,
+        "latency_ms": 1113,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-social-b2-01",
+      "output": "Your trainers deserve better than the London pavement. 👟\n\nSend us your worn-out pairs and we'll collect them from your door, clean them properly, and return them looking sharp — all within 48 hours, anywhere in London.\n\nOne fixed price: £22 per pair. No surprises.\n\nBetter still, first-time customers get 10% off their first booking.\n\nStop hiding those grubby trainers at the back of the wardrobe. Book your collection today and step out in spotless kicks by the weekend. ✨",
+      "generation": {
+        "response_id": "gen-1788535117-H8JPKBCzedD9wpL0uKog",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 118,
+        "cached_input_tokens": 0,
+        "output_tokens": 106,
+        "billable_output_tokens": 106,
+        "reasoning_tokens": 0,
+        "total_tokens": 224,
+        "latency_ms": 3881,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-de-email-c1-01",
+      "output": "**Betreffzeile:**\nIhr Projekt steht – wer darf als Nächstes reinschauen?\n\n**Fließtext (136 Wörter):**\n\nGuten Tag [Vorname],\n\nvor drei Wochen haben Sie in [Produktname] Ihr erstes Projekt angelegt. Die Struktur steht – jetzt fehlen nur noch die Menschen, die darin mitarbeiten.\n\nEine Einladung ist in wenigen Minuten erledigt: Sie geben die E-Mail-Adresse Ihrer Kollegin, Ihres Kollegen oder Ihres Kunden ein und legen fest, welche Rolle die Person erhält. „Ansehen\" eignet sich für alle, die den Überblick behalten sollen; „Bearbeiten\" für die, die aktiv mitplanen. Mehr brauchen Sie nicht, um aus Ihrem Projekt ein gemeinsames zu machen.\n\nÜbrigens müssen Sie nicht gleich das ganze Team einladen. Eine einzige Einladung genügt, um zu sehen, wie sich die Zusammenarbeit anfühlt – und ob die gewählte Rolle passt.\n\nIhre Testphase läuft noch 14 Tage. Genug Zeit, den ersten Schritt ganz ohne Druck zu gehen.\n\nIch freue mich, Sie bald wieder in [Produktname] zu sehen.\n\nIhr [Absendername]\n\n**CTA-Button:**\nJetzt das erste Teammitglied einladen\n\n---\n\nHinweise: Es wurden ausschließlich die drei erlaubten Fakten verwendet (Einladung per E-Mail, Rollen „Ansehen\"/„Bearbeiten\", 14 Tage Restlaufzeit). Die Trial-Restlaufzeit ist bewusst am Ende und ohne Dringlichkeitsappell platziert; der Absatz zur einzelnen Einladung senkt die Einstiegshürde, ohne Ergebnisse zu versprechen.",
+      "generation": {
+        "response_id": "gen-1788535121-pQv1FKrNI1z1MKVDhjQK",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 173,
+        "cached_input_tokens": 0,
+        "output_tokens": 3640,
+        "billable_output_tokens": 3640,
+        "reasoning_tokens": 0,
+        "total_tokens": 3813,
+        "latency_ms": 43250,
+        "attempts": 1
+      }
+    },
+    {
+      "task_id": "public-en-email-c1-01",
+      "output": "**Subject line:** Your project's ready — bring in your team\n\n**Body:**\n\nHi [First name],\n\nYour [Project name] project has been up and running for three weeks now — and it's looking solid. But a project managed solo is only half the story.\n\nYou've got 14 days left in your trial, which is plenty of time to see how Planwell works with a real team behind it. Inviting a colleague takes under a minute: just enter their email address, and we'll send the invitation straight to their inbox. From there, you decide what they can do — assign them a View role to keep an eye on progress, or an Edit role so they can contribute directly.\n\nAgencies that bring a teammate in during the trial tend to get a far better feel for whether a tool fits. Yours is one click away.\n\n**Invite your first team member →**\n\nBest,\nThe Planwell Team",
+      "generation": {
+        "response_id": "gen-1788535164-TM91M5DqxugTDL8qEOUT",
+        "response_model": "z-ai/glm-5.3-flash",
+        "response_status": "completed",
+        "input_tokens": 142,
+        "cached_input_tokens": 0,
+        "output_tokens": 188,
+        "billable_output_tokens": 188,
+        "reasoning_tokens": 0,
+        "total_tokens": 330,
+        "latency_ms": 6321,
+        "attempts": 1
+      }
+    }
+  ]
+}

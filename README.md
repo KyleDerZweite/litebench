@@ -9,9 +9,9 @@ Live results: <https://kylederzweite.github.io/litebench/>
 
 | Suite | Question | Status |
 |---|---|---|
-| **CopyBench Lite** | Does the writing follow the copy brief? | 120 provisional scored outputs, 128 new unscored outputs |
-| **NaturalBench Lite** | Does the writing sound idiomatic and free of stock AI habits? | 64 unscored outputs |
-| **CEFRBench Lite** | Does the writing match the requested CEFR level? | 128 unscored outputs |
+| **CopyBench Lite** | Does the writing follow the copy brief? | 120 provisional scored outputs, 152 new unscored outputs |
+| **NaturalBench Lite** | Does the writing sound idiomatic and free of stock AI habits? | 76 unscored outputs |
+| **CEFRBench Lite** | Does the writing match the requested CEFR level? | 152 unscored outputs |
 
 CopyBench scores do not count toward the other suites.
 
@@ -19,9 +19,10 @@ The 120 CopyBench outputs were each judged in a separate, blinded
 `gpt-5.6-sol` max call. No person has reviewed those scores. The site labels
 them as provisional AI scores.
 
-The `2026-09-04-rerun-01` batch adds 320 unscored outputs from GPT-5.6 Luna,
-Terra, and Sol at five effort levels, plus Gemini 3.8 Flash High. These files
-stay outside the leaderboard until the evaluator protocol is fixed. See
+The `2026-09-04-rerun-01` batch adds 380 unscored outputs from GPT-5.6 Luna,
+Terra, and Sol at five effort levels, Gemini 3.8 Flash High, and GLM-5.3-Flash
+at low, high, and max. These files stay outside the leaderboard until the
+evaluator protocol is fixed. See
 [`EVALUATION.md`](EVALUATION.md) for the current proposal.
 
 ## Dashboard

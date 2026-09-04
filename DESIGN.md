@@ -35,7 +35,7 @@ into proof of AI authorship. Context still matters. The first automatic results
 must name the evaluator model and prompt version, and the site must call them
 provisional until they have been checked against human ratings.
 
-The public set has 4 bilingual tasks and no runs.
+The public set has 4 bilingual tasks and no scored runs.
 
 ## CEFRBench Lite
 
@@ -43,7 +43,7 @@ CEFRBench asks whether the output matches the requested CEFR level. Its tasks
 cover A2, B1, B2, and C1 in German and British English. The evaluator does not
 reward persuasion or naturalness.
 
-The public set has 8 tasks and no runs.
+The public set has 8 tasks and no scored runs.
 
 ## Results page
 
