@@ -1,59 +1,60 @@
-# CopyBench Lite
+# LiteBench
 
-A tiny, bilingual copywriting smoke test for choosing models you would actually
-use. It is a personal decision aid first and a community dataset second, not a
-scientific claim about the "best" writing model.
+LiteBench is a small open-source home for focused AI writing benchmarks. Each
+suite owns one question, one prompt set, and one evaluator. The shared
+visualizer is adapted from
+[SkateBench](https://github.com/T3-Content/skatebench/tree/main/visualizer).
 
-Live dashboard: <https://kylederzweite.github.io/copybench-lite/>
+Live dashboard: <https://kylederzweite.github.io/litebench/>
 
-> **Current limitation:** The dashboard contains 15 runs and 120 outputs. Every
-> output was scored in a separate, blinded `gpt-5.6-sol` max-reasoning call.
-> These ratings are **AI-provisional** and none have been human-validated.
+## Included suites
 
-V0 deliberately contains only:
+| Suite | Primary question | Status |
+|---|---|---|
+| **CopyBench Lite** | Does the answer fulfil the copy brief well? | 15 configurations, 120 outputs |
+| **NaturalBench Lite** | Does the writing sound idiomatic and non-formulaic? | Prompts and evaluator ready, no runs |
+| **CEFRBench Lite** | Does the language match the requested CEFR level? | Prompts and evaluator ready, no runs |
 
-- 8 public writing tasks: 4 localized DE/EN pairs across A2, B1, B2, and C1
-- 3 GPT-5.6 model variants across low, medium, high, xhigh, and max reasoning
-- 1 output per task and model configuration
-- 3 separate 1–5 item ratings plus 2 practical yes/no checks, all summarized out of 100
-- raw outputs and run metadata in reviewable JSON files
-- transparent evaluator metadata and the exact provisional [judge prompt](data/judge-ai-provisional-v0.2.txt)
-- a dependency-free Python helper and a static GitHub Pages site
-- a small, local-only hidden canary set
+Existing scores belong only to CopyBench Lite. NaturalBench Lite and CEFRBench
+Lite do not reuse those scores.
 
-No speech, AI detector, trained scorer, paid rater panel, database, web app, or
-single magic score. The reasoning is in [DESIGN.md](DESIGN.md).
+> **Current limitation:** Each of the 120 CopyBench outputs was scored by a
+> separate, blinded `gpt-5.6-sol` max-reasoning call. The ratings are
+> **AI-provisional** and none have human validation.
 
-## What it measures
+## Dashboard
 
-| Field | Question |
-|---|---|
-| `copy_quality` | Is the copy clear, useful, persuasive, and on-brief? |
-| `naturalness` | Does it sound specific, idiomatic, and non-formulaic? |
-| `cefr_fit` | Does the language fit the requested level, not merely look advanced? |
-| `facts_ok` | Are all factual claims supported by the brief? |
-| `would_use` | Would you use it after at most ten minutes of editing? |
+The visualizer uses SkateBench's visual language and core stack with
+[DeepSWE's](https://deepswe.datacurve.ai/) single-page layout: a
+score-versus-efficiency plot above a compact leaderboard.
+The plot can compare score against estimated average cost, output tokens, or
+latency and connects every reasoning level for each model.
 
-The three scores stay separate. `naturalness` is an evaluator impression, not
-proof that text was written by a human. The current dashboard uses one AI judge
-as a cheap first pass. Human ratings should be stored as separate runs rather
-than presented as interchangeable with AI ratings.
+`Best` selects the highest CopyBench score for each model. Equal scores prefer
+the lower reasoning effort. `All effort levels` exposes every configuration.
 
-Rating anchors:
+Pass@1 is intentionally absent for now. CopyBench currently has a graded quality
+rubric, not a deterministic binary verifier. Add Pass@1 and its distribution
+only after a public pass rule exists.
 
-- **1:** misses the requirement
-- **3:** mixed; needs substantial editing
-- **5:** strong; needs little or no editing
+Average cost is an estimate for candidate generation only. `bench.py` combines
+recorded input and output tokens with the OpenAI rates captured in
+[`pricing.json`](pricing.json) from [models.dev](https://models.dev/api.json).
+It excludes cache discounts, proxy fees, and evaluator cost.
 
-For `cefr_fit`, 5 means a clear fit to the requested level. It does not mean
-"more sophisticated language." For the two booleans, use `true` or `false`.
-The dashboard averages each field and normalizes every displayed result to a
-0–100 scale. Raw result files retain the judge's original 1–5 item ratings.
-Charts default to the best-scoring reasoning effort for each model on the
-selected metric. A tie prefers the lower effort. Use **All effort levels** for
-all 15 configurations; **Detailed** always shows the complete matrix.
+## Repository layout
 
-## Run it
+```text
+benches/
+  copybench/       prompts, evaluator, hidden-set commitment, results
+  naturalbench/    independent prompts and evaluator
+  cefrbench/       independent prompts and evaluator
+visualizer/        adapted SkateBench visualizer
+bench.py           dependency-free result validation and aggregation
+pricing.json       versioned models.dev rates used for cost estimates
+```
+
+## Run CopyBench Lite
 
 Requirements: Python 3.9+ and whatever model interface you already use.
 
@@ -62,76 +63,71 @@ python3 bench.py prompts
 python3 bench.py new "Model Name" --provider "Provider"
 ```
 
-The second command creates a dated file under `results/`. For every task:
+For every task:
 
-1. Start from a clean conversation/session.
-2. Send the exact prompt with no extra optimization.
-3. Paste the unedited output into the result file.
-4. Fill in the five ratings, ideally without looking at the model name, or leave
-   every rating `null` and publish the run transparently as awaiting review.
+1. Start from a clean model session.
+2. Send the exact prompt with no extra optimisation.
+3. Store the model output unchanged.
+4. Record generation metadata.
+5. Add transparent evaluator metadata or leave all scores `null`.
 
-Then validate the file and rebuild the page data:
+Validate and aggregate:
 
 ```bash
-python3 bench.py check results/model-name-YYYY-MM-DD.json
+python3 bench.py check
 python3 bench.py build
-python3 -m http.server 8000 -d docs
 ```
 
-Open <http://localhost:8000>. GitHub Pages can publish the same site directly
-from the repository's `/docs` folder; there is no build step.
+Run the visualizer:
 
-## Reproducibility rules
+```bash
+cd visualizer
+bun install
+bun run dev
+```
 
-- Use every public task. Do not cherry-pick outputs.
+## Result rules
+
+- Use every public task and do not cherry-pick outputs.
 - Use one generation per task for the normal track.
-- Record provider, exact model/version if known, date, temperature, and any
-  system prompt in `run`.
-- Keep the model output byte-for-byte except for JSON escaping.
-- State who rated the run in `run.evaluator`.
+- Keep model output byte-for-byte except for JSON escaping.
+- Record provider, model version, date, reasoning effort, and known settings.
 - Mark AI ratings with `evaluation_type: "ai_provisional"` and
-  `human_evaluation: false`. Record the judge model, effort, prompt version, and
-  whether each answer was judged independently.
-- A rerun is a new result file; never replace an older run silently.
+  `human_evaluation: false`.
+- Treat latency as directional because it includes proxy and network effects.
+- Label token-derived monetary cost as estimated and commit its source rates.
 
-One sample is intentionally cheap but noisy. Before making an expensive model
-choice, repeat only the top two candidates three times.
+## Contribute a CopyBench result
 
-## Contribute a result
+Fork the repository, add one complete JSON run under
+`benches/copybench/results/`, then run:
 
-Fork the repository, add one complete-output JSON file to `results/`, run
-`python3 bench.py check <file>` and `python3 bench.py build`, then open a PR
-containing the raw result and updated `docs/leaderboard.json`.
+```bash
+python3 bench.py check
+python3 bench.py build
+```
 
-Scores are self-reported unless a maintainer says otherwise. Reviewers can
-inspect every public output, metadata field, and rating. This is collaborative
-evidence, not an audit certificate. The dashboard labels AI scores as
-provisional and exposes whether human validation exists. Unrated runs are
-welcome as raw evidence but stay out of the visual ranking.
+Open a pull request containing the raw run and regenerated
+`visualizer/data/leaderboard.json`. Keep every model output unchanged and state
+the evaluator and evaluation type. The helper currently supports CopyBench Lite;
+the other two suites will get result support with their first real runs.
 
-## Hidden canary set
+## Hidden canary
 
-`private/hidden.json` exists only in the maintainer's local checkout and is
-ignored by Git. `data/hidden.sha256` publicly commits to its exact contents.
-The holdout is a small overfitting check, not a second leaderboard.
-
-Run it locally with:
+`private/hidden.json` remains local and Git-ignored. The public commitment is
+stored at `benches/copybench/hidden.sha256`.
 
 ```bash
 python3 bench.py prompts --tasks private/hidden.json
-python3 bench.py new "Model Name" --provider "Provider" \
-  --tasks private/hidden.json --out private/results/model-name.json
-python3 bench.py check private/results/model-name.json
-sha256sum -c data/hidden.sha256
+sha256sum -c benches/copybench/hidden.sha256
 ```
 
-Do not put hidden prompts or raw hidden outputs in a public PR. Publish only a
-rounded summary and task count if a hidden result needs to be discussed. When
-the set leaks, reveal it, move it into the public set, create a new local set,
-and update the commitment.
+Do not publish hidden prompts or their raw outputs. If the set leaks, move it
+into the public set and replace it.
 
-## License
+## License and attribution
 
-Code and original benchmark material are MIT licensed. Model outputs may be
-subject to their provider's terms; contributors are responsible for having the
-right to publish them.
+LiteBench code and original benchmark material are MIT licensed. The visualizer
+contains an MIT-licensed adaptation of SkateBench. See
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Model outputs may be subject
+to provider terms.

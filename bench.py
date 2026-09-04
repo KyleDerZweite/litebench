@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Small, dependency-free helper for CopyBench Lite."""
+"""Small, dependency-free helper for LiteBench."""
 
 import argparse
 import json
@@ -11,9 +11,10 @@ from statistics import fmean
 
 
 ROOT = Path(__file__).resolve().parent
-PUBLIC_TASKS = ROOT / "data" / "public.json"
-RESULTS_DIR = ROOT / "results"
-LEADERBOARD = ROOT / "docs" / "leaderboard.json"
+PUBLIC_TASKS = ROOT / "benches" / "copybench" / "public.json"
+RESULTS_DIR = ROOT / "benches" / "copybench" / "results"
+LEADERBOARD = ROOT / "visualizer" / "data" / "leaderboard.json"
+PRICING = ROOT / "pricing.json"
 SCALE_FIELDS = ("copy_quality", "naturalness", "cefr_fit")
 BOOL_FIELDS = ("facts_ok", "would_use")
 
@@ -157,12 +158,45 @@ def aggregate(data):
             round(100 * fmean(item["scores"][field] for item in rated), 1)
             if rated else None
         )
+    generations = [item.get("generation") for item in generated]
+    for field in ("latency_ms", "input_tokens", "output_tokens", "total_tokens"):
+        values = [entry.get(field) for entry in generations if isinstance(entry, dict)]
+        summary[f"average_{field}"] = (
+            round(fmean(values))
+            if len(values) == len(generated) and all(type(value) in (int, float) for value in values)
+            else None
+        )
+    costs = [entry.get("cost_usd") for entry in generations if isinstance(entry, dict)]
+    if len(costs) == len(generated) and all(type(value) in (int, float) for value in costs):
+        summary["average_cost_usd"] = round(fmean(costs), 6)
+        summary["cost_basis"] = "reported"
+    else:
+        pricing = read_json(PRICING)
+        rates = pricing.get("models", {}).get(run["model"])
+        token_pairs = [
+            (entry.get("input_tokens"), entry.get("output_tokens"))
+            for entry in generations
+            if isinstance(entry, dict)
+        ]
+        if rates and len(token_pairs) == len(generated) and all(
+            type(input_tokens) in (int, float) and type(output_tokens) in (int, float)
+            for input_tokens, output_tokens in token_pairs
+        ):
+            estimates = [
+                (input_tokens * rates["input"] + output_tokens * rates["output"]) / 1_000_000
+                for input_tokens, output_tokens in token_pairs
+            ]
+            summary["average_cost_usd"] = round(fmean(estimates), 6)
+            summary["cost_basis"] = "estimated"
+        else:
+            summary["average_cost_usd"] = None
+            summary["cost_basis"] = "unavailable"
     return summary
 
 
 def command_prompts(args):
     data, tasks = load_tasks(args.tasks)
-    print(f"CopyBench Lite - {task_set_name(data)} - {len(tasks)} tasks")
+    print(f"LiteBench / CopyBench Lite - {task_set_name(data)} - {len(tasks)} tasks")
     for index, task in enumerate(tasks, 1):
         print(f"\n[{index}/{len(tasks)}] {task['id']} - {task.get('title', '')}")
         print(task["prompt"])
@@ -274,15 +308,18 @@ def command_build(args):
             continue
         summary = aggregate(data)
         if summary:
-            summary["file"] = path.name
+            resolved = path.resolve()
+            summary["file"] = resolved.relative_to(ROOT).as_posix() if resolved.is_relative_to(ROOT) else path.name
             rows.append(summary)
     if not valid:
         return 1
     payload = {
-        "benchmark": "CopyBench Lite",
+        "benchmark": "LiteBench",
+        "suite": "CopyBench Lite",
         "task_set": expected_name,
         "score_scale": 100,
         "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "pricing": read_json(PRICING),
         "runs": rows,
     }
     write_json(args.out, payload)
@@ -296,7 +333,7 @@ def command_self_test(_args):
     assert len(tasks) == 8
     sample = {
         "run": {
-            "model": "test",
+            "model": "gpt-5.6-luna",
             "task_set": "test-0",
             "reasoning_effort": "high",
             "evaluation_type": "ai_provisional",
@@ -306,6 +343,7 @@ def command_self_test(_args):
             {
                 "task_id": "one",
                 "output": "x",
+                "generation": {"latency_ms": 1000, "input_tokens": 100, "output_tokens": 200, "total_tokens": 300},
                 "scores": {
                     "copy_quality": 3,
                     "naturalness": 4,
@@ -317,6 +355,7 @@ def command_self_test(_args):
             {
                 "task_id": "two",
                 "output": "y",
+                "generation": {"latency_ms": 3000, "input_tokens": 200, "output_tokens": 400, "total_tokens": 600},
                 "scores": {
                     "copy_quality": 5,
                     "naturalness": 2,
@@ -334,6 +373,10 @@ def command_self_test(_args):
     assert summary["facts_ok_pct"] == 50
     assert summary["reasoning_effort"] == "high"
     assert summary["status"] == "ai_scored"
+    assert summary["average_latency_ms"] == 2000
+    assert summary["average_output_tokens"] == 300
+    assert summary["average_cost_usd"] == 0.00039
+    assert summary["cost_basis"] == "estimated"
     print("self-test: OK")
     return 0
 

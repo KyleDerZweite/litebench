@@ -1,6 +1,14 @@
+# Third-party notices
+
+The LiteBench visualizer is adapted from the
+[SkateBench visualizer](https://github.com/T3-Content/skatebench/tree/main/visualizer).
+
+SkateBench is licensed under the MIT License:
+
+```text
 MIT License
 
-Copyright (c) 2026 LiteBench contributors
+Copyright (c) 2025 Theo's Content-Adjacent Code
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +27,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
+
+Provider logos remain trademarks of their respective owners and are used only
+to identify model providers.
+
+The dashboard information layout was informed by
+[DeepSWE](https://deepswe.datacurve.ai/). No DeepSWE source code or assets are
+included.

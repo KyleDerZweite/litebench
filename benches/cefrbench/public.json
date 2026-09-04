@@ -1,0 +1,79 @@
+{
+  "name": "cefrbench-public",
+  "version": "0.1",
+  "primary_metric": "cefr_fit",
+  "tasks": [
+    {
+      "id": "cefr-en-a2-01",
+      "language": "en",
+      "locale": "en-GB",
+      "cefr": "A2",
+      "family": "public_information",
+      "title": "Library hours",
+      "prompt": "Write a 55 to 75 word notice in British English for library visitors. Explain that the library closes at 17:00 on Friday, opens at 10:00 on Saturday, and the return box stays open. Target CEFR A2. Do not add facts."
+    },
+    {
+      "id": "cefr-de-a2-01",
+      "language": "de",
+      "locale": "de-DE",
+      "cefr": "A2",
+      "family": "public_information",
+      "title": "Öffnungszeiten der Bibliothek",
+      "prompt": "Schreibe einen Hinweis mit 55 bis 75 Wörtern für Besucher einer Bibliothek. Erkläre, dass die Bibliothek am Freitag um 17:00 Uhr schließt, am Samstag um 10:00 Uhr öffnet und die Rückgabebox geöffnet bleibt. Zielniveau: CEFR A2. Erfinde keine Fakten."
+    },
+    {
+      "id": "cefr-en-b1-01",
+      "language": "en",
+      "locale": "en-GB",
+      "cefr": "B1",
+      "family": "process_explanation",
+      "title": "Community garden registration",
+      "prompt": "Write an 80 to 100 word explanation in British English. Residents can apply for a community garden plot online until 30 April. A plot costs £25 for the year. If there are more applications than plots, names are selected at random. Target CEFR B1. Do not add facts."
+    },
+    {
+      "id": "cefr-de-b1-01",
+      "language": "de",
+      "locale": "de-DE",
+      "cefr": "B1",
+      "family": "process_explanation",
+      "title": "Anmeldung zum Gemeinschaftsgarten",
+      "prompt": "Schreibe eine Erklärung mit 80 bis 100 Wörtern. Einwohner können sich bis zum 30. April online für ein Beet im Gemeinschaftsgarten bewerben. Ein Beet kostet 25 Euro pro Jahr. Wenn es mehr Bewerbungen als Beete gibt, werden die Namen zufällig ausgewählt. Zielniveau: CEFR B1. Erfinde keine Fakten."
+    },
+    {
+      "id": "cefr-en-b2-01",
+      "language": "en",
+      "locale": "en-GB",
+      "cefr": "B2",
+      "family": "policy_explanation",
+      "title": "Remote-work policy",
+      "prompt": "Write a 110 to 140 word internal explanation in British English. Staff may work remotely for up to three days each week. Teams choose two shared office days. Exceptions require agreement from the team lead. The policy starts on 1 November and will be reviewed after six months. Target CEFR B2. Do not add facts or argue whether the policy is good."
+    },
+    {
+      "id": "cefr-de-b2-01",
+      "language": "de",
+      "locale": "de-DE",
+      "cefr": "B2",
+      "family": "policy_explanation",
+      "title": "Regelung zur mobilen Arbeit",
+      "prompt": "Schreibe eine interne Erklärung mit 110 bis 140 Wörtern. Beschäftigte dürfen bis zu drei Tage pro Woche mobil arbeiten. Jedes Team legt zwei gemeinsame Bürotage fest. Ausnahmen müssen mit der Teamleitung vereinbart werden. Die Regelung beginnt am 1. November und wird nach sechs Monaten überprüft. Zielniveau: CEFR B2. Erfinde keine Fakten und bewerte die Regelung nicht."
+    },
+    {
+      "id": "cefr-en-c1-01",
+      "language": "en",
+      "locale": "en-GB",
+      "cefr": "C1",
+      "family": "balanced_summary",
+      "title": "Town-centre consultation",
+      "prompt": "Write a balanced 150 to 180 word summary in British English. A council consultation considers removing private cars from the town centre on weekends. Supporters expect quieter streets and more space for pedestrians. Opponents worry about access for older residents and deliveries. Two peripheral car parks and a free shuttle are proposed. Target CEFR C1. Present the trade-offs without taking a side or adding facts."
+    },
+    {
+      "id": "cefr-de-c1-01",
+      "language": "de",
+      "locale": "de-DE",
+      "cefr": "C1",
+      "family": "balanced_summary",
+      "title": "Konsultation zur Innenstadt",
+      "prompt": "Schreibe eine ausgewogene Zusammenfassung mit 150 bis 180 Wörtern. Eine kommunale Konsultation prüft, private Autos am Wochenende aus der Innenstadt auszuschließen. Befürworter erwarten ruhigere Straßen und mehr Raum für Fußgänger. Gegner sorgen sich um den Zugang für ältere Menschen und Lieferungen. Vorgeschlagen sind zwei Parkplätze am Stadtrand und ein kostenloser Shuttle. Zielniveau: CEFR C1. Stelle die Zielkonflikte dar, ohne Position zu beziehen oder Fakten zu ergänzen."
+    }
+  ]
+}

@@ -1,8 +1,35 @@
 {
-  "benchmark": "CopyBench Lite",
+  "benchmark": "LiteBench",
+  "suite": "CopyBench Lite",
   "task_set": "public-0.1",
   "score_scale": 100,
-  "generated_at": "2026-09-04T13:02:06+00:00",
+  "generated_at": "2026-09-04T13:44:32+00:00",
+  "pricing": {
+    "source": "https://models.dev/api.json",
+    "provider": "openai",
+    "retrieved_at": "2026-09-04",
+    "unit": "USD per 1M tokens",
+    "models": {
+      "gpt-5.6-luna": {
+        "input": 0.2,
+        "output": 1.2,
+        "cache_read": 0.02,
+        "last_updated": "2026-07-09"
+      },
+      "gpt-5.6-terra": {
+        "input": 2.0,
+        "output": 12.0,
+        "cache_read": 0.2,
+        "last_updated": "2026-07-09"
+      },
+      "gpt-5.6-sol": {
+        "input": 4.0,
+        "output": 20.0,
+        "cache_read": 0.4,
+        "last_updated": "2026-07-09"
+      }
+    }
+  },
   "runs": [
     {
       "model": "gpt-5.6-luna",
@@ -22,7 +49,13 @@
       "cefr_fit": 97.5,
       "facts_ok_pct": 87.5,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-luna-high-2026-09-04.json"
+      "average_latency_ms": 12837,
+      "average_input_tokens": 422,
+      "average_output_tokens": 623,
+      "average_total_tokens": 1046,
+      "average_cost_usd": 0.000832,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-luna-high-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-luna",
@@ -42,7 +75,13 @@
       "cefr_fit": 97.5,
       "facts_ok_pct": 37.5,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-luna-low-2026-09-04.json"
+      "average_latency_ms": 7044,
+      "average_input_tokens": 422,
+      "average_output_tokens": 264,
+      "average_total_tokens": 686,
+      "average_cost_usd": 0.000402,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-luna-low-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-luna",
@@ -62,7 +101,13 @@
       "cefr_fit": 100.0,
       "facts_ok_pct": 87.5,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-luna-max-2026-09-04.json"
+      "average_latency_ms": 27103,
+      "average_input_tokens": 422,
+      "average_output_tokens": 1353,
+      "average_total_tokens": 1776,
+      "average_cost_usd": 0.001708,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-luna-max-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-luna",
@@ -82,7 +127,13 @@
       "cefr_fit": 100.0,
       "facts_ok_pct": 50.0,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-luna-medium-2026-09-04.json"
+      "average_latency_ms": 12074,
+      "average_input_tokens": 422,
+      "average_output_tokens": 501,
+      "average_total_tokens": 923,
+      "average_cost_usd": 0.000685,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-luna-medium-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-luna",
@@ -102,7 +153,13 @@
       "cefr_fit": 95.0,
       "facts_ok_pct": 87.5,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-luna-xhigh-2026-09-04.json"
+      "average_latency_ms": 24905,
+      "average_input_tokens": 422,
+      "average_output_tokens": 1272,
+      "average_total_tokens": 1694,
+      "average_cost_usd": 0.001611,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-luna-xhigh-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-sol",
@@ -122,7 +179,13 @@
       "cefr_fit": 100.0,
       "facts_ok_pct": 62.5,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-sol-high-2026-09-04.json"
+      "average_latency_ms": 13241,
+      "average_input_tokens": 422,
+      "average_output_tokens": 556,
+      "average_total_tokens": 978,
+      "average_cost_usd": 0.012814,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-sol-high-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-sol",
@@ -142,7 +205,13 @@
       "cefr_fit": 100.0,
       "facts_ok_pct": 50.0,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-sol-low-2026-09-04.json"
+      "average_latency_ms": 7604,
+      "average_input_tokens": 422,
+      "average_output_tokens": 330,
+      "average_total_tokens": 752,
+      "average_cost_usd": 0.008282,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-sol-low-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-sol",
@@ -162,7 +231,13 @@
       "cefr_fit": 97.5,
       "facts_ok_pct": 50.0,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-sol-max-2026-09-04.json"
+      "average_latency_ms": 19723,
+      "average_input_tokens": 422,
+      "average_output_tokens": 956,
+      "average_total_tokens": 1378,
+      "average_cost_usd": 0.020804,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-sol-max-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-sol",
@@ -182,7 +257,13 @@
       "cefr_fit": 95.0,
       "facts_ok_pct": 50.0,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-sol-medium-2026-09-04.json"
+      "average_latency_ms": 10309,
+      "average_input_tokens": 422,
+      "average_output_tokens": 450,
+      "average_total_tokens": 873,
+      "average_cost_usd": 0.010696,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-sol-medium-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-sol",
@@ -202,7 +283,13 @@
       "cefr_fit": 97.5,
       "facts_ok_pct": 75.0,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-sol-xhigh-2026-09-04.json"
+      "average_latency_ms": 13936,
+      "average_input_tokens": 422,
+      "average_output_tokens": 664,
+      "average_total_tokens": 1087,
+      "average_cost_usd": 0.014977,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-sol-xhigh-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-terra",
@@ -222,7 +309,13 @@
       "cefr_fit": 100.0,
       "facts_ok_pct": 37.5,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-terra-high-2026-09-04.json"
+      "average_latency_ms": 6896,
+      "average_input_tokens": 422,
+      "average_output_tokens": 285,
+      "average_total_tokens": 707,
+      "average_cost_usd": 0.004265,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-terra-high-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-terra",
@@ -242,7 +335,13 @@
       "cefr_fit": 97.5,
       "facts_ok_pct": 37.5,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-terra-low-2026-09-04.json"
+      "average_latency_ms": 4888,
+      "average_input_tokens": 422,
+      "average_output_tokens": 144,
+      "average_total_tokens": 566,
+      "average_cost_usd": 0.002576,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-terra-low-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-terra",
@@ -262,7 +361,13 @@
       "cefr_fit": 97.5,
       "facts_ok_pct": 87.5,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-terra-max-2026-09-04.json"
+      "average_latency_ms": 27756,
+      "average_input_tokens": 422,
+      "average_output_tokens": 1410,
+      "average_total_tokens": 1832,
+      "average_cost_usd": 0.017766,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-terra-max-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-terra",
@@ -282,7 +387,13 @@
       "cefr_fit": 97.5,
       "facts_ok_pct": 50.0,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-terra-medium-2026-09-04.json"
+      "average_latency_ms": 7127,
+      "average_input_tokens": 422,
+      "average_output_tokens": 205,
+      "average_total_tokens": 628,
+      "average_cost_usd": 0.003308,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-terra-medium-2026-09-04.json"
     },
     {
       "model": "gpt-5.6-terra",
@@ -302,7 +413,13 @@
       "cefr_fit": 97.5,
       "facts_ok_pct": 50.0,
       "would_use_pct": 100.0,
-      "file": "gpt-5-6-terra-xhigh-2026-09-04.json"
+      "average_latency_ms": 15060,
+      "average_input_tokens": 422,
+      "average_output_tokens": 710,
+      "average_total_tokens": 1133,
+      "average_cost_usd": 0.009369,
+      "cost_basis": "estimated",
+      "file": "benches/copybench/results/gpt-5-6-terra-xhigh-2026-09-04.json"
     }
   ]
 }

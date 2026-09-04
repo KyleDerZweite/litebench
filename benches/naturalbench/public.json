@@ -1,0 +1,39 @@
+{
+  "name": "naturalbench-public",
+  "version": "0.1",
+  "primary_metric": "naturalness",
+  "tasks": [
+    {
+      "id": "natural-en-service-01",
+      "language": "en",
+      "locale": "en-GB",
+      "family": "service_update",
+      "title": "Saturday maintenance note",
+      "prompt": "Write an 80 to 110 word customer update in natural British English. Facts: account exports will be unavailable this Saturday from 07:00 to 09:00 UK time; saved reports remain available; no customer action is required. The note should sound calm, direct, and written by a considerate support lead. Include a short subject line. Do not add facts, apologies for unspecified harm, or promotional language."
+    },
+    {
+      "id": "natural-de-service-01",
+      "language": "de",
+      "locale": "de-DE",
+      "family": "service_update",
+      "title": "Wartung am Samstag",
+      "prompt": "Schreibe eine Kundeninformation mit 80 bis 110 Wörtern in natürlichem Deutsch. Fakten: Kontoexporte sind diesen Samstag von 07:00 bis 09:00 Uhr nicht verfügbar; gespeicherte Berichte bleiben verfügbar; Kundinnen und Kunden müssen nichts tun. Der Text soll ruhig, direkt und wie von einer aufmerksamen Support-Leitung geschrieben klingen. Füge eine kurze Betreffzeile hinzu. Erfinde keine Fakten und nutze keine Werbesprache."
+    },
+    {
+      "id": "natural-en-founder-01",
+      "language": "en",
+      "locale": "en-GB",
+      "family": "founder_note",
+      "title": "Feature delay note",
+      "prompt": "Write a 100 to 130 word note from the founder of a small scheduling app. Facts: calendar sharing was planned for this month; testing found unreliable timezone handling; release has moved to next month; existing scheduling still works normally. Sound candid and specific without sounding corporate, dramatic, or overly polished. Do not add a precise release date, technical details, or compensation."
+    },
+    {
+      "id": "natural-de-founder-01",
+      "language": "de",
+      "locale": "de-DE",
+      "family": "founder_note",
+      "title": "Verschobenes Feature",
+      "prompt": "Schreibe eine Mitteilung mit 100 bis 130 Wörtern aus Sicht der Gründerin einer kleinen Terminplanungs-App. Fakten: Das Teilen von Kalendern war für diesen Monat geplant; Tests zeigten unzuverlässige Zeitzonen; die Veröffentlichung wurde auf nächsten Monat verschoben; die bestehende Terminplanung funktioniert normal. Schreibe offen und konkret, ohne Konzernsprache, Drama oder übertriebene Glätte. Erfinde kein genaues Datum, keine technischen Details und keine Entschädigung."
+    }
+  ]
+}

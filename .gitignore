@@ -5,3 +5,8 @@ __pycache__/
 # Never commit holdout prompts or their raw outputs.
 private/
 
+# Visualizer build output and dependencies.
+visualizer/.next/
+visualizer/node_modules/
+visualizer/out/
+visualizer/*.tsbuildinfo

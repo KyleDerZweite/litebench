@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 98%;
+    --muted: 0 0% 42%;
+    --brand-orange: 24 95% 53%;
+    --safety-green: 142 71% 45%;
+    --electric-blue: 199 89% 48%;
+    --purple: 263 70% 64%;
+  }
+
+  * { box-sizing: border-box; }
+  html { min-width: 320px; background: #050505; }
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: #050505;
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans), sans-serif;
+  }
+  button, summary, input { font: inherit; }
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: .012;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.grid-background {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / .03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / .03) 1px, transparent 1px),
+    radial-gradient(circle at 12% 0%, rgb(249 115 22 / .07), transparent 30rem);
+  background-size: 40px 40px, 40px 40px, auto;
+}
+
+.stencil-text {
+  font-weight: 850;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+}
+
+.glass-card {
+  border: 1px solid rgb(255 255 255 / .06);
+  background: rgb(23 23 23 / .42);
+  backdrop-filter: blur(12px);
+}
+
+.chart-tooltip {
+  min-width: 10rem;
+  border: 1px solid #2a2a2a;
+  background: #080808;
+  padding: .65rem .75rem;
+  box-shadow: 0 18px 45px rgb(0 0 0 / .55);
+  color: #aaa;
+  font: 600 .7rem/1.55 var(--font-mono), monospace;
+}
+
+.chart-tooltip strong { display: block; margin-bottom: .2rem; color: #fff; }
+.model-filter summary { list-style: none; }
+.model-filter summary::-webkit-details-marker { display: none; }
+.model-filter[open] summary { border-color: #444; background: #151515; }
+
+.scanline {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, rgb(249 115 22 / .25), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
