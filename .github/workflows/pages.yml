@@ -15,7 +15,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate preserved generations
+        run: python3 bench.py check
+      - name: Validate current evaluations
+        run: python3 bench.py evaluation-check
+      - name: Run offline self-test
+        run: python3 bench.py self-test
   deploy:
+    needs: validate
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

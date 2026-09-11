@@ -61,8 +61,6 @@ interface Run {
   generated: number;
   rated: number;
   total: number;
-  evaluation_type: string;
-  human_evaluation: boolean;
   generation_file: string;
   file: string;
   items: RunItem[];

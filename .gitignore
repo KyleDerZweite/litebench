@@ -5,6 +5,9 @@ __pycache__/
 # Never commit holdout prompts or their raw outputs.
 private/
 
+# Local working notes stay out of version control.
+.scratch/
+
 # Visualizer build output and dependencies.
 visualizer/.next/
 visualizer/node_modules/
