@@ -43,6 +43,18 @@ examples let you make your own judgment.
 
 ## Local use
 
+This branch is an arena experiment. Score mode replaces the AI judge with
+blind pairwise human votes and ELO rankings. Browse mode keeps the earlier
+Astra assessments for reference. Votes stay in browser local storage until
+exported as JSON.
+
+Use Python 3.9 or newer to rebuild the vote pool from generations only:
+
+```bash
+python3 bench.py arena-build
+python3 bench.py arena-check
+```
+
 Use Python 3.9 or newer to inspect and validate the public data:
 
 ```bash
