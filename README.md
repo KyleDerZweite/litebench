@@ -43,10 +43,21 @@ examples let you make your own judgment.
 
 ## Local use
 
-This branch is an arena experiment. Score mode replaces the AI judge with
-blind pairwise human votes and ELO rankings. Browse mode keeps the earlier
-Astra assessments for reference. Votes stay in browser local storage until
-exported as JSON.
+This branch adds a blind pairwise arena experiment alongside the earlier AI assessments.
+Switch between **Score** mode and **Browse AI assessments** via the top navigation.
+
+In **Score** mode:
+- Two blind answers are drawn for each prompt from the preserved generation batch (`2026-09-04-rerun-01`). Generation files remain the source of truth.
+- Model names and configurations stay hidden until you vote.
+- Voting options:
+  - **A is better** / **B is better**: select the preferred response.
+  - **Tie**: record an equal-quality tie.
+  - **Both are bad**: record that both model responses were unsatisfactory.
+  - **Skip**: advance to another matchup without recording a vote.
+- ELO ratings start at 1000 with a K-factor of 32 and replay statelessly from your stored votes. Standings report ratings, total votes, and W · L · T · Bad breakdown.
+- Votes persist in browser `localStorage` and can be exported as JSON, imported, or reset. No AI judge is involved in Score mode.
+
+Browse mode keeps the earlier Astra xhigh assessments and criterion highlights for reference.
 
 Use Python 3.9 or newer to rebuild the vote pool from generations only:
 

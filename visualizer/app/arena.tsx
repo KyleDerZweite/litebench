@@ -31,7 +31,6 @@ interface ArenaSuite {
 
 const arena = arenaJson as unknown as { generation: string; suites: Record<string, ArenaSuite> };
 const STORAGE_KEY = "litebench-arena-votes-v1";
-const repository = "https://github.com/KyleDerZweite/litebench";
 
 interface Pair {
   taskId: string;
@@ -49,7 +48,7 @@ function loadVotes(): VoteRecord[] {
       typeof entry === "object" && entry !== null &&
       typeof (entry as VoteRecord).a === "string" &&
       typeof (entry as VoteRecord).b === "string" &&
-      ((entry as VoteRecord).winner === "a" || (entry as VoteRecord).winner === "b" || (entry as VoteRecord).winner === "tie"),
+      ((entry as VoteRecord).winner === "a" || (entry as VoteRecord).winner === "b" || (entry as VoteRecord).winner === "tie" || (entry as VoteRecord).winner === "both_bad"),
     );
   } catch {
     return [];
@@ -107,7 +106,6 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
   const task = suite.tasks.find((entry) => entry.id === pair?.taskId) || suite.tasks[0];
   const outputFor = (config: string) =>
     suite.configs.find((entry) => entry.config === config)?.items.find((entry) => entry.task_id === task?.id)?.output || "";
-  const decided = votes.filter((vote) => vote.suite === suiteId).length;
 
   const next = () => {
     setRevealed(null);
@@ -137,7 +135,7 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
       if (!Array.isArray(parsed)) throw new Error("expected a vote list");
       setVotes((current) => [...current, ...(parsed as VoteRecord[]).filter((entry) =>
         entry && typeof entry.a === "string" && typeof entry.b === "string" &&
-        (entry.winner === "a" || entry.winner === "b" || entry.winner === "tie"))]);
+        (entry.winner === "a" || entry.winner === "b" || entry.winner === "tie" || entry.winner === "both_bad"))]);
       setNotice(`Imported votes from ${file.name}.`);
     } catch {
       setNotice("Import failed. Expected the exported vote JSON.");
@@ -147,14 +145,7 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
   return (
     <div>
       <section className="mb-6 border border-neutral-800 bg-[#111] p-4 sm:p-6">
-        <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
-          <h2 className="text-xl font-semibold">Score two answers</h2>
-          <span className="font-mono text-[10px] uppercase text-orange-400">{decided} comparisons this suite</span>
-        </div>
-        <p className="mb-4 text-xs leading-5 text-neutral-400">
-          Model names stay hidden until you vote. Pick the answer you prefer for this prompt, call a tie when neither
-          is better, or skip a close call without recording it.
-        </p>
+        <h2 className="mb-4 text-xl font-semibold">Score two answers</h2>
         {!pair || !task ? (
           <p className="text-sm text-neutral-400">Not enough configurations or prompts to run comparisons.</p>
         ) : (
@@ -179,7 +170,11 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
             {revealed ? (
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <p className="text-sm text-neutral-300">
-                  {revealed === "tie" ? "Recorded as a tie." : `Recorded: ${revealed === "a" ? pair.a : pair.b} wins.`}
+                  {revealed === "tie"
+                    ? "Recorded as a tie."
+                    : revealed === "both_bad"
+                    ? "Recorded: both are bad."
+                    : `Recorded: ${revealed === "a" ? pair.a : pair.b} wins.`}
                 </p>
                 <button className="border border-orange-500 bg-orange-500/10 px-4 py-2 font-mono text-[10px] uppercase text-orange-400 hover:bg-orange-500/20" onClick={next} type="button">
                   Next matchup
@@ -190,6 +185,7 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
                 <button className="border border-neutral-100 bg-neutral-100 px-4 py-2 font-mono text-[10px] uppercase text-black hover:bg-white" onClick={() => cast("a")} type="button">A is better</button>
                 <button className="border border-neutral-100 bg-neutral-100 px-4 py-2 font-mono text-[10px] uppercase text-black hover:bg-white" onClick={() => cast("b")} type="button">B is better</button>
                 <button className="border border-neutral-700 px-4 py-2 font-mono text-[10px] uppercase text-neutral-300 hover:border-neutral-500" onClick={() => cast("tie")} type="button">Tie</button>
+                <button className="border border-neutral-700 px-4 py-2 font-mono text-[10px] uppercase text-neutral-300 hover:border-neutral-500" onClick={() => cast("both_bad")} type="button">Both are bad</button>
                 <button className="px-4 py-2 font-mono text-[10px] uppercase text-neutral-500 hover:text-white" onClick={next} type="button">Skip</button>
               </div>
             )}
@@ -236,7 +232,7 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
                 <th className="px-4 py-3 text-left font-medium">Configuration</th>
                 <th className="px-3 py-3 text-right font-medium">ELO</th>
                 <th className="px-3 py-3 text-right font-medium">Votes</th>
-                <th className="px-3 py-3 text-right font-medium">W · L · T</th>
+                <th className="px-3 py-3 text-right font-medium">W · L · T · Bad</th>
               </tr>
             </thead>
             <tbody>
@@ -245,20 +241,13 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
                   <td className="px-4 py-3 text-neutral-200">{entry.config}</td>
                   <td className="px-3 py-3 text-right font-bold text-neutral-100">{Math.round(entry.rating)}</td>
                   <td className="px-3 py-3 text-right">{entry.votes}</td>
-                  <td className="px-3 py-3 text-right">{entry.wins} · {entry.losses} · {entry.ties}</td>
+                  <td className="px-3 py-3 text-right">{entry.wins} · {entry.losses} · {entry.ties} · {entry.bad}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-xs leading-5 text-neutral-500">
-          Ratings start at 1000 with a K-factor of 32 and replay from your stored votes. Votes stay in this browser
-          until you export them. Texts come from {arena.generation};{" "}
-          <a className="underline underline-offset-4 hover:text-orange-400" href={`${repository}/blob/arena-human-vote/benches/copybench/generations/${arena.generation}`} rel="noreferrer" target="_blank">
-            generation files
-          </a>{" "}
-          remain the source of truth.
-        </p>
+
       </section>
     </div>
   );

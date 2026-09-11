@@ -1,5 +1,5 @@
 // ELO ratings for blind pairwise human votes. Stateless so ratings replay from votes.
-export type VoteWinner = "a" | "b" | "tie";
+export type VoteWinner = "a" | "b" | "tie" | "both_bad";
 
 export interface VoteRecord {
   suite: string;
@@ -17,6 +17,7 @@ export interface Standing {
   wins: number;
   losses: number;
   ties: number;
+  bad: number;
 }
 
 export const BASE_RATING = 1000;
@@ -33,7 +34,7 @@ export function updatedRatings(a: number, b: number, scoreA: number, k = K_FACTO
 
 export function computeStandings(configs: string[], votes: VoteRecord[], k = K_FACTOR): Standing[] {
   const table = new Map<string, Standing>(
-    configs.map((config) => [config, { config, rating: BASE_RATING, votes: 0, wins: 0, losses: 0, ties: 0 }]),
+    configs.map((config) => [config, { config, rating: BASE_RATING, votes: 0, wins: 0, losses: 0, ties: 0, bad: 0 }]),
   );
   for (const vote of votes) {
     const a = table.get(vote.a);
@@ -48,6 +49,9 @@ export function computeStandings(configs: string[], votes: VoteRecord[], k = K_F
     if (vote.winner === "tie") {
       a.ties += 1;
       b.ties += 1;
+    } else if (vote.winner === "both_bad") {
+      a.bad += 1;
+      b.bad += 1;
     } else {
       const winner = vote.winner === "a" ? a : b;
       const loser = vote.winner === "a" ? b : a;

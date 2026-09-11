@@ -635,7 +635,6 @@ export default function LiteBenchVisualizer() {
   const [axis, setAxis] = useState<MatrixAxis>("cost");
   const [hoveredModel, setHoveredModel] = useState<string | null>(null);
   const [inspectedRun, setInspectedRun] = useState("");
-  const suite = suites.find((item) => item.id === suiteId) || suites[0];
   const suiteData = data.suites[suiteId];
   const filtered = suiteData.runs.filter((run) => selectedConfigurations.has(runKey(run)));
   const suiteModelCount = new Set(suiteData.runs.map((run) => run.model)).size;
@@ -652,10 +651,6 @@ export default function LiteBenchVisualizer() {
             <LiteMark />
             <div>
               <h1 className="stencil-text text-4xl leading-none tracking-tighter sm:text-6xl">LITE<span className="text-orange-500">BENCH</span></h1>
-              <p className="mt-2 flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-neutral-500">
-                <span className="h-2 w-2 rounded-full bg-orange-500" />
-                Suite / {suite.label}
-              </p>
             </div>
           </div>
           <div className="flex flex-col items-end gap-2 font-mono text-[10px] uppercase text-neutral-500">
@@ -666,11 +661,6 @@ export default function LiteBenchVisualizer() {
       </header>
 
       <main className="relative z-10 mx-auto max-w-7xl px-4 py-8">
-        <section className="mb-8 max-w-3xl">
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-orange-400">Kyle's personal writing bench · work in progress</p>
-          <p className="text-lg leading-7 text-neutral-200">These are the writing tasks and qualities I care about. Read the prompts, compare the answers, and make your own call.</p>
-          <p className="mt-3 text-sm leading-6 text-neutral-400">{mode === "score" ? "Score mode shows two blind answers per prompt from the preserved generation batch. Your votes set the ELO rankings. No AI judge is involved." : "The current generations are demo material while I build this page and find flaws in the workflow. Astra's scores are an early indicator under my draft criteria. I haven't reviewed these assessments yet."}</p>
-        </section>
         <nav aria-label="LiteBench mode" className="mb-4 flex flex-wrap gap-2">
           {(["score", "browse"] as Mode[]).map((entry) => (
             <button
