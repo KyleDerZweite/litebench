@@ -1,14 +1,12 @@
-# Third-party notices
+Scope note: this MIT license covers this repository except Engine-linked
+directories listed in LICENSING.md (engine/, proxy/, rewriter/,
+browse/, mcp/, shrink/, cavemem Go core, shared/platform/), which are licensed
+under Business Source License 1.1 — see LICENSE.BSL. New Engine-linked runtime
+modules default to BSL-1.1 unless explicitly classified as MIT.
 
-LiteBench adapts the
-[SkateBench visualizer](https://github.com/T3-Content/skatebench/tree/main/visualizer).
-
-SkateBench is licensed under the MIT License:
-
-```text
 MIT License
 
-Copyright (c) 2025 Theo's Content-Adjacent Code
+Copyright (c) 2026 Julius Brussee
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,20 +25,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
-
-Provider logos remain trademarks of their respective owners and are used only
-to identify model providers.
-
-LiteBench uses [DeepSWE's](https://deepswe.datacurve.ai/) chart-above-table
-layout. It includes no DeepSWE source code or assets.
-
-## AgentBench interventions
-
-The Caveman prompt is vendored from JuliusBrussee/caveman at the commit recorded
-in [its source record](benches/agentbench/prompts/SOURCES.md). Its MIT notice is
-retained in [CAVEMAN-LICENSE](benches/agentbench/prompts/CAVEMAN-LICENSE).
-Ponytail is Kyle's MIT-licensed shared skill, frozen for this experiment.
-RTK 0.49.0 is an external Apache-2.0 CLI, downloaded only into ignored local
-runtime storage from https://github.com/rtk-ai/rtk/releases/tag/v0.49.0.
-The two small harness adapters are original LiteBench code.

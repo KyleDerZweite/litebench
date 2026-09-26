@@ -11,6 +11,7 @@ import {
   YAxis,
 } from "recharts";
 import leaderboardData from "../data/leaderboard.json";
+import Link from "next/link";
 import { useIsMobile } from "../hooks/use-mobile";
 import { evidenceSegments } from "./evidence";
 
@@ -669,6 +670,7 @@ export default function LiteBenchVisualizer() {
           <p className="mt-3 text-sm leading-6 text-neutral-400">The current generations are demo material while I build this page and find flaws in the workflow. Astra's scores are an early indicator under my draft criteria. I haven't reviewed these assessments yet.</p>
         </section>
         <nav aria-label="LiteBench suites" className="mb-8 flex flex-wrap gap-2 border-b border-white/5 pb-4">
+          <Link href="/agentbench/" className="border border-orange-500/40 px-4 py-2 font-mono text-[10px] uppercase text-orange-400 hover:text-white">AgentBench · token efficiency</Link>
           {suites.map((item) => (
             <button
               aria-current={suiteId === item.id ? "page" : undefined}

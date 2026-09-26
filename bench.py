@@ -376,11 +376,15 @@ def parser():
     build.add_argument("--evaluation", default=EVALUATION)
     build.add_argument("--out", default=LEADERBOARD, type=Path)
     build.set_defaults(func=command_build)
+    commands.add_parser("agentbench", help="isolated agent efficiency benchmark; use agentbench --help")
     commands.add_parser("self-test", help="run offline validation checks").set_defaults(func=command_self_test)
     return cli
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "agentbench":
+        import agentbench
+        return agentbench.main(sys.argv[2:])
     args = parser().parse_args()
     try:
         return args.func(args)

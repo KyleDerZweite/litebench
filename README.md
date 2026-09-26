@@ -1,7 +1,7 @@
 # LiteBench
 
-LiteBench is my personal writing bench. I'm Kyle, and I want a place to compare
-answers to prompts I care about, point out wording I dislike, and develop my
+LiteBench contains three personal writing benchmarks and one agent efficiency
+benchmark. I'm Kyle, and I want a place to compare answers to prompts I care about, point out wording I dislike, and develop my
 own taste into an explicit rubric. Your preferences may differ. Read the prompt,
 inspect the answer, and decide whether the criticism makes sense to you.
 
@@ -13,7 +13,20 @@ with 380 answers across 19 configurations and 20 prompts. They do not establish
 current model performance under a controlled generation protocol. Rebuilding
 generation is a later step.
 
-## What the percentages mean
+## Agent efficiency benchmark
+
+[AgentBench Lite](benches/agentbench/README.md) compares tokens, time and cost for
+one verifiable coding task across OpenCode and Codex, using OpenRouter and CPA.
+The active matrix has eight models in OpenCode, eight combinations of Ponytail,
+Caveman and RTK, and three repetitions per cell, for 192 runs. Codex and Qwen
+free are temporarily deferred. It runs in isolated workspaces and uses
+executable acceptance tests. This is the fourth suite; its efficiency results
+stay separate from the writing scores below.
+
+Start with `python3 bench.py agentbench check` after supplying the dedicated
+`LITEBENCH_OPENROUTER_KEY`. See the suite's guide for smoke tests and the full run.
+
+## What the writing percentages mean
 
 GPT-6-Astra at xhigh reviews each prompt and answer using the
 [personal rubric](benches/judge-astra-v0.1.json) and a frozen copy of my
@@ -110,3 +123,5 @@ adapts MIT-licensed [SkateBench](https://github.com/T3-Content/skatebench)
 code and the [DeepSWE](https://deepswe.datacurve.ai/) layout. See
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Model outputs may have separate
 provider terms.
+
+AgentBench: [interrupted OpenCode batch analysis](benches/agentbench/results/opencode-01/ANALYSIS.md), including successful-run efficiency, failure coverage and Luna intervention comparisons.
