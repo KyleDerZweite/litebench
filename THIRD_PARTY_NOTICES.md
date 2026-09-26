@@ -34,3 +34,13 @@ to identify model providers.
 
 LiteBench uses [DeepSWE's](https://deepswe.datacurve.ai/) chart-above-table
 layout. It includes no DeepSWE source code or assets.
+
+## AgentBench interventions
+
+The Caveman prompt is vendored from JuliusBrussee/caveman at the commit recorded
+in [its source record](benches/agentbench/prompts/SOURCES.md). Its MIT notice is
+retained in [CAVEMAN-LICENSE](benches/agentbench/prompts/CAVEMAN-LICENSE).
+Ponytail is Kyle's MIT-licensed shared skill, frozen for this experiment.
+RTK 0.49.0 is an external Apache-2.0 CLI, downloaded only into ignored local
+runtime storage from https://github.com/rtk-ai/rtk/releases/tag/v0.49.0.
+The two small harness adapters are original LiteBench code.

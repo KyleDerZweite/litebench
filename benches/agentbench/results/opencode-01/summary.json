@@ -1,0 +1,3416 @@
+[
+  {
+    "model": "nex-agi/nex-n2.5-mini:free",
+    "harness": "opencode",
+    "condition": "ponytail+rtk",
+    "attempts": 2,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "timeout": 2,
+      "tests_failed": 2,
+      "pending_requests": 2,
+      "usage_incomplete": 1,
+      "condition_unverified": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-vl:free",
+    "harness": "opencode",
+    "condition": "rtk",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 2,
+    "exclusions": {
+      "usage_incomplete": 1
+    },
+    "wall_seconds": {
+      "median": 214.13183516499703,
+      "min": 214.13183516499703,
+      "max": 214.13183516499703
+    },
+    "input_tokens": {
+      "median": 353742,
+      "min": 353742,
+      "max": 353742
+    },
+    "output_tokens": {
+      "median": 13572,
+      "min": 13572,
+      "max": 13572
+    },
+    "total_tokens": {
+      "median": 367314,
+      "min": 367314,
+      "max": 367314
+    },
+    "cached_input_tokens": {
+      "median": 205077,
+      "min": 205077,
+      "max": 205077
+    },
+    "reasoning_tokens": {
+      "median": 7498,
+      "min": 7498,
+      "max": 7498
+    },
+    "cost_usd": {
+      "median": 0,
+      "min": 0,
+      "max": 0
+    },
+    "estimated_cost_usd": {
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "requests": {
+      "median": 22,
+      "min": 22,
+      "max": 22
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "z-ai/glm-5.3-flash",
+    "harness": "opencode",
+    "condition": "ponytail+rtk",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {
+      "tests_failed": 1
+    },
+    "wall_seconds": {
+      "median": 338.5794830090017,
+      "min": 338.5794830090017,
+      "max": 338.5794830090017
+    },
+    "input_tokens": {
+      "median": 428404,
+      "min": 428404,
+      "max": 428404
+    },
+    "output_tokens": {
+      "median": 12312,
+      "min": 12312,
+      "max": 12312
+    },
+    "total_tokens": {
+      "median": 440716,
+      "min": 440716,
+      "max": 440716
+    },
+    "cached_input_tokens": {
+      "median": 373262,
+      "min": 373262,
+      "max": 373262
+    },
+    "reasoning_tokens": {
+      "median": 5934,
+      "min": 5934,
+      "max": 5934
+    },
+    "cost_usd": {
+      "median": 0.01281258,
+      "min": 0.01281258,
+      "max": 0.01281258
+    },
+    "estimated_cost_usd": {
+      "median": 0.0330904,
+      "min": 0.0330904,
+      "max": 0.0330904
+    },
+    "requests": {
+      "median": 28,
+      "min": 28,
+      "max": 28
+    },
+    "all_attempts_input_tokens": 450895,
+    "all_attempts_output_tokens": 28990,
+    "all_attempts_cost_usd": 0.017935465,
+    "all_attempts_estimated_cost_usd": 0.04358065,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-vl:free",
+    "harness": "opencode",
+    "condition": "ponytail+rtk",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 211.30540304049646,
+      "min": 190.06293131200073,
+      "max": 232.5478747689922
+    },
+    "input_tokens": {
+      "median": 483525.0,
+      "min": 360771,
+      "max": 606279
+    },
+    "output_tokens": {
+      "median": 16234.0,
+      "min": 11524,
+      "max": 20944
+    },
+    "total_tokens": {
+      "median": 499759.0,
+      "min": 372295,
+      "max": 627223
+    },
+    "cached_input_tokens": {
+      "median": 347072.0,
+      "min": 260057,
+      "max": 434087
+    },
+    "reasoning_tokens": {
+      "median": 9955.0,
+      "min": 4990,
+      "max": 14920
+    },
+    "cost_usd": {
+      "median": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "estimated_cost_usd": {
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "requests": {
+      "median": 24.0,
+      "min": 23,
+      "max": 25
+    },
+    "all_attempts_input_tokens": 967050,
+    "all_attempts_output_tokens": 32468,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-mini:free",
+    "harness": "opencode",
+    "condition": "caveman",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {
+      "timeout": 1,
+      "tests_failed": 1,
+      "usage_incomplete": 1,
+      "pending_requests": 1
+    },
+    "wall_seconds": {
+      "median": 471.0398448449996,
+      "min": 471.0398448449996,
+      "max": 471.0398448449996
+    },
+    "input_tokens": {
+      "median": 408947,
+      "min": 408947,
+      "max": 408947
+    },
+    "output_tokens": {
+      "median": 29753,
+      "min": 29753,
+      "max": 29753
+    },
+    "total_tokens": {
+      "median": 438700,
+      "min": 438700,
+      "max": 438700
+    },
+    "cached_input_tokens": {
+      "median": 361408,
+      "min": 361408,
+      "max": 361408
+    },
+    "reasoning_tokens": {
+      "median": 29228,
+      "min": 29228,
+      "max": 29228
+    },
+    "cost_usd": {
+      "median": 0,
+      "min": 0,
+      "max": 0
+    },
+    "estimated_cost_usd": {
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "requests": {
+      "median": 21,
+      "min": 21,
+      "max": 21
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "harness": "opencode",
+    "condition": "rtk",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 128.0840222830011,
+      "min": 110.631599336004,
+      "max": 128.62356039699807
+    },
+    "input_tokens": {
+      "median": 532228,
+      "min": 476141,
+      "max": 688617
+    },
+    "output_tokens": {
+      "median": 18120,
+      "min": 15348,
+      "max": 19756
+    },
+    "total_tokens": {
+      "median": 550348,
+      "min": 491489,
+      "max": 708373
+    },
+    "cached_input_tokens": {
+      "median": 489728,
+      "min": 425792,
+      "max": 609856
+    },
+    "reasoning_tokens": {
+      "median": 9305,
+      "min": 7175,
+      "max": 11025
+    },
+    "cost_usd": {
+      "median": 0.0040909176,
+      "min": 0.0038125794,
+      "max": 0.0054600042
+    },
+    "estimated_cost_usd": {
+      "median": 0.0040909176000000005,
+      "min": 0.0038125794,
+      "max": 0.0054600042
+    },
+    "requests": {
+      "median": 28,
+      "min": 26,
+      "max": 31
+    },
+    "all_attempts_input_tokens": 1696986,
+    "all_attempts_output_tokens": 53224,
+    "all_attempts_cost_usd": 0.013363501199999999,
+    "all_attempts_estimated_cost_usd": 0.0133635012,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 14.21865921253227,
+      "total_tokens": 15.155801437909599,
+      "estimated_cost_usd": 7.8390299637742356,
+      "cost_usd": 7.839029963774213
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-pro:free",
+    "harness": "opencode",
+    "condition": "caveman",
+    "attempts": 3,
+    "eligible": 0,
+    "code_pass": 3,
+    "exclusions": {
+      "timeout": 3,
+      "usage_incomplete": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-vl:free",
+    "harness": "opencode",
+    "condition": "ponytail+caveman",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 2,
+    "exclusions": {
+      "usage_incomplete": 1
+    },
+    "wall_seconds": {
+      "median": 207.02896696499374,
+      "min": 207.02896696499374,
+      "max": 207.02896696499374
+    },
+    "input_tokens": {
+      "median": 616124,
+      "min": 616124,
+      "max": 616124
+    },
+    "output_tokens": {
+      "median": 12488,
+      "min": 12488,
+      "max": 12488
+    },
+    "total_tokens": {
+      "median": 628612,
+      "min": 628612,
+      "max": 628612
+    },
+    "cached_input_tokens": {
+      "median": 402178,
+      "min": 402178,
+      "max": 402178
+    },
+    "reasoning_tokens": {
+      "median": 4980,
+      "min": 4980,
+      "max": 4980
+    },
+    "cost_usd": {
+      "median": 0,
+      "min": 0,
+      "max": 0
+    },
+    "estimated_cost_usd": {
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "requests": {
+      "median": 30,
+      "min": 30,
+      "max": 30
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "harness": "opencode",
+    "condition": "ponytail+caveman+rtk",
+    "attempts": 1,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 218.761579877013,
+      "min": 218.761579877013,
+      "max": 218.761579877013
+    },
+    "input_tokens": {
+      "median": 421301,
+      "min": 421301,
+      "max": 421301
+    },
+    "output_tokens": {
+      "median": 11376,
+      "min": 11376,
+      "max": 11376
+    },
+    "total_tokens": {
+      "median": 432677,
+      "min": 432677,
+      "max": 432677
+    },
+    "cached_input_tokens": {
+      "median": 396288,
+      "min": 396288,
+      "max": 396288
+    },
+    "reasoning_tokens": {
+      "median": 6091,
+      "min": 6091,
+      "max": 6091
+    },
+    "cost_usd": {
+      "median": 0.007796706400000001,
+      "min": 0.007796706400000001,
+      "max": 0.007796706400000001
+    },
+    "estimated_cost_usd": {
+      "median": 0.007796706400000001,
+      "min": 0.007796706400000001,
+      "max": 0.007796706400000001
+    },
+    "requests": {
+      "median": 22,
+      "min": 22,
+      "max": 22
+    },
+    "all_attempts_input_tokens": 421301,
+    "all_attempts_output_tokens": 11376,
+    "all_attempts_cost_usd": 0.007796706400000001,
+    "all_attempts_estimated_cost_usd": 0.007796706400000001,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -45.5337874936946,
+      "total_tokens": -4.478089725163981,
+      "estimated_cost_usd": -28.604921513919102,
+      "cost_usd": -28.60492151391909
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-pro:free",
+    "harness": "opencode",
+    "condition": "ponytail+caveman",
+    "attempts": 1,
+    "eligible": 0,
+    "code_pass": 1,
+    "exclusions": {
+      "timeout": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 329225,
+    "all_attempts_output_tokens": 41616,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-pro:free",
+    "harness": "opencode",
+    "condition": "ponytail+rtk",
+    "attempts": 3,
+    "eligible": 0,
+    "code_pass": 1,
+    "exclusions": {
+      "timeout": 3,
+      "tests_failed": 2,
+      "usage_incomplete": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "gpt-5.6-luna",
+    "harness": "opencode",
+    "condition": "baseline",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 207.344755502505,
+      "min": 195.3872689060081,
+      "max": 219.3022420990019
+    },
+    "input_tokens": {
+      "median": 200055.5,
+      "min": 146168,
+      "max": 253943
+    },
+    "output_tokens": {
+      "median": 8807.5,
+      "min": 7893,
+      "max": 9722
+    },
+    "total_tokens": {
+      "median": 208863.0,
+      "min": 154061,
+      "max": 263665
+    },
+    "cached_input_tokens": {
+      "median": 148224.0,
+      "min": 93696,
+      "max": 202752
+    },
+    "reasoning_tokens": {
+      "median": 4819.0,
+      "min": 3973,
+      "max": 5665
+    },
+    "cost_usd": null,
+    "estimated_cost_usd": {
+      "median": 0.02389978,
+      "min": 0.02183992,
+      "max": 0.02595964
+    },
+    "requests": {
+      "median": 15.5,
+      "min": 13,
+      "max": 18
+    },
+    "all_attempts_input_tokens": 400111,
+    "all_attempts_output_tokens": 17615,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": 0.04779956,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 0.0,
+      "total_tokens": 0.0,
+      "estimated_cost_usd": 0.0,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "meta/muse-spark-1.3-contributor",
+    "harness": "opencode",
+    "condition": "ponytail+caveman",
+    "attempts": 3,
+    "eligible": 2,
+    "code_pass": 3,
+    "exclusions": {
+      "usage_incomplete": 1
+    },
+    "wall_seconds": {
+      "median": 220.22073455099599,
+      "min": 196.10921399199287,
+      "max": 244.3322551099991
+    },
+    "input_tokens": {
+      "median": 341389.0,
+      "min": 262764,
+      "max": 420014
+    },
+    "output_tokens": {
+      "median": 16027.5,
+      "min": 15044,
+      "max": 17011
+    },
+    "total_tokens": {
+      "median": 357416.5,
+      "min": 279775,
+      "max": 435058
+    },
+    "cached_input_tokens": {
+      "median": 261934.5,
+      "min": 204899,
+      "max": 318970
+    },
+    "reasoning_tokens": {
+      "median": 10175.5,
+      "min": 8646,
+      "max": 11705
+    },
+    "cost_usd": {
+      "median": 0.011674819,
+      "min": 0.009598498,
+      "max": 0.01375114
+    },
+    "estimated_cost_usd": {
+      "median": 0.011674819,
+      "min": 0.009598498,
+      "max": 0.01375114
+    },
+    "requests": {
+      "median": 23.5,
+      "min": 20,
+      "max": 27
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -41.743136678282646,
+      "total_tokens": 20.475103017637288,
+      "estimated_cost_usd": -18.880122556490708,
+      "cost_usd": -18.880122556490708
+    }
+  },
+  {
+    "model": "z-ai/glm-5.3-flash",
+    "harness": "opencode",
+    "condition": "baseline",
+    "attempts": 3,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "tests_failed": 3,
+      "nonzero_exit": 1,
+      "usage_incomplete": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-pro:free",
+    "harness": "opencode",
+    "condition": "ponytail",
+    "attempts": 3,
+    "eligible": 0,
+    "code_pass": 3,
+    "exclusions": {
+      "timeout": 3,
+      "pending_requests": 2
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 827409,
+    "all_attempts_output_tokens": 99816,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "z-ai/glm-5.3-flash",
+    "harness": "opencode",
+    "condition": "caveman",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 419.5770017200048,
+      "min": 305.411308011011,
+      "max": 533.7426954289986
+    },
+    "input_tokens": {
+      "median": 424845.5,
+      "min": 289505,
+      "max": 560186
+    },
+    "output_tokens": {
+      "median": 11605.0,
+      "min": 9826,
+      "max": 13384
+    },
+    "total_tokens": {
+      "median": 436450.5,
+      "min": 299331,
+      "max": 573570
+    },
+    "cached_input_tokens": {
+      "median": 323428.0,
+      "min": 234598,
+      "max": 412258
+    },
+    "reasoning_tokens": {
+      "median": 5029.0,
+      "min": 4641,
+      "max": 5417
+    },
+    "cost_usd": {
+      "median": 0.0153589825,
+      "min": 0.010093495,
+      "max": 0.02062447
+    },
+    "estimated_cost_usd": {
+      "median": 0.037186525,
+      "min": 0.02487895,
+      "max": 0.0494941
+    },
+    "requests": {
+      "median": 25.0,
+      "min": 18,
+      "max": 32
+    },
+    "all_attempts_input_tokens": 849691,
+    "all_attempts_output_tokens": 23210,
+    "all_attempts_cost_usd": 0.030717965,
+    "all_attempts_estimated_cost_usd": 0.07437305,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "z-ai/glm-5.3-flash",
+    "harness": "opencode",
+    "condition": "caveman+rtk",
+    "attempts": 3,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {
+      "nonzero_exit": 1,
+      "tests_failed": 1,
+      "usage_incomplete": 1,
+      "condition_unverified": 1
+    },
+    "wall_seconds": {
+      "median": 455.6942924725008,
+      "min": 401.5146667270019,
+      "max": 509.87391821799974
+    },
+    "input_tokens": {
+      "median": 413864.5,
+      "min": 393221,
+      "max": 434508
+    },
+    "output_tokens": {
+      "median": 14517.0,
+      "min": 13250,
+      "max": 15784
+    },
+    "total_tokens": {
+      "median": 428381.5,
+      "min": 406471,
+      "max": 450292
+    },
+    "cached_input_tokens": {
+      "median": 343518.0,
+      "min": 336125,
+      "max": 350911
+    },
+    "reasoning_tokens": {
+      "median": 9290.0,
+      "min": 8033,
+      "max": 10547
+    },
+    "cost_usd": {
+      "median": 0.0140580075,
+      "min": 0.012636575,
+      "max": 0.01547944
+    },
+    "estimated_cost_usd": {
+      "median": 0.034986375,
+      "min": 0.03199565,
+      "max": 0.0379771
+    },
+    "requests": {
+      "median": 22.0,
+      "min": 22,
+      "max": 22
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "gpt-5.6-luna",
+    "harness": "opencode",
+    "condition": "ponytail+caveman+rtk",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 267.6524966220022,
+      "min": 240.7094576160016,
+      "max": 458.27778994699474
+    },
+    "input_tokens": {
+      "median": 322974,
+      "min": 316916,
+      "max": 362676
+    },
+    "output_tokens": {
+      "median": 10874,
+      "min": 10735,
+      "max": 11538
+    },
+    "total_tokens": {
+      "median": 334512,
+      "min": 327651,
+      "max": 373550
+    },
+    "cached_input_tokens": {
+      "median": 285696,
+      "min": 256512,
+      "max": 297472
+    },
+    "reasoning_tokens": {
+      "median": 6919,
+      "min": 6190,
+      "max": 7375
+    },
+    "cost_usd": null,
+    "estimated_cost_usd": {
+      "median": 0.030093039999999998,
+      "min": 0.02701512,
+      "max": 0.03203904
+    },
+    "requests": {
+      "median": 18,
+      "min": 18,
+      "max": 20
+    },
+    "all_attempts_input_tokens": 1002566,
+    "all_attempts_output_tokens": 33147,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": 0.0891472,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 29.08573258741942,
+      "total_tokens": 60.1585728444004,
+      "estimated_cost_usd": 25.913460291266265,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "gpt-5.6-luna",
+    "harness": "opencode",
+    "condition": "ponytail+caveman",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 322.46370455349825,
+      "min": 204.93828618200496,
+      "max": 439.98912292499153
+    },
+    "input_tokens": {
+      "median": 231814.5,
+      "min": 171971,
+      "max": 291658
+    },
+    "output_tokens": {
+      "median": 9126.0,
+      "min": 8922,
+      "max": 9330
+    },
+    "total_tokens": {
+      "median": 240940.5,
+      "min": 180893,
+      "max": 300988
+    },
+    "cached_input_tokens": {
+      "median": 180992.0,
+      "min": 131584,
+      "max": 230400
+    },
+    "reasoning_tokens": {
+      "median": 5455.5,
+      "min": 5179,
+      "max": 5732
+    },
+    "cost_usd": null,
+    "estimated_cost_usd": {
+      "median": 0.02473554,
+      "min": 0.02141548,
+      "max": 0.0280556
+    },
+    "requests": {
+      "median": 14.5,
+      "min": 12,
+      "max": 17
+    },
+    "all_attempts_input_tokens": 463629,
+    "all_attempts_output_tokens": 18252,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": 0.04947108,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 55.520550192841725,
+      "total_tokens": 15.358153430717735,
+      "estimated_cost_usd": 3.4969359550589996,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-vl:free",
+    "harness": "opencode",
+    "condition": "baseline",
+    "attempts": 3,
+    "eligible": 0,
+    "code_pass": 2,
+    "exclusions": {
+      "usage_incomplete": 3,
+      "tests_failed": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "gpt-5.6-luna",
+    "harness": "opencode",
+    "condition": "ponytail",
+    "attempts": 1,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 259.18304802400235,
+      "min": 259.18304802400235,
+      "max": 259.18304802400235
+    },
+    "input_tokens": {
+      "median": 390102,
+      "min": 390102,
+      "max": 390102
+    },
+    "output_tokens": {
+      "median": 10985,
+      "min": 10985,
+      "max": 10985
+    },
+    "total_tokens": {
+      "median": 401087,
+      "min": 401087,
+      "max": 401087
+    },
+    "cached_input_tokens": {
+      "median": 328192,
+      "min": 328192,
+      "max": 328192
+    },
+    "reasoning_tokens": {
+      "median": 6179,
+      "min": 6179,
+      "max": 6179
+    },
+    "cost_usd": null,
+    "estimated_cost_usd": {
+      "median": 0.03212784,
+      "min": 0.03212784,
+      "max": 0.03212784
+    },
+    "requests": {
+      "median": 24,
+      "min": 24,
+      "max": 24
+    },
+    "all_attempts_input_tokens": 390102,
+    "all_attempts_output_tokens": 10985,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": 0.03212784,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 25.00101456430186,
+      "total_tokens": 92.03353394330253,
+      "estimated_cost_usd": 34.42734619314487,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "meta/muse-spark-1.3-contributor",
+    "harness": "opencode",
+    "condition": "rtk",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 306.93723626900464,
+      "min": 250.22163593000732,
+      "max": 348.63923028999125
+    },
+    "input_tokens": {
+      "median": 263641,
+      "min": 133812,
+      "max": 331464
+    },
+    "output_tokens": {
+      "median": 16281,
+      "min": 16175,
+      "max": 19420
+    },
+    "total_tokens": {
+      "median": 279816,
+      "min": 150093,
+      "max": 350884
+    },
+    "cached_input_tokens": {
+      "median": 202053,
+      "min": 78028,
+      "max": 317321
+    },
+    "reasoning_tokens": {
+      "median": 10979,
+      "min": 9851,
+      "max": 12802
+    },
+    "cost_usd": {
+      "median": 0.008990656,
+      "min": 0.005932942,
+      "max": 0.009797906
+    },
+    "estimated_cost_usd": {
+      "median": 0.008990656,
+      "min": 0.005932942,
+      "max": 0.009797906
+    },
+    "requests": {
+      "median": 22,
+      "min": 13,
+      "max": 26
+    },
+    "all_attempts_input_tokens": 728917,
+    "all_attempts_output_tokens": 51876,
+    "all_attempts_cost_usd": 0.024721504,
+    "all_attempts_estimated_cost_usd": 0.024721504,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -18.80328317800445,
+      "total_tokens": -5.681854570275302,
+      "estimated_cost_usd": -37.53043084807127,
+      "cost_usd": -37.53043084807127
+    }
+  },
+  {
+    "model": "z-ai/glm-5.3-flash",
+    "harness": "opencode",
+    "condition": "ponytail+caveman",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 380.3847830339946,
+      "min": 329.8325316670089,
+      "max": 400.27076258999296
+    },
+    "input_tokens": {
+      "median": 364377,
+      "min": 180133,
+      "max": 483817
+    },
+    "output_tokens": {
+      "median": 13697,
+      "min": 7736,
+      "max": 13851
+    },
+    "total_tokens": {
+      "median": 378228,
+      "min": 193830,
+      "max": 491553
+    },
+    "cached_input_tokens": {
+      "median": 241232,
+      "min": 93139,
+      "max": 367395
+    },
+    "reasoning_tokens": {
+      "median": 8420,
+      "min": 2493,
+      "max": 9473
+    },
+    "cost_usd": {
+      "median": 0.016176575,
+      "min": 0.011345885,
+      "max": 0.016317105000000002
+    },
+    "estimated_cost_usd": {
+      "median": 0.03745885,
+      "min": 0.024554549999999998,
+      "max": 0.039701049999999995
+    },
+    "requests": {
+      "median": 20,
+      "min": 11,
+      "max": 33
+    },
+    "all_attempts_input_tokens": 1028327,
+    "all_attempts_output_tokens": 35284,
+    "all_attempts_cost_usd": 0.043839565,
+    "all_attempts_estimated_cost_usd": 0.10171445,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-vl:free",
+    "harness": "opencode",
+    "condition": "caveman+rtk",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 2,
+    "exclusions": {
+      "usage_incomplete": 1
+    },
+    "wall_seconds": {
+      "median": 178.56958665599814,
+      "min": 178.56958665599814,
+      "max": 178.56958665599814
+    },
+    "input_tokens": {
+      "median": 505376,
+      "min": 505376,
+      "max": 505376
+    },
+    "output_tokens": {
+      "median": 12349,
+      "min": 12349,
+      "max": 12349
+    },
+    "total_tokens": {
+      "median": 517725,
+      "min": 517725,
+      "max": 517725
+    },
+    "cached_input_tokens": {
+      "median": 400370,
+      "min": 400370,
+      "max": 400370
+    },
+    "reasoning_tokens": {
+      "median": 5397,
+      "min": 5397,
+      "max": 5397
+    },
+    "cost_usd": {
+      "median": 0,
+      "min": 0,
+      "max": 0
+    },
+    "estimated_cost_usd": {
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "requests": {
+      "median": 27,
+      "min": 27,
+      "max": 27
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "z-ai/glm-5.3-flash",
+    "harness": "opencode",
+    "condition": "ponytail",
+    "attempts": 2,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "tests_failed": 2
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 44868,
+    "all_attempts_output_tokens": 33395,
+    "all_attempts_cost_usd": 0.01109945,
+    "all_attempts_estimated_cost_usd": 0.0224037,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "harness": "opencode",
+    "condition": "caveman",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 286.55951023499074,
+      "min": 211.9884252579941,
+      "max": 361.1305952119874
+    },
+    "input_tokens": {
+      "median": 191520.0,
+      "min": 152145,
+      "max": 230895
+    },
+    "output_tokens": {
+      "median": 13606.5,
+      "min": 11558,
+      "max": 15655
+    },
+    "total_tokens": {
+      "median": 205126.5,
+      "min": 167800,
+      "max": 242453
+    },
+    "cached_input_tokens": {
+      "median": 172000.0,
+      "min": 132544,
+      "max": 211456
+    },
+    "reasoning_tokens": {
+      "median": 8561.5,
+      "min": 6211,
+      "max": 10912
+    },
+    "cost_usd": {
+      "median": 0.007024219999999999,
+      "min": 0.0065497768,
+      "max": 0.0074986632
+    },
+    "estimated_cost_usd": {
+      "median": 0.00702422,
+      "min": 0.0065497768000000005,
+      "max": 0.0074986632
+    },
+    "requests": {
+      "median": 12.0,
+      "min": 9,
+      "max": 15
+    },
+    "all_attempts_input_tokens": 383040,
+    "all_attempts_output_tokens": 27213,
+    "all_attempts_cost_usd": 0.014048439999999999,
+    "all_attempts_estimated_cost_usd": 0.01404844,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -28.653782858322472,
+      "total_tokens": -54.71431315278799,
+      "estimated_cost_usd": -35.67864268898221,
+      "cost_usd": -35.67864268898221
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "harness": "opencode",
+    "condition": "baseline",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 112.13931521002087,
+      "min": 79.85315233899746,
+      "max": 156.01241980399936
+    },
+    "input_tokens": {
+      "median": 463582,
+      "min": 379919,
+      "max": 896108
+    },
+    "output_tokens": {
+      "median": 14334,
+      "min": 13779,
+      "max": 19945
+    },
+    "total_tokens": {
+      "median": 477916,
+      "min": 393698,
+      "max": 916053
+    },
+    "cached_input_tokens": {
+      "median": 407424,
+      "min": 363200,
+      "max": 801280
+    },
+    "reasoning_tokens": {
+      "median": 8861,
+      "min": 7805,
+      "max": 11023
+    },
+    "cost_usd": {
+      "median": 0.0037935408,
+      "min": 0.002744616,
+      "max": 0.006613299
+    },
+    "estimated_cost_usd": {
+      "median": 0.0037935408,
+      "min": 0.002744616,
+      "max": 0.0066132990000000004
+    },
+    "requests": {
+      "median": 24,
+      "min": 21,
+      "max": 35
+    },
+    "all_attempts_input_tokens": 1739609,
+    "all_attempts_output_tokens": 48058,
+    "all_attempts_cost_usd": 0.0131514558,
+    "all_attempts_estimated_cost_usd": 0.0131514558,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 0.0,
+      "total_tokens": 0.0,
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0
+    }
+  },
+  {
+    "model": "gpt-5.6-luna",
+    "harness": "opencode",
+    "condition": "rtk",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 261.1839086879918,
+      "min": 232.31441121500393,
+      "max": 358.22861031901266
+    },
+    "input_tokens": {
+      "median": 186355,
+      "min": 147581,
+      "max": 269839
+    },
+    "output_tokens": {
+      "median": 9296,
+      "min": 8865,
+      "max": 9720
+    },
+    "total_tokens": {
+      "median": 195220,
+      "min": 157301,
+      "max": 279135
+    },
+    "cached_input_tokens": {
+      "median": 139776,
+      "min": 103936,
+      "max": 237568
+    },
+    "reasoning_tokens": {
+      "median": 5402,
+      "min": 5114,
+      "max": 6160
+    },
+    "cost_usd": null,
+    "estimated_cost_usd": {
+      "median": 0.02247172,
+      "min": 0.02236076,
+      "max": 0.02274932
+    },
+    "requests": {
+      "median": 15,
+      "min": 13,
+      "max": 20
+    },
+    "all_attempts_input_tokens": 603775,
+    "all_attempts_output_tokens": 27881,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": 0.0675818,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 25.966006738393887,
+      "total_tokens": -6.5320329594040105,
+      "estimated_cost_usd": -5.975201445368949,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "harness": "opencode",
+    "condition": "caveman",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 114.39487941999687,
+      "min": 100.14890603700769,
+      "max": 124.78905257400766
+    },
+    "input_tokens": {
+      "median": 735503,
+      "min": 594961,
+      "max": 786149
+    },
+    "output_tokens": {
+      "median": 18353,
+      "min": 16122,
+      "max": 21554
+    },
+    "total_tokens": {
+      "median": 757057,
+      "min": 611083,
+      "max": 804502
+    },
+    "cached_input_tokens": {
+      "median": 656896,
+      "min": 491264,
+      "max": 735616
+    },
+    "reasoning_tokens": {
+      "median": 7411,
+      "min": 6773,
+      "max": 15313
+    },
+    "cost_usd": {
+      "median": 0.0053070192,
+      "min": 0.0052566318,
+      "max": 0.0057676122
+    },
+    "estimated_cost_usd": {
+      "median": 0.0053070192000000006,
+      "min": 0.0052566318,
+      "max": 0.0057676122
+    },
+    "requests": {
+      "median": 27,
+      "min": 27,
+      "max": 32
+    },
+    "all_attempts_input_tokens": 2116613,
+    "all_attempts_output_tokens": 56029,
+    "all_attempts_cost_usd": 0.0163312632,
+    "all_attempts_estimated_cost_usd": 0.0163312632,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 2.01139467077327,
+      "total_tokens": 58.40796290561521,
+      "estimated_cost_usd": 39.896194078102454,
+      "cost_usd": 39.89619407810243
+    }
+  },
+  {
+    "model": "gpt-5.6-luna",
+    "harness": "opencode",
+    "condition": "caveman+rtk",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 409.0946826389991,
+      "min": 245.7018193739932,
+      "max": 572.487545904005
+    },
+    "input_tokens": {
+      "median": 463789.5,
+      "min": 376845,
+      "max": 550734
+    },
+    "output_tokens": {
+      "median": 12015.0,
+      "min": 10496,
+      "max": 13534
+    },
+    "total_tokens": {
+      "median": 475804.5,
+      "min": 387341,
+      "max": 564268
+    },
+    "cached_input_tokens": {
+      "median": 403456.0,
+      "min": 337920,
+      "max": 468992
+    },
+    "reasoning_tokens": {
+      "median": 7438.5,
+      "min": 6075,
+      "max": 8802
+    },
+    "cost_usd": null,
+    "estimated_cost_usd": {
+      "median": 0.03455382,
+      "min": 0.0271386,
+      "max": 0.04196904
+    },
+    "requests": {
+      "median": 25.0,
+      "min": 22,
+      "max": 28
+    },
+    "all_attempts_input_tokens": 927579,
+    "all_attempts_output_tokens": 24030,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": 0.06910764,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 97.30167837983088,
+      "total_tokens": 127.80698352508581,
+      "estimated_cost_usd": 44.577983563028624,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-mini:free",
+    "harness": "opencode",
+    "condition": "rtk",
+    "attempts": 1,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "tests_failed": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 43002,
+    "all_attempts_output_tokens": 19836,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "meta/muse-spark-1.3-contributor",
+    "harness": "opencode",
+    "condition": "caveman",
+    "attempts": 1,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 324.72908603299584,
+      "min": 324.72908603299584,
+      "max": 324.72908603299584
+    },
+    "input_tokens": {
+      "median": 232221,
+      "min": 232221,
+      "max": 232221
+    },
+    "output_tokens": {
+      "median": 16006,
+      "min": 16006,
+      "max": 16006
+    },
+    "total_tokens": {
+      "median": 248227,
+      "min": 248227,
+      "max": 248227
+    },
+    "cached_input_tokens": {
+      "median": 160114,
+      "min": 160114,
+      "max": 160114
+    },
+    "reasoning_tokens": {
+      "median": 10374,
+      "min": 10374,
+      "max": 10374
+    },
+    "cost_usd": {
+      "median": 0.010732128,
+      "min": 0.010732128,
+      "max": 0.010732128
+    },
+    "estimated_cost_usd": {
+      "median": 0.010732127999999999,
+      "min": 0.010732127999999999,
+      "max": 0.010732127999999999
+    },
+    "requests": {
+      "median": 19,
+      "min": 19,
+      "max": 19
+    },
+    "all_attempts_input_tokens": 232221,
+    "all_attempts_output_tokens": 16006,
+    "all_attempts_cost_usd": 0.010732128,
+    "all_attempts_estimated_cost_usd": 0.010732127999999999,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -14.096653886014032,
+      "total_tokens": -16.329622732137295,
+      "estimated_cost_usd": -25.430200839254603,
+      "cost_usd": -25.430200839254592
+    }
+  },
+  {
+    "model": "z-ai/glm-5.3-flash",
+    "harness": "opencode",
+    "condition": "ponytail+caveman+rtk",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {
+      "tests_failed": 1
+    },
+    "wall_seconds": {
+      "median": 275.34696147700015,
+      "min": 275.34696147700015,
+      "max": 275.34696147700015
+    },
+    "input_tokens": {
+      "median": 257535,
+      "min": 257535,
+      "max": 257535
+    },
+    "output_tokens": {
+      "median": 9146,
+      "min": 9146,
+      "max": 9146
+    },
+    "total_tokens": {
+      "median": 266681,
+      "min": 266681,
+      "max": 266681
+    },
+    "cached_input_tokens": {
+      "median": 183601,
+      "min": 183601,
+      "max": 183601
+    },
+    "reasoning_tokens": {
+      "median": 4376,
+      "min": 4376,
+      "max": 4376
+    },
+    "cost_usd": {
+      "median": 0.010585565,
+      "min": 0.010585565,
+      "max": 0.010585565
+    },
+    "estimated_cost_usd": {
+      "median": 0.024843149999999998,
+      "min": 0.024843149999999998,
+      "max": 0.024843149999999998
+    },
+    "requests": {
+      "median": 18,
+      "min": 18,
+      "max": 18
+    },
+    "all_attempts_input_tokens": 671494,
+    "all_attempts_output_tokens": 19034,
+    "all_attempts_cost_usd": 0.02492495,
+    "all_attempts_estimated_cost_usd": 0.0599151,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "meta/muse-spark-1.3-contributor",
+    "harness": "opencode",
+    "condition": "caveman+rtk",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 409.8039205815003,
+      "min": 340.9329869369976,
+      "max": 478.67485422600294
+    },
+    "input_tokens": {
+      "median": 266293.5,
+      "min": 242841,
+      "max": 289746
+    },
+    "output_tokens": {
+      "median": 16846.0,
+      "min": 14838,
+      "max": 18854
+    },
+    "total_tokens": {
+      "median": 283139.5,
+      "min": 257679,
+      "max": 308600
+    },
+    "cached_input_tokens": {
+      "median": 142555.5,
+      "min": 109170,
+      "max": 175941
+    },
+    "reasoning_tokens": {
+      "median": 11641.0,
+      "min": 10076,
+      "max": 13206
+    },
+    "cost_usd": {
+      "median": 0.016028111,
+      "min": 0.015503182,
+      "max": 0.01655304
+    },
+    "estimated_cost_usd": {
+      "median": 0.016028110999999998,
+      "min": 0.015503181999999999,
+      "max": 0.016553039999999998
+    },
+    "requests": {
+      "median": 21.0,
+      "min": 20,
+      "max": 22
+    },
+    "all_attempts_input_tokens": 532587,
+    "all_attempts_output_tokens": 33692,
+    "all_attempts_cost_usd": 0.032056222,
+    "all_attempts_estimated_cost_usd": 0.032056221999999995,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 8.40891543975828,
+      "total_tokens": -4.561595698960974,
+      "estimated_cost_usd": 11.367756534038165,
+      "cost_usd": 11.367756534038186
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "harness": "opencode",
+    "condition": "rtk",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 2,
+    "exclusions": {
+      "interrupted": 1
+    },
+    "wall_seconds": {
+      "median": 471.6500374390016,
+      "min": 471.6500374390016,
+      "max": 471.6500374390016
+    },
+    "input_tokens": {
+      "median": 273354,
+      "min": 273354,
+      "max": 273354
+    },
+    "output_tokens": {
+      "median": 22255,
+      "min": 22255,
+      "max": 22255
+    },
+    "total_tokens": {
+      "median": 295609,
+      "min": 295609,
+      "max": 295609
+    },
+    "cached_input_tokens": {
+      "median": 244736,
+      "min": 244736,
+      "max": 244736
+    },
+    "reasoning_tokens": {
+      "median": 15625,
+      "min": 15625,
+      "max": 15625
+    },
+    "cost_usd": {
+      "median": 0.0109231808,
+      "min": 0.0109231808,
+      "max": 0.0109231808
+    },
+    "estimated_cost_usd": {
+      "median": 0.0109231808,
+      "min": 0.0109231808,
+      "max": 0.0109231808
+    },
+    "requests": {
+      "median": 13,
+      "min": 13,
+      "max": 13
+    },
+    "all_attempts_input_tokens": 436905,
+    "all_attempts_output_tokens": 42695,
+    "all_attempts_cost_usd": 0.0201642952,
+    "all_attempts_estimated_cost_usd": 0.0201642952,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 17.429171896645745,
+      "total_tokens": -34.73853157335841,
+      "estimated_cost_usd": 0.024460396976322407,
+      "cost_usd": 0.02446039697634461
+    }
+  },
+  {
+    "model": "meta/muse-spark-1.3-contributor",
+    "harness": "opencode",
+    "condition": "baseline",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 378.0168069380088,
+      "min": 337.77084191200265,
+      "max": 418.262771964015
+    },
+    "input_tokens": {
+      "median": 273560.0,
+      "min": 205458,
+      "max": 341662
+    },
+    "output_tokens": {
+      "median": 23112.5,
+      "min": 16196,
+      "max": 30029
+    },
+    "total_tokens": {
+      "median": 296672.5,
+      "min": 221654,
+      "max": 371691
+    },
+    "cached_input_tokens": {
+      "median": 179453.5,
+      "min": 134657,
+      "max": 224250
+    },
+    "reasoning_tokens": {
+      "median": 15514.0,
+      "min": 10020,
+      "max": 21008
+    },
+    "cost_usd": {
+      "median": 0.014392057,
+      "min": 0.010588614,
+      "max": 0.0181955
+    },
+    "estimated_cost_usd": {
+      "median": 0.014392057,
+      "min": 0.010588614,
+      "max": 0.0181955
+    },
+    "requests": {
+      "median": 22.5,
+      "min": 18,
+      "max": 27
+    },
+    "all_attempts_input_tokens": 547120,
+    "all_attempts_output_tokens": 46225,
+    "all_attempts_cost_usd": 0.028784114,
+    "all_attempts_estimated_cost_usd": 0.028784114,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 0.0,
+      "total_tokens": 0.0,
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0
+    }
+  },
+  {
+    "model": "z-ai/glm-5.3-flash",
+    "harness": "opencode",
+    "condition": "rtk",
+    "attempts": 2,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "tests_failed": 2
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 42806,
+    "all_attempts_output_tokens": 33365,
+    "all_attempts_cost_usd": 0.010484420000000001,
+    "all_attempts_estimated_cost_usd": 0.0213246,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "harness": "opencode",
+    "condition": "ponytail+caveman",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 352.25277491550514,
+      "min": 246.74905966001097,
+      "max": 457.7564901709993
+    },
+    "input_tokens": {
+      "median": 267899.0,
+      "min": 181701,
+      "max": 354097
+    },
+    "output_tokens": {
+      "median": 14114.5,
+      "min": 13856,
+      "max": 14373
+    },
+    "total_tokens": {
+      "median": 282013.5,
+      "min": 195557,
+      "max": 368470
+    },
+    "cached_input_tokens": {
+      "median": 246336.0,
+      "min": 162624,
+      "max": 330048
+    },
+    "reasoning_tokens": {
+      "median": 8796.0,
+      "min": 8369,
+      "max": 9223
+    },
+    "cost_usd": {
+      "median": 0.0076606208,
+      "min": 0.0070058072,
+      "max": 0.0083154344
+    },
+    "estimated_cost_usd": {
+      "median": 0.0076606208,
+      "min": 0.0070058072,
+      "max": 0.0083154344
+    },
+    "requests": {
+      "median": 14.0,
+      "min": 11,
+      "max": 17
+    },
+    "all_attempts_input_tokens": 535798,
+    "all_attempts_output_tokens": 28229,
+    "all_attempts_cost_usd": 0.0153212416,
+    "all_attempts_estimated_cost_usd": 0.0153212416,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -12.297787823301064,
+      "total_tokens": -37.74000410631378,
+      "estimated_cost_usd": -29.85106848859874,
+      "cost_usd": -29.85106848859873
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-vl:free",
+    "harness": "opencode",
+    "condition": "ponytail+caveman+rtk",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {
+      "tests_failed": 1
+    },
+    "wall_seconds": {
+      "median": 252.14667112099414,
+      "min": 252.14667112099414,
+      "max": 252.14667112099414
+    },
+    "input_tokens": {
+      "median": 496165,
+      "min": 496165,
+      "max": 496165
+    },
+    "output_tokens": {
+      "median": 15060,
+      "min": 15060,
+      "max": 15060
+    },
+    "total_tokens": {
+      "median": 511225,
+      "min": 511225,
+      "max": 511225
+    },
+    "cached_input_tokens": {
+      "median": 311568,
+      "min": 311568,
+      "max": 311568
+    },
+    "reasoning_tokens": {
+      "median": 6793,
+      "min": 6793,
+      "max": 6793
+    },
+    "cost_usd": {
+      "median": 0,
+      "min": 0,
+      "max": 0
+    },
+    "estimated_cost_usd": {
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "requests": {
+      "median": 24,
+      "min": 24,
+      "max": 24
+    },
+    "all_attempts_input_tokens": 783508,
+    "all_attempts_output_tokens": 26981,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "harness": "opencode",
+    "condition": "ponytail+rtk",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {
+      "nonzero_exit": 1,
+      "tests_failed": 1,
+      "usage_incomplete": 1,
+      "condition_unverified": 1
+    },
+    "wall_seconds": {
+      "median": 467.68312196100305,
+      "min": 467.68312196100305,
+      "max": 467.68312196100305
+    },
+    "input_tokens": {
+      "median": 405002,
+      "min": 405002,
+      "max": 405002
+    },
+    "output_tokens": {
+      "median": 21620,
+      "min": 21620,
+      "max": 21620
+    },
+    "total_tokens": {
+      "median": 426622,
+      "min": 426622,
+      "max": 426622
+    },
+    "cached_input_tokens": {
+      "median": 373504,
+      "min": 373504,
+      "max": 373504
+    },
+    "reasoning_tokens": {
+      "median": 13385,
+      "min": 13385,
+      "max": 13385
+    },
+    "cost_usd": {
+      "median": 0.0115091312,
+      "min": 0.0115091312,
+      "max": 0.0115091312
+    },
+    "estimated_cost_usd": {
+      "median": 0.011509131200000002,
+      "min": 0.011509131200000002,
+      "max": 0.011509131200000002
+    },
+    "requests": {
+      "median": 18,
+      "min": 18,
+      "max": 18
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 16.44150824226598,
+      "total_tokens": -5.8148494020456525,
+      "estimated_cost_usd": 5.390056156353729,
+      "cost_usd": 5.390056156353729
+    }
+  },
+  {
+    "model": "gpt-5.6-luna",
+    "harness": "opencode",
+    "condition": "caveman",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 197.5354992049979,
+      "min": 173.8910613390035,
+      "max": 237.92348356501316
+    },
+    "input_tokens": {
+      "median": 177715,
+      "min": 162695,
+      "max": 254216
+    },
+    "output_tokens": {
+      "median": 8828,
+      "min": 8027,
+      "max": 9534
+    },
+    "total_tokens": {
+      "median": 187249,
+      "min": 170722,
+      "max": 263044
+    },
+    "cached_input_tokens": {
+      "median": 131072,
+      "min": 114176,
+      "max": 220672
+    },
+    "reasoning_tokens": {
+      "median": 5023,
+      "min": 4753,
+      "max": 6175
+    },
+    "cost_usd": null,
+    "estimated_cost_usd": {
+      "median": 0.02171584,
+      "min": 0.018578439999999998,
+      "max": 0.02643212
+    },
+    "requests": {
+      "median": 14,
+      "min": 13,
+      "max": 17
+    },
+    "all_attempts_input_tokens": 594626,
+    "all_attempts_output_tokens": 26389,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": 0.06672639999999999,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -4.730891926219272,
+      "total_tokens": -10.34841020190268,
+      "estimated_cost_usd": -9.137908382420257,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "harness": "opencode",
+    "condition": "baseline",
+    "attempts": 1,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 401.64639656500367,
+      "min": 401.64639656500367,
+      "max": 401.64639656500367
+    },
+    "input_tokens": {
+      "median": 431967,
+      "min": 431967,
+      "max": 431967
+    },
+    "output_tokens": {
+      "median": 20994,
+      "min": 20994,
+      "max": 20994
+    },
+    "total_tokens": {
+      "median": 452961,
+      "min": 452961,
+      "max": 452961
+    },
+    "cached_input_tokens": {
+      "median": 404032,
+      "min": 404032,
+      "max": 404032
+    },
+    "reasoning_tokens": {
+      "median": 13631,
+      "min": 13631,
+      "max": 13631
+    },
+    "cost_usd": {
+      "median": 0.0109205096,
+      "min": 0.0109205096,
+      "max": 0.0109205096
+    },
+    "estimated_cost_usd": {
+      "median": 0.010920509600000001,
+      "min": 0.010920509600000001,
+      "max": 0.010920509600000001
+    },
+    "requests": {
+      "median": 21,
+      "min": 21,
+      "max": 21
+    },
+    "all_attempts_input_tokens": 431967,
+    "all_attempts_output_tokens": 20994,
+    "all_attempts_cost_usd": 0.0109205096,
+    "all_attempts_estimated_cost_usd": 0.010920509600000001,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 0.0,
+      "total_tokens": 0.0,
+      "estimated_cost_usd": 0.0,
+      "cost_usd": 0.0
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-pro:free",
+    "harness": "opencode",
+    "condition": "baseline",
+    "attempts": 3,
+    "eligible": 0,
+    "code_pass": 2,
+    "exclusions": {
+      "timeout": 3,
+      "tests_failed": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 1758251,
+    "all_attempts_output_tokens": 108351,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "harness": "opencode",
+    "condition": "ponytail+rtk",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 138.21624079399044,
+      "min": 131.81419739499688,
+      "max": 165.9262497680029
+    },
+    "input_tokens": {
+      "median": 835742,
+      "min": 713263,
+      "max": 847502
+    },
+    "output_tokens": {
+      "median": 22232,
+      "min": 17291,
+      "max": 23475
+    },
+    "total_tokens": {
+      "median": 857974,
+      "min": 736738,
+      "max": 864793
+    },
+    "cached_input_tokens": {
+      "median": 766272,
+      "min": 630848,
+      "max": 766720
+    },
+    "reasoning_tokens": {
+      "median": 12330,
+      "min": 9889,
+      "max": 12989
+    },
+    "cost_usd": {
+      "median": 0.006005979,
+      "min": 0.0058592016,
+      "max": 0.0060778284000000005
+    },
+    "estimated_cost_usd": {
+      "median": 0.006005979000000001,
+      "min": 0.0058592016,
+      "max": 0.0060778284000000005
+    },
+    "requests": {
+      "median": 33,
+      "min": 30,
+      "max": 37
+    },
+    "all_attempts_input_tokens": 2396507,
+    "all_attempts_output_tokens": 62998,
+    "all_attempts_cost_usd": 0.017943009,
+    "all_attempts_estimated_cost_usd": 0.017943009000000003,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 23.25404389631882,
+      "total_tokens": 79.524016772822,
+      "estimated_cost_usd": 58.3211916423833,
+      "cost_usd": 58.321191642383276
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-mini:free",
+    "harness": "opencode",
+    "condition": "ponytail",
+    "attempts": 3,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "timeout": 3,
+      "tests_failed": 3,
+      "usage_incomplete": 3,
+      "pending_requests": 2
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "harness": "opencode",
+    "condition": "ponytail+caveman+rtk",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 122.82645422400674,
+      "min": 93.90275451701018,
+      "max": 151.7501539310033
+    },
+    "input_tokens": {
+      "median": 531629.5,
+      "min": 478163,
+      "max": 585096
+    },
+    "output_tokens": {
+      "median": 16800.0,
+      "min": 14096,
+      "max": 19504
+    },
+    "total_tokens": {
+      "median": 548429.5,
+      "min": 492259,
+      "max": 604600
+    },
+    "cached_input_tokens": {
+      "median": 503680.0,
+      "min": 441984,
+      "max": 565376
+    },
+    "reasoning_tokens": {
+      "median": 9093.5,
+      "min": 5596,
+      "max": 12591
+    },
+    "cost_usd": {
+      "median": 0.0037607955,
+      "min": 0.0035041398,
+      "max": 0.0040174512
+    },
+    "estimated_cost_usd": {
+      "median": 0.0037607955,
+      "min": 0.0035041398,
+      "max": 0.0040174512
+    },
+    "requests": {
+      "median": 25.5,
+      "min": 25,
+      "max": 26
+    },
+    "all_attempts_input_tokens": 1063259,
+    "all_attempts_output_tokens": 33600,
+    "all_attempts_cost_usd": 0.007521591,
+    "all_attempts_estimated_cost_usd": 0.007521591,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 9.530233882711325,
+      "total_tokens": 14.754371061023285,
+      "estimated_cost_usd": -0.863185654942733,
+      "cost_usd": -0.863185654942733
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-vl:free",
+    "harness": "opencode",
+    "condition": "ponytail",
+    "attempts": 1,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 258.02313822100405,
+      "min": 258.02313822100405,
+      "max": 258.02313822100405
+    },
+    "input_tokens": {
+      "median": 704451,
+      "min": 704451,
+      "max": 704451
+    },
+    "output_tokens": {
+      "median": 16321,
+      "min": 16321,
+      "max": 16321
+    },
+    "total_tokens": {
+      "median": 720772,
+      "min": 720772,
+      "max": 720772
+    },
+    "cached_input_tokens": {
+      "median": 514350,
+      "min": 514350,
+      "max": 514350
+    },
+    "reasoning_tokens": {
+      "median": 8670,
+      "min": 8670,
+      "max": 8670
+    },
+    "cost_usd": {
+      "median": 0,
+      "min": 0,
+      "max": 0
+    },
+    "estimated_cost_usd": {
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "requests": {
+      "median": 32,
+      "min": 32,
+      "max": 32
+    },
+    "all_attempts_input_tokens": 704451,
+    "all_attempts_output_tokens": 16321,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash-vl:free",
+    "harness": "opencode",
+    "condition": "caveman",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 202.1239789885003,
+      "min": 190.40331214301114,
+      "max": 213.8446458339895
+    },
+    "input_tokens": {
+      "median": 524247.5,
+      "min": 318652,
+      "max": 729843
+    },
+    "output_tokens": {
+      "median": 12972.0,
+      "min": 10520,
+      "max": 15424
+    },
+    "total_tokens": {
+      "median": 537219.5,
+      "min": 329172,
+      "max": 745267
+    },
+    "cached_input_tokens": {
+      "median": 349204.5,
+      "min": 142027,
+      "max": 556382
+    },
+    "reasoning_tokens": {
+      "median": 6087.5,
+      "min": 3612,
+      "max": 8563
+    },
+    "cost_usd": {
+      "median": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "estimated_cost_usd": {
+      "median": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "requests": {
+      "median": 25.5,
+      "min": 19,
+      "max": 32
+    },
+    "all_attempts_input_tokens": 1048495,
+    "all_attempts_output_tokens": 25944,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "harness": "opencode",
+    "condition": "ponytail",
+    "attempts": 1,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "tests_failed": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 22735,
+    "all_attempts_output_tokens": 16549,
+    "all_attempts_cost_usd": 0.0050331064,
+    "all_attempts_estimated_cost_usd": 0.0050331064,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "meta/muse-spark-1.3-contributor",
+    "harness": "opencode",
+    "condition": "ponytail+caveman+rtk",
+    "attempts": 2,
+    "eligible": 1,
+    "code_pass": 2,
+    "exclusions": {
+      "usage_incomplete": 1
+    },
+    "wall_seconds": {
+      "median": 255.27561984598287,
+      "min": 255.27561984598287,
+      "max": 255.27561984598287
+    },
+    "input_tokens": {
+      "median": 317596,
+      "min": 317596,
+      "max": 317596
+    },
+    "output_tokens": {
+      "median": 16198,
+      "min": 16198,
+      "max": 16198
+    },
+    "total_tokens": {
+      "median": 333794,
+      "min": 333794,
+      "max": 333794
+    },
+    "cached_input_tokens": {
+      "median": 212933,
+      "min": 212933,
+      "max": 212933
+    },
+    "reasoning_tokens": {
+      "median": 9503,
+      "min": 9503,
+      "max": 9503
+    },
+    "cost_usd": {
+      "median": 0.014131766,
+      "min": 0.014131766,
+      "max": 0.014131766
+    },
+    "estimated_cost_usd": {
+      "median": 0.014131765999999999,
+      "min": 0.014131765999999999,
+      "max": 0.014131765999999999
+    },
+    "requests": {
+      "median": 23,
+      "min": 23,
+      "max": 23
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -32.469769819561044,
+      "total_tokens": 12.512619133893432,
+      "estimated_cost_usd": -1.8085739932797718,
+      "cost_usd": -1.8085739932797606
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "harness": "opencode",
+    "condition": "caveman+rtk",
+    "attempts": 3,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {
+      "tests_failed": 1
+    },
+    "wall_seconds": {
+      "median": 137.70252283199807,
+      "min": 106.57788825398893,
+      "max": 168.8271574100072
+    },
+    "input_tokens": {
+      "median": 600897.0,
+      "min": 456528,
+      "max": 745266
+    },
+    "output_tokens": {
+      "median": 19546.5,
+      "min": 17818,
+      "max": 21275
+    },
+    "total_tokens": {
+      "median": 620443.5,
+      "min": 474346,
+      "max": 766541
+    },
+    "cached_input_tokens": {
+      "median": 529216.0,
+      "min": 437696,
+      "max": 620736
+    },
+    "reasoning_tokens": {
+      "median": 12378.0,
+      "min": 11234,
+      "max": 13522
+    },
+    "cost_usd": {
+      "median": 0.0049594376999999995,
+      "min": 0.0033563292,
+      "max": 0.0065625462
+    },
+    "estimated_cost_usd": {
+      "median": 0.0049594376999999995,
+      "min": 0.0033563292,
+      "max": 0.0065625462
+    },
+    "requests": {
+      "median": 26.0,
+      "min": 23,
+      "max": 29
+    },
+    "all_attempts_input_tokens": 1544757,
+    "all_attempts_output_tokens": 48739,
+    "all_attempts_cost_usd": 0.0128269596,
+    "all_attempts_estimated_cost_usd": 0.0128269596,
+    "change_percent_vs_baseline": {
+      "wall_seconds": 22.79593697723317,
+      "total_tokens": 29.82270943010905,
+      "estimated_cost_usd": 30.73373825319077,
+      "cost_usd": 30.73373825319077
+    }
+  },
+  {
+    "model": "meta/muse-spark-1.3-contributor",
+    "harness": "opencode",
+    "condition": "ponytail+rtk",
+    "attempts": 3,
+    "eligible": 1,
+    "code_pass": 3,
+    "exclusions": {
+      "timeout": 1,
+      "usage_incomplete": 1
+    },
+    "wall_seconds": {
+      "median": 317.46747689900803,
+      "min": 317.46747689900803,
+      "max": 317.46747689900803
+    },
+    "input_tokens": {
+      "median": 309550,
+      "min": 309550,
+      "max": 309550
+    },
+    "output_tokens": {
+      "median": 21036,
+      "min": 21036,
+      "max": 21036
+    },
+    "total_tokens": {
+      "median": 330586,
+      "min": 330586,
+      "max": 330586
+    },
+    "cached_input_tokens": {
+      "median": 256265,
+      "min": 256265,
+      "max": 256265
+    },
+    "reasoning_tokens": {
+      "median": 14814,
+      "min": 14814,
+      "max": 14814
+    },
+    "cost_usd": {
+      "median": 0.01004823,
+      "min": 0.01004823,
+      "max": 0.01004823
+    },
+    "estimated_cost_usd": {
+      "median": 0.01004823,
+      "min": 0.01004823,
+      "max": 0.01004823
+    },
+    "requests": {
+      "median": 26,
+      "min": 26,
+      "max": 26
+    },
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -16.017629091536744,
+      "total_tokens": 11.431292081335487,
+      "estimated_cost_usd": -30.182113647826714,
+      "cost_usd": -30.182113647826714
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "harness": "opencode",
+    "condition": "ponytail+caveman",
+    "attempts": 1,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 92.9452561460057,
+      "min": 92.9452561460057,
+      "max": 92.9452561460057
+    },
+    "input_tokens": {
+      "median": 487172,
+      "min": 487172,
+      "max": 487172
+    },
+    "output_tokens": {
+      "median": 16653,
+      "min": 16653,
+      "max": 16653
+    },
+    "total_tokens": {
+      "median": 503825,
+      "min": 503825,
+      "max": 503825
+    },
+    "cached_input_tokens": {
+      "median": 450176,
+      "min": 450176,
+      "max": 450176
+    },
+    "reasoning_tokens": {
+      "median": 8095,
+      "min": 8095,
+      "max": 8095
+    },
+    "cost_usd": {
+      "median": 0.0037167942,
+      "min": 0.0037167942,
+      "max": 0.0037167942
+    },
+    "estimated_cost_usd": {
+      "median": 0.0037167942000000003,
+      "min": 0.0037167942000000003,
+      "max": 0.0037167942000000003
+    },
+    "requests": {
+      "median": 20,
+      "min": 20,
+      "max": 20
+    },
+    "all_attempts_input_tokens": 487172,
+    "all_attempts_output_tokens": 16653,
+    "all_attempts_cost_usd": 0.0037167942,
+    "all_attempts_estimated_cost_usd": 0.0037167942000000003,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -17.116262060337572,
+      "total_tokens": 5.421245574536115,
+      "estimated_cost_usd": -2.0230861890295104,
+      "cost_usd": -2.0230861890295215
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-pro:free",
+    "harness": "opencode",
+    "condition": "caveman+rtk",
+    "attempts": 2,
+    "eligible": 0,
+    "code_pass": 2,
+    "exclusions": {
+      "timeout": 2,
+      "pending_requests": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 1052066,
+    "all_attempts_output_tokens": 46519,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-mini:free",
+    "harness": "opencode",
+    "condition": "ponytail+caveman+rtk",
+    "attempts": 2,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "timeout": 2,
+      "tests_failed": 2,
+      "usage_incomplete": 2,
+      "condition_unverified": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-pro:free",
+    "harness": "opencode",
+    "condition": "ponytail+caveman+rtk",
+    "attempts": 1,
+    "eligible": 0,
+    "code_pass": 1,
+    "exclusions": {
+      "timeout": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 498991,
+    "all_attempts_output_tokens": 52460,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-mini:free",
+    "harness": "opencode",
+    "condition": "baseline",
+    "attempts": 3,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "timeout": 3,
+      "tests_failed": 3,
+      "usage_incomplete": 3,
+      "pending_requests": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "meta/muse-spark-1.3-contributor",
+    "harness": "opencode",
+    "condition": "ponytail",
+    "attempts": 3,
+    "eligible": 3,
+    "code_pass": 3,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 335.18432846001815,
+      "min": 292.7873267289833,
+      "max": 367.8447515500011
+    },
+    "input_tokens": {
+      "median": 297411,
+      "min": 179108,
+      "max": 455339
+    },
+    "output_tokens": {
+      "median": 21133,
+      "min": 14229,
+      "max": 24262
+    },
+    "total_tokens": {
+      "median": 321673,
+      "min": 193337,
+      "max": 476472
+    },
+    "cached_input_tokens": {
+      "median": 188741,
+      "min": 135056,
+      "max": 411725
+    },
+    "reasoning_tokens": {
+      "median": 12451,
+      "min": 8918,
+      "max": 17644
+    },
+    "cost_usd": {
+      "median": 0.00941145,
+      "min": 0.007521112,
+      "max": 0.016096882
+    },
+    "estimated_cost_usd": {
+      "median": 0.00941145,
+      "min": 0.007521112,
+      "max": 0.016096882
+    },
+    "requests": {
+      "median": 23,
+      "min": 17,
+      "max": 30
+    },
+    "all_attempts_input_tokens": 931858,
+    "all_attempts_output_tokens": 59624,
+    "all_attempts_cost_usd": 0.033029444,
+    "all_attempts_estimated_cost_usd": 0.033029444,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -11.330839711847728,
+      "total_tokens": 8.426969132629413,
+      "estimated_cost_usd": -34.60663753624655,
+      "cost_usd": -34.60663753624655
+    }
+  },
+  {
+    "model": "inclusionai/ling-3.0-flash",
+    "harness": "opencode",
+    "condition": "ponytail",
+    "attempts": 1,
+    "eligible": 1,
+    "code_pass": 1,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 89.66606961400248,
+      "min": 89.66606961400248,
+      "max": 89.66606961400248
+    },
+    "input_tokens": {
+      "median": 328282,
+      "min": 328282,
+      "max": 328282
+    },
+    "output_tokens": {
+      "median": 15348,
+      "min": 15348,
+      "max": 15348
+    },
+    "total_tokens": {
+      "median": 343630,
+      "min": 343630,
+      "max": 343630
+    },
+    "cached_input_tokens": {
+      "median": 274688,
+      "min": 274688,
+      "max": 274688
+    },
+    "reasoning_tokens": {
+      "median": 9631,
+      "min": 9631,
+      "max": 9631
+    },
+    "cost_usd": {
+      "median": 0.0032460875999999997,
+      "min": 0.0032460875999999997,
+      "max": 0.0032460875999999997
+    },
+    "estimated_cost_usd": {
+      "median": 0.0032460876,
+      "min": 0.0032460876,
+      "max": 0.0032460876
+    },
+    "requests": {
+      "median": 18,
+      "min": 18,
+      "max": 18
+    },
+    "all_attempts_input_tokens": 328282,
+    "all_attempts_output_tokens": 15348,
+    "all_attempts_cost_usd": 0.0032460875999999997,
+    "all_attempts_estimated_cost_usd": 0.0032460876,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -20.04046979770584,
+      "total_tokens": -28.098243205919026,
+      "estimated_cost_usd": -14.431193148100574,
+      "cost_usd": -14.431193148100585
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-pro:free",
+    "harness": "opencode",
+    "condition": "rtk",
+    "attempts": 2,
+    "eligible": 0,
+    "code_pass": 2,
+    "exclusions": {
+      "timeout": 2
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": 903083,
+    "all_attempts_output_tokens": 99010,
+    "all_attempts_cost_usd": 0,
+    "all_attempts_estimated_cost_usd": 0.0,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-mini:free",
+    "harness": "opencode",
+    "condition": "caveman+rtk",
+    "attempts": 2,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {
+      "timeout": 2,
+      "tests_failed": 2,
+      "usage_incomplete": 2,
+      "pending_requests": 1,
+      "condition_unverified": 1
+    },
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "xiaomi/mimo-v2.6-flash",
+    "harness": "opencode",
+    "condition": "caveman+rtk",
+    "attempts": 2,
+    "eligible": 2,
+    "code_pass": 2,
+    "exclusions": {},
+    "wall_seconds": {
+      "median": 289.63765576601145,
+      "min": 284.92454123700736,
+      "max": 294.35077029501554
+    },
+    "input_tokens": {
+      "median": 186264.0,
+      "min": 177178,
+      "max": 195350
+    },
+    "output_tokens": {
+      "median": 14054.5,
+      "min": 13381,
+      "max": 14728
+    },
+    "total_tokens": {
+      "median": 200318.5,
+      "min": 190559,
+      "max": 210078
+    },
+    "cached_input_tokens": {
+      "median": 166368.0,
+      "min": 160256,
+      "max": 172480
+    },
+    "reasoning_tokens": {
+      "median": 9477.0,
+      "min": 8825,
+      "max": 10129
+    },
+    "cost_usd": {
+      "median": 0.0071865304,
+      "min": 0.0065644768,
+      "max": 0.0078085839999999995
+    },
+    "estimated_cost_usd": {
+      "median": 0.0071865304,
+      "min": 0.006564476800000001,
+      "max": 0.007808584
+    },
+    "requests": {
+      "median": 11.0,
+      "min": 11,
+      "max": 11
+    },
+    "all_attempts_input_tokens": 372528,
+    "all_attempts_output_tokens": 28109,
+    "all_attempts_cost_usd": 0.0143730608,
+    "all_attempts_estimated_cost_usd": 0.0143730608,
+    "change_percent_vs_baseline": {
+      "wall_seconds": -27.887400897138235,
+      "total_tokens": -55.77577319018635,
+      "estimated_cost_usd": -34.19235307480524,
+      "cost_usd": -34.192353074805226
+    }
+  },
+  {
+    "model": "gpt-5.6-luna",
+    "harness": "opencode",
+    "condition": "ponytail+rtk",
+    "attempts": 0,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {},
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  },
+  {
+    "model": "nex-agi/nex-n2.5-mini:free",
+    "harness": "opencode",
+    "condition": "ponytail+caveman",
+    "attempts": 0,
+    "eligible": 0,
+    "code_pass": 0,
+    "exclusions": {},
+    "wall_seconds": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "total_tokens": null,
+    "cached_input_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "estimated_cost_usd": null,
+    "requests": null,
+    "all_attempts_input_tokens": null,
+    "all_attempts_output_tokens": null,
+    "all_attempts_cost_usd": null,
+    "all_attempts_estimated_cost_usd": null,
+    "change_percent_vs_baseline": {
+      "wall_seconds": null,
+      "total_tokens": null,
+      "estimated_cost_usd": null,
+      "cost_usd": null
+    }
+  }
+]

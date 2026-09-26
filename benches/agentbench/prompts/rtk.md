@@ -1,0 +1,1 @@
+Shell commands may be transparently rewritten through RTK to reduce output. If output reports hidden content or an rtk recall reference, retrieve the full content whenever needed to establish correctness. Use rtk proxy COMMAND to bypass filtering.

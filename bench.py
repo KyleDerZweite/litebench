@@ -456,11 +456,15 @@ def parser():
     arena_check.add_argument("--generation", default=GENERATION)
     arena_check.add_argument("--arena", default=ARENA_OUT, type=Path)
     arena_check.set_defaults(func=command_arena_check)
+    commands.add_parser("agentbench", help="isolated agent efficiency benchmark; use agentbench --help")
     commands.add_parser("self-test", help="run offline validation checks").set_defaults(func=command_self_test)
     return cli
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == "agentbench":
+        import agentbench
+        return agentbench.main(sys.argv[2:])
     args = parser().parse_args()
     try:
         return args.func(args)
