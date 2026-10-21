@@ -275,7 +275,7 @@ def command_arena_check(args):
                     raise ValueError(f"duplicate arena config {config.get('config')}")
                 seen.add(config["config"])
                 original = {item["task_id"]: item["output"] for item in generation["items"]}
-                listed = {item["task_id"]: item["output"] for item in config.get("items", [])}
+                listed = {task_id: item["output"] for task_id, item in indexed_items(config.get("items", [])).items()}
                 if listed != original:
                     raise ValueError(f"{config.get('config')}: arena texts do not match the generation file")
             if not expected_sources or sources != expected_sources:
@@ -446,7 +446,7 @@ def command_self_test(_args):
     with TemporaryDirectory() as directory:
         arena_path = Path(directory) / "arena.json"
         args = argparse.Namespace(arena=arena_path, generation=GENERATION)
-        for mutation in ("valid", "metadata", "empty", "missing", "duplicate", "output"):
+        for mutation in ("valid", "metadata", "empty", "missing", "duplicate", "duplicate-task", "output"):
             candidate = copy.deepcopy(arena)
             configs = candidate["suites"]["copybench"]["configs"]
             if mutation == "metadata":
@@ -457,6 +457,10 @@ def command_self_test(_args):
                 configs.pop()
             elif mutation == "duplicate":
                 configs.append(copy.deepcopy(configs[0]))
+            elif mutation == "duplicate-task":
+                corrupt = copy.deepcopy(configs[0]["items"][0])
+                corrupt["output"] = "changed answer masked by later duplicate"
+                configs[0]["items"].insert(0, corrupt)
             elif mutation == "output":
                 configs[0]["items"][0]["output"] = "changed answer"
             write_json(arena_path, candidate)
