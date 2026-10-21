@@ -56,10 +56,14 @@ examples let you make your own judgment.
 
 ## Local use
 
-This branch adds a blind pairwise arena experiment alongside the earlier AI assessments.
-Switch between **Score** mode and **Browse AI assessments** via the top navigation.
+The start page shows writing charts and rankings, followed by original answers
+and AI assessments. The right sidebar filters configurations in both the chart
+and ranking. On mobile, use the Models button to open the filter dialog.
 
-In **Score** mode:
+Open **Score** in the top navigation for the blind pairwise arena. **AgentBench**
+opens the separate agent efficiency results.
+
+In **Score**:
 - Two blind answers are drawn for each prompt from the preserved generation batch (`2026-09-04-rerun-01`). Generation files remain the source of truth.
 - Model names and configurations stay hidden until you vote.
 - Voting options:
@@ -70,7 +74,7 @@ In **Score** mode:
 - ELO ratings start at 1000 with a K-factor of 32 and replay statelessly from your stored votes. Standings report ratings, total votes, and W · L · T · Bad breakdown.
 - Votes persist in browser `localStorage` and can be exported as JSON, imported, or reset. No AI judge is involved in Score mode.
 
-Browse mode keeps the earlier Astra xhigh assessments and criterion highlights for reference.
+The Results page keeps the Astra xhigh assessments and criterion highlights for reference.
 
 Use Python 3.9 or newer to rebuild the vote pool from generations only:
 
@@ -143,7 +147,9 @@ generation directories; keep private prompts and answers out of contributions.
 
 LiteBench code and original benchmark material use the MIT License. The page
 adapts MIT-licensed [SkateBench](https://github.com/T3-Content/skatebench)
-code and the [DeepSWE](https://deepswe.datacurve.ai/) layout. See
+code. The dashboard layout is inspired by
+[Slopalytics](https://slopalytics.com/) and the earlier
+[DeepSWE](https://deepswe.datacurve.ai/) layout. See
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Model outputs may have separate
 provider terms.
 
