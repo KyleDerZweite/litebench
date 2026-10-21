@@ -38,18 +38,25 @@ interface Pair {
   b: string;
 }
 
+function isVoteRecord(entry: unknown): entry is VoteRecord {
+  if (typeof entry !== "object" || entry === null) return false;
+  const vote = entry as Partial<VoteRecord>;
+  if (typeof vote.suite !== "string" || typeof vote.taskId !== "string" ||
+      typeof vote.a !== "string" || typeof vote.b !== "string" || vote.a === vote.b ||
+      typeof vote.ts !== "string" || !Number.isFinite(Date.parse(vote.ts)) ||
+      !["a", "b", "tie", "both_bad"].includes(vote.winner ?? "")) return false;
+  const suite = arena.suites[vote.suite];
+  return Boolean(suite?.tasks.some((task) => task.id === vote.taskId) &&
+    suite.configs.some((config) => config.config === vote.a) &&
+    suite.configs.some((config) => config.config === vote.b));
+}
+
 function loadVotes(): VoteRecord[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const parsed: unknown = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter((entry): entry is VoteRecord =>
-      typeof entry === "object" && entry !== null &&
-      typeof (entry as VoteRecord).a === "string" &&
-      typeof (entry as VoteRecord).b === "string" &&
-      ((entry as VoteRecord).winner === "a" || (entry as VoteRecord).winner === "b" || (entry as VoteRecord).winner === "tie" || (entry as VoteRecord).winner === "both_bad"),
-    );
+    return Array.isArray(parsed) ? parsed.filter(isVoteRecord) : [];
   } catch {
     return [];
   }
@@ -72,6 +79,7 @@ function drawPair(suite: ArenaSuite, avoid: string): Pair | null {
 export default function ArenaView({ suiteId }: { suiteId: string }) {
   const suite = arena.suites[suiteId];
   const [votes, setVotes] = useState<VoteRecord[]>([]);
+  const [hydrated, setHydrated] = useState(false);
   const [pair, setPair] = useState<Pair | null>(null);
   const [revealed, setRevealed] = useState<VoteWinner | null>(null);
   const [notice, setNotice] = useState("");
@@ -80,15 +88,17 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
 
   useEffect(() => {
     setVotes(loadVotes());
+    setHydrated(true);
   }, []);
 
   useEffect(() => {
+    if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(votes));
     } catch {
       setNotice("Browser storage is unavailable, votes will not persist.");
     }
-  }, [votes]);
+  }, [votes, hydrated]);
 
   useEffect(() => {
     avoidRef.current = "";
@@ -132,10 +142,8 @@ export default function ArenaView({ suiteId }: { suiteId: string }) {
   const importVotes = async (file: File) => {
     try {
       const parsed: unknown = JSON.parse(await file.text());
-      if (!Array.isArray(parsed)) throw new Error("expected a vote list");
-      setVotes((current) => [...current, ...(parsed as VoteRecord[]).filter((entry) =>
-        entry && typeof entry.a === "string" && typeof entry.b === "string" &&
-        (entry.winner === "a" || entry.winner === "b" || entry.winner === "tie" || entry.winner === "both_bad"))]);
+      if (!Array.isArray(parsed) || !parsed.every(isVoteRecord)) throw new Error("invalid vote list");
+      setVotes((current) => [...current, ...parsed]);
       setNotice(`Imported votes from ${file.name}.`);
     } catch {
       setNotice("Import failed. Expected the exported vote JSON.");

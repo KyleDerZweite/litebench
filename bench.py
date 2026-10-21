@@ -258,9 +258,19 @@ def command_arena_check(args):
             if any(task.get("prompt") != public.get("prompt") for task, public in zip(entry["tasks"], tasks)):
                 raise ValueError("arena prompt text does not match public tasks")
             seen = set()
+            sources = set()
+            expected_sources = {path.resolve() for path in (ROOT / "benches" / suite / "generations" / args.generation).glob("*.json")}
             for config in entry.get("configs", []):
-                source = ROOT / config.get("generation_file", "")
+                source = (ROOT / config.get("generation_file", "")).resolve()
+                if source not in expected_sources or source in sources:
+                    raise ValueError("arena must use each source from the selected generation exactly once")
+                sources.add(source)
                 generation, _ = load_generation(source, suite)
+                batch = generation["batch"]
+                if (config.get("model") != batch["model"] or
+                        config.get("reasoning_effort") != batch["reasoning_effort"] or
+                        config.get("config") != f"{batch['model']} [{batch['reasoning_effort']}]"):
+                    raise ValueError("arena configuration does not match source metadata")
                 if config.get("config") in seen:
                     raise ValueError(f"duplicate arena config {config.get('config')}")
                 seen.add(config["config"])
@@ -268,6 +278,8 @@ def command_arena_check(args):
                 listed = {item["task_id"]: item["output"] for item in config.get("items", [])}
                 if listed != original:
                     raise ValueError(f"{config.get('config')}: arena texts do not match the generation file")
+            if not expected_sources or sources != expected_sources:
+                raise ValueError("arena must cover the complete selected generation batch")
             print(f"{suite}: OK, {len(entry['configs'])} configurations over {len(tasks)} prompts")
         except (ValueError, OSError, AttributeError, KeyError, TypeError) as exc:
             print(f"{suite}: {exc}", file=sys.stderr)
@@ -426,7 +438,32 @@ def command_self_test(_args):
             pass
         else:
             raise AssertionError("incomplete or extra generation coverage accepted")
-    print("self-test: OK, evidence, derived score, hash, duplicate, private-source, SSE and batch coverage checks")
+    from contextlib import redirect_stdout, redirect_stderr
+    from io import StringIO
+    from tempfile import TemporaryDirectory
+
+    arena = read_json(ARENA_OUT)
+    with TemporaryDirectory() as directory:
+        arena_path = Path(directory) / "arena.json"
+        args = argparse.Namespace(arena=arena_path, generation=GENERATION)
+        for mutation in ("valid", "metadata", "empty", "missing", "duplicate", "output"):
+            candidate = copy.deepcopy(arena)
+            configs = candidate["suites"]["copybench"]["configs"]
+            if mutation == "metadata":
+                configs[0].update(config="invented [high]", model="invented", reasoning_effort="high")
+            elif mutation == "empty":
+                configs.clear()
+            elif mutation == "missing":
+                configs.pop()
+            elif mutation == "duplicate":
+                configs.append(copy.deepcopy(configs[0]))
+            elif mutation == "output":
+                configs[0]["items"][0]["output"] = "changed answer"
+            write_json(arena_path, candidate)
+            with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+                result = command_arena_check(args)
+            assert result == (0 if mutation == "valid" else 1), mutation
+    print("self-test: OK, evidence, derived score, hash, duplicate, private-source, SSE, batch coverage and arena corruption checks")
     return 0
 
 
