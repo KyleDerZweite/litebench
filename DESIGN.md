@@ -115,3 +115,32 @@ Votes über Reload und Bereichswechsel sowie Import, Export und Reset.
 Desktop und Mobile werden gerendert und mit Tastatur bedient. TypeScript,
 ELO- und Evidence-Tests, Datenvalidierung und der statische Pages-Build bleiben
 verbindliche Checks. Owner-Akzeptanz des neuen Designs bleibt Kyle vorbehalten.
+
+## Prüfstand des Redesigns
+
+Am 21. Oktober 2026 wurde der Implementierungsstand `f72cd75` gegen `ce3f13b`
+geprüft. Die unabhängigen Standards- und Spec-Reviews meldeten keine offenen
+Befunde. Der vorherige Vertragsreview wurde mit den oben genannten
+Präzisierungen zu Suite-Besitz, Filterschlüsseln und Dialogbedienung eingearbeitet.
+
+`bun run check`, `bun app/elo.test.ts`, `bun app/evidence.test.ts` und
+`bun run build:pages` bestanden im Visualizer. Im Repository bestanden
+`python3 bench.py check`, `evaluation-check`, `arena-check` und `self-test`.
+
+Eine echte Chromium-Prüfung lief gegen den Entwicklungsserver und anschließend
+gegen den statischen Pages-Export unter `/litebench/`. Sie prüfte Startseite,
+Filter und leere Auswahl mit Wiederherstellung, Suite- und Achsenwechsel,
+Ranking zu Originalantwort, exakte Antworttexte mit und ohne Highlights,
+Score-Votes samt Reload, Bereichs- und Suite-Wechsel, Skip, Import, Export,
+Reset und AgentBench-Modellauswahl. Die Layoutprüfung von 320 bis 1440px
+fand keinen bleibenden horizontalen Seitenüberlauf. Escape, Fokus-Rückgabe,
+Dialogsuche und der Wechsel über 900px bestanden. Es gab keine Page-Errors
+oder externen Netzwerkanfragen. Desktop-, Mobile- und AgentBench-Render wurden
+visuell geprüft.
+
+Die T3-Screenshot-Automation lieferte Timeouts. Die Render- und Bedienprüfung
+verwendete deshalb den bereits installierten lokalen Chromium über Playwright.
+Echte Touch-Hardware und Screenreader wurden nicht geprüft. Die gestalterische
+Owner-Akzeptanz durch Kyle steht aus. Das Redesign wurde noch nicht gemergt
+oder auf GitHub Pages veröffentlicht. Der bestehende Workflow läuft erst nach
+einem Push auf `main`, daher gibt es für diesen PR keinen eigenen CI-Lauf.
