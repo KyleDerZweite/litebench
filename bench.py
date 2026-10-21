@@ -203,6 +203,90 @@ def require_generation_coverage(sources):
         raise ValueError(f"Evaluation must cover the complete retained generation batch: {len(missing)} missing, {len(extra)} unexpected sources")
 
 
+ARENA_OUT = ROOT / "visualizer/data/arena.json"
+
+
+def command_arena_build(args):
+    payload = {
+        "benchmark": "LiteBench Arena",
+        "generation": args.generation,
+        "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "suites": {},
+    }
+    configs = 0
+    for suite, name in SUITES.items():
+        _, tasks = load_tasks(ROOT / "benches" / suite / "public.json")
+        suite_payload = {
+            "name": name,
+            "tasks": [{key: task.get(key, "") for key in ("id", "title", "prompt")} for task in tasks],
+            "configs": [],
+        }
+        for path in sorted((ROOT / "benches" / suite / "generations" / args.generation).glob("*.json")):
+            data, _ = load_generation(path, suite)
+            batch = data["batch"]
+            outputs = {item["task_id"]: item["output"] for item in data["items"]}
+            suite_payload["configs"].append({
+                "config": f"{batch['model']} [{batch['reasoning_effort']}]",
+                "model": batch["model"],
+                "reasoning_effort": batch["reasoning_effort"],
+                "generation_file": path.relative_to(ROOT).as_posix(),
+                "items": [{"task_id": task["id"], "output": outputs[task["id"]]} for task in tasks],
+            })
+            configs += 1
+        if not suite_payload["configs"]:
+            raise ValueError(f"No generation files found for {suite}/{args.generation}")
+        payload["suites"][suite] = suite_payload
+    write_json(args.out, payload)
+    print(f"{args.out}: wrote {configs} arena configurations from {args.generation}")
+    return 0
+
+
+def command_arena_check(args):
+    data = read_json(args.arena)
+    if not isinstance(data, dict) or data.get("generation") != args.generation:
+        raise ValueError(f"{args.arena}: expected arena data for generation {args.generation}")
+    suites = data.get("suites")
+    if not isinstance(suites, dict) or set(suites) != set(SUITES):
+        raise ValueError(f"{args.arena}: expected suites {sorted(SUITES)}")
+    valid = True
+    for suite, name in SUITES.items():
+        try:
+            _, tasks = load_tasks(ROOT / "benches" / suite / "public.json")
+            entry = suites[suite]
+            if [task["id"] for task in entry.get("tasks", [])] != [task["id"] for task in tasks]:
+                raise ValueError("arena task list does not match public tasks")
+            if any(task.get("prompt") != public.get("prompt") for task, public in zip(entry["tasks"], tasks)):
+                raise ValueError("arena prompt text does not match public tasks")
+            seen = set()
+            sources = set()
+            expected_sources = {path.resolve() for path in (ROOT / "benches" / suite / "generations" / args.generation).glob("*.json")}
+            for config in entry.get("configs", []):
+                source = (ROOT / config.get("generation_file", "")).resolve()
+                if source not in expected_sources or source in sources:
+                    raise ValueError("arena must use each source from the selected generation exactly once")
+                sources.add(source)
+                generation, _ = load_generation(source, suite)
+                batch = generation["batch"]
+                if (config.get("model") != batch["model"] or
+                        config.get("reasoning_effort") != batch["reasoning_effort"] or
+                        config.get("config") != f"{batch['model']} [{batch['reasoning_effort']}]"):
+                    raise ValueError("arena configuration does not match source metadata")
+                if config.get("config") in seen:
+                    raise ValueError(f"duplicate arena config {config.get('config')}")
+                seen.add(config["config"])
+                original = {item["task_id"]: item["output"] for item in generation["items"]}
+                listed = {task_id: item["output"] for task_id, item in indexed_items(config.get("items", [])).items()}
+                if listed != original:
+                    raise ValueError(f"{config.get('config')}: arena texts do not match the generation file")
+            if not expected_sources or sources != expected_sources:
+                raise ValueError("arena must cover the complete selected generation batch")
+            print(f"{suite}: OK, {len(entry['configs'])} configurations over {len(tasks)} prompts")
+        except (ValueError, OSError, AttributeError, KeyError, TypeError) as exc:
+            print(f"{suite}: {exc}", file=sys.stderr)
+            valid = False
+    return 0 if valid else 1
+
+
 def command_prompts(args):
     data, tasks = load_tasks(args.tasks)
     print(f"LiteBench / {task_set_name(data)} / {len(tasks)} prompts")
@@ -354,7 +438,36 @@ def command_self_test(_args):
             pass
         else:
             raise AssertionError("incomplete or extra generation coverage accepted")
-    print("self-test: OK, evidence, derived score, hash, duplicate, private-source, SSE and batch coverage checks")
+    from contextlib import redirect_stdout, redirect_stderr
+    from io import StringIO
+    from tempfile import TemporaryDirectory
+
+    arena = read_json(ARENA_OUT)
+    with TemporaryDirectory() as directory:
+        arena_path = Path(directory) / "arena.json"
+        args = argparse.Namespace(arena=arena_path, generation=GENERATION)
+        for mutation in ("valid", "metadata", "empty", "missing", "duplicate", "duplicate-task", "output"):
+            candidate = copy.deepcopy(arena)
+            configs = candidate["suites"]["copybench"]["configs"]
+            if mutation == "metadata":
+                configs[0].update(config="invented [high]", model="invented", reasoning_effort="high")
+            elif mutation == "empty":
+                configs.clear()
+            elif mutation == "missing":
+                configs.pop()
+            elif mutation == "duplicate":
+                configs.append(copy.deepcopy(configs[0]))
+            elif mutation == "duplicate-task":
+                corrupt = copy.deepcopy(configs[0]["items"][0])
+                corrupt["output"] = "changed answer masked by later duplicate"
+                configs[0]["items"].insert(0, corrupt)
+            elif mutation == "output":
+                configs[0]["items"][0]["output"] = "changed answer"
+            write_json(arena_path, candidate)
+            with redirect_stdout(StringIO()), redirect_stderr(StringIO()):
+                result = command_arena_check(args)
+            assert result == (0 if mutation == "valid" else 1), mutation
+    print("self-test: OK, evidence, derived score, hash, duplicate, private-source, SSE, batch coverage and arena corruption checks")
     return 0
 
 
@@ -376,6 +489,14 @@ def parser():
     build.add_argument("--evaluation", default=EVALUATION)
     build.add_argument("--out", default=LEADERBOARD, type=Path)
     build.set_defaults(func=command_build)
+    arena_build = commands.add_parser("arena-build", help="build human-vote arena data from generations only")
+    arena_build.add_argument("--generation", default=GENERATION)
+    arena_build.add_argument("--out", default=ARENA_OUT, type=Path)
+    arena_build.set_defaults(func=command_arena_build)
+    arena_check = commands.add_parser("arena-check", help="verify arena data matches generation files")
+    arena_check.add_argument("--generation", default=GENERATION)
+    arena_check.add_argument("--arena", default=ARENA_OUT, type=Path)
+    arena_check.set_defaults(func=command_arena_check)
     commands.add_parser("agentbench", help="isolated agent efficiency benchmark; use agentbench --help")
     commands.add_parser("self-test", help="run offline validation checks").set_defaults(func=command_self_test)
     return cli
