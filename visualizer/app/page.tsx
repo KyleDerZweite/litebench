@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   CartesianGrid,
   ResponsiveContainer,
@@ -11,13 +12,10 @@ import {
   YAxis,
 } from "recharts";
 import leaderboardData from "../data/leaderboard.json";
-import ArenaView from "./arena";
-import Link from "next/link";
+import SuiteNavigation, { suites, SuiteId } from "./suite-navigation";
 import { useIsMobile } from "../hooks/use-mobile";
 import { evidenceSegments } from "./evidence";
 
-type SuiteId = "copybench" | "naturalbench" | "cefrbench";
-type Mode = "score" | "browse";
 type Scope = "best" | "all";
 type MatrixAxis = "cost" | "tokens" | "latency";
 
@@ -33,7 +31,13 @@ interface Judgment {
   score: number;
   brief_ok: boolean;
   realized_cefr: string | null;
-  issues: { code: string; category: string; severity: string; evidence: string; explanation: string }[];
+  issues: {
+    code: string;
+    category: string;
+    severity: string;
+    evidence: string;
+    explanation: string;
+  }[];
   note: string;
 }
 
@@ -89,40 +93,34 @@ interface Leaderboard {
     human_validated: boolean;
     judge: { model: string; reasoning_effort: string };
   };
-  suites: Record<SuiteId, {
-    name: string;
-    score_label: string;
-    task_count: number;
-    tasks: Task[];
-    runs: Run[];
-  }>;
+  suites: Record<
+    SuiteId,
+    {
+      name: string;
+      score_label: string;
+      task_count: number;
+      tasks: Task[];
+      runs: Run[];
+    }
+  >;
 }
 
 const data = leaderboardData as unknown as Leaderboard;
 const repository = "https://github.com/KyleDerZweite/litebench";
-const effortOrder: Record<string, number> = { low: 0, medium: 1, high: 2, xhigh: 3, max: 4 };
-const modelColors: Record<string, string> = {
-  "gpt-5.6-luna": "#3fa66b",
-  "gpt-5.6-terra": "#3fa66b",
-  "gpt-5.6-sol": "#3fa66b",
-  "gemini-3.8-flash-high": "#54a7f5",
-  "z-ai/glm-5.3-flash": "#b58cff",
+const effortOrder: Record<string, number> = {
+  low: 0,
+  medium: 1,
+  high: 2,
+  xhigh: 3,
+  max: 4,
 };
-
-const suites = [
-  {
-    id: "copybench" as const,
-    label: "CopyBench Lite",
-  },
-  {
-    id: "naturalbench" as const,
-    label: "NaturalBench Lite",
-  },
-  {
-    id: "cefrbench" as const,
-    label: "CEFRBench Lite",
-  },
-];
+const modelColors: Record<string, string> = {
+  "gpt-5.6-luna": "#9b94ee",
+  "gpt-5.6-terra": "#d69978",
+  "gpt-5.6-sol": "#c5d0da",
+  "gemini-3.8-flash-high": "#56ca80",
+  "z-ai/glm-5.3-flash": "#94c4ff",
+};
 
 function formatNumber(value: number, decimals = 1) {
   return Number.isInteger(value) ? value.toFixed(0) : value.toFixed(decimals);
@@ -134,7 +132,9 @@ function formatScore(value: number) {
 
 function compactTokens(value: number | null) {
   if (value === null) return "N/A";
-  return value >= 1000 ? `${formatNumber(value / 1000)}k` : Math.round(value).toString();
+  return value >= 1000
+    ? `${formatNumber(value / 1000)}k`
+    : Math.round(value).toString();
 }
 
 function formatCost(value: number | null) {
@@ -160,7 +160,9 @@ function bestByModel(runs: Run[]) {
     if (
       !current ||
       score > currentScore ||
-      (score === currentScore && (effortOrder[run.reasoning_effort] ?? 99) < (effortOrder[current.reasoning_effort] ?? 99))
+      (score === currentScore &&
+        (effortOrder[run.reasoning_effort] ?? 99) <
+          (effortOrder[current.reasoning_effort] ?? 99))
     ) {
       best.set(run.model, run);
     }
@@ -169,20 +171,24 @@ function bestByModel(runs: Run[]) {
 }
 
 function ModelMark({ model }: { model: string }) {
-  return <i aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: modelColors[model] || "#888" }} />;
-}
-
-function LiteMark() {
   return (
-    <div className="relative grid h-14 w-14 rotate-[-4deg] place-items-center border-2 border-white text-sm font-black tracking-tight text-orange-500 shadow-[0_0_35px_rgb(249_115_22_/_0.12)]">
-      LB
-    </div>
+    <i
+      aria-hidden="true"
+      className="h-2.5 w-2.5 shrink-0 rounded-full"
+      style={{ background: modelColors[model] || "#888" }}
+    />
   );
 }
 
-function ScopeToggle({ value, onChange }: { value: Scope; onChange: (scope: Scope) => void }) {
+function ScopeToggle({
+  value,
+  onChange,
+}: {
+  value: Scope;
+  onChange: (scope: Scope) => void;
+}) {
   return (
-    <div className="flex border border-neutral-800 font-mono text-[10px] uppercase">
+    <div className="flex border border-neutral-800 text-xs">
       {(["best", "all"] as Scope[]).map((scope) => (
         <button
           aria-pressed={value === scope}
@@ -198,67 +204,113 @@ function ScopeToggle({ value, onChange }: { value: Scope; onChange: (scope: Scop
   );
 }
 
-function ModelFilter({ runs, selected, onChange }: {
+function ModelFilter({
+  runs,
+  selected,
+  onChange,
+  mobileContainer,
+}: {
   runs: Run[];
+  mobileContainer: HTMLDivElement | null;
   selected: Set<string>;
   onChange: (next: Set<string>) => void;
 }) {
+  const mobile = useIsMobile();
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const dialog = useRef<HTMLDialogElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
   const models = [...new Set(runs.map((run) => run.model))].sort();
   const allKeys = runs.map(runKey);
+  const count = allKeys.filter((key) => selected.has(key)).length;
 
-  return (
-    <details className="model-filter relative z-30">
-      <summary className="flex cursor-pointer items-center gap-2 border border-neutral-800 bg-neutral-900/50 px-4 py-2 font-mono text-[10px] uppercase text-neutral-300 hover:bg-neutral-900">
-        Configs [{allKeys.filter((key) => selected.has(key)).length}/{allKeys.length}]
-        <span aria-hidden="true" className="text-neutral-600">⌄</span>
-      </summary>
-      <div className="absolute left-0 right-auto top-[calc(100%+.5rem)] w-[min(23rem,calc(100vw-2rem))] border border-neutral-800 bg-neutral-950 shadow-2xl sm:left-auto sm:right-0">
-        <div className="max-h-[min(28rem,40vh)] overflow-y-auto p-2">
-          {models.map((model) => {
+  useEffect(() => {
+    if (!mobile) setOpen(false);
+    if (mobile && open) dialog.current?.showModal();
+    else dialog.current?.close();
+  }, [mobile, open]);
+
+  const filters = (
+    <>
+      <div className="filter-heading">
+        <h2 id="model-filter-title">
+          Models{" "}
+          <span>
+            {
+              models.filter((model) =>
+                runs.some(
+                  (run) => run.model === model && selected.has(runKey(run)),
+                ),
+              ).length
+            }
+          </span>
+        </h2>
+        <button type="button" onClick={() => onChange(new Set(allKeys))}>
+          Reset
+        </button>
+      </div>
+      <label className="model-search">
+        <span className="sr-only">Find models</span>
+        <span aria-hidden="true">⌕</span>
+        <input
+          type="search"
+          placeholder="Find models"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+      </label>
+      <p className="filter-caption">
+        {count} of {allKeys.length} configurations
+      </p>
+      <div className="model-list">
+        {models
+          .filter((model) => model.toLowerCase().includes(search.toLowerCase()))
+          .map((model) => {
             const modelRuns = runs.filter((run) => run.model === model);
-            const modelKeys = modelRuns.map(runKey);
-            const selectedCount = modelKeys.filter((key) => selected.has(key)).length;
-            const allSelected = selectedCount === modelKeys.length;
-            const someSelected = selectedCount > 0 && !allSelected;
-
+            const keys = modelRuns.map(runKey);
+            const selectedCount = keys.filter((key) =>
+              selected.has(key),
+            ).length;
+            const allSelected = selectedCount === keys.length;
             return (
-              <div className="border-b border-white/5 px-2 py-3 last:border-0" key={model}>
-                <div className="flex items-center gap-2.5">
-                  <button
-                    aria-checked={allSelected ? true : someSelected ? "mixed" : false}
-                    aria-label={`${allSelected ? "Deselect" : "Select"} all ${model} configurations`}
-                    className={`grid h-4 w-4 shrink-0 place-items-center rounded-[2px] border text-[10px] ${selectedCount ? "border-neutral-200 bg-neutral-100 text-black" : "border-neutral-800 text-transparent"}`}
-                    onClick={() => {
-                      const next = new Set(selected);
-                      modelKeys.forEach((key) => allSelected ? next.delete(key) : next.add(key));
-                      onChange(next);
-                    }}
-                    role="checkbox"
-                    type="button"
-                  >
-                    {someSelected ? "−" : "✓"}
-                  </button>
+              <div className="model-group" key={model}>
+                <button
+                  className="model-toggle"
+                  type="button"
+                  role="checkbox"
+                  aria-checked={
+                    allSelected ? true : selectedCount ? "mixed" : false
+                  }
+                  aria-label={`${allSelected ? "Deselect" : "Select"} all ${model} configurations`}
+                  onClick={() => {
+                    const next = new Set(selected);
+                    keys.forEach((key) =>
+                      allSelected ? next.delete(key) : next.add(key),
+                    );
+                    onChange(next);
+                  }}
+                >
                   <ModelMark model={model} />
-                  <span className="min-w-0 flex-1 truncate font-mono text-xs text-neutral-300">{model}</span>
-                  <span className="font-mono text-[10px] text-neutral-600">{selectedCount}/{modelRuns.length}</span>
-                </div>
-                <div className="ml-6 mt-2 flex flex-wrap gap-1.5">
+                  <span>{model}</span>
+                  <span className="model-check" aria-hidden="true">
+                    {allSelected ? "✓" : selectedCount ? "−" : "+"}
+                  </span>
+                </button>
+                <div className="effort-options">
                   {modelRuns.map((run) => {
                     const key = runKey(run);
-                    const active = selected.has(key);
                     return (
                       <button
+                        type="button"
+                        key={key}
+                        aria-pressed={selected.has(key)}
                         aria-label={`${model} ${run.reasoning_effort} reasoning`}
-                        aria-pressed={active}
-                        className={`border px-2 py-1 font-mono text-[9px] uppercase tracking-wide ${active ? "border-neutral-500 bg-white/[.035] text-neutral-200" : "border-neutral-800 text-neutral-600 hover:border-neutral-600 hover:text-neutral-300"}`}
-                        key={run.reasoning_effort}
                         onClick={() => {
                           const next = new Set(selected);
                           if (next.has(key)) next.delete(key);
                           else next.add(key);
                           onChange(next);
                         }}
-                        type="button"
                       >
                         {run.reasoning_effort}
                       </button>
@@ -268,13 +320,66 @@ function ModelFilter({ runs, selected, onChange }: {
               </div>
             );
           })}
-        </div>
-        <div className="flex border-t border-neutral-800 p-2">
-          <button className="flex-1 py-2 font-mono text-[10px] uppercase text-neutral-500 hover:text-white" onClick={() => onChange(new Set(allKeys))} type="button">Select all</button>
-          <button className="flex-1 py-2 font-mono text-[10px] uppercase text-neutral-500 hover:text-white" onClick={() => onChange(new Set())} type="button">Clear</button>
-        </div>
+        {!models.some((model) =>
+          model.toLowerCase().includes(search.toLowerCase()),
+        ) && <p className="filter-caption">No models match your search.</p>}
       </div>
-    </details>
+      <div className="filter-actions">
+        <button type="button" onClick={() => onChange(new Set(allKeys))}>
+          Select all
+        </button>
+        <button type="button" onClick={() => onChange(new Set())}>
+          Clear
+        </button>
+      </div>
+      <p className="filter-note">
+        Filters apply to charts and rankings. Original answers remain available
+        below.
+      </p>
+    </>
+  );
+
+  return mobile ? (
+    <>
+      {mobileContainer &&
+        createPortal(
+          <button
+            ref={trigger}
+            className="mobile-filter-trigger"
+            type="button"
+            aria-haspopup="dialog"
+            onClick={() => setOpen(true)}
+          >
+            Models{" "}
+            <span>
+              {count}/{allKeys.length}
+            </span>{" "}
+            <span aria-hidden="true">☷</span>
+          </button>,
+          mobileContainer,
+        )}
+      <dialog
+        className="model-dialog"
+        ref={dialog}
+        aria-labelledby="model-filter-title"
+        onClose={() => {
+          setOpen(false);
+          trigger.current?.focus();
+        }}
+      >
+        <div className="dialog-top">
+          <span>Filter results</span>
+          <button type="button" onClick={() => dialog.current?.close()}>
+            Done
+          </button>
+        </div>
+        {filters}
+      </dialog>
+    </>
+  ) : (
+    <aside className="model-sidebar" aria-label="Model filters">
+      {filters}
+    </aside>
   );
 }
 
@@ -286,30 +391,74 @@ function MatrixTooltip({ active, payload }: any) {
       <strong>{point?.label}</strong>
       <div>Astra indicator: {formatScore(point?.score)}</div>
       <div>Brief met: {formatScore(point?.briefOkPct)}</div>
-      <div>{point?.axisLabel}: {point?.xDisplay}</div>
-      <div>{point?.costBasis} generation cost: {formatCost(point?.cost)}</div>
+      <div>
+        {point?.axisLabel}: {point?.xDisplay}
+      </div>
+      <div>
+        {point?.costBasis} generation cost: {formatCost(point?.cost)}
+      </div>
       <div>Output: {compactTokens(point?.outputTokens)} tok</div>
-      <div>Latency: {point?.latency == null ? "N/A" : `${formatNumber(point.latency / 1000, 2)}s`}</div>
+      <div>
+        Latency:{" "}
+        {point?.latency == null
+          ? "N/A"
+          : `${formatNumber(point.latency / 1000, 2)}s`}
+      </div>
     </div>
   );
 }
 
-function MatrixPoint({ activeModel, cx, cy, fill, maxX, mobile, onModelHover, payload }: any) {
-  const point = <circle cx={cx} cy={cy} fill={fill} r={activeModel === payload.model ? 5 : 3.5} />;
+function MatrixPoint({
+  activeModel,
+  cx,
+  cy,
+  fill,
+  maxX,
+  mobile,
+  onModelHover,
+  payload,
+}: any) {
+  const point = (
+    <circle
+      cx={cx}
+      cy={cy}
+      fill={fill}
+      r={activeModel === payload.model ? 5 : 3.5}
+    />
+  );
   if (mobile || !payload.highlight) {
     return <g onMouseEnter={() => onModelHover(payload.model)}>{point}</g>;
   }
-  const nearRight = maxX > 0 && payload.x <= maxX * 0.18;
-  const nearLeft = maxX > 0 && payload.x >= maxX * 0.82;
+  const nearRight = maxX > 0 && payload.x >= maxX * 0.82;
+  const nearLeft = maxX > 0 && payload.x <= maxX * 0.18;
   const textAnchor = nearRight ? "end" : nearLeft ? "start" : "middle";
   const labelX = cx + (nearRight ? -8 : nearLeft ? 8 : 0);
-  const labelY = cy + (["gpt-5.6-terra", "z-ai/glm-5.3-flash"].includes(payload.model) ? 18 : -13);
+  const labelY =
+    cy +
+    (["gpt-5.6-terra", "z-ai/glm-5.3-flash"].includes(payload.model)
+      ? 18
+      : -13);
   return (
     <g onMouseEnter={() => onModelHover(payload.model)}>
       {point}
-      <text fill={fill} fontFamily="var(--font-sans)" fontSize={12} fontWeight={600} textAnchor={textAnchor} x={labelX} y={labelY}>
+      <text
+        fill={fill}
+        fontFamily="var(--font-sans)"
+        fontSize={12}
+        fontWeight={600}
+        textAnchor={textAnchor}
+        x={labelX}
+        y={labelY}
+      >
         <tspan x={labelX}>{payload.model}</tspan>
-        <tspan fontFamily="var(--font-mono)" fontSize={7} fontWeight={500} letterSpacing=".08em" x={labelX} dy={9}>
+        <tspan
+          fontFamily="var(--font-mono)"
+          fontSize={7}
+          fontWeight={500}
+          letterSpacing=".08em"
+          x={labelX}
+          dy={9}
+        >
           {payload.reasoningEffort.toUpperCase()}
         </tspan>
       </text>
@@ -317,62 +466,101 @@ function MatrixPoint({ activeModel, cx, cy, fill, maxX, mobile, onModelHover, pa
   );
 }
 
-function PerformanceChart({ runs, configurations, mobile, axis, onAxisChange, selectedConfigurations, onConfigurationsChange, scoreLabel, hoveredModel, onModelHover }: {
+function PerformanceChart({
+  runs,
+  mobile,
+  axis,
+  onAxisChange,
+  scoreLabel,
+  hoveredModel,
+  onModelHover,
+}: {
   runs: Run[];
-  configurations: Run[];
   mobile: boolean;
   axis: MatrixAxis;
   onAxisChange: (axis: MatrixAxis) => void;
-  selectedConfigurations: Set<string>;
-  onConfigurationsChange: (configurations: Set<string>) => void;
   scoreLabel: string;
   hoveredModel: string | null;
   onModelHover: (model: string | null) => void;
 }) {
   const axisDefinition = {
-    cost: { label: "Avg cost per task", value: (run: Run) => run.average_cost_usd, format: (value: number) => value === 0 ? "$0" : mobile ? `$${value.toFixed(3)}` : formatCost(value) },
-    tokens: { label: "Avg output tokens per task", value: (run: Run) => run.average_output_tokens, format: (value: number) => compactTokens(value) },
-    latency: { label: "Avg latency per task", value: (run: Run) => run.average_latency_ms === null ? null : run.average_latency_ms / 1000, format: (value: number) => `${formatNumber(value, 2)}s` },
+    cost: {
+      label: "Avg cost per task",
+      value: (run: Run) => run.average_cost_usd,
+      format: (value: number) =>
+        value === 0
+          ? "$0"
+          : mobile
+            ? `$${value.toFixed(3)}`
+            : formatCost(value),
+    },
+    tokens: {
+      label: "Avg output tokens per task",
+      value: (run: Run) => run.average_output_tokens,
+      format: (value: number) => compactTokens(value),
+    },
+    latency: {
+      label: "Avg latency per task",
+      value: (run: Run) =>
+        run.average_latency_ms === null ? null : run.average_latency_ms / 1000,
+      format: (value: number) => `${formatNumber(value, 2)}s`,
+    },
   }[axis];
   const groups = [...new Set(runs.map((run) => run.model))].map((model) => {
     const points = runs
       .filter((run) => run.model === model)
       .map((run) => {
         const x = axisDefinition.value(run);
-        return x === null ? null : {
-          x,
-          score: run.score,
-          briefOkPct: run.brief_ok_pct,
-          label: runLabel(run),
-          axisLabel: axisDefinition.label,
-          xDisplay: axisDefinition.format(x),
-          cost: run.average_cost_usd,
-          costBasis: run.cost_basis,
-          outputTokens: run.average_output_tokens,
-          latency: run.average_latency_ms,
-          effort: effortOrder[run.reasoning_effort] ?? 99,
-          model: run.model,
-          reasoningEffort: run.reasoning_effort,
-        };
+        return x === null
+          ? null
+          : {
+              x,
+              score: run.score,
+              briefOkPct: run.brief_ok_pct,
+              label: runLabel(run),
+              axisLabel: axisDefinition.label,
+              xDisplay: axisDefinition.format(x),
+              cost: run.average_cost_usd,
+              costBasis: run.cost_basis,
+              outputTokens: run.average_output_tokens,
+              latency: run.average_latency_ms,
+              effort: effortOrder[run.reasoning_effort] ?? 99,
+              model: run.model,
+              reasoningEffort: run.reasoning_effort,
+            };
       })
       .filter((point): point is NonNullable<typeof point> => point !== null)
       .sort((a, b) => a.effort - b.effort);
-    const highlight = points.reduce((best, point) => !best || point.score > best.score ? point : best, points[0]);
+    const highlight = points.reduce(
+      (best, point) => (!best || point.score > best.score ? point : best),
+      points[0],
+    );
     return {
       model,
       color: modelColors[model] || "#888",
-      points: points.map((point) => ({ ...point, highlight: point === highlight })),
+      points: points.map((point) => ({
+        ...point,
+        highlight: point === highlight,
+      })),
     };
   });
-  const maxX = Math.max(0, ...groups.flatMap((group) => group.points.map((point) => point.x)));
+  const maxX = Math.max(
+    0,
+    ...groups.flatMap((group) => group.points.map((point) => point.x)),
+  );
   const orderedGroups = hoveredModel
-    ? groups.slice().sort((a, b) => Number(a.model === hoveredModel) - Number(b.model === hoveredModel))
+    ? groups
+        .slice()
+        .sort(
+          (a, b) =>
+            Number(a.model === hoveredModel) - Number(b.model === hoveredModel),
+        )
     : groups;
 
   return (
     <div>
       <div className="mb-2 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex border border-neutral-800 font-mono text-[10px] uppercase">
+        <div className="flex border border-neutral-800 text-xs">
           {(["cost", "tokens", "latency"] as MatrixAxis[]).map((option) => (
             <button
               aria-pressed={axis === option}
@@ -381,25 +569,58 @@ function PerformanceChart({ runs, configurations, mobile, axis, onAxisChange, se
               onClick={() => onAxisChange(option)}
               type="button"
             >
-              {option === "cost" ? "Cost" : option === "tokens" ? "Output tokens" : "Latency"}
+              {option === "cost"
+                ? "Cost"
+                : option === "tokens"
+                  ? "Output tokens"
+                  : "Latency"}
             </button>
           ))}
         </div>
-        <ModelFilter onChange={onConfigurationsChange} runs={configurations} selected={selectedConfigurations} />
       </div>
-      <section className="border border-neutral-800 bg-[#151515] p-4 sm:p-6">
-        <h3 className="mb-1 text-sm font-semibold text-neutral-200">{scoreLabel}</h3>
-        <div className="h-[390px] w-full sm:h-[540px]">
+      <section
+        className="performance-chart"
+        aria-label="Writing score comparison"
+      >
+        <h3 className="mb-1 text-sm font-semibold text-neutral-200">
+          {scoreLabel}
+        </h3>
+        <div className="chart-canvas">
           <ResponsiveContainer height="100%" width="100%">
-            <ScatterChart margin={{ top: 32, right: mobile ? 6 : 18, bottom: 42, left: mobile ? -10 : 4 }} onMouseLeave={() => onModelHover(null)}>
-              <CartesianGrid stroke="rgba(255,255,255,.13)" />
+            <ScatterChart
+              margin={{
+                top: 32,
+                right: mobile ? 6 : 18,
+                bottom: 42,
+                left: mobile ? -10 : 4,
+              }}
+              onMouseLeave={() => onModelHover(null)}
+            >
+              <CartesianGrid
+                stroke="#25211e"
+                strokeDasharray="2 6"
+                vertical={false}
+              />
               <XAxis
                 axisLine={{ stroke: "rgba(255,255,255,.16)" }}
                 dataKey="x"
-                domain={[0, (value: number) => value === 0 ? 1 : value * 1.08]}
-                label={{ value: axisDefinition.label, position: "insideBottom", offset: -29, fill: "#d4d4d4", fontFamily: "var(--font-sans)", fontSize: 12 }}
-                reversed
-                tick={{ fill: "#999", fontFamily: "var(--font-sans)", fontSize: 11 }}
+                domain={[
+                  0,
+                  (value: number) => (value === 0 ? 1 : value * 1.08),
+                ]}
+                label={{
+                  value: axisDefinition.label,
+                  position: "insideBottom",
+                  offset: -29,
+                  fill: "#d4d4d4",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 12,
+                }}
+                tick={{
+                  fill: "#999",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 11,
+                }}
                 tickFormatter={axisDefinition.format}
                 tickLine={false}
                 type="number"
@@ -408,41 +629,76 @@ function PerformanceChart({ runs, configurations, mobile, axis, onAxisChange, se
                 axisLine={false}
                 dataKey="score"
                 domain={[0, 100]}
-                tick={{ fill: "#999", fontFamily: "var(--font-sans)", fontSize: 11 }}
+                tick={{
+                  fill: "#999",
+                  fontFamily: "var(--font-sans)",
+                  fontSize: 11,
+                }}
                 tickFormatter={(value) => `${value}%`}
                 tickLine={false}
                 type="number"
               />
-              <Tooltip content={<MatrixTooltip />} cursor={{ stroke: "rgba(255,255,255,.15)", strokeDasharray: "3 3" }} />
+              <Tooltip
+                content={<MatrixTooltip />}
+                cursor={{
+                  stroke: "rgba(255,255,255,.15)",
+                  strokeDasharray: "3 3",
+                }}
+              />
               {orderedGroups.map((group) => {
-                const dimmed = hoveredModel !== null && hoveredModel !== group.model;
+                const dimmed =
+                  hoveredModel !== null && hoveredModel !== group.model;
                 const color = dimmed ? "#484848" : group.color;
                 return (
-                <Scatter
-                  data={group.points}
-                  fill={color}
-                  key={group.model}
-                  line={{ stroke: color, strokeWidth: hoveredModel === group.model ? 2.5 : 1.5 }}
-                  name={group.model}
-                  onMouseEnter={() => onModelHover(group.model)}
-                  onMouseLeave={() => onModelHover(null)}
-                  opacity={dimmed ? 0.38 : 1}
-                  shape={<MatrixPoint activeModel={hoveredModel} maxX={maxX} mobile={mobile} onModelHover={onModelHover} />}
-                />
+                  <Scatter
+                    isAnimationActive={false}
+                    data={group.points}
+                    fill={color}
+                    key={group.model}
+                    line={{
+                      stroke: color,
+                      strokeWidth: hoveredModel === group.model ? 2.5 : 2,
+                    }}
+                    name={group.model}
+                    onMouseEnter={() => onModelHover(group.model)}
+                    onMouseLeave={() => onModelHover(null)}
+                    opacity={dimmed ? 0.38 : 1}
+                    shape={
+                      <MatrixPoint
+                        activeModel={hoveredModel}
+                        maxX={maxX}
+                        mobile={mobile}
+                        onModelHover={onModelHover}
+                      />
+                    }
+                  />
                 );
               })}
             </ScatterChart>
           </ResponsiveContainer>
         </div>
-        <div className="flex flex-wrap gap-4 font-mono text-[10px] uppercase text-neutral-500 sm:hidden">
-          {groups.map((group) => <span className="flex items-center gap-2" key={group.model}><i className="h-2 w-2 rounded-full" style={{ background: group.color }} />{group.model}</span>)}
+        <div className="chart-legend">
+          {groups.map((group) => (
+            <span className="flex items-center gap-2" key={group.model}>
+              <i
+                className="h-2 w-2 rounded-full"
+                style={{ background: group.color }}
+              />
+              {group.model}
+            </span>
+          ))}
         </div>
       </section>
     </div>
   );
 }
 
-function TaskBrowser({ runs, tasks, selectedRun, onSelectRun }: {
+function TaskBrowser({
+  runs,
+  tasks,
+  selectedRun,
+  onSelectRun,
+}: {
   runs: Run[];
   tasks: Task[];
   selectedRun: string;
@@ -458,96 +714,267 @@ function TaskBrowser({ runs, tasks, selectedRun, onSelectRun }: {
   if (!run || !task) return null;
 
   return (
-    <section className="mb-10 scroll-mt-4 border border-neutral-800 bg-[#111] p-4 sm:p-6" id="read-answers" tabIndex={-1}>
+    <section className="answer-browser" id="read-answers" tabIndex={-1}>
       <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="text-xl font-semibold">Read it for yourself</h2>
-        <span className="font-mono text-[10px] uppercase text-orange-400">Demo outputs · unedited</span>
+        <span className="text-xs text-orange-400">Demo outputs · unedited</span>
       </div>
       <div className="mb-5 grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-2 font-mono text-[10px] uppercase text-neutral-400">
+        <label className="grid gap-2 text-xs text-neutral-400">
           Prompt
-          <select className="w-full min-w-0 border border-neutral-700 bg-neutral-950 px-3 py-3 text-xs normal-case text-neutral-100" onChange={(event) => { setTaskId(event.target.value); setCopyStatus(""); }} value={task.id}>
-            {tasks.map((entry, index) => <option key={entry.id} value={entry.id}>{index + 1}. {entry.title}</option>)}
+          <select
+            aria-label="Prompt"
+            className="w-full min-w-0 border border-neutral-700 bg-neutral-950 px-3 py-3 text-xs normal-case text-neutral-100"
+            onChange={(event) => {
+              setTaskId(event.target.value);
+              setCopyStatus("");
+            }}
+            value={task.id}
+          >
+            {tasks.map((entry, index) => (
+              <option key={entry.id} value={entry.id}>
+                {index + 1}. {entry.title}
+              </option>
+            ))}
           </select>
         </label>
-        <label className="grid gap-2 font-mono text-[10px] uppercase text-neutral-400">
+        <label className="grid gap-2 text-xs text-neutral-400">
           Answer from
-          <select className="w-full min-w-0 border border-neutral-700 bg-neutral-950 px-3 py-3 text-xs normal-case text-neutral-100" onChange={(event) => { onSelectRun(event.target.value); setCopyStatus(""); }} value={runKey(run)}>
-            {runs.map((entry) => <option key={runKey(entry)} value={runKey(entry)}>{runLabel(entry)}</option>)}
+          <select
+            aria-label="Answer from"
+            className="w-full min-w-0 border border-neutral-700 bg-neutral-950 px-3 py-3 text-xs normal-case text-neutral-100"
+            onChange={(event) => {
+              onSelectRun(event.target.value);
+              setCopyStatus("");
+            }}
+            value={runKey(run)}
+          >
+            {runs.map((entry) => (
+              <option key={runKey(entry)} value={runKey(entry)}>
+                {runLabel(entry)}
+              </option>
+            ))}
           </select>
         </label>
       </div>
-      <p className="mb-4 text-xs leading-5 text-neutral-400">Keep the prompt selected and switch answers to compare. The highlights are Astra's criticisms under my draft criteria. Decide which ones matter to you.</p>
+      <p className="mb-4 text-xs leading-5 text-neutral-400">
+        Keep the prompt selected and switch answers to compare. The highlights
+        are Astra's criticisms under my draft criteria. Decide which ones matter
+        to you.
+      </p>
       <div className="grid gap-4 lg:grid-cols-2">
-        <article className="min-w-0 border border-white/5 bg-black/20 p-4">
-          <h3 className="mb-3 font-mono text-[10px] uppercase tracking-wider text-neutral-400">Input · {task.title}</h3>
-          <div className="whitespace-pre-wrap break-words text-sm leading-6 text-neutral-300">{task.prompt}</div>
-        </article>
-        <article className="min-w-0 border border-white/5 bg-black/20 p-4">
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-            <h3 className="font-mono text-[10px] uppercase tracking-wider text-neutral-400">Original answer</h3>
-            {item && <div className="flex flex-wrap gap-3 text-xs text-neutral-300">
-              <label className="flex cursor-pointer items-center gap-2"><input checked={showHighlights} onChange={(event) => setShowHighlights(event.target.checked)} type="checkbox" />Highlights</label>
-              <button className="underline underline-offset-4 hover:text-orange-400" onClick={async () => {
-                try { await navigator.clipboard.writeText(item.output); setCopyStatus("Copied original answer"); }
-                catch { setCopyStatus("Copy failed. Select the answer text to copy it."); }
-              }} type="button">Copy answer</button>
-            </div>}
+        <article className="min-w-0 border border-neutral-800 bg-transparent p-4">
+          <h3 className="mb-3 text-xs  text-neutral-400">
+            Input · {task.title}
+          </h3>
+          <div className="whitespace-pre-wrap break-words text-sm leading-6 text-neutral-300">
+            {task.prompt}
           </div>
-          {item ? <div className="whitespace-pre-wrap break-words text-sm leading-6 text-neutral-200" data-original-answer>
-            {showHighlights && judgment ? evidenceSegments(item.output, judgment.issues.map((issue) => issue.evidence)).map((segment, index) =>
-              segment.issues.length ? <mark className="evidence-mark" key={index}><a aria-describedby={segment.issues.map((issue) => `astra-issue-${issue}`).join(" ")} href={`#astra-issue-${segment.issues[0]}`}>{segment.text}</a></mark> : <span key={index}>{segment.text}</span>
-            ) : item.output}
-          </div> : <p className="text-sm text-neutral-400">No answer is available for this configuration and prompt.</p>}
-          <p aria-live="polite" className="mt-2 text-xs text-neutral-400">{copyStatus}</p>
-          {item && <p className="mt-3 font-mono text-[10px] text-neutral-500">{compactTokens(item.generation.input_tokens)} input tokens · {compactTokens(item.generation.output_tokens)} output tokens · {item.generation.latency_ms === null ? "N/A" : `${formatNumber(item.generation.latency_ms / 1000, 2)}s`}</p>}
+        </article>
+        <article className="min-w-0 border border-neutral-800 bg-transparent p-4">
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h3 className="text-xs  text-neutral-400">Original answer</h3>
+            {item && (
+              <div className="flex flex-wrap gap-3 text-xs text-neutral-300">
+                <label className="flex cursor-pointer items-center gap-2">
+                  <input
+                    checked={showHighlights}
+                    onChange={(event) =>
+                      setShowHighlights(event.target.checked)
+                    }
+                    type="checkbox"
+                  />
+                  Highlights
+                </label>
+                <button
+                  className="underline underline-offset-4 hover:text-orange-400"
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(item.output);
+                      setCopyStatus("Copied original answer");
+                    } catch {
+                      setCopyStatus(
+                        "Copy failed. Select the answer text to copy it.",
+                      );
+                    }
+                  }}
+                  type="button"
+                >
+                  Copy answer
+                </button>
+              </div>
+            )}
+          </div>
+          {item ? (
+            <div
+              className="whitespace-pre-wrap break-words text-sm leading-6 text-neutral-200"
+              data-original-answer
+            >
+              {showHighlights && judgment
+                ? evidenceSegments(
+                    item.output,
+                    judgment.issues.map((issue) => issue.evidence),
+                  ).map((segment, index) =>
+                    segment.issues.length ? (
+                      <mark className="evidence-mark" key={index}>
+                        <a
+                          aria-describedby={segment.issues
+                            .map((issue) => `astra-issue-${issue}`)
+                            .join(" ")}
+                          href={`#astra-issue-${segment.issues[0]}`}
+                        >
+                          {segment.text}
+                        </a>
+                      </mark>
+                    ) : (
+                      <span key={index}>{segment.text}</span>
+                    ),
+                  )
+                : item.output}
+            </div>
+          ) : (
+            <p className="text-sm text-neutral-400">
+              No answer is available for this configuration and prompt.
+            </p>
+          )}
+          <p aria-live="polite" className="mt-2 text-xs text-neutral-400">
+            {copyStatus}
+          </p>
+          {item && (
+            <p className="mt-3 text-xs text-neutral-500">
+              {compactTokens(item.generation.input_tokens)} input tokens ·{" "}
+              {compactTokens(item.generation.output_tokens)} output tokens ·{" "}
+              {item.generation.latency_ms === null
+                ? "N/A"
+                : `${formatNumber(item.generation.latency_ms / 1000, 2)}s`}
+            </p>
+          )}
         </article>
       </div>
 
-      {item && judgment && <div className="mt-5 border-t border-white/5 pt-5">
-        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
-          <h3 className="font-mono text-xs uppercase text-neutral-300">Astra xhigh assessment</h3>
-          <span className="font-mono text-sm text-orange-400">{formatScore(item.score)} <span className="text-xs text-neutral-500">personal fit indicator</span></span>
-        </div>
-        <p className="text-sm leading-6 text-neutral-300">{judgment.note}</p>
-        <div className="mt-2 flex flex-wrap gap-4 text-xs text-neutral-400">
-          <span>Brief {judgment.brief_ok ? "met" : "flagged"}</span>
-          {judgment.realized_cefr && <span>Estimated level {judgment.realized_cefr}</span>}
-          <span>AI assessment · not yet reviewed by Kyle</span>
-        </div>
+      {item && judgment && (
+        <div className="mt-5 border-t border-neutral-800 pt-5">
+          <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
+            <h3 className="text-xs text-neutral-300">Astra xhigh assessment</h3>
+            <span className="text-sm text-orange-400">
+              {formatScore(item.score)}{" "}
+              <span className="text-xs text-neutral-500">
+                personal fit indicator
+              </span>
+            </span>
+          </div>
+          <p className="text-sm leading-6 text-neutral-300">{judgment.note}</p>
+          <div className="mt-2 flex flex-wrap gap-4 text-xs text-neutral-400">
+            <span>Brief {judgment.brief_ok ? "met" : "flagged"}</span>
+            {judgment.realized_cefr && (
+              <span>Estimated level {judgment.realized_cefr}</span>
+            )}
+            <span>AI assessment · not yet reviewed by Kyle</span>
+          </div>
 
-        <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          {judgment.issues.map((issue, index) => <article className="issue-card border border-orange-500/20 bg-orange-500/[.035] p-4" id={`astra-issue-${index}`} key={index} tabIndex={-1}>
-            <h4 className="font-mono text-[10px] uppercase text-orange-400">Astra flagged · {issue.category} · {issue.severity}</h4>
-            <p className="mt-2 text-xs font-medium text-neutral-200">{issue.code.replace(/_/g, " ")}</p>
-            {issue.evidence ? <blockquote className="mt-2 whitespace-pre-wrap break-words border-l border-orange-500/40 pl-3 text-sm text-neutral-300">{issue.evidence}</blockquote> : <p className="mt-2 text-xs text-neutral-500">Missing from the answer; no passage to highlight.</p>}
-            <p className="mt-2 text-sm leading-6 text-neutral-400">{issue.explanation}</p>
-          </article>)}
-          {!judgment.issues.length && <p className="text-sm text-neutral-400">Astra did not flag a specific passage. You may still disagree with its assessment.</p>}
-        </div>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {judgment.issues.map((issue, index) => (
+              <article
+                className="issue-card border border-orange-500/20 bg-orange-500/[.035] p-4"
+                id={`astra-issue-${index}`}
+                key={index}
+                tabIndex={-1}
+              >
+                <h4 className="text-xs text-orange-400">
+                  Astra flagged · {issue.category} · {issue.severity}
+                </h4>
+                <p className="mt-2 text-xs font-medium text-neutral-200">
+                  {issue.code.replace(/_/g, " ")}
+                </p>
+                {issue.evidence ? (
+                  <blockquote className="mt-2 whitespace-pre-wrap break-words border-l border-orange-500/40 pl-3 text-sm text-neutral-300">
+                    {issue.evidence}
+                  </blockquote>
+                ) : (
+                  <p className="mt-2 text-xs text-neutral-500">
+                    Missing from the answer; no passage to highlight.
+                  </p>
+                )}
+                <p className="mt-2 text-sm leading-6 text-neutral-400">
+                  {issue.explanation}
+                </p>
+              </article>
+            ))}
+            {!judgment.issues.length && (
+              <p className="text-sm text-neutral-400">
+                Astra did not flag a specific passage. You may still disagree
+                with its assessment.
+              </p>
+            )}
+          </div>
 
-        <details className="mt-5 border border-white/10 p-4">
-          <summary className="cursor-pointer text-sm text-neutral-300">Criterion scores and reasons · 0 to 5</summary>
-          <p className="mt-3 text-xs leading-5 text-neutral-400">The percentage is the mean criterion score divided by 5. It is a rubric index, not a probability of success. Natural style includes the unslop guidance and contributes to the score.</p>
-          <dl className="mt-4 grid gap-4 sm:grid-cols-2">
-            {Object.entries(judgment.criteria).map(([criterion, rating]) => <div key={criterion}>
-              <dt className="flex items-center justify-between gap-3 text-sm text-neutral-200"><span>{criterion.replace(/_/g, " ")}</span><span className="font-mono">{rating.score}/5</span></dt>
-              <dd className="mt-1 text-xs leading-5 text-neutral-400">{rating.reason}</dd>
-            </div>)}
-          </dl>
-        </details>
-      </div>}
-      {item && !judgment && <p className="mt-5 text-sm text-neutral-400">The new Astra assessment is not available for this answer yet.</p>}
-      <div className="mt-5 flex flex-wrap gap-4 font-mono text-[10px] uppercase">
-        <a className="text-neutral-400 underline underline-offset-4 hover:text-orange-400" href={`${repository}/blob/main/${run.generation_file}`} rel="noreferrer" target="_blank">Original generation JSON</a>
-        <a className="text-neutral-400 underline underline-offset-4 hover:text-orange-400" href={`${repository}/blob/main/${run.file}`} rel="noreferrer" target="_blank">Assessment JSON</a>
-        <a className="text-neutral-400 underline underline-offset-4 hover:text-orange-400" href={`${repository}/blob/main/${data.evaluation.protocol_file}`} rel="noreferrer" target="_blank">Criteria and judging protocol</a>
+          <details className="mt-5 border border-white/10 p-4">
+            <summary className="cursor-pointer text-sm text-neutral-300">
+              Criterion scores and reasons · 0 to 5
+            </summary>
+            <p className="mt-3 text-xs leading-5 text-neutral-400">
+              The percentage is the mean criterion score divided by 5. It is a
+              rubric index, not a probability of success. Natural style includes
+              the unslop guidance and contributes to the score.
+            </p>
+            <dl className="mt-4 grid gap-4 sm:grid-cols-2">
+              {Object.entries(judgment.criteria).map(([criterion, rating]) => (
+                <div key={criterion}>
+                  <dt className="flex items-center justify-between gap-3 text-sm text-neutral-200">
+                    <span>{criterion.replace(/_/g, " ")}</span>
+                    <span className="font-mono">{rating.score}/5</span>
+                  </dt>
+                  <dd className="mt-1 text-xs leading-5 text-neutral-400">
+                    {rating.reason}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </details>
+        </div>
+      )}
+      {item && !judgment && (
+        <p className="mt-5 text-sm text-neutral-400">
+          The new Astra assessment is not available for this answer yet.
+        </p>
+      )}
+      <div className="mt-5 flex flex-wrap gap-4 text-xs">
+        <a
+          className="text-neutral-400 underline underline-offset-4 hover:text-orange-400"
+          href={`${repository}/blob/main/${run.generation_file}`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          Original generation JSON
+        </a>
+        <a
+          className="text-neutral-400 underline underline-offset-4 hover:text-orange-400"
+          href={`${repository}/blob/main/${run.file}`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          Assessment JSON
+        </a>
+        <a
+          className="text-neutral-400 underline underline-offset-4 hover:text-orange-400"
+          href={`${repository}/blob/main/${data.evaluation.protocol_file}`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          Criteria and judging protocol
+        </a>
       </div>
     </section>
   );
 }
 
-function LeaderboardTable({ runs, scope, onScopeChange, onModelHover, onInspect }: {
+function LeaderboardTable({
+  runs,
+  scope,
+  onScopeChange,
+  onModelHover,
+  onInspect,
+}: {
   runs: Run[];
   scope: Scope;
   onScopeChange: (scope: Scope) => void;
@@ -559,14 +986,17 @@ function LeaderboardTable({ runs, scope, onScopeChange, onModelHover, onInspect 
     .sort((a, b) => b.score - a.score);
 
   return (
-    <section className="mt-8">
+    <section className="ranking-section" aria-labelledby="ranking-title">
+      <h2 id="ranking-title">Configurations</h2>
       <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
         <ScopeToggle onChange={onScopeChange} value={scope} />
-        <span className="font-mono text-[9px] uppercase text-neutral-600">{rows.length} configurations</span>
+        <span className="text-xs text-neutral-500">
+          {rows.length} configurations
+        </span>
       </div>
-      <div className="overflow-x-auto border border-white/5 bg-neutral-900/30">
-        <table className="w-full min-w-[860px] border-collapse font-mono text-[11px]">
-          <thead className="text-[9px] uppercase text-neutral-600">
+      <div className="overflow-x-auto border border-neutral-800 bg-neutral-900/30">
+        <table className="w-full min-w-[860px] border-collapse text-[13px]">
+          <thead className="text-xs text-neutral-500">
             <tr>
               <th className="px-4 py-3 text-left font-medium">Model</th>
               <th className="px-3 py-3 text-right font-medium">Personal fit</th>
@@ -580,7 +1010,7 @@ function LeaderboardTable({ runs, scope, onScopeChange, onModelHover, onInspect 
           <tbody>
             {rows.map((run) => (
               <tr
-                className="border-t border-white/5 text-neutral-400 hover:bg-white/[.025]"
+                className="border-t border-neutral-800 text-neutral-400 hover:bg-white/[.025]"
                 key={runKey(run)}
                 onMouseEnter={() => onModelHover(run.model)}
                 onMouseLeave={() => onModelHover(null)}
@@ -589,24 +1019,45 @@ function LeaderboardTable({ runs, scope, onScopeChange, onModelHover, onInspect 
                   <span className="flex items-center gap-2 text-neutral-200">
                     <ModelMark model={run.model} />
                     <span>{run.model}</span>
-                    <span className="text-neutral-600">[{run.reasoning_effort}]</span>
+                    <span className="text-neutral-500">
+                      [{run.reasoning_effort}]
+                    </span>
                   </span>
                   <span className="mt-2 block h-1.5 overflow-hidden bg-neutral-900">
-                    <span className="block h-full" style={{ background: modelColors[run.model] || "#888", width: `${run.score}%` }} />
+                    <span
+                      className="block h-full"
+                      style={{
+                        background: modelColors[run.model] || "#888",
+                        width: `${run.score}%`,
+                      }}
+                    />
                   </span>
                 </td>
                 <td className="px-3 py-3 text-right font-bold text-neutral-100">
                   {formatScore(run.score)}
                 </td>
-                <td className="px-3 py-3 text-right">{formatScore(run.brief_ok_pct)}</td>
-                <td className="px-3 py-3 text-right" title={`${run.cost_basis} generation cost`}>{formatCost(run.average_cost_usd)}</td>
-                <td className="px-3 py-3 text-right">{compactTokens(run.average_output_tokens)}</td>
-                <td className="px-3 py-3 text-right">{run.average_latency_ms === null ? "N/A" : `${formatNumber(run.average_latency_ms / 1000, 2)}s`}</td>
+                <td className="px-3 py-3 text-right">
+                  {formatScore(run.brief_ok_pct)}
+                </td>
+                <td
+                  className="px-3 py-3 text-right"
+                  title={`${run.cost_basis} generation cost`}
+                >
+                  {formatCost(run.average_cost_usd)}
+                </td>
+                <td className="px-3 py-3 text-right">
+                  {compactTokens(run.average_output_tokens)}
+                </td>
+                <td className="px-3 py-3 text-right">
+                  {run.average_latency_ms === null
+                    ? "N/A"
+                    : `${formatNumber(run.average_latency_ms / 1000, 2)}s`}
+                </td>
                 <td className="px-4 py-3 text-right">
                   <button
                     aria-controls="read-answers"
                     aria-label={`Read answers from ${runLabel(run)}`}
-                    className="uppercase text-neutral-500 hover:text-orange-500"
+                    className="text-neutral-400 hover:text-orange-500"
                     onClick={() => onInspect(run)}
                     type="button"
                   >
@@ -626,120 +1077,140 @@ export default function LiteBenchVisualizer() {
   const mobile = useIsMobile();
   const configurations = useMemo(() => {
     const unique = new Map<string, Run>();
-    Object.values(data.suites).forEach((entry) => entry.runs.forEach((run) => unique.set(runKey(run), run)));
-    return [...unique.values()].sort((a, b) => a.model.localeCompare(b.model) || (effortOrder[a.reasoning_effort] ?? 99) - (effortOrder[b.reasoning_effort] ?? 99));
+    Object.values(data.suites).forEach((entry) =>
+      entry.runs.forEach((run) => unique.set(runKey(run), run)),
+    );
+    return [...unique.values()].sort(
+      (a, b) =>
+        a.model.localeCompare(b.model) ||
+        (effortOrder[a.reasoning_effort] ?? 99) -
+          (effortOrder[b.reasoning_effort] ?? 99),
+    );
   }, []);
-  const [selectedConfigurations, setSelectedConfigurations] = useState(() => new Set(configurations.map(runKey)));
-  const [mode, setMode] = useState<Mode>("score");
+  const [mobileContainer, setMobileContainer] = useState<HTMLDivElement | null>(
+    null,
+  );
+  const [selectedConfigurations, setSelectedConfigurations] = useState(
+    () => new Set(configurations.map(runKey)),
+  );
   const [suiteId, setSuiteId] = useState<SuiteId>("copybench");
   const [scope, setScope] = useState<Scope>("best");
   const [axis, setAxis] = useState<MatrixAxis>("cost");
   const [hoveredModel, setHoveredModel] = useState<string | null>(null);
   const [inspectedRun, setInspectedRun] = useState("");
   const suiteData = data.suites[suiteId];
-  const filtered = suiteData.runs.filter((run) => selectedConfigurations.has(runKey(run)));
+  const filtered = suiteData.runs.filter((run) =>
+    selectedConfigurations.has(runKey(run)),
+  );
   const suiteModelCount = new Set(suiteData.runs.map((run) => run.model)).size;
   const suiteRunCount = suiteData.runs.length;
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#050505] text-neutral-100 selection:bg-orange-500/30">
-      <div className="noise-overlay" />
-      <div className="grid-background pointer-events-none absolute inset-0" />
-
-      <header className="relative z-10 mx-auto max-w-7xl border-b border-white/5 px-4 pb-7 pt-10">
-        <div className="flex flex-wrap items-end justify-between gap-7">
-          <div className="flex items-center gap-5">
-            <LiteMark />
-            <div>
-              <h1 className="stencil-text text-4xl leading-none tracking-tighter sm:text-6xl">LITE<span className="text-orange-500">BENCH</span></h1>
-            </div>
-          </div>
-          <div className="flex flex-col items-end gap-2 font-mono text-[10px] uppercase text-neutral-500">
-            <div className="flex gap-4"><span>Models: {suiteModelCount}</span><span>Runs: {suiteRunCount}</span></div>
-            <span>{mode === "score" ? "Human vote · ELO" : "Astra xhigh · AI assessment"}</span>
-          </div>
+    <div className="results-layout">
+      <main className="results-main" id="main-content">
+        <div className="results-toolbar">
+          <SuiteNavigation
+            value={suiteId}
+            onChange={(value) => {
+              setSuiteId(value);
+              setHoveredModel(null);
+            }}
+          />
+          <a className="read-link" href="#read-answers">
+            Read the answers <span aria-hidden="true">↗</span>
+          </a>
         </div>
-      </header>
-
-      <main className="relative z-10 mx-auto max-w-7xl px-4 py-8">
-        <nav aria-label="LiteBench mode" className="mb-4 flex flex-wrap gap-2">
-          {(["score", "browse"] as Mode[]).map((entry) => (
-            <button
-              aria-current={mode === entry ? "page" : undefined}
-              className={`border px-4 py-2 font-mono text-[10px] uppercase ${mode === entry ? "border-orange-500 bg-orange-500/10 text-orange-400" : "border-neutral-800 text-neutral-500 hover:text-white"}`}
-              key={entry}
-              onClick={() => setMode(entry)}
-              type="button"
-            >
-              {entry === "score" ? "Score" : "Browse AI assessments"}
-            </button>
-          ))}
-        </nav>
-        <nav aria-label="LiteBench suites" className="mb-8 flex flex-wrap gap-2 border-b border-white/5 pb-4">
-          <Link href="/agentbench/" className="border border-orange-500/40 px-4 py-2 font-mono text-[10px] uppercase text-orange-400 hover:text-white">AgentBench · token efficiency</Link>
-          {suites.map((item) => (
-            <button
-              aria-current={suiteId === item.id ? "page" : undefined}
-              className={`border px-4 py-2 font-mono text-[10px] uppercase ${suiteId === item.id ? "border-orange-500 bg-orange-500/10 text-orange-400" : "border-neutral-800 text-neutral-500 hover:text-white"}`}
-              key={item.id}
-              onClick={() => {
-                setSuiteId(item.id);
-                setHoveredModel(null);
-              }}
-              type="button"
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
-
-        {mode === "score" ? (
-          <ArenaView key={`arena-${suiteId}`} suiteId={suiteId} />
-        ) : (
-          <>
-            <TaskBrowser key={suiteId} onSelectRun={setInspectedRun} runs={suiteData.runs} selectedRun={inspectedRun} tasks={suiteData.tasks} />
-        <h2 className="mb-2 text-xl font-semibold text-neutral-100">Demo results</h2>
-        <p className="mb-5 text-sm leading-6 text-neutral-400">Percentages summarize Astra's 0 to 5 criterion ratings. They show fit to this rubric, not a pass probability or a general model ranking. {suiteId === "cefrbench" && "Level and style fit is a provisional estimate for the requested audience, not a CEFR certificate."}</p>
+        <section className="results-intro">
+          <div>
+            <p className="eyebrow">
+              Writing benchmarks · Astra xhigh annotations
+            </p>
+            <h1>{suites.find((suite) => suite.id === suiteId)?.label}</h1>
+          </div>
+          <p className="result-counts">
+            <span>{suiteModelCount} models</span>
+            <span>{suiteRunCount} configurations</span>
+            <span>{suiteData.tasks.length} prompts</span>
+          </p>
+        </section>
+        <p className="results-context">
+          Kyle's personal writing rubric. These preserved generations are demo
+          material, not a current model ranking. Read the original answers and
+          decide for yourself.
+        </p>
+        <div className="mobile-filter-slot" ref={setMobileContainer} />
         {filtered.length === 0 ? (
-          <section className="glass-card grid min-h-[350px] place-items-center p-6 text-center font-mono text-xs uppercase text-neutral-600">
-            <div>
-              <p>Select at least one configuration for this suite</p>
-              <div className="mt-4 flex justify-center gap-2">
-                <ModelFilter onChange={setSelectedConfigurations} runs={configurations} selected={selectedConfigurations} />
-                <button className="border border-neutral-800 px-4 py-2 text-neutral-300 hover:border-neutral-600" onClick={() => setSelectedConfigurations(new Set(configurations.map(runKey)))} type="button">Select all</button>
-              </div>
-            </div>
+          <section className="empty-results">
+            <h2>No configurations selected</h2>
+            <p>Select a model or reasoning level to compare results.</p>
+            <button
+              className="primary-button"
+              onClick={() =>
+                setSelectedConfigurations(new Set(configurations.map(runKey)))
+              }
+              type="button"
+            >
+              Select all configurations
+            </button>
           </section>
         ) : (
           <>
             <PerformanceChart
               axis={axis}
-              configurations={configurations}
               hoveredModel={hoveredModel}
               mobile={mobile}
               onAxisChange={setAxis}
-              onConfigurationsChange={setSelectedConfigurations}
               onModelHover={setHoveredModel}
               runs={filtered}
               scoreLabel={suiteData.score_label}
-              selectedConfigurations={selectedConfigurations}
             />
-            <LeaderboardTable onInspect={(run) => {
-              setInspectedRun(runKey(run));
-              const browser = document.getElementById("read-answers");
-              browser?.focus({ preventScroll: true });
-              browser?.scrollIntoView({ block: "start" });
-            }} onModelHover={setHoveredModel} onScopeChange={setScope} runs={filtered} scope={scope} />
+            <LeaderboardTable
+              onInspect={(run) => {
+                setInspectedRun(runKey(run));
+                const browser = document.getElementById("read-answers");
+                browser?.focus({ preventScroll: true });
+                browser?.scrollIntoView({ block: "start", behavior: "smooth" });
+              }}
+              onModelHover={setHoveredModel}
+              onScopeChange={setScope}
+              runs={filtered}
+              scope={scope}
+            />
           </>
         )}
-          </>
-        )}
+        <details className="methodology">
+          <summary>About these results</summary>
+          <p>
+            Percentages summarize Astra's 0 to 5 criterion ratings. They show
+            fit to this draft rubric, not a pass probability or a general model
+            ranking. Kyle has not reviewed these AI assessments.
+          </p>
+          <p>
+            Costs and latency describe the preserved generation calls. Costs may
+            be estimates. Best observed effort selects the highest-scoring
+            configuration in this batch, which favors lucky results.
+          </p>
+          {suiteId === "cefrbench" && (
+            <p>
+              Level and style fit is a provisional estimate for the requested
+              audience, not a CEFR certificate.
+            </p>
+          )}
+        </details>
+        <TaskBrowser
+          key={suiteId}
+          onSelectRun={setInspectedRun}
+          runs={suiteData.runs}
+          selectedRun={inspectedRun}
+          tasks={suiteData.tasks}
+        />
       </main>
-
-      <footer className="relative z-10 mx-auto flex max-w-7xl justify-end border-t border-white/5 px-4 py-6 font-mono text-[9px] uppercase tracking-wider text-neutral-700">
-        <span><a className="hover:text-orange-500" href="https://github.com/T3-Content/skatebench" rel="noreferrer" target="_blank">SkateBench design</a>, MIT · <a className="hover:text-orange-500" href={repository} rel="noreferrer" target="_blank">Source</a></span>
-      </footer>
-      <div className="scanline" />
+      <ModelFilter
+        mobileContainer={mobileContainer}
+        onChange={setSelectedConfigurations}
+        runs={configurations}
+        selected={selectedConfigurations}
+      />
     </div>
   );
 }

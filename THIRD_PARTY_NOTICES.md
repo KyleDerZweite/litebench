@@ -35,6 +35,9 @@ to identify model providers.
 LiteBench uses [DeepSWE's](https://deepswe.datacurve.ai/) chart-above-table
 layout. It includes no DeepSWE source code or assets.
 
+The current dashboard layout is inspired by [Slopalytics](https://slopalytics.com/).
+It uses an independent implementation without Slopalytics source code or assets.
+
 ## AgentBench interventions
 
 The Caveman prompt is vendored from JuliusBrussee/caveman at the commit recorded
