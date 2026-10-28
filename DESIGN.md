@@ -144,3 +144,42 @@ Echte Touch-Hardware und Screenreader wurden nicht geprüft. Die gestalterische
 Owner-Akzeptanz durch Kyle steht aus. Das Redesign wurde noch nicht gemergt
 oder auf GitHub Pages veröffentlicht. Der bestehende Workflow läuft erst nach
 einem Push auf `main`, daher gibt es für diesen PR keinen eigenen CI-Lauf.
+
+## Maintenance verification, 2026-10-28
+
+The preceding review records the state before delivery. PR #3 merged on
+2026-10-21 as `24da7fca8a33825c7008a479ca491ebcb2d9eb7c`. The Pages workflow
+[run 39577471444](https://github.com/KyleDerZweite/litebench/actions/runs/39577471444)
+succeeded at that revision. Kyle's design acceptance remains outstanding.
+
+The maintenance contract preserves benchmark data, scoring, UI behavior and
+AgentBench execution. The visualizer owns its Node.js 24 and pnpm development
+dependencies. Its assertion scripts run through tsx without requiring Bun.
+Python offline tools remain standard-library scripts. No agent experiment is
+resumed. PR validation must run generation, evaluation and arena validation,
+offline self-tests, TypeScript, ELO and evidence tests, and the static Pages
+build. Deployment consumes that validated artifact only on main or manual
+dispatch. Branch protection remains a separate owner decision.
+
+The migration selects pnpm 10.34.9 to retain a dependency-graph-readable
+single-document lockfile. GitHub documents a dependency graph limitation for
+the pnpm 12 default two-document format in its
+[ecosystem reference](https://docs.github.com/en/code-security/reference/supply-chain-security/dependency-graph-supported-package-ecosystems).
+Dependabot uses the `npm` ecosystem
+for pnpm and the separate `github-actions` ecosystem for workflow updates.
+Next.js moves from 16.0.10 to 16.4.3 within major version 16 after enabling
+vulnerability alerts revealed 41 open Next.js advisories. Their highest
+reported first-patched version was 16.4.1. The deployed revision remains
+unchanged until this maintenance patch receives review and delivery.
+
+Local verification passed on the maintenance working diff based on `24da7fc`:
+Python generation, evaluation and arena checks and offline self-test; frozen
+pnpm install; route type generation and TypeScript; ELO and evidence assertions;
+and the static Pages build with two workers. The local pnpm audit reported
+zero known vulnerabilities. Initial type checks encountered stale ignored
+Next.js 16.0.10 generated types; regeneration using 16.4.3 resolved the failure.
+The new check command generates route types before checking TypeScript.
+The temporary development server was stopped. Next.js automatic agent-rule
+generation is disabled to preserve repository instruction ownership.
+Independent review, fresh GitHub CI and rendered UI verification remain with
+Root. No maintenance commit, push or deployment occurred in this phase.

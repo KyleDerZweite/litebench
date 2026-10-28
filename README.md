@@ -98,12 +98,18 @@ rubric before writing `visualizer/data/leaderboard.json`. It rejects incomplete
 evaluations. The historical `panel-check` command is an alias for the current
 evaluation check.
 
-Run the page with Bun:
+The visualizer uses Node.js 24 and pnpm 10.34.9, pinned in `visualizer/package.json`.
+With Corepack available, run `corepack pnpm install --frozen-lockfile` to select the pinned version.
+Run `pnpm run check`, `pnpm test`, and `pnpm run build:pages` in `visualizer`.
+PR validation also runs the offline generation, evaluation, arena and self-test checks.
+AgentBench provider distributions and executable semantics remain independent of this development tooling.
+
+Run the page with pnpm:
 
 ```bash
 cd visualizer
-bun install
-bun run dev
+pnpm install --frozen-lockfile
+pnpm run dev
 ```
 
 See [EVALUATION.md](EVALUATION.md) for the judging procedure and

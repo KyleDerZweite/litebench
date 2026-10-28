@@ -1,17 +1,16 @@
-name: Deploy LiteBench Pages
+name: Validate and deploy LiteBench Pages
 
 on:
+  pull_request:
   push:
     branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -26,29 +25,45 @@ jobs:
         run: python3 bench.py check
       - name: Validate current evaluations
         run: python3 bench.py evaluation-check
+      - name: Validate arena data
+        run: python3 bench.py arena-check
       - name: Run offline self-test
         run: python3 bench.py self-test
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: visualizer/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+          cache-dependency-path: visualizer/pnpm-lock.yaml
+      - name: Install visualizer dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: visualizer
+      - name: Check visualizer types
+        run: pnpm run check
+        working-directory: visualizer
+      - name: Test ELO and evidence
+        run: pnpm test
+        working-directory: visualizer
+      - name: Build static visualizer
+        run: pnpm run build:pages
+        working-directory: visualizer
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        with:
+          path: visualizer/out
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: validate
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.3.10
-      - uses: actions/configure-pages@v5
-      - name: Install visualizer dependencies
-        run: bun install --frozen-lockfile
-        working-directory: visualizer
-      - name: Build static visualizer
-        run: bun run build:pages
-        working-directory: visualizer
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: visualizer/out
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
