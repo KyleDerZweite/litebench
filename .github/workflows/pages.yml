@@ -49,7 +49,7 @@ jobs:
       - name: Build static visualizer
         run: pnpm run build:pages
         working-directory: visualizer
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
           path: visualizer/out
